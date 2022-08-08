@@ -68,3 +68,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Outline
+
+This webpage will have the ability to create a virtual garden from the users existing plants.  The user will be able to create a log in and then add and edit any existing plants in their own garden section.  The idea is to have the user upload pictures and put descriptions for each type of plant they put in their garden.  Decsriptions might include the plants species, height, soil type, zone, hardiness, water amount, etc.  The end resault will be a gardening community website where people can share their gardens.
