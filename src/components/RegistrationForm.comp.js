@@ -13,7 +13,7 @@ const RegistrationForm = () => {
   };
 
   const [formValues, setFormValues] = useState(initialValues);
-
+  const [formErrors, setFormErrors] = useState({});
   useEffect(() => {}, [formValues]);
 
   const handleChange = (e) => {
@@ -23,14 +23,38 @@ const RegistrationForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setFormErrors(validate(formValues));
   };
-  console.log(formValues);
+
+  const validate = (values) => {
+    const errors = {};
+    const regEx = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    if (!values.username) {
+      errors.username = "Username is required";
+    }
+    if (!values.email) {
+      errors.email = "Email is required!";
+    } else if (!regEx.test(values.email)) {
+      errors.email = "Invalid email!";
+    }
+    if (!values.password) {
+      errors.password = "Password is required!";
+    } else if (values.password.length < 4) {
+      errors.password = "Password must be more than 4 characters";
+    }
+    if (!values.confirmpassword) {
+      errors.confirmpassword = "Confirm Password is required";
+    } else if (!(values.password === values.confirmpassword)) {
+      errors.confirmpassword = "Confirm password and password must be same";
+    }
+    return errors;
+  };
 
   return (
     <Container>
       <Row>
         <Col>
-          <h1 className="text-info">Sign Up</h1>
+          <h1>Sign Up</h1>
         </Col>
       </Row>
 
@@ -47,6 +71,7 @@ const RegistrationForm = () => {
                 onChange={handleChange}
               />
             </Form.Group>
+            <p className="text-danger">{formErrors.username}</p>
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email</Form.Label>
@@ -58,6 +83,7 @@ const RegistrationForm = () => {
                 onChange={handleChange}
               />
             </Form.Group>
+            <p className="text-danger">{formErrors.email}</p>
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Password</Form.Label>
@@ -69,6 +95,7 @@ const RegistrationForm = () => {
                 onChange={handleChange}
               />
             </Form.Group>
+            <p className="text-danger">{formErrors.password}</p>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Confirm Password</Form.Label>
@@ -80,11 +107,19 @@ const RegistrationForm = () => {
                 onChange={handleChange}
               />
             </Form.Group>
+            <p className="text-danger">{formErrors.confirmpassword}</p>
 
             <Button variant="primary" type="submit">
               Sign Up
             </Button>
           </Form>
+        </Col>
+      </Row>
+
+      <Row className="py-4">
+        <Col>
+          Already have an account
+          <a href="/login">Login Now</a>
         </Col>
       </Row>
     </Container>

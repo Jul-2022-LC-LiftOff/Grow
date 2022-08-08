@@ -9,7 +9,6 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<RegistrationPage />} />
-      {/* <Route path="/registration" element={<RegistrationPage />}/> */}
     </Routes>
   );
 }
