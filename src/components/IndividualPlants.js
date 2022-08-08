@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import IndividualPlant from "./IndividualPlant";
-import ".//individual-style.css";
+//import ".//individual-style.css";
 class IndividualPlants extends Component{
 
     render(){
