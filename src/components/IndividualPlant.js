@@ -8,13 +8,13 @@ const IndividualPlant = (props)=> {
     return(
         <section>
         <div className="IndividualPlant text-left col-sm">
-            <Card >
+            <Card className="IndividualPlant">
                 <Card.Img variant="top" src={plantOne}></Card.Img>
                 <Card.Body >
-                    <Card.Title class="text-center" className="fw-bolder text-center" >
+                    <Card.Title  className="fw-bolder text-center" >
                         Jimmy the Plant
                     </Card.Title>
-                    <ListGroup variant="flush" >
+                    <ListGroup variant="flush " >
                         <ListGroupItem>Name: Monstera Deliciosa</ListGroupItem>
                         <ListGroupItem>Family: Araceae</ListGroupItem>
 
@@ -31,21 +31,7 @@ const IndividualPlant = (props)=> {
                     </ListGroup>
                 </Card.Body>
             </Card>
-             {/* <div  >
-                <img src={plantOne} alt="Plant is still growing!" class="rounded" col-sm className="img-fluid IndividualPlant"></img>
-             </div>
-             <div className="IndividualPlant-body text-dark">
-                <h4 className="IndividualPlant-title text-left">James</h4>
-                <div className="IndividualPlant-text text-secondary justify-content-left">
-                    <p style="display:inline">Name: </p><p>James The Plant</p>
-                    <p>Familky: <p>Plantius Leafius</p></p>
-                    <p>Mature Size: <p>Pretty big</p></p>
-                    <p>Soil type: <p>The brown kind</p></p>
-                    <p>Sun Exposure: <p>Would be nice</p></p>
-                    <p>Hardiness: <p>Kinda wimpy</p></p>
-                    <p>Water: <p>His favorite beverage</p></p>
-                </div>
-             </div> */}
+            
         </div>
         </section>
            
