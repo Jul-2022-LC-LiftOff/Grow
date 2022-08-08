@@ -1,10 +1,10 @@
 import React from "react";
-import IndividualPlants from "../components/IndividualPlants";
+import IndividualPlant from "../components/individualPlant";
 import "src\components\individual-style.css";
 const myGarden = (props)=> {
     return(
         <body>
-        <IndividualPlants/>
+        <IndividualPlant/>
         </body>
     );
 };

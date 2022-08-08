@@ -1,11 +1,10 @@
 import React from 'react';
 import './App.css';
-import IndividualPlants from './components/IndividualPlants';
-
+import IndividualPlant from './components/IndividualPlant';
 const App = () => {
 	return (
   <body>
-  <IndividualPlants/>
+  <IndividualPlant/>
   </body>
   );
 };
