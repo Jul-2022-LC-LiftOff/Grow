@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import IndividualPlant from './components/IndividualPlant';
+import IndividualPlants from './components/IndividualPlants';
 const App = () => {
 	return (
   <body>
-  <IndividualPlant/>
+  <IndividualPlants/>
   </body>
   );
 };
