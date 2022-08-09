@@ -118,8 +118,7 @@ const RegistrationForm = () => {
 
       <Row className="py-4">
         <Col>
-          Already have an account
-          <a href="/login">Login Now</a>
+          Already have an account? <a href="/login">Login Here</a>
         </Col>
       </Row>
     </Container>

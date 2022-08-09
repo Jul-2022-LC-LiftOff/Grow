@@ -8,15 +8,14 @@
   align-items: center;
   padding: 200px;
   background: linear-gradient(90deg, #42047e, #07f49e);
+  /* background-image: url(C:\Users\ruban\Desktop\IMG_7233[9571].jpg); */
 }
-
 .form-box {
   box-shadow: 0px 0px 15px -5px black;
 }
-
 .card {
   background-color: white;
-  border-radius: 4px;
+  border-radius: 25px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   padding: 1rem;
   width: 20rem;
