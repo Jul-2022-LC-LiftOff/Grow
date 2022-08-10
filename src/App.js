@@ -3,7 +3,7 @@ import './App.css';
 import IndividualPlants from './components/IndividualPlants';
 const App = () => {
 	return (
-  <body>
+  <body class="mainBackground">
   <IndividualPlants/>
   </body>
   );

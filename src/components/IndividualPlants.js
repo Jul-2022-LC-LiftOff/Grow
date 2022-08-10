@@ -6,13 +6,13 @@ class IndividualPlants extends Component{
 
     render(){
         return(
-            <div className="IndividualPlant container-fluid d-flex  justify-content-center">
-                <div className="row">  
-                    
+            // <div className="IndividualPlant container-fluid d-flex  justify-content-center">
+            //     <div className="row">  
+               
                 <IndividualPlant/>
                    
-                 </div> 
-            </div>
+                 
+            // </div>
         );
     }
 }
