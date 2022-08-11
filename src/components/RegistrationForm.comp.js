@@ -86,7 +86,7 @@ const RegistrationForm = () => {
     <Container>
       <Row>
         <Col>
-          <h1>Sign Up</h1>
+          <h1 className="signup mb-4">Sign Up</h1>
         </Col>
       </Row>
 
@@ -141,7 +141,11 @@ const RegistrationForm = () => {
             </Form.Group>
             <p className="text-danger">{formErrors.confirmpassword}</p>
 
-            <Button variant="primary" type="submit">
+            <Button
+              className="custom-btn "
+              // variant="primary"
+              type="submit"
+            >
               Sign Up
             </Button>
           </Form>
@@ -150,7 +154,10 @@ const RegistrationForm = () => {
 
       <Row className="py-4">
         <Col>
-          Already have an account? <Link to="/login">Login Here</Link>
+          Already have an account?{" "}
+          <Link to="/login" className="login-here">
+            Login Here
+          </Link>
         </Col>
       </Row>
     </Container>

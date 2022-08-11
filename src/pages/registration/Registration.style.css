@@ -6,9 +6,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 200px;
-  background: linear-gradient(90deg, #42047e, #07f49e);
-  /* background-image: url(C:\Users\ruban\Desktop\IMG_7233[9571].jpg); */
+  /* padding: 290px; */
+  /* background: linear-gradient(90deg, #42047e, #07f49e); */
+  background-image: url("../../assets/1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
 }
 .form-box {
   box-shadow: 0px 0px 15px -5px black;
@@ -18,14 +21,49 @@
   border-radius: 25px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   padding: 1rem;
-  width: 20rem;
+  width: fit-content;
 }
 
 .style {
-  padding: 300px;
-  text-align: center;
   font-size: 60px;
   font-style: italic;
+  justify-content: center;
+  align-items: center;
+  display: flex;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  background-image: linear-gradient(90deg, #42047e, #07f49e);
+  /* background-image: linear-gradient(90deg, #42047e, #07f49e); */
+  background-image: url("../../assets/1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.login-here {
+  font-weight: bold;
+  color: green;
+  font-size: large;
+}
+
+.signup {
+  color: green;
+}
+
+.custom-btn {
+  background: green;
+  color: white;
+  border: 2px solid green;
+  border-radius: 25px;
+  padding: 5px 15px;
+  /* text-transform: uppercase; */
+}
+
+@media screen and (max-width: 500px) {
+  .registration-page {
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    transform: none;
+    width: 100%;
+    height: 100vh;
+  }
 }
