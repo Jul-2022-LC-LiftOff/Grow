@@ -9,6 +9,10 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<RegistrationPage />} />
+      <Route
+        path="/login"
+        element={<div className="style">Welcome To Login Page</div>}
+      />
     </Routes>
   );
 }

@@ -20,3 +20,12 @@
   padding: 1rem;
   width: 20rem;
 }
+
+.style {
+  padding: 300px;
+  text-align: center;
+  font-size: 60px;
+  font-style: italic;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  background-image: linear-gradient(90deg, #42047e, #07f49e);
+}

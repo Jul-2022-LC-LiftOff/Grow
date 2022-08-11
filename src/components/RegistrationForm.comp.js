@@ -1,6 +1,10 @@
 import React from "react";
 
 import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "../firebase-config";
 
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 
@@ -16,14 +20,34 @@ const RegistrationForm = () => {
   const [formErrors, setFormErrors] = useState({});
   useEffect(() => {}, [formValues]);
 
+  const { username, email, password } = formValues;
+
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setFormErrors(validate(formValues));
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      const user = userCredential.user;
+
+      updateProfile(auth.currentUser, { username: username });
+
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const validate = (values) => {
@@ -118,7 +142,7 @@ const RegistrationForm = () => {
 
       <Row className="py-4">
         <Col>
-          Already have an account? <a href="/login">Login Here</a>
+          Already have an account? <Link to="/login">Login Here</Link>
         </Col>
       </Row>
     </Container>
