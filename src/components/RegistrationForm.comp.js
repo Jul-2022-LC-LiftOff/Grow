@@ -5,6 +5,9 @@ import { useNavigate, Link } from "react-router-dom";
 
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase-config";
+import { db } from "../firebase-config";
+
+import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 
@@ -41,8 +44,13 @@ const RegistrationForm = () => {
       );
 
       const user = userCredential.user;
-
       updateProfile(auth.currentUser, { username: username });
+
+      const formValuesCopy = { ...formValues };
+      delete formValuesCopy.password;
+      formValuesCopy.timestamp = serverTimestamp();
+
+      await setDoc(doc(db, "users", user.uid), formValuesCopy);
 
       navigate("/login");
     } catch (error) {
