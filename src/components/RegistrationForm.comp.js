@@ -65,12 +65,12 @@ const RegistrationForm = () => {
       errors.username = "Username is required";
     }
     if (!values.email) {
-      errors.email = "Email is required!";
+      errors.email = "Email is required";
     } else if (!regEx.test(values.email)) {
       errors.email = "Invalid email!";
     }
     if (!values.password) {
-      errors.password = "Password is required!";
+      errors.password = "Password is required";
     } else if (values.password.length < 4) {
       errors.password = "Password must be more than 4 characters";
     }
