@@ -1,21 +1,13 @@
 import React from "react";
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-
-//import { DialogContent } from "@material-ui/core";
 import {IndividualPlant} from "../components/IndividualPlant";
-import {EditPlantModal} from "../components/EditPlantModal";
-//import "src\components\individual-style.css";
 import { useState, useEffect } from "react";
 export const MyGarden=()=>{
 
-    //const[allPlants,setAllPlants]= useState([]);
     const[plants,setPlants]= useState([]);
     const ref = React.createRef();
-    const [openEdit, setOpenEdit] = useState(false);
-    const [isClicked, setIsClicked] = useState([]);
+    
 useEffect(()=>{
-    //get plant data from database
+    //get plant data from database later, using array as dummy data
     
     let plantData;
     plantData=[{id:0,image:"", title:"Sally 1", name:"Ficus lyrata",family:"Fig",size:"12-15m",soil:"Well draining and peat-based",sun:"Around 5 hours a day",hardiness:"Zones 9-11",water:"Once a week"},
@@ -33,21 +25,6 @@ useEffect(()=>{
     
 },[]);
 
-// const handleOpen = (id) =>{
-//     setIsClicked(plants.find(x => x.id === id));
-//     setOpen(true);
-// }
-
-// const handleClose = ()=>{
-//     setOpen(false);
-//     setIsClicked([]);
-// }
-// const [modalInfo, setModalInfo] = useState([]);
-// const cardEvents = {
-//     onClick: (e, card) =>{
-//         console.log(card);
-//     }
-// }
 return(
     
         <div className="IndividualPlant container-fluid d-flex justify-content-center ">
@@ -58,28 +35,12 @@ return(
             plantData={plant} 
             key={plant.title} 
             id={plant.id}
-            onClick = {()=>{setOpenEdit(true)}}
-            // handleOpen = {handleOpen}
-            // cardEvents = {cardEvents}
-
             />
-            
-            )
+             )
         })}
-        {openEdit && <Modal/>}
-            //<EditPlantModal
-                // id={`${isClicked.id}-${isClicked.name}`}
-                // plants = {isClicked}
-                // ref={ref}
-                />
-            
-        
-        
         </div>
         </div>
-  
 )
 };
 export default MyGarden;
 
-//have the modal feature in here with the open and close functions and then just put in the modal here 
