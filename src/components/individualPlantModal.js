@@ -1,12 +1,31 @@
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
-im
+import Form from "react-bootstrap/Form";
+import { useState, useEffect } from "react";
 //Will need to grab the id of the specific plant that we want to edit and bring in
-function individualPlantModal(props){
+function IndividualPlantModal(){
+    //do not pass in props, just directly pass in the object that we chose 
+    const[showModal, setShowModal] = useState(false);
+    const openModal = () =>{
+        setShowModal(prev=>!prev)
+    }
+    
     return(
         <Modal.Dialog>
             <Modal.Header closeButton>
-                <Modal.Title>Specific Plant Name</Modal.Title>
+                <Modal.Title>
+                    <Form>
+                        <Form.Group controlId={props.id}>
+                            <Form.Control 
+                            as="textarea"
+                            multiple
+                            value={props.title}
+                            >
+                            </Form.Control>
+                        </Form.Group>
+                    </Form>
+                    Specific Plant Name
+                    </Modal.Title>
             </Modal.Header>
             <Modal.Body>
             <div className="IndividualPlant container-fluid d-flex justify-content-center ">
@@ -48,3 +67,4 @@ function individualPlantModal(props){
         </Modal.Dialog>
     )
 }
+export default IndividualPlantModal;
