@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import { BsFillPencilFill } from "react-icons/bs";
 import {BsImage } from "react-icons/bs"
 import ".//individual-style.css";
+import { BsFillTrashFill } from "react-icons/bs";
 import { Card } from "react-bootstrap";
 import ListGroupItem from "react-bootstrap/esm/ListGroupItem";
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -43,8 +44,10 @@ const handleImageShow = () => setShowImageModal(true);
  
  
                             </ListGroup>
+                            <div className="position-absolute bottom-10 start-10">
+                            <button className="btn btn-light" onClick = {()=>{window.confirm("Do you really want to delete this plant?")}}><BsFillTrashFill></BsFillTrashFill></button>
+                            </div>
                             <div className="text-end">
-                            {/* <Button type="button" className="btn btn-secondary btn-sm" onClick = {handleShow}>Edit Plant</Button> */}
                             <Button onClick = {handleEditShow}><BsFillPencilFill></BsFillPencilFill></Button>
                             </div>
                             </Card.Body>
