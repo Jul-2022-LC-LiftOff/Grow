@@ -71,29 +71,43 @@ const handleImageShow = () => setShowImageModal(true);
                             
                             <ListGroup variant="flush" >
                                 <ListGroupItem><span style={{fontWeight:'bold'}}> Name:</span>
-                                <input type="text" placeholder={plantData.name}></input>
+                                <div>
+                                <input class="editAdd" type="text" placeholder={plantData.name}></input>
+                                </div>
                                  </ListGroupItem>
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Family:</span> 
-                                <input type="text" placeholder={plantData.family}></input>
+                                <div>
+                                <input class="editAdd" type="text" placeholder={plantData.family}></input>
+                                </div>
                                 </ListGroupItem>
  
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Size:</span> 
-                                <input type="text" placeholder={plantData.size}></input>
+                                <div>
+                                <input class="editAdd" type="text" placeholder={plantData.size}></input>
+                                </div>
                                 </ListGroupItem>
  
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Soil:</span> 
-                                <input type="text" placeholder={plantData.soil}></input>
+                                <div>
+                                <input class="editAdd" type="text" placeholder={plantData.soil}></input>
+                                </div>
                                 </ListGroupItem>
- 
+                                
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Sun:</span> 
-                                <input type="text" placeholder={plantData.sun}></input>
+                                <div >
+                                <input class="editAdd" type="text" placeholder={plantData.sun}></input>
+                                </div>
                                 </ListGroupItem>
- 
+                              
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Hardiness:</span> 
-                                <input type="text" placeholder={plantData.hardiness}></input>
+                                <div>
+                                <input class="editAdd" type="text" placeholder={plantData.hardiness}></input>
+                                </div>
                                 </ListGroupItem>
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Water:</span> 
-                                <input type="text" placeholder={plantData.water}></input>
+                                <div>
+                                <input class="editAdd" type="text" placeholder={plantData.water}></input>
+                                </div>
                                 </ListGroupItem>
  
  

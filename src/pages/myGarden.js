@@ -1,11 +1,25 @@
 import React from "react";
+import Button from 'react-bootstrap/Button';
 import {IndividualPlant} from "../components/IndividualPlant";
+import { BsFillPlusCircleFill } from "react-icons/bs";
 import { useState, useEffect } from "react";
+import ListGroupItem from "react-bootstrap/esm/ListGroupItem";
+import ListGroup from 'react-bootstrap/ListGroup';
+import { Modal } from "react-bootstrap";
+import { Card } from "react-bootstrap";
+import UploadImage from "../components/UploadImage";
+import {BsImage } from "react-icons/bs"
+
 export const MyGarden=()=>{
 
     const[plants,setPlants]= useState([]);
     const ref = React.createRef();
-    
+    const[showAddModal,setShowAddModal] = useState(false);
+    const handleAddClose = () => setShowAddModal(false);
+    const handleAddShow = () => setShowAddModal(true);
+    const [showImageModal, setShowImageModal] = useState(false);
+    const handleImageClose = () => setShowImageModal(false);
+    const handleImageShow = () => setShowImageModal(true);
 useEffect(()=>{
     //get plant data from database later, using array as dummy data
     
@@ -26,8 +40,11 @@ useEffect(()=>{
 },[]);
 
 return(
-    
+    //add plant button maybe will go near search functionality?
+        <div>
+           <Button onClick={handleAddShow} className="btn-lg"><span>Add Plant   </span><BsFillPlusCircleFill></BsFillPlusCircleFill></Button>
         <div className="IndividualPlant container-fluid d-flex justify-content-center ">
+                  
                     <div className="row">
         {plants.map((plant)=>{
             return(
@@ -40,6 +57,91 @@ return(
         })}
         </div>
         </div>
+        <Modal show={showAddModal} onHide={handleAddClose} class="modal">
+                        <Modal.Header closeButton>
+                            <Modal.Title>Add Plant</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                        <section>
+                    <div className="IndividualPlantModal text-left col-sm">
+                        <Card className="IndividualPlantModal"  >
+                            <div>
+                            <Card.Img variant="top" >
+                            
+                            </Card.Img>
+                            </div>
+                             <Button className="position-absolute top-0 end-0" onClick = {() => { handleImageShow(); handleAddClose();}} ><span>Upload Image   </span><BsImage></BsImage></Button> 
+                             
+                             <Card.Body >
+                            
+                            <ListGroup variant="flush" >
+                                <ListGroupItem><span style={{fontWeight:'bold'}}> Name:</span>
+                                <div>
+                                <input class="editAdd" type="text" ></input>
+                                </div>
+                                 </ListGroupItem>
+                                <ListGroupItem><span style={{fontWeight:'bold'}}>Family:</span> 
+                                <div>
+                                <input class="editAdd" type="text" ></input>
+                                </div>
+                                </ListGroupItem>
+ 
+                                <ListGroupItem><span style={{fontWeight:'bold'}}>Size:</span> 
+                                <div>
+                                <input class="editAdd" type="text" ></input>
+                                </div>
+                                </ListGroupItem>
+ 
+                                <ListGroupItem><span style={{fontWeight:'bold'}}>Soil:</span> 
+                                <div>
+                                <input class="editAdd" type="text" ></input>
+                                </div>
+                                </ListGroupItem>
+                                
+                                <ListGroupItem><span style={{fontWeight:'bold'}}>Sun:</span> 
+                                <div >
+                                <input class="editAdd" type="text" ></input>
+                                </div>
+                                </ListGroupItem>
+                              
+                                <ListGroupItem><span style={{fontWeight:'bold'}}>Hardiness:</span> 
+                                <div>
+                                <input class="editAdd" type="text" ></input>
+                                </div>
+                                </ListGroupItem>
+                                <ListGroupItem><span style={{fontWeight:'bold'}}>Water:</span> 
+                                <div>
+                                <input class="editAdd" type="text" ></input>
+                                </div>
+                                </ListGroupItem>
+ 
+ 
+                            </ListGroup>
+                            <div className="text-end">
+                            </div>
+                            </Card.Body>
+                        </Card>
+                        
+                     </div>
+                     </section>
+                        </Modal.Body>
+                        <Modal.Footer>
+                        <Button variant="primary" onClick={handleAddClose}>
+                        Save Plant
+                        </Button>
+                        </Modal.Footer>
+                    </Modal>
+                    <Modal show={showImageModal} onHide = {handleImageClose} class="modal">
+                        <Modal.Header closeButton>
+                            <Modal.Title>Upload Plant Image</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <UploadImage/> 
+                            <Button onClick={() => { handleImageClose(); handleAddShow();}}>Save Image</Button>
+                        </Modal.Body>
+                    </Modal>
+        </div>
+        
 )
 };
 export default MyGarden;
