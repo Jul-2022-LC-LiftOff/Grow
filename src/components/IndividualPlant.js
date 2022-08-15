@@ -19,6 +19,7 @@ const [showImageModal, setShowImageModal] = useState(false);
 const handleImageClose = () => setShowImageModal(false);
 const handleImageShow = () => setShowImageModal(true);
         return(
+  //generic my garden plant display 
                     <div className="col-md-4">
                         <section>
                     <div className="IndividualPlant text-left col-sm">
@@ -29,6 +30,7 @@ const handleImageShow = () => setShowImageModal(true);
                             <Card.Title  className="fw-bolder text-center" >
                              {plantData.title}
                             </Card.Title>
+                            
                             <ListGroup variant="flush" >
 
                                 <ListGroupItem><span style={{fontWeight:'bold'}}> Name:</span> {plantData.name}</ListGroupItem>
@@ -45,6 +47,7 @@ const handleImageShow = () => setShowImageModal(true);
  
  
                             </ListGroup>
+                            
                             <div className="position-absolute bottom-10 start-10">
                             <button className="btn btn-light" onClick = {()=>{window.confirm("Do you really want to delete this plant?")}}><BsFillTrashFill></BsFillTrashFill></button>
                             </div>
@@ -53,9 +56,11 @@ const handleImageShow = () => setShowImageModal(true);
                             </div>
                             </Card.Body>
                         </Card>
+
                         
                      </div>
                      </section>
+{/*Edit Plant Modal */}
                      <div class="modalBackground">
                      <Modal show={showEditModal} onHide={handleEditClose} class="modal">
                         <Modal.Header closeButton>
@@ -128,6 +133,7 @@ const handleImageShow = () => setShowImageModal(true);
                         
                      </div>
                      </section>
+ {/* upload image modal */}
                         </Modal.Body>
                         <Modal.Footer>
                         <Button variant="primary" onClick={handleEditClose}>
