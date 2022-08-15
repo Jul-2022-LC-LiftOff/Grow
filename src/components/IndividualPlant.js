@@ -30,6 +30,7 @@ const handleImageShow = () => setShowImageModal(true);
                              {plantData.title}
                             </Card.Title>
                             <ListGroup variant="flush" >
+
                                 <ListGroupItem><span style={{fontWeight:'bold'}}> Name:</span> {plantData.name}</ListGroupItem>
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Family:</span> {plantData.family}</ListGroupItem>
  
@@ -73,6 +74,11 @@ const handleImageShow = () => setShowImageModal(true);
                              <Card.Body >
                             
                             <ListGroup variant="flush" >
+                            <ListGroupItem><span style={{fontWeight:'bold'}}> Title:</span>
+                                <div>
+                                <input class="editAdd" type="text" placeholder={plantData.title}></input>
+                                </div>
+                                 </ListGroupItem>
                                 <ListGroupItem><span style={{fontWeight:'bold'}}> Name:</span>
                                 <div>
                                 <input class="editAdd" type="text" placeholder={plantData.name}></input>

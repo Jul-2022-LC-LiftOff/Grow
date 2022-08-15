@@ -9,7 +9,7 @@ import { Modal } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import UploadImage from "../components/UploadImage";
 import {BsImage } from "react-icons/bs"
-
+//import {addDoc, collection} from 'firebase/firestore';
 export const MyGarden=()=>{
 
     const[plants,setPlants]= useState([]);
@@ -20,6 +20,19 @@ export const MyGarden=()=>{
     const [showImageModal, setShowImageModal] = useState(false);
     const handleImageClose = () => setShowImageModal(false);
     const handleImageShow = () => setShowImageModal(true);
+    const [plantName, setPlantName] = useState("");
+    const [plantTitle, setPlantTitle] = useState("");
+    const [plantSoil, setPlantSoil] = useState("");
+    const [plantSize, setPlantSize] = useState("");
+    const [plantSun, setPlantSun] = useState("");
+    const [plantHardiness, setPlantHardiness] = useState("");
+    const [plantWater, setPlantWater] = useState("");
+    const [plantFamily, setPlantFamily] = useState("");
+    const [plantImage, setPlantImage] = useState("");
+    // const plantsCollectionRef = collection(db);
+    // const createPlant = async () => {
+    //     await addDoc()
+    // }
 useEffect(()=>{
     //get plant data from database later, using array as dummy data
     
@@ -75,43 +88,48 @@ return(
                              <Card.Body >
                             
                             <ListGroup variant="flush" >
+                            <ListGroupItem><span style={{fontWeight:'bold'}}> Title:</span>
+                                <div>
+                                <input class="editAdd" type="text" onChange={(event)=> {setPlantTitle(event.target.value)}}></input>
+                                </div>
+                                 </ListGroupItem>
                                 <ListGroupItem><span style={{fontWeight:'bold'}}> Name:</span>
                                 <div>
-                                <input class="editAdd" type="text" ></input>
+                                <input class="editAdd" type="text" onChange={(event)=> {setPlantName(event.target.value)}}></input>
                                 </div>
                                  </ListGroupItem>
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Family:</span> 
                                 <div>
-                                <input class="editAdd" type="text" ></input>
+                                <input class="editAdd" type="text" onChange={(event)=> {setPlantFamily(event.target.value)}}></input>
                                 </div>
                                 </ListGroupItem>
  
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Size:</span> 
                                 <div>
-                                <input class="editAdd" type="text" ></input>
+                                <input class="editAdd" type="text" onChange={(event)=> {setPlantSize(event.target.value)}}></input>
                                 </div>
                                 </ListGroupItem>
  
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Soil:</span> 
                                 <div>
-                                <input class="editAdd" type="text" ></input>
+                                <input class="editAdd" type="text" onChange={(event)=> {setPlantSoil(event.target.value)}}></input>
                                 </div>
                                 </ListGroupItem>
                                 
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Sun:</span> 
                                 <div >
-                                <input class="editAdd" type="text" ></input>
+                                <input class="editAdd" type="text" onChange={(event)=> {setPlantSun(event.target.value)}}></input>
                                 </div>
                                 </ListGroupItem>
                               
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Hardiness:</span> 
                                 <div>
-                                <input class="editAdd" type="text" ></input>
+                                <input class="editAdd" type="text" onChange={(event)=> {setPlantHardiness(event.target.value)}}></input>
                                 </div>
                                 </ListGroupItem>
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Water:</span> 
                                 <div>
-                                <input class="editAdd" type="text" ></input>
+                                <input class="editAdd" type="text" onChange={(event)=> {setPlantWater(event.target.value)}}></input>
                                 </div>
                                 </ListGroupItem>
  
