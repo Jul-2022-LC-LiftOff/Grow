@@ -49,6 +49,8 @@ const RegistrationForm = () => {
 
         const formValuesCopy = { ...formValues };
         delete formValuesCopy.password;
+        delete formValuesCopy.confirmpassword;
+
         formValuesCopy.timestamp = serverTimestamp();
 
         await setDoc(doc(db, "users", user.uid), formValuesCopy);
