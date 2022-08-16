@@ -1,3 +1,6 @@
+import React from "react";
+import "./App.css";
+import MyGarden from "./pages/myGarden";
 import { Route, Routes } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -13,8 +16,19 @@ function App() {
         path="/login"
         element={<div className="style">Welcome To Login Page</div>}
       />
+      <Route
+        path="/"
+        element={
+          <div class="mainBackground">
+            <MyGarden />
+          </div>
+        }
+      />
     </Routes>
+
+    // <div class="mainBackground">
+    //   <MyGarden/>
+    // </div>
   );
 }
-
 export default App;
