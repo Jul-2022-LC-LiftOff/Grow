@@ -9,7 +9,9 @@ import { Modal } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import UploadImage from "../components/UploadImage";
 import {BsImage } from "react-icons/bs"
-//import {addDoc, collection} from 'firebase/firestore';
+import { db , auth} from "../firebase-config";
+import {addDoc, collection} from 'firebase/firestore';
+import { useNavigate } from "react-router-dom";
 export const MyGarden=()=>{
 //grace brach
     const[plants,setPlants]= useState([]);
@@ -20,19 +22,22 @@ export const MyGarden=()=>{
     const [showImageModal, setShowImageModal] = useState(false);
     const handleImageClose = () => setShowImageModal(false);
     const handleImageShow = () => setShowImageModal(true);
-    const [plantName, setPlantName] = useState("");
-    const [plantTitle, setPlantTitle] = useState("");
-    const [plantSoil, setPlantSoil] = useState("");
-    const [plantSize, setPlantSize] = useState("");
-    const [plantSun, setPlantSun] = useState("");
-    const [plantHardiness, setPlantHardiness] = useState("");
-    const [plantWater, setPlantWater] = useState("");
-    const [plantFamily, setPlantFamily] = useState("");
-    const [plantImage, setPlantImage] = useState("");
-    // const plantsCollectionRef = collection(db);
-    // const createPlant = async () => {
-    //     await addDoc()
-    // }
+    const [name, setPlantName] = useState("");
+    const [title, setPlantTitle] = useState("");
+    const [soil, setPlantSoil] = useState("");
+    const [size, setPlantSize] = useState("");
+    const [sun, setPlantSun] = useState("");
+    const [hardiness, setPlantHardiness] = useState("");
+    const [water, setPlantWater] = useState("");
+    const [family, setPlantFamily] = useState("");
+    const [image, setPlantImage] = useState("");
+    const plantsCollectionRef = collection(db, "plants");
+    //const userCollectionRef = collection(db, "users");
+    let navigate = useNavigate();
+    const createPlant = async () => {
+        await addDoc(plantsCollectionRef,{title, name, soil, size, sun, hardiness, water, family, image});
+        navigate("/");
+    }
 useEffect(()=>{
     //get plant data from database later, using array as dummy data
     
@@ -135,8 +140,7 @@ return(
  
  
                             </ListGroup>
-                            <div className="text-end">
-                            </div>
+                           
                             </Card.Body>
                         </Card>
                         
@@ -144,7 +148,7 @@ return(
                      </section>
                         </Modal.Body>
                         <Modal.Footer>
-                        <Button variant="primary" onClick={handleAddClose}>
+                            <Button variant="primary" onClick={()=>{handleAddClose(); createPlant();}}>
                         Save Plant
                         </Button>
                         </Modal.Footer>
