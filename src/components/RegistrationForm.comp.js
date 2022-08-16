@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
@@ -21,7 +21,7 @@ const RegistrationForm = () => {
 
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
-  useEffect(() => {}, [formValues]);
+  // useEffect(() => {}, [formValues]);
 
   const { username, email, password } = formValues;
 
@@ -34,27 +34,31 @@ const RegistrationForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormErrors(validate(formValues));
+    // setFormErrors(validate(formValues));
 
-    try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+    if (Object.keys(validate(formValues)).length === 0) {
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
 
-      const user = userCredential.user;
-      updateProfile(auth.currentUser, { username: username });
+        const user = userCredential.user;
+        updateProfile(auth.currentUser, { username: username });
 
-      const formValuesCopy = { ...formValues };
-      delete formValuesCopy.password;
-      formValuesCopy.timestamp = serverTimestamp();
+        const formValuesCopy = { ...formValues };
+        delete formValuesCopy.password;
+        formValuesCopy.timestamp = serverTimestamp();
 
-      await setDoc(doc(db, "users", user.uid), formValuesCopy);
+        await setDoc(doc(db, "users", user.uid), formValuesCopy);
 
-      navigate("/login");
-    } catch (error) {
-      console.log(error);
+        navigate("/login");
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      setFormErrors(validate(formValues));
     }
   };
 
