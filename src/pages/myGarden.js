@@ -193,8 +193,7 @@ return(
  
  
                             </ListGroup>
-                            <div className="text-end">
-                            </div>
+                            
                             </Card.Body>
                         </Card>
                         
@@ -220,7 +219,7 @@ return(
                     </Modal>
                     </div>
                     
-             )
+             );
         })}
         </div>
         </div>
