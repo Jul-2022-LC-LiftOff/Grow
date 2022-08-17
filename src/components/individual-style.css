@@ -12,7 +12,6 @@
 }
 .IndividualPlant-text{
     width:100%;
-    
 }
 
 .container-fluid{
@@ -27,6 +26,22 @@
 .editAdd{
     width: 100%;
 }
+ .buttons{
+    z-index: 9;
+    position: relative;
+    
+    
+ }
+ .button-trash{
+    position: absolute;
+    bottom:10px;
+    left: 10px;
 
+ }
+ .button-edit{
+    position: absolute;
+    bottom:10px;
+    right: 10px;
+ }
 
 

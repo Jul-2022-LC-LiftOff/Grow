@@ -20,8 +20,8 @@ const handleImageClose = () => setShowImageModal(false);
 const handleImageShow = () => setShowImageModal(true);
         return(
   //generic my garden plant display 
-                    <div className="col-md-4">
-                        <section>
+                    // <div className="col-md-4">
+                    //     <section>
                     <div className="IndividualPlant text-left col-sm">
                         <Card className="IndividualPlant" key={plantData.id} >
                          
@@ -47,19 +47,20 @@ const handleImageShow = () => setShowImageModal(true);
  
  
                             </ListGroup>
-                            
+                            {/* <div>
                             <div className="position-absolute bottom-10 start-10">
                             <button className="btn btn-light" onClick = {()=>{window.confirm("Do you really want to delete this plant?")}}><BsFillTrashFill></BsFillTrashFill></button>
                             </div>
                             <div className="text-end">
-                            <Button onClick = {handleEditShow}><BsFillPencilFill></BsFillPencilFill></Button>
+                            <Button ><BsFillPencilFill></BsFillPencilFill></Button>
                             </div>
+                            </div> */}
                             </Card.Body>
                         </Card>
 
                         
-                     </div>
-                     </section>
+                     {/* </div>
+                     </section> */}
 {/*Edit Plant Modal */}
                      <div class="modalBackground">
                      <Modal show={showEditModal} onHide={handleEditClose} class="modal">
@@ -78,7 +79,7 @@ const handleImageShow = () => setShowImageModal(true);
                              
                              <Card.Body >
                             
-                            <ListGroup variant="flush" >
+                            <ListGroup id="plantCharacteristics" variant="flush" >
                             <ListGroupItem><span style={{fontWeight:'bold'}}> Title:</span>
                                 <div>
                                 <input class="editAdd" type="text" placeholder={plantData.title}></input>

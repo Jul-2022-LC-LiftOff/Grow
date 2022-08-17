@@ -82,11 +82,22 @@ return(
                     <div className="row">
                     {plants.map((plant)=>{
             return(
-            <IndividualPlant 
-            plantData={plant} 
-            key={plant.title} 
-            id={plant.id}
-            />
+                <div id="container" className="col-md-4">
+                <IndividualPlant 
+                    plantData={plant} 
+                    key={plant.title} 
+                    id="card"
+                    />
+                    <div class="buttons">
+                            <div class="button-trash">
+                            <button className="btn btn-light" onClick = {()=>{window.confirm("Do you really want to delete this plant?")}}><BsFillTrashFill></BsFillTrashFill></button>
+                            </div>
+                            <div class="button-edit">
+                            <button className="btn btn-light" ><BsFillPencilFill></BsFillPencilFill></button>
+                            </div>
+                            </div>
+                    </div>
+            
              )
         })}
         </div>
