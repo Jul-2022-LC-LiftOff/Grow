@@ -69,10 +69,15 @@ useEffect(()=>{
     //getPlants();
     
 },[]);
-// const deletePlant = async () =>{
-//     const plantDoc = doc(db, "plants", )
-// }
-
+const deletePlant = async () =>{
+  const plantDoc = doc(db, "plants", )
+}
+const confirmDelete = () =>{
+    const confirmed = window.confirm("Are you sure you want to delete this plant?");
+    if(confirmed){
+        deletePlant();
+    }
+}
 return(
     //add plant button maybe will go near search functionality?
         <div>
@@ -90,7 +95,7 @@ return(
                     />
                     <div class="buttons">
                             <div class="button-trash">
-                            <button className="btn btn-light" onClick = {()=>{window.confirm("Do you really want to delete this plant?")}}><BsFillTrashFill></BsFillTrashFill></button>
+                            <button className="btn btn-light" onClick = {()=> confirmDelete()}><BsFillTrashFill></BsFillTrashFill></button>
                             </div>
                             <div class="button-edit">
                             <button className="btn btn-light" ><BsFillPencilFill></BsFillPencilFill></button>
