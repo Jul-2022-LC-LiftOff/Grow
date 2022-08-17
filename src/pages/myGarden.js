@@ -11,7 +11,7 @@ import { Card } from "react-bootstrap";
 import UploadImage from "../components/UploadImage";
 import {BsImage } from "react-icons/bs"
 import { db , auth} from "../firebase-config";
-import {addDoc, collection} from 'firebase/firestore';
+import {doc, updateDoc, addDoc, collection} from 'firebase/firestore';
 import { useNavigate } from "react-router-dom";
 import {getDocs} from 'firebase/firestore';
 import { BsFillPencilFill } from "react-icons/bs";
@@ -19,7 +19,7 @@ import { BsFillTrashFill } from "react-icons/bs";
 import plantThree from "../assets/plantThree.jpg";
 
 export const MyGarden=()=>{
-//grace brach
+
     const[plants,setPlants]= useState([]);
     const ref = React.createRef();
     const [showEditModal, setShowEditModal] = useState(false);
@@ -43,11 +43,27 @@ export const MyGarden=()=>{
     const plantsCollectionRef = collection(db, "plants");
     //const userCollectionRef = collection(db, "users");
     let navigate = useNavigate();
+
     const createPlant = async () => {
         await addDoc(plantsCollectionRef,{title, name, soil, size, sun, hardiness, water, family, image});
         navigate("/");
     }
-useEffect(()=>{
+    const editPlant = async (id) => {
+        const plantDocRef = doc(db, "plants", id);
+        await updateDoc(plantDocRef, {title, name, soil, size, sun, hardiness, water, family, image});
+    }
+    const deletePlant = async (id) =>{
+        const plantDoc = doc(db, "plants", id);
+        await deletePlant(plantDoc,);
+      }
+      const confirmDelete = (id) =>{
+          const confirmed = window.confirm("Are you sure you want to delete this plant?");
+          if(confirmed){
+              deletePlant(id);
+          }
+      }
+
+    useEffect(()=>{
     //get plant data from database later, using array as dummy data
     // const getPlants = async () =>{
     //     const plantData = await getDocs(plantsCollectionRef);
@@ -68,16 +84,8 @@ useEffect(()=>{
     setPlants(plantData);
     //getPlants();
     
-},[]);
-const deletePlant = async () =>{
-  const plantDoc = doc(db, "plants", )
-}
-const confirmDelete = () =>{
-    const confirmed = window.confirm("Are you sure you want to delete this plant?");
-    if(confirmed){
-        deletePlant();
-    }
-}
+    },[]);
+
 return(
     //add plant button maybe will go near search functionality?
         <div>
@@ -95,10 +103,10 @@ return(
                     />
                     <div class="buttons">
                             <div class="button-trash">
-                            <button className="btn btn-light" onClick = {()=> confirmDelete()}><BsFillTrashFill></BsFillTrashFill></button>
+                            <button className="btn btn-light" onClick = {()=> confirmDelete(plant.id)}><BsFillTrashFill></BsFillTrashFill></button>
                             </div>
                             <div class="button-edit">
-                            <button className="btn btn-light" ><BsFillPencilFill></BsFillPencilFill></button>
+                            <button className="btn btn-light" onClick ={()=> handleEditShow()}><BsFillPencilFill></BsFillPencilFill></button>
                             </div>
                             </div>
                     </div>
@@ -113,8 +121,8 @@ return(
                         </Modal.Header>
                         <Modal.Body>
                         <section>
-                    <div className="IndividualPlantModal text-left col-sm">
-                        <Card className="IndividualPlantModal"  >
+                    <div >
+                        <Card className="IndividualPlantModal" id="addModal"  >
                             <div>
                             <Card.Img variant="top" >
                             
@@ -192,6 +200,97 @@ return(
                         <Modal.Body>
                             <UploadImage onChange={(event)=> {setPlantImage(event.target.value)}}/> 
                             <Button onClick={() => { handleImageClose(); handleAddShow();}}>Save Image</Button>
+                        </Modal.Body>
+                    </Modal>
+    {/* Edit plant modal */}
+                    <div class="modalBackground">
+                     <Modal show={showEditModal} onHide={handleEditClose} class="modal">
+                        <Modal.Header closeButton>
+                            <Modal.Title>Edit {plant.title}</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                        <section>
+                    <div className="IndividualPlantModal text-left col-sm">
+                        <Card className="IndividualPlantModal" key={plantData.id} >
+                         
+                            <Card.Img variant="top"  src= {plantThree}>
+                            
+                            </Card.Img>
+                             <Button className="position-absolute top-0 end-0" onClick = {() => { handleImageShow(); handleEditClose();}} ><BsImage></BsImage></Button> 
+                             
+                             <Card.Body >
+                            
+                            <ListGroup id="plantCharacteristics" variant="flush" >
+                            <ListGroupItem><span style={{fontWeight:'bold'}}> Title:</span>
+                                <div>
+                                <input class="editAdd" type="text" placeholder={plantData.title}></input>
+                                </div>
+                                 </ListGroupItem>
+                                <ListGroupItem><span style={{fontWeight:'bold'}}> Name:</span>
+                                <div>
+                                <input class="editAdd" type="text" placeholder={plantData.name}></input>
+                                </div>
+                                 </ListGroupItem>
+                                <ListGroupItem><span style={{fontWeight:'bold'}}>Family:</span> 
+                                <div>
+                                <input class="editAdd" type="text" placeholder={plantData.family}></input>
+                                </div>
+                                </ListGroupItem>
+ 
+                                <ListGroupItem><span style={{fontWeight:'bold'}}>Size:</span> 
+                                <div>
+                                <input class="editAdd" type="text" placeholder={plantData.size}></input>
+                                </div>
+                                </ListGroupItem>
+ 
+                                <ListGroupItem><span style={{fontWeight:'bold'}}>Soil:</span> 
+                                <div>
+                                <input class="editAdd" type="text" placeholder={plantData.soil}></input>
+                                </div>
+                                </ListGroupItem>
+                                
+                                <ListGroupItem><span style={{fontWeight:'bold'}}>Sun:</span> 
+                                <div >
+                                <input class="editAdd" type="text" placeholder={plantData.sun}></input>
+                                </div>
+                                </ListGroupItem>
+                              
+                                <ListGroupItem><span style={{fontWeight:'bold'}}>Hardiness:</span> 
+                                <div>
+                                <input class="editAdd" type="text" placeholder={plantData.hardiness}></input>
+                                </div>
+                                </ListGroupItem>
+                                <ListGroupItem><span style={{fontWeight:'bold'}}>Water:</span> 
+                                <div>
+                                <input class="editAdd" type="text" placeholder={plantData.water}></input>
+                                </div>
+                                </ListGroupItem>
+ 
+ 
+                            </ListGroup>
+                            <div className="text-end">
+                            </div>
+                            </Card.Body>
+                        </Card>
+                        
+                     </div>
+                     </section>
+ 
+                        </Modal.Body>
+                        <Modal.Footer>
+                        <Button variant="primary" onClick={() => { editPlant(plantData.id); handleEditClose();}}>
+                        Save Changes
+                        </Button>
+                        </Modal.Footer>
+                    </Modal>
+                    </div>
+                    <Modal show={showImageModal} onHide = {handleImageClose} class="modal">
+                        <Modal.Header closeButton>
+                            <Modal.Title>Upload Plant Image</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <UploadImage/> 
+                            <Button onClick={() => { handleImageClose(); handleEditShow();}}>Save Image</Button>
                         </Modal.Body>
                     </Modal>
         </div>

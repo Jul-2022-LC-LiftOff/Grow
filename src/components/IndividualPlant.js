@@ -62,7 +62,7 @@ const handleImageShow = () => setShowImageModal(true);
                      {/* </div>
                      </section> */}
 {/*Edit Plant Modal */}
-                     <div class="modalBackground">
+                     {/* <div class="modalBackground">
                      <Modal show={showEditModal} onHide={handleEditClose} class="modal">
                         <Modal.Header closeButton>
                             <Modal.Title>Edit {plantData.title}</Modal.Title>
@@ -134,7 +134,7 @@ const handleImageShow = () => setShowImageModal(true);
                         
                      </div>
                      </section>
- {/* upload image modal */}
+ 
                         </Modal.Body>
                         <Modal.Footer>
                         <Button variant="primary" onClick={handleEditClose}>
@@ -151,7 +151,7 @@ const handleImageShow = () => setShowImageModal(true);
                             <UploadImage/> 
                             <Button onClick={() => { handleImageClose(); handleEditShow();}}>Save Image</Button>
                         </Modal.Body>
-                    </Modal>
+                    </Modal> */}
                     </div>
                     );
       
