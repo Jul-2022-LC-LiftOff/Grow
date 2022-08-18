@@ -52,7 +52,7 @@ const handleImageShow = () => setShowImageModal(true);
                             <button className="btn btn-light" onClick = {()=>{window.confirm("Do you really want to delete this plant?")}}><BsFillTrashFill></BsFillTrashFill></button>
                             </div>
                             <div className="text-end">
-                            <Button ><BsFillPencilFill></BsFillPencilFill></Button>
+                            <Button onClick={()=>{showEditModal()}}><BsFillPencilFill></BsFillPencilFill></Button>
                             </div>
                             </div> */}
                             </Card.Body>

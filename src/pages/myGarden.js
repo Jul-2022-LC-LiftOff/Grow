@@ -151,30 +151,71 @@ return(
  
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Size:</span> 
                                 <div>
-                                <input class="editAdd" type="text" onChange={(event)=> {setPlantSize(event.target.value)}}></input>
+                                <select class="form-select" aria-label="Default select example" onSelect={(event)=> {setPlantSize(event.target.value)}}>
+                                    <option value="1-3 inches">1-5 inches</option>
+                                    <option value="4-7 inches">4-7 inches</option>
+                                    <option value="8-12 inches">8-11 inches</option>
+                                    <option value="1-1.5 feet">1-1.5 feet</option>
+                                    <option value="1.5-2 feet">1.5-2 feet</option>
+                                    <option value="2-2.5 feet">2-2.5 feet</option>
+                                    <option value="2.5-3 feet">2.5-3 feet</option>
+                                    <option value="3+ feet">3+ feet</option>
+                                </select>
                                 </div>
                                 </ListGroupItem>
  
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Soil:</span> 
                                 <div>
-                                <input class="editAdd" type="text" onChange={(event)=> {setPlantSoil(event.target.value)}}></input>
+                                <select class="form-select" aria-label="Default select example" onSelect={(event)=> {setPlantSoil(event.target.value)}}>
+                                    <option value="Clay">Clay</option>
+                                    <option value="Sandy">Sandy</option>
+                                    <option value="Silty">Silty</option>
+                                    <option value="Peaty">Peaty</option>
+                                    <option value="Chalky">Chalky</option>
+                                    <option value="Loamy">Loamy</option>
+                                </select>
                                 </div>
                                 </ListGroupItem>
                                 
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Sun:</span> 
                                 <div >
-                                <input class="editAdd" type="text" onChange={(event)=> {setPlantSun(event.target.value)}}></input>
+                                <select class="form-select" aria-label="Default select example" onSelect={(event)=> {setPlantSun(event.target.value)}}>
+                                    <option value="Direct light">Direct light</option>
+                                    <option value="Bright indirect light">Bright indirect light</option>
+                                    <option value="Medium indirect light">Medium indirect light</option>
+                                    <option value="Low light">Low light</option>
+                                </select>
                                 </div>
                                 </ListGroupItem>
                               
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Hardiness:</span> 
                                 <div>
-                                <input class="editAdd" type="text" onChange={(event)=> {setPlantHardiness(event.target.value)}}></input>
+                                <select id="hardiness" class="form-select" aria-label="Default select example"  onSelect={(event)=> {setPlantHardiness(event.target.value)}}>
+
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+
+                                </select>
                                 </div>
                                 </ListGroupItem>
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Water:</span> 
                                 <div>
-                                <input class="editAdd" type="text" onChange={(event)=> {setPlantWater(event.target.value)}}></input>
+                                <select class="form-select" aria-label="Default select example" onSelect={(event)=> {setPlantWater(event.target.value)}}>
+                                    <option value="Daily">Daily</option>
+                                    <option value="3-5 times per week">3-5 times per week</option>
+                                    <option value="1-2 times per week">1-2 times per week</option>
+                                    <option value="2 times per month">2 times per month</option>
+                                    <option value="1 time per month">1 time per month</option>
+                                    <option value="Never">Never</option>
+                                </select>
                                 </div>
                                 </ListGroupItem>
  
@@ -203,7 +244,7 @@ return(
                         </Modal.Body>
                     </Modal>
     {/* Edit plant modal */}
-                    <div class="modalBackground">
+                    {/* <div class="modalBackground">
                      <Modal show={showEditModal} onHide={handleEditClose} class="modal">
                         <Modal.Header closeButton>
                             <Modal.Title>Edit {plant.title}</Modal.Title>
@@ -223,46 +264,46 @@ return(
                             <ListGroup id="plantCharacteristics" variant="flush" >
                             <ListGroupItem><span style={{fontWeight:'bold'}}> Title:</span>
                                 <div>
-                                <input class="editAdd" type="text" placeholder={plantData.title}></input>
+                                <input class="editAdd" type="text" placeholder={plantData.title} value={title}></input>
                                 </div>
                                  </ListGroupItem>
-                                <ListGroupItem><span style={{fontWeight:'bold'}}> Name:</span>
+                                <ListGroupItem><span style={{fontWeight:'bold'}} > Name:</span>
                                 <div>
-                                <input class="editAdd" type="text" placeholder={plantData.name}></input>
+                                <input class="editAdd" type="text" placeholder={plantData.name} value={name}></input>
                                 </div>
                                  </ListGroupItem>
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Family:</span> 
                                 <div>
-                                <input class="editAdd" type="text" placeholder={plantData.family}></input>
+                                <input class="editAdd" type="text" placeholder={plantData.family} value={family}></input>
                                 </div>
                                 </ListGroupItem>
  
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Size:</span> 
                                 <div>
-                                <input class="editAdd" type="text" placeholder={plantData.size}></input>
+                                <input class="editAdd" type="text" placeholder={plantData.size} value={size}></input>
                                 </div>
                                 </ListGroupItem>
  
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Soil:</span> 
                                 <div>
-                                <input class="editAdd" type="text" placeholder={plantData.soil}></input>
+                                <input class="editAdd" type="text" placeholder={plantData.soil} value={soil}></input>
                                 </div>
                                 </ListGroupItem>
                                 
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Sun:</span> 
                                 <div >
-                                <input class="editAdd" type="text" placeholder={plantData.sun}></input>
+                                <input class="editAdd" type="text" placeholder={plantData.sun} value={sun}></input>
                                 </div>
                                 </ListGroupItem>
                               
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Hardiness:</span> 
                                 <div>
-                                <input class="editAdd" type="text" placeholder={plantData.hardiness}></input>
+                                <input class="editAdd" type="text" placeholder={plantData.hardiness} value={hardiness}></input>
                                 </div>
                                 </ListGroupItem>
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Water:</span> 
                                 <div>
-                                <input class="editAdd" type="text" placeholder={plantData.water}></input>
+                                <input class="editAdd" type="text" placeholder={plantData.water} value={water}></input>
                                 </div>
                                 </ListGroupItem>
  
@@ -292,7 +333,7 @@ return(
                             <UploadImage/> 
                             <Button onClick={() => { handleImageClose(); handleEditShow();}}>Save Image</Button>
                         </Modal.Body>
-                    </Modal>
+                    </Modal> */}
         </div>
         
 )
