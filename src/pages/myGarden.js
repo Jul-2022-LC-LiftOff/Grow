@@ -208,6 +208,7 @@ return(
                                 </ListGroupItem>
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Water:</span> 
                                 <div>
+
                                 <select class="form-select" aria-label="Default select example" onSelect={(event)=> {setPlantWater(event.target.value)}}>
                                     <option value="Daily">Daily</option>
                                     <option value="3-5 times per week">3-5 times per week</option>
