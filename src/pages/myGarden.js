@@ -1,5 +1,6 @@
 import React from "react";
 import Button from 'react-bootstrap/Button';
+import { Alert } from "react-bootstrap";
 import "../components/individual-style.css";
 import {IndividualPlant} from "../components/IndividualPlant";
 import { BsFillPlusCircleFill } from "react-icons/bs";
@@ -17,57 +18,47 @@ import {getDocs} from 'firebase/firestore';
 import { BsFillPencilFill } from "react-icons/bs";
 import { BsFillTrashFill } from "react-icons/bs";
 import plantThree from "../assets/plantThree.jpg";
-import plantsServices from "../services/plants.services";
-export const MyGarden=()=>{
+import PlantDataService from "../services/PlantDataService";
+import AddPlant from "../components/AddPlant";
+ const MyGarden=({getPlantId})=>{
 
-    const[plants,setPlants]= useState([]);
-    const ref = React.createRef();
-    const [showEditModal, setShowEditModal] = useState(false);
-    const handleEditClose = () => setShowEditModal(false);
-    const handleEditShow = () => setShowEditModal(true);    
-    const[showAddModal,setShowAddModal] = useState(false);
-    const handleAddClose = () => setShowAddModal(false);
-    const handleAddShow = () => setShowAddModal(true);
-    const [showImageModal, setShowImageModal] = useState(false);
-    const handleImageClose = () => setShowImageModal(false);
-    const handleImageShow = () => setShowImageModal(true);
-    const [name, setPlantName] = useState("");
-    const [title, setPlantTitle] = useState("");
-    const [soil, setPlantSoil] = useState("");
-    const [size, setPlantSize] = useState("");
-    const [sun, setPlantSun] = useState("");
-    const [hardiness, setPlantHardiness] = useState("");
-    const [water, setPlantWater] = useState("");
-    const [family, setPlantFamily] = useState("");
-    const [image, setPlantImage] = useState("");
-    const plantsCollectionRef = collection(db, "plants");
-    const [message, setMessage] = useState({error: false, msg: ""});
-    //const userCollectionRef = collection(db, "users");
-    let navigate = useNavigate();
+    // const[plants,setPlants]= useState([]);
+    // const ref = React.createRef();
+    // const [showEditModal, setShowEditModal] = useState(false);
+    // const handleEditClose = () => setShowEditModal(false);
+    // const handleEditShow = () => setShowEditModal(true);    
+    // const[showAddModal,setShowAddModal] = useState(false);
+    // const handleAddClose = () => setShowAddModal(false);
+    // const handleAddShow = () => setShowAddModal(true);
+    // const [showImageModal, setShowImageModal] = useState(false);
+    // const handleImageClose = () => setShowImageModal(false);
+    // const handleImageShow = () => setShowImageModal(true);
+    // const [name, setPlantName] = useState("");
+    // const [title, setPlantTitle] = useState("");
+    // const [soil, setPlantSoil] = useState("");
+    // const [size, setPlantSize] = useState("");
+    // const [sun, setPlantSun] = useState("");
+    // const [hardiness, setPlantHardiness] = useState("");
+    // const [water, setPlantWater] = useState("");
+    // const [family, setPlantFamily] = useState("");
+    // const [image, setPlantImage] = useState("");
+    // const plantsCollectionRef = collection(db, "plants");
+    // const [message, setMessage] = useState({error: false, msg: ""});
+    // //const userCollectionRef = collection(db, "users");
+    // let navigate = useNavigate();
+    const [plants, setPlants] = useState([]);
+    useEffect(()=>{
+        getPlants();
+    },[]);
 
-    const createPlant = async (e) => {
-        e.preventDefault();
-        setMessage("");
-        if(title=== "" || name === "" || watering === ""){
-            setMessage({error:true, msg: "All fields are mandatory!"});
-            return;
-        }
-        const newPlant = {
-            title, name, soil, size, sun, hardiness, water, family, image,
-        };
-        try{
-            await plantsServices.addPlants(newPlant);
-            setMessage({error=false, msg:"New plant added successfully"});
-        }
-        navigate("/");
-    }
-    const editPlant = async (id) => {
-        const plantDocRef = doc(db, "plants", id);
-        await updateDoc(plantDocRef, {title, name, soil, size, sun, hardiness, water, family, image});
-    }
+    const getPlants = async () => {
+        const data = await PlantDataService.getAllPlants();
+        setPlants(data.docs.map((doc)=>({...doc.data(),id: doc.id})));
+    };
+    
     const deletePlant = async (id) =>{
-        const plantDoc = doc(db, "plants", id);
-        await deletePlant(plantDoc,);
+        await PlantDataService.deletePlant(id);
+        getPlants();
       }
       const confirmDelete = (id) =>{
           const confirmed = window.confirm("Are you sure you want to delete this plant?");
@@ -101,8 +92,11 @@ export const MyGarden=()=>{
 
 return(
     //add plant button maybe will go near search functionality?
+    
+    
         <div>
            <Button onClick={handleAddShow} className="btn-lg"><span>Add Plant   </span><BsFillPlusCircleFill></BsFillPlusCircleFill></Button>
+           {message?.msg && (<Alert variant={message?.error ? "danger": "success"} dismissible onClose = {()=>{setMessage("")}}>{message?.msg}</Alert>)}
         <div className="IndividualPlant container-fluid d-flex justify-content-center ">
                   
                     <div className="row">
@@ -116,15 +110,16 @@ return(
                     />
                     <div class="buttons">
                             <div class="button-trash">
-                            <button className="btn btn-light" onClick = {()=> confirmDelete(plant.id)}><BsFillTrashFill></BsFillTrashFill></button>
+                            <button className="btn btn-light" onClick = {(e)=> confirmDelete(plant.id)}><BsFillTrashFill></BsFillTrashFill></button>
                             </div>
                             <div class="button-edit">
-                            <button className="btn btn-light" onClick ={()=> handleEditShow()}><BsFillPencilFill></BsFillPencilFill></button>
+                            <button className="btn btn-light" onClick ={(e)=> handleEditShow()}><BsFillPencilFill></BsFillPencilFill></button>
                             </div>
                             </div>
                     </div>
             
              )
+             
         })}
         </div>
         </div>
@@ -395,7 +390,7 @@ return(
                         </Modal.Body>
                     </Modal> */}
         </div>
-        
+       
 )
 };
 export default MyGarden;
