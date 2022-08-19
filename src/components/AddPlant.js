@@ -2,7 +2,11 @@ import { namedQuery } from "firebase/firestore";
 import React, {useState, useEffect} from "react";
 import { Form, Alert, InputGroup, Button, ButtonGroup } from "react-bootstrap";
 import PlantDataService from "../services/PlantDataService";
-
+import { Modal } from "react-bootstrap";
+import { Card } from "react-bootstrap";
+import { ListGroup, ListGroupItem } from "react-bootstrap";
+import { BsImage } from "react-icons/bs";
+import UploadImage from "./UploadImage";
 const AddPlant = ({id, setPlantId})=>{
 
     const [name, setPlantName] = useState("");
@@ -15,8 +19,8 @@ const AddPlant = ({id, setPlantId})=>{
     const [family, setPlantFamily] = useState("");
     const [image, setPlantImage] = useState("");
     const [message, setMessage] = useState({error: false, msg: ""});
-    const handleEditClose = () => setShowEditModal(false);
-    const handleEditShow = () => setShowEditModal(true);    
+    // const handleEditClose = () => setShowEditModal(false);
+    // const handleEditShow = () => setShowEditModal(true);    
     const[showAddModal,setShowAddModal] = useState(false);
     const handleAddClose = () => setShowAddModal(false);
     const handleAddShow = () => setShowAddModal(true);

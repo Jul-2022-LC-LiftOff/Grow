@@ -31,9 +31,9 @@ import AddPlant from "../components/AddPlant";
      const getPlantIdHandler = (id) =>{
         setPlantId(id);
      }  
-    // const[showAddModal,setShowAddModal] = useState(false);
-    // const handleAddClose = () => setShowAddModal(false);
-    // const handleAddShow = () => setShowAddModal(true);
+    const[showAddModal,setShowAddModal] = useState(false);
+    const handleAddClose = () => setShowAddModal(false);
+    const handleAddShow = () => setShowAddModal(true);
     // const [showImageModal, setShowImageModal] = useState(false);
     // const handleImageClose = () => setShowImageModal(false);
     // const handleImageShow = () => setShowImageModal(true);
@@ -70,7 +70,9 @@ import AddPlant from "../components/AddPlant";
               deletePlant(id);
           }
       }
-
+      const showModal = () =>{
+        setShowAddModal(true);
+      }
     useEffect(()=>{
     //get plant data from database later, using array as dummy data
     // const getPlants = async () =>{
@@ -99,7 +101,7 @@ return(
     
     
         <div>
-           <Button onClick={AddPlant.handleAddShow} className="btn-lg"><span>Add Plant   </span><BsFillPlusCircleFill></BsFillPlusCircleFill></Button>
+           <Button onClick={showModal} className="btn-lg"><span>Add Plant   </span><BsFillPlusCircleFill></BsFillPlusCircleFill></Button>
         <div className="IndividualPlant container-fluid d-flex justify-content-center ">
                   
                     <div className="row">
@@ -126,7 +128,7 @@ return(
         })}
         </div>
         </div>
-        <AddPlant id={plantId} setPlantId={setPlantId}/>
+        <AddPlant id={plantId} setPlantId={setPlantId} show={showAddModal}  onHide={handleAddClose}/>
         {/* <Modal show={showAddModal} onHide={handleAddClose} class="modal">
                         <Modal.Header closeButton>
                             <Modal.Title>Add Plant</Modal.Title>
