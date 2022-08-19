@@ -24,9 +24,13 @@ import AddPlant from "../components/AddPlant";
 
     // const[plants,setPlants]= useState([]);
     // const ref = React.createRef();
-    // const [showEditModal, setShowEditModal] = useState(false);
-    // const handleEditClose = () => setShowEditModal(false);
-    // const handleEditShow = () => setShowEditModal(true);    
+     const [showEditModal, setShowEditModal] = useState(false);
+     const handleEditClose = () => setShowEditModal(false);
+     const handleEditShow = () => setShowEditModal(true);  
+     const[plantId, setPlantId] = useState("");
+     const getPlantIdHandler = (id) =>{
+        setPlantId(id);
+     }  
     // const[showAddModal,setShowAddModal] = useState(false);
     // const handleAddClose = () => setShowAddModal(false);
     // const handleAddShow = () => setShowAddModal(true);
@@ -95,8 +99,7 @@ return(
     
     
         <div>
-           <Button onClick={handleAddShow} className="btn-lg"><span>Add Plant   </span><BsFillPlusCircleFill></BsFillPlusCircleFill></Button>
-           {message?.msg && (<Alert variant={message?.error ? "danger": "success"} dismissible onClose = {()=>{setMessage("")}}>{message?.msg}</Alert>)}
+           <Button onClick={AddPlant.handleAddShow} className="btn-lg"><span>Add Plant   </span><BsFillPlusCircleFill></BsFillPlusCircleFill></Button>
         <div className="IndividualPlant container-fluid d-flex justify-content-center ">
                   
                     <div className="row">
@@ -123,7 +126,8 @@ return(
         })}
         </div>
         </div>
-        <Modal show={showAddModal} onHide={handleAddClose} class="modal">
+        <AddPlant id={plantId} setPlantId={setPlantId}/>
+        {/* <Modal show={showAddModal} onHide={handleAddClose} class="modal">
                         <Modal.Header closeButton>
                             <Modal.Title>Add Plant</Modal.Title>
                         </Modal.Header>
@@ -251,7 +255,7 @@ return(
                             <UploadImage onChange={(event)=> {setPlantImage(event.target.value)}}/> 
                             <Button onClick={() => { handleImageClose(); handleAddShow();}}>Save Image</Button>
                         </Modal.Body>
-                    </Modal>
+                    </Modal> */}
     {/* Edit plant modal */}
                     {/* <div class="modalBackground">
                      <Modal show={showEditModal} onHide={handleEditClose} class="modal">
@@ -288,9 +292,8 @@ return(
                                 </ListGroupItem>
  
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Size:</span> 
-                                <div> */}
-                                {/* <input class="editAdd" type="text" placeholder={plantData.size} value={size}></input> */}
-                                {/* <select class="form-select" aria-label="Default select example" value={size} onSelect={(event)=> {setPlantSize(event.target.value)}}>
+                                <div>
+                                <select class="form-select" aria-label="Default select example" value={size} onSelect={(event)=> {setPlantSize(event.target.value)}}>
                                     <option value="1-3 inches">1-5 inches</option>
                                     <option value="4-7 inches">4-7 inches</option>
                                     <option value="8-12 inches">8-11 inches</option>
@@ -304,9 +307,8 @@ return(
                                 </ListGroupItem>
  
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Soil:</span> 
-                                <div> */}
-                                {/* <input class="editAdd" type="text" placeholder={plantData.soil} value={soil}></input> */}
-                                {/* <select class="form-select" aria-label="Default select example" value={soil} onSelect={(event)=> {setPlantSoil(event.target.value)}}>
+                                <div>
+                                 <select class="form-select" aria-label="Default select example" value={soil} onSelect={(event)=> {setPlantSoil(event.target.value)}}>
                                     <option value="Clay">Clay</option>
                                     <option value="Sandy">Sandy</option>
                                     <option value="Silty">Silty</option>
@@ -319,8 +321,8 @@ return(
                                 
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Sun:</span> 
                                 <div >
-                                {/* <input class="editAdd" type="text" placeholder={plantData.sun} value={sun}></input> */}
-                                {/* <select class="form-select" aria-label="Default select example"  value={sun} onSelect={(event)=> {setPlantSun(event.target.value)}}>
+                                 <input class="editAdd" type="text" placeholder={plantData.sun} value={sun}></input> 
+                                 <select class="form-select" aria-label="Default select example"  value={sun} onSelect={(event)=> {setPlantSun(event.target.value)}}>
                                     <option value="Direct light">Direct light</option>
                                     <option value="Bright indirect light">Bright indirect light</option>
                                     <option value="Medium indirect light">Medium indirect light</option>
@@ -330,9 +332,8 @@ return(
                                 </ListGroupItem>
                               
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Hardiness:</span> 
-                                <div> */} 
-                                {/* <input class="editAdd" type="text" placeholder={plantData.hardiness} value={hardiness}></input> */}
-                                {/* <select id="hardiness" class="form-select" aria-label="Default select example"  value={hardiness} onSelect={(event)=> {setPlantHardiness(event.target.value)}}>
+                                <div> 
+                                <select id="hardiness" class="form-select" aria-label="Default select example"  value={hardiness} onSelect={(event)=> {setPlantHardiness(event.target.value)}}>
 
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -349,9 +350,8 @@ return(
                                 </div>
                                 </ListGroupItem>
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Water:</span> 
-                                <div> */}
-                                {/* <input class="editAdd" type="text" placeholder={plantData.water} value={water}></input> */}
-                                {/* <select class="form-select" aria-label="Default select example" value={water} onSelect={(event)=> {setPlantWater(event.target.value)}}>
+                                <div>
+                                <select class="form-select" aria-label="Default select example" value={water} onSelect={(event)=> {setPlantWater(event.target.value)}}>
                                     <option value="Daily">Daily</option>
                                     <option value="3-5 times per week">3-5 times per week</option>
                                     <option value="1-2 times per week">1-2 times per week</option>
