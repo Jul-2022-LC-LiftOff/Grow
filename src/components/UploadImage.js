@@ -50,7 +50,7 @@ render(){
                 />
             </div>
             <br/>
-            <label>
+            <label >
                 <input
                 name="upload-img-input"
                 type="file"

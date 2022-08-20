@@ -27,15 +27,15 @@ const AddPlant = ({id, setPlantId})=>{
     const [showImageModal, setShowImageModal] = useState(false);
     const handleImageClose = () => setShowImageModal(false);
     const handleImageShow = () => setShowImageModal(true);
-
+    
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
-        setMessage("");
-        if(name==="" || title==="" || water===""){
-            setMessage({error:true, msg: "All fields are required!"});
-            return;
-        }
+        // setMessage("");
+        // if(name==="" || title==="" || water===""){
+        //     setMessage({error:true, msg: "All fields are required!"});
+        //     return;
+        // }
         const newPlant = {
             name, title, soil, size, sun, hardiness, water, family, image,
         };
@@ -43,10 +43,10 @@ const AddPlant = ({id, setPlantId})=>{
             if(id !== undefined && id !== ""){
                 await PlantDataService.updatePlant(id, newPlant);
                 setPlantId("");
-                setMessage({error:false, msg: "Plant updated successfully"});
+                // setMessage({error:false, msg: "Plant updated successfully"});
             }else{
                 await PlantDataService.addPlants(newPlant);
-                setMessage({error:false, msg: "New plant added successfully"});
+                // setMessage({error:false, msg: "New plant added successfully"});
             }
         }catch (err){
             setMessage({error:true, msg: err.message});
@@ -60,6 +60,7 @@ const AddPlant = ({id, setPlantId})=>{
         setPlantFamily("");
         setPlantWater("");
         setPlantImage("");
+        console.log(newPlant);
     };
     const editHandler = async () =>{
         setMessage("");
@@ -94,20 +95,22 @@ const AddPlant = ({id, setPlantId})=>{
             {message?.msg}
           </Alert>
         )}
-          <Modal show={showAddModal} onHide={handleAddClose} class="modal">
+          {/* <Modal show={props.openAdd}  class="modal">
           <Modal.Header closeButton>
               <Modal.Title>Add Plant</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body> */}
           <section>
       <div >
           <Card className="IndividualPlantModal" id="addModal"  >
-              <div>
-              <Card.Img variant="top" >
+              <div class="uploadImage ">
+              {/* <Card.Img variant="top" >
               
-              </Card.Img>
+              </Card.Img> */}
+                            <UploadImage onChange={(event)=> {setPlantImage(event.target.value)}} value={image}/> 
+
               </div>
-               <Button className="position-absolute top-0 end-0" onClick = {() => { handleImageShow(); handleAddClose();}} ><span>Upload Image   </span><BsImage></BsImage></Button> 
+               {/* <Button className="position-absolute top-0 end-0" onClick = {() => { handleImageShow(); handleAddClose();}} ><span>Upload Image   </span><BsImage></BsImage></Button>  */}
                
                <Card.Body >
               
@@ -130,7 +133,8 @@ const AddPlant = ({id, setPlantId})=>{
 
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Size:</span> 
                   <div>
-                  <select class="form-select" aria-label="Default select example" onSelect={(event)=> setPlantSize(event.target.value)} value={size}>
+                  <select class="form-select" aria-label="Default select example" onChange={(event)=> setPlantSize(event.target.value)} value={size}>
+                        <option value=""></option>
                       <option value="1-3 inches">1-5 inches</option>
                       <option value="4-7 inches">4-7 inches</option>
                       <option value="8-12 inches">8-11 inches</option>
@@ -145,7 +149,8 @@ const AddPlant = ({id, setPlantId})=>{
 
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Soil:</span> 
                   <div>
-                  <select class="form-select" aria-label="Default select example" onSelect={(event)=> setPlantSoil(event.target.value)} value={soil}>
+                  <select class="form-select" aria-label="Default select example" onChange={(event)=> setPlantSoil(event.target.value)} value={soil}>
+                    <option value=""></option>
                       <option value="Clay">Clay</option>
                       <option value="Sandy">Sandy</option>
                       <option value="Silty">Silty</option>
@@ -158,7 +163,8 @@ const AddPlant = ({id, setPlantId})=>{
                   
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Sun:</span> 
                   <div >
-                  <select class="form-select" aria-label="Default select example" onSelect={(event)=> setPlantSun(event.target.value)} value={sun}>
+                  <select class="form-select" aria-label="Default select example" onChange={(event)=> setPlantSun(event.target.value)} value={sun}>
+                        <option value=""></option>
                       <option value="Direct light">Direct light</option>
                       <option value="Bright indirect light">Bright indirect light</option>
                       <option value="Medium indirect light">Medium indirect light</option>
@@ -169,8 +175,8 @@ const AddPlant = ({id, setPlantId})=>{
                 
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Hardiness:</span> 
                   <div>
-                  <select id="hardiness" class="form-select" aria-label="Default select example"  onSelect={(event)=> setPlantHardiness(event.target.value)} value={hardiness}>
-
+                  <select id="hardiness" class="form-select" aria-label="Default select example"  onChange={(event)=> setPlantHardiness(event.target.value)} value={hardiness}>
+                    <option value=""></option>
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -188,7 +194,8 @@ const AddPlant = ({id, setPlantId})=>{
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Water:</span> 
                   <div>
 
-                  <select class="form-select" aria-label="Default select example" onSelect={(event)=> setPlantWater(event.target.value)} value={water}>
+                  <select class="form-select" aria-label="Default select example" onChange={(event)=> setPlantWater(event.target.value)} value={water}>
+                      <option value=""></option>
                       <option value="Daily">Daily</option>
                       <option value="3-5 times per week">3-5 times per week</option>
                       <option value="1-2 times per week">1-2 times per week</option>
@@ -201,20 +208,22 @@ const AddPlant = ({id, setPlantId})=>{
 
 
               </ListGroup>
-             
+              <Button variant="primary" onClick={handleSubmit}>
+          Save Plant
+          </Button>
               </Card.Body>
           </Card>
           
        </div>
        </section>
-          </Modal.Body>
+          {/* </Modal.Body>
           <Modal.Footer>
-              <Button variant="primary" onClick={()=>{handleAddClose(); handleSubmit();}}>
+              <Button variant="primary" onClick={()=>{props.closeAdd(); handleSubmit();}}>
           Save Plant
           </Button>
           </Modal.Footer>
-      </Modal>
-      <Modal show={showImageModal} onHide = {handleImageClose} class="modal">
+      </Modal> */}
+      {/* <Modal show={showImageModal} onHide = {handleImageClose} class="modal" id="imageModal">
           <Modal.Header closeButton>
               <Modal.Title>Upload Plant Image</Modal.Title>
           </Modal.Header>
@@ -222,7 +231,7 @@ const AddPlant = ({id, setPlantId})=>{
               <UploadImage onChange={(event)=> {setPlantImage(event.target.value)}} value={image}/> 
               <Button onClick={() => { handleImageClose(); handleAddShow();}}>Save Image</Button>
           </Modal.Body>
-      </Modal>
+      </Modal> */}
         </>
     )
 }
