@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import PlantDataService from "../services/PlantDataService";
 import { Button } from "react-bootstrap";
-import { BsFillPlusCircleFill } from "react-icons/bs";
 import { BsFillPencilFill } from "react-icons/bs";
 import {IndividualPlant} from "../components/IndividualPlant";
 import { BsFillTrashFill } from "react-icons/bs";
-import {doc, updateDoc, addDoc, collection} from 'firebase/firestore';
 
 const PlantList = ({getPlantId, showEdit}) =>{
     const [plants, setPlants] = useState([]);

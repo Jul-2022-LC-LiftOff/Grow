@@ -1,11 +1,8 @@
-import { namedQuery } from "firebase/firestore";
 import React, {useState, useEffect} from "react";
-import { Form, Alert, InputGroup, Button, ButtonGroup } from "react-bootstrap";
+import { Alert,  Button } from "react-bootstrap";
 import PlantDataService from "../services/PlantDataService";
-import { Modal } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
-import { BsImage } from "react-icons/bs";
 import UploadImage from "./UploadImage";
 const AddPlant = ({id, setPlantId, closeModal})=>{
 
@@ -24,11 +21,11 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
-        // setMessage("");
-        // if(name==="" || title==="" || water===""){
-        //     setMessage({error:true, msg: "All fields are required!"});
-        //     return;
-        // }
+        setMessage("");
+        if(name==="" || title==="" || water===""){
+            setMessage({error:true, msg: "All fields are required!"});
+            return;
+        }
         const newPlant = {
             name, title, soil, size, sun, hardiness, water, family, image,
         };
@@ -36,10 +33,10 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
             if(id !== undefined && id !== ""){
                 await PlantDataService.updatePlant(id, newPlant);
                 setPlantId("");
-                // setMessage({error:false, msg: "Plant updated successfully"});
+                 setMessage({error:false, msg: "Plant updated successfully"});
             }else{
                 await PlantDataService.addPlants(newPlant);
-                // setMessage({error:false, msg: "New plant added successfully"});
+                setMessage({error:false, msg: "New plant added successfully"});
             }
         }catch (err){
             setMessage({error:true, msg: err.message});
@@ -88,25 +85,14 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
             {message?.msg}
           </Alert>
         )}
-          {/* <Modal show={props.openAdd}  class="modal">
-          <Modal.Header closeButton>
-              <Modal.Title>Add Plant</Modal.Title>
-          </Modal.Header>
-          <Modal.Body> */}
+          
           <section>
       <div >
           <Card className="IndividualPlantModal" id="addModal"  >
               <div class="uploadImage ">
-              {/* <Card.Img variant="top" >
-              
-              </Card.Img> */}
-                            <UploadImage onChange={(event)=> {setPlantImage(event.target.value)}} value={image}/> 
-
+                    <UploadImage onChange={(event)=> {setPlantImage(event.target.value)}} value={image}/> 
               </div>
-               {/* <Button className="position-absolute top-0 end-0" onClick = {() => { handleImageShow(); handleAddClose();}} ><span>Upload Image   </span><BsImage></BsImage></Button>  */}
-               
                <Card.Body >
-              
               <ListGroup variant="flush" >
               <ListGroupItem><span style={{fontWeight:'bold'}}> Title:</span>
                   <div>
@@ -208,22 +194,6 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
           
        </div>
        </section>
-          {/* </Modal.Body>
-          <Modal.Footer>
-              <Button variant="primary" onClick={()=>{props.closeAdd(); handleSubmit();}}>
-          Save Plant
-          </Button>
-          </Modal.Footer>
-      </Modal> */}
-      {/* <Modal show={showImageModal} onHide = {handleImageClose} class="modal" id="imageModal">
-          <Modal.Header closeButton>
-              <Modal.Title>Upload Plant Image</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-              <UploadImage onChange={(event)=> {setPlantImage(event.target.value)}} value={image}/> 
-              <Button onClick={() => { handleImageClose(); handleAddShow();}}>Save Image</Button>
-          </Modal.Body>
-      </Modal> */}
         </>
     )
 }
