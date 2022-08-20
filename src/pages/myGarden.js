@@ -20,43 +20,47 @@ import { BsFillTrashFill } from "react-icons/bs";
 import plantThree from "../assets/plantThree.jpg";
 import PlantDataService from "../services/PlantDataService";
 import AddPlant from "../components/AddPlant";
- const MyGarden=({getPlantId})=>{
+import PlantList from "../components/PlantList";
+ const MyGarden=()=>{
 
     
-     const [show, setShow] = useState(false);
-    
+     const [showAdd, setShowAdd] = useState(false);
+     const [showEdit, setShowEdit] = useState(false);
+
      const[plantId, setPlantId] = useState("");
      const getPlantIdHandler = (id) =>{
         setPlantId(id);
      }  
-    const[showAddModal,setShowAddModal] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    // const[showAddModal,setShowAddModal] = useState(false);
+    const handleAddClose = () => setShowAdd(false);
+    const handleAddShow = () => setShowAdd(true);
+    const handleEditClose = () => setShowEdit(false);
+    const handleEditShow = () => setShowEdit(true);
     
-    const [plants, setPlants] = useState([]);
+    // const [plants, setPlants] = useState([]);
 
-    useEffect(()=>{
-        getPlants();
-    },[]);
+    // useEffect(()=>{
+    //     getPlants();
+    // },[]);
 
-    const getPlants = async () => {
-        const data = await PlantDataService.getAllPlants();
-        setPlants(data.docs.map((doc)=>({...doc.data(),id: doc.id})));
-    };
+    // const getPlants = async () => {
+    //     const data = await PlantDataService.getAllPlants();
+    //     setPlants(data.docs.map((doc)=>({...doc.data(),id: doc.id})));
+    // };
     
-    const deletePlant = async (id) =>{
-        await PlantDataService.deletePlant(id);
-        getPlants();
-      }
-      const confirmDelete = (id) =>{
-          const confirmed = window.confirm("Are you sure you want to delete this plant?");
-          if(confirmed){
-              deletePlant(id);
-          }
-      }
-      function refreshPage(){
-        window.location.reload(false);
-      }
+    // const deletePlant = async (id) =>{
+    //     await PlantDataService.deletePlant(id);
+    //     getPlants();
+    //   }
+    //   const confirmDelete = (id) =>{
+    //       const confirmed = window.confirm("Are you sure you want to delete this plant?");
+    //       if(confirmed){
+    //           deletePlant(id);
+    //       }
+    //   }
+    //   function refreshPage(){
+    //     window.location.reload(false);
+    //   }
       
     // useEffect(()=>{
     // //get plant data from database later, using array as dummy data
@@ -82,40 +86,67 @@ import AddPlant from "../components/AddPlant";
     // },[]);
 
 return(
+    <>
+    <Button  onClick = {handleAddShow}className="btn-lg"><span>Add Plant   </span><BsFillPlusCircleFill></BsFillPlusCircleFill></Button>
+
+    <Modal show={showAdd} onHide={handleAddClose}  class="modal">
+         <Modal.Header >
+        
+             <Modal.Title>Add Plant </Modal.Title>
+             <CloseButton onClick={() => { handleAddClose()}}/>
+         </Modal.Header>
+         <Modal.Body>
+         <AddPlant id={plantId} setPlantId={setPlantId} closeModal={handleAddClose}/>
+        </Modal.Body>
+       </Modal>
+       
+       <Modal show={showEdit} onHide={handleEditClose}  class="modal">
+         <Modal.Header >
+        
+             <Modal.Title>Edit Plant </Modal.Title>
+             <CloseButton onClick={() => { handleEditClose()}}/>
+         </Modal.Header>
+         <Modal.Body>
+         <AddPlant id={plantId} setPlantId={setPlantId} closeModal={handleEditClose}/>
+        </Modal.Body>
+       </Modal>
+    <PlantList getPlantId={getPlantIdHandler} showEdit={handleEditShow}/>
+    </>
+
     //add plant button maybe will go near search functionality?
     
     
-        <div>
-           <Button onClick={handleShow} className="btn-lg"><span>Add Plant   </span><BsFillPlusCircleFill></BsFillPlusCircleFill></Button>
-        <div className="IndividualPlant container-fluid d-flex justify-content-center ">
+        // <div>
+        //    <Button onClick={handleShow} className="btn-lg"><span>Add Plant   </span><BsFillPlusCircleFill></BsFillPlusCircleFill></Button>
+        // <div className="IndividualPlant container-fluid d-flex justify-content-center ">
                   
-                    <div className="row">
-                    {plants.map((plant)=>{
-            return(
-                <div id="container" className="col-md-4">
-                <IndividualPlant 
-                    plantData={plant} 
-                    key={plant.title} 
-                    id="card"
-                    />
-                    <div class="buttons">
-                            <div class="button-trash">
-                            <button className="btn btn-light" onClick = {(e)=> confirmDelete(plant.id)}><BsFillTrashFill></BsFillTrashFill></button>
-                            </div>
-                            <div class="button-edit">
-                            {/* <button className="btn btn-light" onClick ={(e)=> handleEditShow()}><BsFillPencilFill></BsFillPencilFill></button> */}
-                            </div>
-                            </div>
-                    </div>
+        //             <div className="row">
+        //             {plants.map((plant)=>{
+           
+                // <div id="container" className="col-md-4">
+                // <IndividualPlant 
+                //     plantData={plant} 
+                //     key={plant.title} 
+                //     id="card"
+                //     />
+                //     <div class="buttons">
+                //             <div class="button-trash">
+                //             <button className="btn btn-light" onClick = {(e)=> confirmDelete(plant.id)}><BsFillTrashFill></BsFillTrashFill></button>
+                //             </div>
+                //             <div class="button-edit">
+                //             <button className="btn btn-light" onClick ={() => {getPlantId(doc.id); handleShow();}}><BsFillPencilFill></BsFillPencilFill></button>
+                //             </div>
+                //             </div>
+                //     </div>
             
-             )
              
-        })}
-        </div>
-        </div>
+             
         
-    {/* Edit plant modal */}
-                    {/* <div class="modalBackground">
+        // </div>
+        // </div>
+        
+    /* Edit plant modal */
+                    /* <div class="modalBackground">
                      <Modal show={showEditModal} onHide={handleEditClose} class="modal">
                         <Modal.Header closeButton>
                             <Modal.Title>Edit {plantData.title}</Modal.Title>
@@ -246,18 +277,28 @@ return(
                             <UploadImage/> 
                             <Button onClick={() => { handleImageClose(); handleEditShow();}}>Save Image</Button>
                         </Modal.Body>
-                    </Modal> */}
-            <Modal show={show} onHide={handleClose}  class="modal">
-        <Modal.Header >
+                    </Modal> */
+    //         <Modal show={show} onHide={handleClose}  class="modal">
+    //     <Modal.Header >
         
-            <Modal.Title>Add Plant </Modal.Title>
-            <CloseButton onClick={() => { handleClose(); refreshPage();}}/>
-        </Modal.Header>
-        <Modal.Body>
-            <AddPlant id={plantId} setPlantId={setPlantId}/>
-        </Modal.Body>
-      </Modal>
-        </div>
+    //         <Modal.Title>Add Plant </Modal.Title>
+    //         <CloseButton onClick={() => { handleClose(); refreshPage();}}/>
+    //     </Modal.Header>
+    //     <Modal.Body>
+    //         <AddPlant id={plantId} setPlantId={setPlantId}/>
+    //     </Modal.Body>
+    //   </Modal>
+    //   <Modal show={show} onHide={handleClose}  class="modal">
+    //     <Modal.Header >
+        
+    //         <Modal.Title>Edit Plant </Modal.Title>
+    //         <CloseButton onClick={() => { handleClose(); refreshPage();}}/>
+    //     </Modal.Header>
+    //     <Modal.Body>
+    //         <AddPlant id={plantId} />
+    //     </Modal.Body>
+    //   </Modal>
+    //     </div>
         
 )
 };

@@ -7,7 +7,7 @@ import { Card } from "react-bootstrap";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 import { BsImage } from "react-icons/bs";
 import UploadImage from "./UploadImage";
-const AddPlant = ({id, setPlantId})=>{
+const AddPlant = ({id, setPlantId, closeModal})=>{
 
     const [name, setPlantName] = useState("");
     const [title, setPlantTitle] = useState("");
@@ -19,14 +19,7 @@ const AddPlant = ({id, setPlantId})=>{
     const [family, setPlantFamily] = useState("");
     const [image, setPlantImage] = useState("");
     const [message, setMessage] = useState({error: false, msg: ""});
-    // const handleEditClose = () => setShowEditModal(false);
-    // const handleEditShow = () => setShowEditModal(true);    
-    const[showAddModal,setShowAddModal] = useState(false);
-    const handleAddClose = () => setShowAddModal(false);
-    const handleAddShow = () => setShowAddModal(true);
-    const [showImageModal, setShowImageModal] = useState(false);
-    const handleImageClose = () => setShowImageModal(false);
-    const handleImageShow = () => setShowImageModal(true);
+    
     
 
     const handleSubmit = async (e) =>{
@@ -206,9 +199,8 @@ const AddPlant = ({id, setPlantId})=>{
                   </div>
                   </ListGroupItem>
 
-
               </ListGroup>
-              <Button variant="primary" onClick={handleSubmit}>
+              <Button variant="primary" onClick={()=> {handleSubmit(); closeModal();}}>
           Save Plant
           </Button>
               </Card.Body>
