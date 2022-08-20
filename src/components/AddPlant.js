@@ -200,7 +200,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
                   </ListGroupItem>
 
               </ListGroup>
-              <Button variant="primary" onClick={()=> {handleSubmit(); closeModal();}}>
+              <Button variant="primary" onClick={handleSubmit} onSubmit={closeModal}>
           Save Plant
           </Button>
               </Card.Body>
