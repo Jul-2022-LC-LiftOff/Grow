@@ -11,6 +11,7 @@ import RegistrationPage from "./pages/registration/Registration.page";
 
 function App() {
   return (
+
     // <Routes>
     //   <Route path="/" element={<RegistrationPage />} />
     //   <Route
