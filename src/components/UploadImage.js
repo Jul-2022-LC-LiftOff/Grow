@@ -1,8 +1,9 @@
 import React from "react";
 import ReactAvatarEditor from "react-avatar-editor";
 import plantThree from "../assets/plantThree.jpg";
-
-
+import { storage } from "../firebase-config";
+import {ref, uploadBytes} from 'firebase/storage';
+import { v4 } from "uuid";
 class UploadImage extends React.Component {
 constructor(props){
     super(props);
@@ -15,6 +16,7 @@ constructor(props){
     };
     this.handleSubmit = this.handleSubmit.bind(this);
 }
+
 handleNewImage = (e) => {
     this.setState({image: e.target.files[0]});
 }
@@ -24,7 +26,7 @@ handleScale = (e) => {
     this.setState({scale});
 };
 handlePositionChange = (position) => {
-    this.setState({position});
+    this.setState({position})
 };
 setEditorRef = (editor) => (this.editor = editor);
 
@@ -34,6 +36,7 @@ async handleSubmit(e){
     }
 }
 render(){
+    const imageRef = ref(storage, 'images/${imageUpload.name + v4()}')
     return(
         <div>
             <div>

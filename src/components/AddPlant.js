@@ -3,7 +3,13 @@ import { Alert,  Button } from "react-bootstrap";
 import PlantDataService from "../services/PlantDataService";
 import { Card } from "react-bootstrap";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
+import ReactAvatarEditor from "react-avatar-editor";
+import plantThree from "../assets/plantThree.jpg";
+import { storage } from "../firebase-config";
+import {getDownloadURL, ref, uploadBytes, uploadBytesResumable} from 'firebase/storage';
+import { v4 } from "uuid";
 import UploadImage from "./UploadImage";
+
 const AddPlant = ({id, setPlantId, closeModal})=>{
 
     const [name, setPlantName] = useState("");
@@ -14,11 +20,21 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
     const [hardiness, setPlantHardiness] = useState("");
     const [water, setPlantWater] = useState("");
     const [family, setPlantFamily] = useState("");
-    const [image, setPlantImage] = useState("");
+    const [image, setPlantImage] = useState(null);
     const [message, setMessage] = useState({error: false, msg: ""});
+    const imagesListRef = ref(storage,"Grow/");
+    // const [imageUrls, setImageUrls] = useState([]);
+   
+    // const uploadFile = () =>{
+    //     if(image == null) return;
+    //     const imageRef = ref(storage, `images/${image.name + v4()}`);
+    //     uploadBytes(imageRef, image).then((snapshot)=>{
+    //         getDownloadURL(snapshot.ref).then((url)=>{
+    //             setImageUrls((prev)=> [...prev,url]);
+    //         });
+    //     });
+    // };
     
-    
-
     const handleSubmit = async (e) =>{
         e.preventDefault();
         setMessage("");
@@ -26,6 +42,10 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
             setMessage({error:true, msg: "All fields are required!"});
             return;
         }
+        // const file = e.target[0]?.files[0]
+       
+        // const storageRef = ref(storage, `images/${file.name}`);
+        // const uploadTask = uploadBytesResumable(storageRef, file);
         const newPlant = {
             name, title, soil, size, sun, hardiness, water, family, image,
         };
@@ -88,7 +108,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
           
           <section>
       <div >
-          <Card className="IndividualPlantModal" id="addModal"  >
+      <Card className="IndividualPlantModal" id="addModal"  >
               <div class="uploadImage ">
                     <UploadImage onChange={(event)=> {setPlantImage(event.target.value)}} value={image}/> 
               </div>

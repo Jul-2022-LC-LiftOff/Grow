@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from 'react-bootstrap/Button';
 import { CloseButton } from "react-bootstrap";
 import "../components/individual-style.css";
@@ -7,9 +7,10 @@ import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import AddPlant from "../components/AddPlant";
 import PlantList from "../components/PlantList";
+//import { UserContext } from "../components/UserContext";
  const MyGarden=()=>{
 
-    
+    //const currentUser = useContext(UserContext)
      const [showAdd, setShowAdd] = useState(false);
      const [showEdit, setShowEdit] = useState(false);
 

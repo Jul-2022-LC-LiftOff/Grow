@@ -21,6 +21,7 @@ class PlantDataService{
     getAllPlants = () =>{
         return getDocs(plantCollectionRef);
     };
+    
 
     getPlant = (id) => {
         const plantDoc = doc(db, "plants", id);

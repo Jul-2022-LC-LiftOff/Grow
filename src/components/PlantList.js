@@ -4,9 +4,10 @@ import { Button } from "react-bootstrap";
 import { BsFillPencilFill } from "react-icons/bs";
 import {IndividualPlant} from "../components/IndividualPlant";
 import { BsFillTrashFill } from "react-icons/bs";
-
+import { Firestore } from "firebase/firestore";
 const PlantList = ({getPlantId, showEdit}) =>{
     const [plants, setPlants] = useState([]);
+    //npmconst [userData, setUserData] = useState(null);
     useEffect(()=>{
         getPlants();
     },[]);
