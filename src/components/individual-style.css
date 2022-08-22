@@ -1,0 +1,32 @@
+
+
+.IndividualPlant{
+   
+    margin-top: 10px;
+  
+    
+}
+.IndividualPlant:hover{
+    box-shadow: 5px 10px 20px 1px rgba(0,0,0,0.253)!important;
+    
+}
+.IndividualPlant-text{
+    width:100%;
+    
+}
+
+.container-fluid{
+    padding-top:3rem;
+    padding-bottom:3rem;
+   
+}
+
+.col-md-4{
+    padding-top: 1rem;
+}
+.editAdd{
+    width: 100%;
+}
+
+
+
