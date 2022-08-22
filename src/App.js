@@ -10,6 +10,7 @@ import RegistrationPage from "./pages/registration/Registration.page";
 
 function App() {
   return (
+
     <Routes>
       <Route path="/signup" element={<RegistrationPage />} />
       <Route
@@ -29,6 +30,7 @@ function App() {
     // <div class="mainBackground">
     //   <MyGarden/>
     // </div>
+
   );
 }
 export default App;
