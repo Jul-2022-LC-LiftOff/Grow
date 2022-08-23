@@ -13,7 +13,7 @@ import { setPersistence } from "firebase/auth";
 
 
 
-const UploadImage = () => {
+const UploadImage = ({handleNewImage}) => {
 const [imageUrl, setImageUrl] = useState("");
 const [image, setImage] = useState('');
 const [zoomOut, setZoomOut] = useState(false);
@@ -31,9 +31,9 @@ const handleScale = (e) => {
     setScale(scale);
 };
 
-const handleNewImage = (e) => {
-    setImage(e.target.files[0]);
-    };
+// const handleNewImage = (e) => {
+//     setImage(e.target.files[0]);
+//     };
 
 const handlePositionChange = (position) =>{
     setPosition({position});
