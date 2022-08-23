@@ -19,8 +19,8 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
     const [hardiness, setPlantHardiness] = useState("");
     const [water, setPlantWater] = useState("");
     const [family, setPlantFamily] = useState("");
-    const [image, setPlantImage] = useState("");
-    const [imageUrl, setImageUrl] = useState("");
+    const [file, setFile] = useState("");
+    const [image, setImage] = useState("");
     const [per, setPerc] = useState(null);
 
     const [message, setMessage] = useState({error: false, msg: ""});
@@ -57,7 +57,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
         setPlantHardiness("");
         setPlantFamily("");
         setPlantWater("");
-        setPlantImage("");
+        setImage("");
         console.log(newPlant);
     };
     const editHandler = async () =>{
@@ -72,14 +72,14 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
             setPlantHardiness(docSnap.data().hardiness);
             setPlantFamily(docSnap.data().family);
             setPlantWater(docSnap.data().water);
-            setPlantImage(docSnap.data().image);
+            setFile(docSnap.data().file);
         }catch (err){
             setMessage({error:true, msg:err.message});
         }
     };
 
     const handleImage = (e)=>{
-        setPlantImage(e.target.files[0]);
+        setFile(e.target.files[0]);
     };
 
     useEffect(()=>{
@@ -91,9 +91,9 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
     useEffect(()=>{
         const handleUpload = () =>{
             
-            const name = new Date().getTime() + image.name;
+            const name = new Date().getTime() + file.name;
             const imageRef = ref(storage, `files/${name}`);
-            const uploadTask = uploadBytesResumable(imageRef, image);
+            const uploadTask = uploadBytesResumable(imageRef, file);
             uploadTask.on(
                 "state_changed",
                 (snapshot)=>{
@@ -117,15 +117,15 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
                 },
                 ()=>{
                     getDownloadURL(uploadTask.snapshot.ref).then((url)=>{
-                        setImageUrl((prev)=>[...prev, url]);
+                        setImage((prev)=>[...prev, url]);
                     }) ;
                 }
                 
             );
             
         };
-        image && handleUpload();
-        },[image]);
+        file && handleUpload();
+        },[file]);
 
         
 
