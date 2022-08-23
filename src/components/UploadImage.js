@@ -13,7 +13,7 @@ import { uploadBytesResumable} from 'firebase/storage';
 
 
 const UploadImage = () => {
-
+const [imageUrl, setImageUrl] = useState("");
 const [image, setImage] = useState('');
 const [zoomOut, setZoomOut] = useState(false);
 const [scale, setScale] = useState(1);
@@ -46,9 +46,13 @@ const handleUpload = () =>{
     if(!image){
         alert("Please upload an image first!");
     }
-    const imageRef = ref(storage, 'files/${image.name}');
-    const uploadTask = uploadBytesResumable(imageRef, image );
-    getDownloadURL(uploadTask.snapshot.ref);
+    const imageRef = ref(storage, `files/${image.name}`);
+    uploadBytes(imageRef, image ).then((snapshot)=>{
+        getDownloadURL(snapshot.ref).then((url)=>{
+            setImageUrl((prev)=>[...prev, url]);
+        })
+    })
+    
 }
 
 
