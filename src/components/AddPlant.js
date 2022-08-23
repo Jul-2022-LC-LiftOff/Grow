@@ -22,7 +22,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
     const [family, setPlantFamily] = useState("");
     const [image, setPlantImage] = useState(null);
     const [message, setMessage] = useState({error: false, msg: ""});
-    const imagesListRef = ref(storage,"Grow/");
+    //const imagesListRef = ref(storage,"files/");
     // const [imageUrls, setImageUrls] = useState([]);
    
     // const uploadFile = () =>{
@@ -34,10 +34,14 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
     //         });
     //     });
     // };
+   
+
+
     
     const handleSubmit = async (e) =>{
         e.preventDefault();
         setMessage("");
+        
         if(name==="" || title==="" || water===""){
             setMessage({error:true, msg: "All fields are required!"});
             return;
@@ -46,6 +50,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
        
         // const storageRef = ref(storage, `images/${file.name}`);
         // const uploadTask = uploadBytesResumable(storageRef, file);
+        
         const newPlant = {
             name, title, soil, size, sun, hardiness, water, family, image,
         };
@@ -110,7 +115,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
       <div >
       <Card className="IndividualPlantModal" id="addModal"  >
               <div class="uploadImage ">
-                    <UploadImage onChange={(event)=> {setPlantImage(event.target.value)}} value={image}/> 
+                    <UploadImage value={image}/> 
               </div>
                <Card.Body >
               <ListGroup variant="flush" >
