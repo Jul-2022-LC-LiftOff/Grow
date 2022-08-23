@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactAvatarEditor from "react-avatar-editor";
 import plantThree from "../assets/plantThree.jpg";
 import { storage } from "../firebase-config";
@@ -6,6 +6,7 @@ import {getDownloadURL, ref, uploadBytes} from 'firebase/storage';
 import { v4 } from "uuid";
 import { useState, useRef } from "react";
 import { uploadBytesResumable} from 'firebase/storage';
+import { setPersistence } from "firebase/auth";
 
 
 
@@ -20,7 +21,7 @@ const [scale, setScale] = useState(1);
 const [rotate, setRotate] = useState(0);
 const [preview, setPreview] = useState(null);
 const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
-
+const [per, setPerc] = useState(null);
 // const handleNewImage = (e) => {
 //     setImage(e.target.files[0]);
 // };
@@ -42,18 +43,45 @@ const handlePositionChange = (position) =>{
 // };
 const setEditorRef = useRef();
 
+useEffect(()=>{
 const handleUpload = () =>{
-    if(!image){
-        alert("Please upload an image first!");
-    }
-    const imageRef = ref(storage, `files/${image.name}`);
-    uploadBytes(imageRef, image ).then((snapshot)=>{
-        getDownloadURL(snapshot.ref).then((url)=>{
-            setImageUrl((prev)=>[...prev, url]);
-        })
-    })
     
-}
+    const name = new Date().getTime() + image.name;
+    const imageRef = ref(storage, `files/${name}`);
+    const uploadTask = uploadBytesResumable(imageRef, image);
+    uploadTask.on(
+        "state_changed",
+        (snapshot)=>{
+            const progress = 
+            (snapshot.bytesTransferred/snapshot.totalBytes) * 100;
+            console.log("Upload is " + progress + "% done");
+            setPerc(progress);
+            switch(snapshot.state){
+                case "paused":
+                console.log("Upload is paused");
+                    break;
+                case "running":
+                console.log("Upload is running");
+                    break;
+                default:
+                    break;
+            }
+        },
+        (error)=>{
+            console.log(error);
+        },
+        ()=>{
+            getDownloadURL(uploadTask.snapshot.ref).then((url)=>{
+                setImageUrl((prev)=>[...prev, url]);
+            }) ;
+        }
+        
+    );
+    
+};
+image && handleUpload();
+},[image]);
+
 
 
  //const imageRef = ref(storage, 'images/${imageUpload.name + v4()}')
@@ -83,7 +111,7 @@ const handleUpload = () =>{
             </label>
             <br/>
             
-            <input
+            {/* <input
                 name="scale"
                 type="range"
                 onChange={handleScale}
@@ -93,7 +121,7 @@ const handleUpload = () =>{
                 defaultValue="1"
                 //placeholder={plantThree}
             />
-            <button onClick={handleUpload}> Upload Image</button>
+            <button onClick={(e)=> setImage(e.target.files[0])}> Upload Image</button> */}
 
         </div>
     )
