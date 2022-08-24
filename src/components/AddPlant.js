@@ -3,7 +3,7 @@ import { Alert,  Button } from "react-bootstrap";
 import PlantDataService from "../services/PlantDataService";
 import { Card } from "react-bootstrap";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
-
+import ProgressBar from 'react-bootstrap/ProgressBar';
 import { storage } from "../firebase-config";
 import {getDownloadURL, ref, uploadBytesResumable} from 'firebase/storage';
 import UploadImage from "./UploadImage";
@@ -20,8 +20,9 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
     const [family, setPlantFamily] = useState("");
     const [file, setFile] = useState("");
     const [image, setImage] = useState("");
-    const [per, setPerc] = useState(null);
-
+    const [per, setPerc] = useState(0);
+    const [showProgBar, setShowProgBar] = useState(false);
+    const [uploaded, setUploaded] = useState(true);
     const [message, setMessage] = useState({error: false, msg: ""});
     const handleSubmit = async (e) =>{
         e.preventDefault();
@@ -81,6 +82,8 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
         setFile(e.target.files[0]);
     };
 
+    
+
     useEffect(()=>{
         if(id !== undefined && id !== ""){
             editHandler();
@@ -96,10 +99,14 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
             uploadTask.on(
                 "state_changed",
                 (snapshot)=>{
+                    setShowProgBar(true);
                     const progress = 
                     (snapshot.bytesTransferred/snapshot.totalBytes) * 100;
                     console.log("Upload is " + progress + "% done");
                     setPerc(progress);
+                    if(per === 100){
+                        showProgBar(false);
+                    };
                     switch(snapshot.state){
                         case "paused":
                         console.log("Upload is paused");
@@ -116,6 +123,8 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
                 },
                 ()=>{
                     getDownloadURL(uploadTask.snapshot.ref).then((url)=>{
+                        setUploaded(false);
+                        setShowProgBar(false);
                         setImage(url);
                     }) ;
                 }
@@ -145,6 +154,13 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
       <Card className="IndividualPlantModal" id="addModal"  >
               <div class="uploadImage ">
                     <UploadImage handleNewImage={handleImage} value={image}/> 
+                     {showProgBar && <ProgressBar 
+                        className="progress__bar"
+                        now={per}
+                        size="medium"
+                        inverted
+                        
+                    /> }
               </div>
                <Card.Body >
               <ListGroup variant="flush" >
@@ -240,7 +256,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
                   </ListGroupItem>
 
               </ListGroup>
-              <Button variant="primary" onClick={handleSubmit} onSubmit={closeModal}>
+              <Button disabled = {uploaded} variant="primary" onClick={handleSubmit} onSubmit={closeModal}>
           Save Plant
           </Button>
               </Card.Body>

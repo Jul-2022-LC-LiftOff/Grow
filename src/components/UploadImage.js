@@ -55,7 +55,7 @@ const setEditorRef = useRef();
                 name="upload-img-input"
                 type="file"
                 accept="image/*" 
-                multiple = "false"
+                multiple ={false}
                 onChange = {handleNewImage}
                 />
                 
