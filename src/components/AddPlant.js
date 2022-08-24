@@ -9,7 +9,7 @@ import {getDownloadURL, ref, uploadBytesResumable} from 'firebase/storage';
 import UploadImage from "./UploadImage";
 
 const AddPlant = ({id, setPlantId, closeModal})=>{
-
+    
     const [name, setPlantName] = useState("");
     const [title, setPlantTitle] = useState("");
     const [soil, setPlantSoil] = useState("");
@@ -22,7 +22,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
     const [image, setImage] = useState("");
     const [per, setPerc] = useState(0);
     const [showProgBar, setShowProgBar] = useState(false);
-    const [uploaded, setUploaded] = useState(true);
+    const [uploaded, setUploaded] = useState(false);
     const [message, setMessage] = useState({error: false, msg: ""});
     const handleSubmit = async (e) =>{
         e.preventDefault();
@@ -99,6 +99,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
             uploadTask.on(
                 "state_changed",
                 (snapshot)=>{
+                    setUploaded(true);
                     setShowProgBar(true);
                     const progress = 
                     (snapshot.bytesTransferred/snapshot.totalBytes) * 100;

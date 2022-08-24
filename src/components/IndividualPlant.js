@@ -1,13 +1,14 @@
 import React from "react";
 import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
-import plantThree from "../assets/plantThree.jpg";
+import ImageUnavailable from "../assets/ImageUnavailable.png";
 import UploadImage from "./UploadImage";
 import Button from 'react-bootstrap/Button';
 import { BsFillPencilFill } from "react-icons/bs";
 import {BsImage } from "react-icons/bs"
 import ".//individual-style.css";
-import { BsFillTrashFill } from "react-icons/bs";
+import { storage } from "../firebase-config";
+import { ref } from "firebase/storage";
 import { Card } from "react-bootstrap";
 import ListGroupItem from "react-bootstrap/esm/ListGroupItem";
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -18,6 +19,8 @@ const handleEditShow = () => setShowEditModal(true);
 const [showImageModal, setShowImageModal] = useState(false);
 const handleImageClose = () => setShowImageModal(false);
 const handleImageShow = () => setShowImageModal(true);
+
+
         return(
   //generic my garden plant display 
                     // <div className="col-md-4">
@@ -25,7 +28,7 @@ const handleImageShow = () => setShowImageModal(true);
                     <div className="IndividualPlant text-left col-sm">
                         <Card className="IndividualPlant" key={plantData.id} >
                          
-                            <Card.Img variant="top"  src= {plantData.image}></Card.Img>
+                            <Card.Img variant="top"  src= {plantData.image} ></Card.Img>
                              <Card.Body >
                             <Card.Title  className="fw-bolder text-center" >
                              {plantData.title}
