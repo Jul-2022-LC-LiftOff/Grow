@@ -3,10 +3,9 @@ import { Alert,  Button } from "react-bootstrap";
 import PlantDataService from "../services/PlantDataService";
 import { Card } from "react-bootstrap";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
-import ReactAvatarEditor from "react-avatar-editor";
-import plantThree from "../assets/plantThree.jpg";
+
 import { storage } from "../firebase-config";
-import {getDownloadURL, ref, uploadBytes, uploadBytesResumable} from 'firebase/storage';
+import {getDownloadURL, ref, uploadBytesResumable} from 'firebase/storage';
 import UploadImage from "./UploadImage";
 
 const AddPlant = ({id, setPlantId, closeModal})=>{
@@ -72,7 +71,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
             setPlantHardiness(docSnap.data().hardiness);
             setPlantFamily(docSnap.data().family);
             setPlantWater(docSnap.data().water);
-            setFile(docSnap.data().file);
+            setImage(docSnap.data().image);
         }catch (err){
             setMessage({error:true, msg:err.message});
         }
@@ -117,7 +116,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
                 },
                 ()=>{
                     getDownloadURL(uploadTask.snapshot.ref).then((url)=>{
-                        setImage((prev)=>[...prev, url]);
+                        setImage(url);
                     }) ;
                 }
                 
