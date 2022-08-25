@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import { Alert,  Button } from "react-bootstrap";
 import PlantDataService from "../services/PlantDataService";
 import { Card } from "react-bootstrap";
@@ -6,6 +6,8 @@ import { ListGroup, ListGroupItem } from "react-bootstrap";
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { storage } from "../firebase-config";
 import {getDownloadURL, ref, uploadBytesResumable} from 'firebase/storage';
+import ReactAvatarEditor from "react-avatar-editor";
+
 import UploadImage from "./UploadImage";
 import { Modal } from "react-bootstrap";
 import {BsFillImageFill} from "react-icons/bs";
@@ -22,12 +24,33 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
     const [family, setPlantFamily] = useState("");
     const [file, setFile] = useState("");
     const [image, setImage] = useState("");
+    const [imagePreview, setImagePreview] = useState("");
+
     const [per, setPerc] = useState(0);
     const [showProgBar, setShowProgBar] = useState(false);
     const [uploaded, setUploaded] = useState(true);
     const [message, setMessage] = useState({error: false, msg: ""});
-    const [showImageModal, setShowImageModal] = useState(false);
-    const openImageModal = () => setShowImageModal(true);
+    const [width, setWidth] = useState(330);
+    const [height, setHeight] = useState(330);
+    const [zoomOut, setZoomOut] = useState(false);
+    const [scale, setScale] = useState(1);
+    const [rotate, setRotate] = useState(0);
+    const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
+    const handleScale = (e) => {
+        const scale = parseFloat(e.target.value);
+        setScale(scale);
+    };
+    
+    const handleImagePreview = (e)=>{
+        setImagePreview(e.target.files[0]);
+    }
+    
+    
+    const handlePositionChange = (position) =>{
+        setPosition({position});
+    }
+    
+    const setEditorRef = useRef(null);
     const handleSubmit = async (e) =>{
         e.preventDefault();
         setMessage("");
@@ -83,7 +106,8 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
     };
 
     const handleImage = (e)=>{
-        setFile(e.target.files[0]);
+        setFile(imagePreview);
+       
     };
 
     
@@ -160,7 +184,47 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
 
               <div class="uploadImage ">
                     {/* <UploadImage handleNewImage={handleImage} value={image} plantImg={image}/>  */}
-                    <button className="btn btn-light" onClick = {openImageModal}>Upload Image  <BsFillImageFill></BsFillImageFill></button>
+                    {/* <button className="btn btn-light" onClick = {openImageModal}>Upload Image  <BsFillImageFill></BsFillImageFill></button> */}
+                    {/* <UploadImage handleNewImage={handleImage} value={image} plantImg={image}/> */}
+                    <div>
+                    <div>
+                        <ReactAvatarEditor
+                            ref={setEditorRef}
+                            scale = {parseFloat(scale)}
+                            width = {height}
+                            height = {width}
+                            // position = {position}
+                            onPositionChange={handlePositionChange}
+                            rotate={parseFloat(rotate)}
+                            image = {imagePreview}
+                            className = "editor-canvas"
+                        />
+                        </div>
+                        <br/>
+            <label >
+                <input
+                name="upload-img-input"
+                type="file"
+                accept="image/*" 
+                onChange={handleImagePreview}
+                multiple ={false}
+                />
+                
+            </label>
+            <br/>
+            
+             <input
+                name="scale"
+                type="range"
+                onChange={handleScale}
+                min={zoomOut ? "0.1" : "1"}
+                max="2"
+                step="0.01"
+                defaultValue="1"
+            />
+            <button onClick={handleImage}> Upload Image</button> 
+
+        </div>
 
                      {showProgBar && <ProgressBar 
                         className="progress__bar"
@@ -169,6 +233,15 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
                         inverted
                         
                     /> }
+                    {/* <Modal show={showImageModal} onHide = {handleImageClose} class="modal">
+                        <Modal.Header closeButton>
+                            <Modal.Title>Upload Plant Image</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <UploadImage handleNewImage={handleImage} value={image} plantImg={image}/>
+                            <Button >Save Image</Button>
+                        </Modal.Body>
+                    </Modal> */}
               </div>
                <Card.Body >
               <ListGroup variant="flush" >
@@ -272,15 +345,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
           
        </div>
        </section>
-                    <Modal show={showImageModal} onHide = {handleImageClose} class="modal">
-                        <Modal.Header closeButton>
-                            <Modal.Title>Upload Plant Image</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <UploadImage handleNewImage={handleImage} value={image} plantImg={image}/>
-                            <Button >Save Image</Button>
-                        </Modal.Body>
-                    </Modal>
+                    
         </>
     )
 }

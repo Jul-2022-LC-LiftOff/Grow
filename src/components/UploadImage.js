@@ -11,13 +11,14 @@ import { useState, useRef } from "react";
 
 const UploadImage = ({handleNewImage, plantImg}) => {
 const [imageUrl, setImageUrl] = useState("");
-const [width, setWidth] = useState(200);
-const [height, setHeight] = useState(200);
+const [width, setWidth] = useState(330);
+const [height, setHeight] = useState(330);
 const [image, setImage] = useState('');
 const [zoomOut, setZoomOut] = useState(false);
 const [scale, setScale] = useState(1);
 const [rotate, setRotate] = useState(0);
 const [preview, setPreview] = useState(null);
+const [borderRadius, setBorderRadius] = useState(50);
 const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
 const [per, setPerc] = useState(null);
 
@@ -27,11 +28,12 @@ const handleScale = (e) => {
 };
 
 
+
 const handlePositionChange = (position) =>{
     setPosition({position});
 }
 
-const setEditorRef = useRef();
+const setEditorRef = useRef(null);
 
 
     return(
@@ -39,13 +41,18 @@ const setEditorRef = useRef();
             <div>
                 <ReactAvatarEditor
                 ref={setEditorRef}
-                scale = {parseFloat(scale)}
-                width = {width}
-                height = {height}
-                position = {position}
+                scale = {parseFloat(scale
+                    
+                    
+                    
+                    )}
+                width = {height}
+                height = {width}
+                // position = {position}
                 onPositionChange={handlePositionChange}
                 rotate={parseFloat(rotate)}
-                image = {plantImg}
+                image = {image}
+                
                 className = "editor-canvas"
                 />
             </div>
@@ -55,6 +62,7 @@ const setEditorRef = useRef();
                 name="upload-img-input"
                 type="file"
                 accept="image/*" 
+                // onChange={handleImage}
                 multiple ={false}
                 />
                 
@@ -70,8 +78,8 @@ const setEditorRef = useRef();
                 step="0.01"
                 defaultValue="1"
             />
-            <button onClick={handleNewImage}> Upload Image</button> 
-
+            {/* <button onClick={handleNewImage}> Upload Image</button> 
+this button isnt actually submitting hte image that we want  */}
         </div>
     )
 }
