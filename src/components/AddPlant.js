@@ -7,6 +7,8 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import { storage } from "../firebase-config";
 import {getDownloadURL, ref, uploadBytesResumable} from 'firebase/storage';
 import UploadImage from "./UploadImage";
+import { Modal } from "react-bootstrap";
+import {BsFillImageFill} from "react-icons/bs";
 
 const AddPlant = ({id, setPlantId, closeModal})=>{
     
@@ -24,6 +26,8 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
     const [showProgBar, setShowProgBar] = useState(false);
     const [uploaded, setUploaded] = useState(true);
     const [message, setMessage] = useState({error: false, msg: ""});
+    const [showImageModal, setShowImageModal] = useState(false);
+    const openImageModal = () => setShowImageModal(true);
     const handleSubmit = async (e) =>{
         e.preventDefault();
         setMessage("");
@@ -153,8 +157,11 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
           <section>
       <div >
       <Card className="IndividualPlantModal" id="addModal"  >
+
               <div class="uploadImage ">
-                    <UploadImage handleNewImage={handleImage} value={image} plantImg={image}/> 
+                    {/* <UploadImage handleNewImage={handleImage} value={image} plantImg={image}/>  */}
+                    <button className="btn btn-light" onClick = {openImageModal}>Upload Image  <BsFillImageFill></BsFillImageFill></button>
+
                      {showProgBar && <ProgressBar 
                         className="progress__bar"
                         now={per}
@@ -265,6 +272,15 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
           
        </div>
        </section>
+                    <Modal show={showImageModal} onHide = {handleImageClose} class="modal">
+                        <Modal.Header closeButton>
+                            <Modal.Title>Upload Plant Image</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <UploadImage handleNewImage={handleImage} value={image} plantImg={image}/>
+                            <Button >Save Image</Button>
+                        </Modal.Body>
+                    </Modal>
         </>
     )
 }

@@ -51,7 +51,18 @@
    
  }
  .plantImage{
-   
+    flex-shrink:0;
+    -webkit-flex-shrink: 0;
+    max-width:90%;
+    max-height:100%;
+ }
+ .plantImageContainer{
+    width:360px;
+    height:300px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden
  }
 
  

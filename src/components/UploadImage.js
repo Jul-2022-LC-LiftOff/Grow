@@ -56,13 +56,12 @@ const setEditorRef = useRef();
                 type="file"
                 accept="image/*" 
                 multiple ={false}
-                onChange = {handleNewImage}
                 />
                 
             </label>
             <br/>
             
-            {/* <input
+             <input
                 name="scale"
                 type="range"
                 onChange={handleScale}
@@ -70,9 +69,8 @@ const setEditorRef = useRef();
                 max="2"
                 step="0.01"
                 defaultValue="1"
-                //placeholder={plantThree}
             />
-            <button onClick={(e)=> setImage(e.target.files[0])}> Upload Image</button> */}
+            <button onClick={handleNewImage}> Upload Image</button> 
 
         </div>
     )
