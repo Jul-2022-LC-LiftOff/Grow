@@ -36,6 +36,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
     const [scale, setScale] = useState(1);
     const [rotate, setRotate] = useState(0);
     const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
+    
     const handleScale = (e) => {
         const scale = parseFloat(e.target.value);
         setScale(scale);
@@ -190,7 +191,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
                     <div>
                         <ReactAvatarEditor
                             ref={setEditorRef}
-                            scale = {parseFloat(scale)}
+                            scale = {parseFloat(handleScale)}
                             width = {height}
                             height = {width}
                             // position = {position}
