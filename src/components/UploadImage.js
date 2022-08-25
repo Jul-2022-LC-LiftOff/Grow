@@ -9,7 +9,7 @@ import { useState, useRef } from "react";
 
 
 
-const UploadImage = ({handleNewImage}) => {
+const UploadImage = ({handleNewImage, plantImg}) => {
 const [imageUrl, setImageUrl] = useState("");
 const [width, setWidth] = useState(200);
 const [height, setHeight] = useState(200);
@@ -45,7 +45,7 @@ const setEditorRef = useRef();
                 position = {position}
                 onPositionChange={handlePositionChange}
                 rotate={parseFloat(rotate)}
-                image = {image}
+                image = {plantImg}
                 className = "editor-canvas"
                 />
             </div>

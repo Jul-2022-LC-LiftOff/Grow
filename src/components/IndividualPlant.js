@@ -28,7 +28,7 @@ const handleImageShow = () => setShowImageModal(true);
                     <div className="IndividualPlant text-left col-sm">
                         <Card className="IndividualPlant" key={plantData.id} >
                          
-                            <Card.Img variant="top"  src= {plantData.image} ></Card.Img>
+                            <Card.Img variant="top" className="plantImage" src= {plantData.image} ></Card.Img>
                              <Card.Body >
                             <Card.Title  className="fw-bolder text-center" >
                              {plantData.title}

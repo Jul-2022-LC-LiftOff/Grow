@@ -22,7 +22,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
     const [image, setImage] = useState("");
     const [per, setPerc] = useState(0);
     const [showProgBar, setShowProgBar] = useState(false);
-    const [uploaded, setUploaded] = useState(false);
+    const [uploaded, setUploaded] = useState(true);
     const [message, setMessage] = useState({error: false, msg: ""});
     const handleSubmit = async (e) =>{
         e.preventDefault();
@@ -99,7 +99,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
             uploadTask.on(
                 "state_changed",
                 (snapshot)=>{
-                    setUploaded(true);
+                    
                     setShowProgBar(true);
                     const progress = 
                     (snapshot.bytesTransferred/snapshot.totalBytes) * 100;
@@ -154,7 +154,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
       <div >
       <Card className="IndividualPlantModal" id="addModal"  >
               <div class="uploadImage ">
-                    <UploadImage handleNewImage={handleImage} value={image}/> 
+                    <UploadImage handleNewImage={handleImage} value={image} plantImg={image}/> 
                      {showProgBar && <ProgressBar 
                         className="progress__bar"
                         now={per}
