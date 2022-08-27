@@ -191,7 +191,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
                     <div>
                         <ReactAvatarEditor
                             ref={setEditorRef}
-                            scale = {parseFloat(handleScale)}
+                            scale = {parseFloat(scale)}
                             width = {height}
                             height = {width}
                             // position = {position}
