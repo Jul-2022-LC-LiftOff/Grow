@@ -7,7 +7,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import { storage } from "../firebase-config";
 import {getDownloadURL, ref, uploadBytesResumable} from 'firebase/storage';
 import ReactAvatarEditor from "react-avatar-editor";
-import CheckBox from "./Checkbox";
+import Select from "react-select";
 import UploadImage from "./UploadImage";
 import { Modal } from "react-bootstrap";
 import {BsFillImageFill} from "react-icons/bs";
@@ -23,7 +23,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
     const [water, setPlantWater] = useState("");
     const [waterTime, setPlantWaterTime] = useState("");
 
-    const [waterDay, setPlantWaterDay] = useState("");
+    const [waterDay, setPlantWaterDay] = useState([]);
 
     const [family, setPlantFamily] = useState("");
     const [file, setFile] = useState("");
@@ -40,7 +40,18 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
     const [scale, setScale] = useState(1);
     const [rotate, setRotate] = useState(0);
     const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
-    
+    const dayOptions=[
+        {value:'Sunday', label: 'Sunday'},
+        {value:'Monday', label: 'Monday'},
+        {value:'Tuesday', label: 'Tuesday'},
+        {value:'Wednesday', label: 'Wednesday'},
+        {value:'Thursday', label: 'Thursday'},
+        {value:'Friday', label: 'Friday'},
+        {value:'Saturday', label: 'Saturday'},
+    ]
+    const daySelect = (selected)=>{
+        setPlantWaterDay({selected});
+    }
     const handleScale = (e) => {
         const scale = parseFloat(e.target.value);
         setScale(scale);
@@ -336,9 +347,11 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
                         </div>
                   </ListGroupItem>
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Watering Days:</span>
-                        <div>
-                        <input type="time" onChange={(event)=> setPlantWaterDay(event.target.value)} value={waterDay}></input>
-                        </div>
+                        <Select
+                        value={waterDay}
+                        onClick = {daySelect}
+                        options={dayOptions}
+                        />
                   </ListGroupItem>
 
               </ListGroup>
