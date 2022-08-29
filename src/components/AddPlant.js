@@ -7,7 +7,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import { storage } from "../firebase-config";
 import {getDownloadURL, ref, uploadBytesResumable} from 'firebase/storage';
 import ReactAvatarEditor from "react-avatar-editor";
-
+import CheckBox from "./Checkbox";
 import UploadImage from "./UploadImage";
 import { Modal } from "react-bootstrap";
 import {BsFillImageFill} from "react-icons/bs";
@@ -21,6 +21,10 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
     const [sun, setPlantSun] = useState("");
     const [hardiness, setPlantHardiness] = useState("");
     const [water, setPlantWater] = useState("");
+    const [waterTime, setPlantWaterTime] = useState("");
+
+    const [waterDay, setPlantWaterDay] = useState("");
+
     const [family, setPlantFamily] = useState("");
     const [file, setFile] = useState("");
     const [image, setImage] = useState("");
@@ -184,9 +188,6 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
       <Card className="IndividualPlantModal" id="addModal"  >
 
               <div class="uploadImage ">
-                    {/* <UploadImage handleNewImage={handleImage} value={image} plantImg={image}/>  */}
-                    {/* <button className="btn btn-light" onClick = {openImageModal}>Upload Image  <BsFillImageFill></BsFillImageFill></button> */}
-                    {/* <UploadImage handleNewImage={handleImage} value={image} plantImg={image}/> */}
                     <div>
                     <div>
                         <ReactAvatarEditor
@@ -234,15 +235,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
                         inverted
                         
                     /> }
-                    {/* <Modal show={showImageModal} onHide = {handleImageClose} class="modal">
-                        <Modal.Header closeButton>
-                            <Modal.Title>Upload Plant Image</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <UploadImage handleNewImage={handleImage} value={image} plantImg={image}/>
-                            <Button >Save Image</Button>
-                        </Modal.Body>
-                    </Modal> */}
+                   
               </div>
                <Card.Body >
               <ListGroup variant="flush" >
@@ -322,7 +315,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
                   </select>
                   </div>
                   </ListGroupItem>
-                  <ListGroupItem><span style={{fontWeight:'bold'}}>Water:</span> 
+                  <ListGroupItem><span style={{fontWeight:'bold'}}>Watering Frequency:</span> 
                   <div>
 
                   <select class="form-select" aria-label="Default select example" onChange={(event)=> setPlantWater(event.target.value)} value={water}>
@@ -334,7 +327,18 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
                       <option value="1 time per month">1 time per month</option>
                       <option value="Never">Never</option>
                   </select>
+                  
                   </div>
+                  </ListGroupItem>
+                  <ListGroupItem><span style={{fontWeight:'bold'}}>Watering Time:</span>
+                        <div>
+                        <input type="time" onChange={(event)=> setPlantWaterTime(event.target.value)} value={waterTime}></input>
+                        </div>
+                  </ListGroupItem>
+                  <ListGroupItem><span style={{fontWeight:'bold'}}>Watering Days:</span>
+                        <div>
+                        <input type="time" onChange={(event)=> setPlantWaterDay(event.target.value)} value={waterDay}></input>
+                        </div>
                   </ListGroupItem>
 
               </ListGroup>
