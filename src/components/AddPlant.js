@@ -24,7 +24,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
     const [water, setPlantWater] = useState("");
     const [waterTime, setPlantWaterTime] = useState("");
     const [waterDay, setPlantWaterDay] = useState([]);
-    const [disableWater, setDisableWater] = useState(null);
+    //const [disableWater, setDisableWater] = useState(8);
     const [family, setPlantFamily] = useState("");
     const [file, setFile] = useState("");
     const [image, setImage] = useState("");
@@ -49,24 +49,24 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
         {value:' Friday ', label: 'Friday'},
         {value:' Saturday ', label: 'Saturday'},
     ]
-    const handleDisableWater = (e)=>{
-        if(water==="Daily"){
-            setDisableWater(8)
-        }else if(water==="3-5 times per week"){
-            setDisableWater(5)
-        }else if(water==="1-2 times per week"){
-            setDisableWater(2)
-        }else if(water==="2 times per month"){
-            setDisableWater(2)
-        }else if(water==="1 time per month"){
-            setDisableWater(1)
-        }else if(water==="Never"){
-            setDisableWater(0)
-        }else{
-            setDisableWater(8)
-        }
-        return disableWater;
-    }
+    // const handleDisableWater = (e)=>{
+    //     if(water==="Daily"){
+    //         setDisableWater(8)
+    //     }else if(water==="3-5 times per week"){
+    //         setDisableWater(5)
+    //     }else if(water==="1-2 times per week"){
+    //         setDisableWater(2)
+    //     }else if(water==="2 times per month"){
+    //         setDisableWater(2)
+    //     }else if(water==="1 time per month"){
+    //         setDisableWater(1)
+    //     }else if(water==="Never"){
+    //         setDisableWater(0)
+    //     }else{
+    //         setDisableWater(8)
+    //     }
+    //     return disableWater;
+    // }
     const handleWaterDay=(e)=>{
         setPlantWaterDay(Array.isArray(e) ? e.map(x => x.value) : []);
     }
@@ -375,7 +375,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
                     options={dayOptions} 
                     onChange={handleWaterDay} 
                     isMulti
-                    isOptionDisabled={() => waterDay.length >= handleDisableWater}
+                    //isOptionDisabled={() => waterDay.length >= {handleDisableWater}}
       />
                          
                  </ListGroupItem>
