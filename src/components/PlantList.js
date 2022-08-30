@@ -4,13 +4,19 @@ import { Button } from "react-bootstrap";
 import { BsFillPencilFill } from "react-icons/bs";
 import {IndividualPlant} from "../components/IndividualPlant";
 import { BsFillTrashFill } from "react-icons/bs";
-import { Firestore } from "firebase/firestore";
+import { storage } from "../firebase-config";
+import { ref, deleteObject } from "firebase/storage";
 const PlantList = ({getPlantId, showEdit}) =>{
     const [plants, setPlants] = useState([]);
-    //npmconst [userData, setUserData] = useState(null);
+    
     useEffect(()=>{
         getPlants();
     },[]);
+
+    // const singlePlant = await PlantDataService.getPlant(id);
+    // const imageRef = ref(storage, `files/${singlePlant.image}`);
+    // imageRef.deleteObject();
+
 
     const getPlants = async () => {
         const data = await PlantDataService.getAllPlants();
@@ -18,7 +24,9 @@ const PlantList = ({getPlantId, showEdit}) =>{
     };
 
     const deleteHandler = async (id) =>{
+        
         await PlantDataService.deletePlant(id);
+        
         getPlants();
     };
     const confirmDelete = (id) =>{
@@ -59,6 +67,9 @@ const PlantList = ({getPlantId, showEdit}) =>{
           
      })}
      </div>
+
+
+
      </div>
      </div>
     );
