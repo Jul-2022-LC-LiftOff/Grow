@@ -135,6 +135,8 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
             setPlantHardiness(docSnap.data().hardiness);
             setPlantFamily(docSnap.data().family);
             setPlantWater(docSnap.data().water);
+            setPlantWaterTime(docSnap.data().waterTime);
+            setPlantWaterDay(docSnap.data().waterDay);
             setImage(docSnap.data().image);
         }catch (err){
             setMessage({error:true, msg:err.message});
