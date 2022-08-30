@@ -11,13 +11,13 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import {BsFillImageFill} from "react-icons/bs";
 export const IndividualPlant = ({plantData, openImageModal})=>{
 
+    
     return(
   
                     <div className="IndividualPlant text-left col-sm">
                         <Card className="IndividualPlant" key={plantData.id} >
                             <div className="plantImageContainer">
                             <Card.Img variant="top" className="plantImage" src= {plantData.image} ></Card.Img>
-                            {/* <button className="btn btn-light" onClick = {openImageModal}>Upload Image  <BsFillImageFill></BsFillImageFill></button> */}
 
                             </div>
                              <Card.Body >

@@ -23,9 +23,8 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
     const [hardiness, setPlantHardiness] = useState("");
     const [water, setPlantWater] = useState("");
     const [waterTime, setPlantWaterTime] = useState("");
-    const [options, setOptions] = useState(['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']);
     const [waterDay, setPlantWaterDay] = useState([]);
-   
+    const [disableWater, setDisableWater] = useState(null);
     const [family, setPlantFamily] = useState("");
     const [file, setFile] = useState("");
     const [image, setImage] = useState("");
@@ -41,26 +40,35 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
     const [scale, setScale] = useState(1);
     const [rotate, setRotate] = useState(0);
     const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
-    // const dayOptions=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
-        // {value:'Sunday', label: 'Sunday'},
-        // {value:'Monday', label: 'Monday'},
-        // {value:'Tuesday', label: 'Tuesday'},
-        // {value:'Wednesday', label: 'Wednesday'},
-        // {value:'Thursday', label: 'Thursday'},
-        // {value:'Friday', label: 'Friday'},
-        // {value:'Saturday', label: 'Saturday'},
-    // ]
-    
-    const handleWaterDay=(e)=>{
-        const{value,checked} = e.target;
-    
-        if(checked){
-            setPlantWaterDay(value);
+    const dayOptions=[
+        {value:' Sunday ', label: 'Sunday'},
+        {value:' Monday ', label: 'Monday'},
+        {value:' Tuesday ', label: 'Tuesday'},
+        {value:' Wednesday ', label: 'Wednesday'},
+        {value:' Thursday ', label: 'Thursday'},
+        {value:' Friday ', label: 'Friday'},
+        {value:' Saturday ', label: 'Saturday'},
+    ]
+    const handleDisableWater = (e)=>{
+        if(water==="Daily"){
+            setDisableWater(8)
+        }else if(water==="3-5 times per week"){
+            setDisableWater(5)
+        }else if(water==="1-2 times per week"){
+            setDisableWater(2)
+        }else if(water==="2 times per month"){
+            setDisableWater(2)
+        }else if(water==="1 time per month"){
+            setDisableWater(1)
+        }else if(water==="Never"){
+            setDisableWater(0)
         }else{
-            setPlantWaterDay(
-                (e)=> e !== value
-            );
+            setDisableWater(8)
         }
+        return disableWater;
+    }
+    const handleWaterDay=(e)=>{
+        setPlantWaterDay(Array.isArray(e) ? e.map(x => x.value) : []);
     }
     const handleScale = (e) => {
         const scale = parseFloat(e.target.value);
@@ -360,69 +368,15 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
                         </div>
                   </ListGroupItem>
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Watering Days:</span>
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    name="days"
-                    value="Sunday"
-                    id="Sunday"
-                    onChange={handleWaterDay}
-                  />
-                  <label for="Monday">Monday</label>
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    name="days"
-                    value="Monday"
-                    id="Monday"
-                    onChange={handleWaterDay}
-                  />
-                  <label for="Tuesday">Tuesday</label>
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    name="days"
-                    value="Tuesday"
-                    id="Tuesday"
-                    onChange={handleWaterDay}
-                  />
-                  <label for="Wednesday">Wednesday</label>
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    name="days"
-                    value="Wednesday"
-                    id="Wednesday"
-                    onChange={handleWaterDay}
-                  />
-                  <label for="Thursday">Thursday</label>
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    name="days"
-                    value="Thursday"
-                    id="Thursday"
-                    onChange={handleWaterDay}
-                  />
-                  <label for="Friday">Friday</label>
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    name="days"
-                    value="Friday"
-                    id="Friday"
-                    onChange={handleWaterDay}
-                  />
-                  <label for="Saturday">Saturday</label>
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    name="days"
-                    value="Saturday"
-                    id="Saturday"
-                    onChange={handleWaterDay}
-                  />
-                  <label for="Sunday">Sunday</label>
+                  <Select
+                    className="dropdown"
+                    placeholder="Select Days"
+                    value={dayOptions.filter(obj => waterDay.includes(obj.value))} // set selected values
+                    options={dayOptions} 
+                    onChange={handleWaterDay} 
+                    isMulti
+                    isOptionDisabled={() => waterDay.length >= handleDisableWater}
+      />
                          
                  </ListGroupItem>
               </ListGroup>
