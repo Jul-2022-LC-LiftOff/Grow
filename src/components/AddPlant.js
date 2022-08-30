@@ -8,6 +8,7 @@ import { storage } from "../firebase-config";
 import {getDownloadURL, ref, uploadBytesResumable} from 'firebase/storage';
 import ReactAvatarEditor from "react-avatar-editor";
 import Select from "react-select";
+import MultiSelectForm from "./MultiSelectForm";
 import UploadImage from "./UploadImage";
 import { Modal } from "react-bootstrap";
 import {BsFillImageFill} from "react-icons/bs";
@@ -32,7 +33,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
 
     const [per, setPerc] = useState(0);
     const [showProgBar, setShowProgBar] = useState(false);
-    const [uploaded, setUploaded] = useState(true);
+    const [uploaded, setUploaded] = useState(false);
     const [message, setMessage] = useState({error: false, msg: ""});
     const [width, setWidth] = useState(330);
     const [height, setHeight] = useState(330);
@@ -40,17 +41,9 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
     const [scale, setScale] = useState(1);
     const [rotate, setRotate] = useState(0);
     const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
-    const dayOptions=[
-        {value:'Sunday', label: 'Sunday'},
-        {value:'Monday', label: 'Monday'},
-        {value:'Tuesday', label: 'Tuesday'},
-        {value:'Wednesday', label: 'Wednesday'},
-        {value:'Thursday', label: 'Thursday'},
-        {value:'Friday', label: 'Friday'},
-        {value:'Saturday', label: 'Saturday'},
-    ]
-    const daySelect = (selected)=>{
-        setPlantWaterDay({selected});
+    
+    const handleWaterDay=(value)=>{
+        setPlantWaterDay(value);
     }
     const handleScale = (e) => {
         const scale = parseFloat(e.target.value);
@@ -78,7 +71,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
        
         
         const newPlant = {
-            name, title, soil, size, sun, hardiness, water, family, image,
+            name, title, soil, size, sun, hardiness, water, waterTime, waterDay, family, image,
         };
         try{
             if(id !== undefined && id !== ""){
@@ -100,6 +93,8 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
         setPlantHardiness("");
         setPlantFamily("");
         setPlantWater("");
+        setPlantWaterTime("");
+        setPlantWaterDay("");
         setImage("");
         console.log(newPlant);
     };
@@ -143,7 +138,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
             uploadTask.on(
                 "state_changed",
                 (snapshot)=>{
-                    
+                    setUploaded(true);
                     setShowProgBar(true);
                     const progress = 
                     (snapshot.bytesTransferred/snapshot.totalBytes) * 100;
@@ -209,7 +204,8 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
                             // position = {position}
                             onPositionChange={handlePositionChange}
                             rotate={parseFloat(rotate)}
-                            image = {imagePreview}
+                            image = {id !== undefined && id !== "" ? image : imagePreview}
+                            alt={image}
                             className = "editor-canvas"
                         />
                         </div>
@@ -347,11 +343,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
                         </div>
                   </ListGroupItem>
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Watering Days:</span>
-                        <Select
-                        value={waterDay}
-                        onClick = {daySelect}
-                        options={dayOptions}
-                        />
+                       <MultiSelectForm onChange={handleWaterDay} setState={setPlantWaterDay}/>
                   </ListGroupItem>
 
               </ListGroup>
