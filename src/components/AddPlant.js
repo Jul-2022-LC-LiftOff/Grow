@@ -7,11 +7,11 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import { storage } from "../firebase-config";
 import {getDownloadURL, ref, uploadBytesResumable} from 'firebase/storage';
 import ReactAvatarEditor from "react-avatar-editor";
-import Select from "react-select";
-import MultiSelectForm from "./MultiSelectForm";
+import Multiselect from "multiselect-react-dropdown";
 import UploadImage from "./UploadImage";
 import { Modal } from "react-bootstrap";
 import {BsFillImageFill} from "react-icons/bs";
+import Select from "react-select";
 
 const AddPlant = ({id, setPlantId, closeModal})=>{
     
@@ -23,9 +23,9 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
     const [hardiness, setPlantHardiness] = useState("");
     const [water, setPlantWater] = useState("");
     const [waterTime, setPlantWaterTime] = useState("");
-
+    const [options, setOptions] = useState(['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']);
     const [waterDay, setPlantWaterDay] = useState([]);
-
+   
     const [family, setPlantFamily] = useState("");
     const [file, setFile] = useState("");
     const [image, setImage] = useState("");
@@ -41,9 +41,26 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
     const [scale, setScale] = useState(1);
     const [rotate, setRotate] = useState(0);
     const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
+    // const dayOptions=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+        // {value:'Sunday', label: 'Sunday'},
+        // {value:'Monday', label: 'Monday'},
+        // {value:'Tuesday', label: 'Tuesday'},
+        // {value:'Wednesday', label: 'Wednesday'},
+        // {value:'Thursday', label: 'Thursday'},
+        // {value:'Friday', label: 'Friday'},
+        // {value:'Saturday', label: 'Saturday'},
+    // ]
     
-    const handleWaterDay=(value)=>{
-        setPlantWaterDay(value);
+    const handleWaterDay=(e)=>{
+        const{value,checked} = e.target;
+    
+        if(checked){
+            setPlantWaterDay(value);
+        }else{
+            setPlantWaterDay(
+                (e)=> e !== value
+            );
+        }
     }
     const handleScale = (e) => {
         const scale = parseFloat(e.target.value);
@@ -94,7 +111,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
         setPlantFamily("");
         setPlantWater("");
         setPlantWaterTime("");
-        setPlantWaterDay("");
+        setPlantWaterDay([]);
         setImage("");
         console.log(newPlant);
     };
@@ -339,13 +356,75 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
                   </ListGroupItem>
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Watering Time:</span>
                         <div>
-                        <input type="time" onChange={(event)=> setPlantWaterTime(event.target.value)} value={waterTime}></input>
+                        <input  type="time" onChange={(event)=> setPlantWaterTime(event.target.value)} placeholder={waterTime} value={waterTime}></input>
                         </div>
                   </ListGroupItem>
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Watering Days:</span>
-                       <MultiSelectForm onChange={handleWaterDay} setState={setPlantWaterDay}/>
-                  </ListGroupItem>
-
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="days"
+                    value="Sunday"
+                    id="Sunday"
+                    onChange={handleWaterDay}
+                  />
+                  <label for="Monday">Monday</label>
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="days"
+                    value="Monday"
+                    id="Monday"
+                    onChange={handleWaterDay}
+                  />
+                  <label for="Tuesday">Tuesday</label>
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="days"
+                    value="Tuesday"
+                    id="Tuesday"
+                    onChange={handleWaterDay}
+                  />
+                  <label for="Wednesday">Wednesday</label>
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="days"
+                    value="Wednesday"
+                    id="Wednesday"
+                    onChange={handleWaterDay}
+                  />
+                  <label for="Thursday">Thursday</label>
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="days"
+                    value="Thursday"
+                    id="Thursday"
+                    onChange={handleWaterDay}
+                  />
+                  <label for="Friday">Friday</label>
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="days"
+                    value="Friday"
+                    id="Friday"
+                    onChange={handleWaterDay}
+                  />
+                  <label for="Saturday">Saturday</label>
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="days"
+                    value="Saturday"
+                    id="Saturday"
+                    onChange={handleWaterDay}
+                  />
+                  <label for="Sunday">Sunday</label>
+                         
+                 </ListGroupItem>
               </ListGroup>
               <Button disabled = {uploaded} variant="primary" onClick={handleSubmit} onSubmit={closeModal}>
           Save Plant
