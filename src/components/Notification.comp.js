@@ -40,7 +40,8 @@ export default function Notification() {
           return (
             <div className="card-notify">
               <h3>Name: {plant.name}</h3>
-              <h5>Water: {plant.water}</h5>
+              <h3>Name: {plant.waterDay}</h3>
+              <h5>Water: {plant.waterTime}</h5>
             </div>
           );
         })}
