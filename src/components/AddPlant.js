@@ -7,13 +7,10 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import { storage } from "../firebase-config";
 import {getDownloadURL, ref, uploadBytesResumable} from 'firebase/storage';
 import ReactAvatarEditor from "react-avatar-editor";
-import Multiselect from "multiselect-react-dropdown";
-import UploadImage from "./UploadImage";
-import { Modal } from "react-bootstrap";
-import {BsFillImageFill} from "react-icons/bs";
 import Select from "react-select";
 
-const AddPlant = ({id, setPlantId, closeModal})=>{
+
+const AddPlant = ({id, setPlantId, closeAddModal,})=>{
     
     const [name, setPlantName] = useState("");
     const [title, setPlantTitle] = useState("");
@@ -123,6 +120,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
         setPlantWaterDay([]);
         setImage("");
         console.log(newPlant);
+        //closeAddModal();
     };
     const editHandler = async () =>{
         setMessage("");
@@ -383,7 +381,7 @@ const AddPlant = ({id, setPlantId, closeModal})=>{
                          
                  </ListGroupItem>
               </ListGroup>
-              <Button disabled = {uploaded} variant="primary" onClick={handleSubmit} onSubmit={closeModal}>
+              <Button disabled = {uploaded} variant="primary" onClick={handleSubmit} >
           Save Plant
           </Button>
               </Card.Body>

@@ -13,10 +13,7 @@ const PlantList = ({getPlantId, showEdit}) =>{
         getPlants();
     },[]);
 
-    // const singlePlant = await PlantDataService.getPlant(id);
-    // const imageRef = ref(storage, `files/${singlePlant.image}`);
-    // imageRef.deleteObject();
-
+   
 
     const getPlants = async () => {
         const data = await PlantDataService.getAllPlants();
