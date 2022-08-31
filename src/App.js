@@ -7,10 +7,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 
 import RegistrationPage from "./pages/registration/Registration.page";
+import NotificationPage from "./pages/notification/Notification.page";
+import Remainder from "./components/Notification.comp";
 
 function App() {
   return (
-
     <Routes>
       <Route path="/signup" element={<RegistrationPage />} />
       <Route
@@ -25,12 +26,12 @@ function App() {
           </div>
         }
       />
+      <Route path="/notify" element={<NotificationPage />} />
     </Routes>
 
     // <div class="mainBackground">
     //   <MyGarden/>
     // </div>
-
   );
 }
 export default App;
