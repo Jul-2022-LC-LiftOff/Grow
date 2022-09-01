@@ -2,13 +2,12 @@ import React from "react";
 import "./App.css";
 import MyGarden from "./pages/myGarden";
 import { Route, Routes } from "react-router-dom";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 
 import RegistrationPage from "./pages/registration/Registration.page";
 import NotificationPage from "./pages/notification/Notification.page";
-import Remainder from "./components/Notification.comp";
+// import CropperTester from "./components/CropperTester";
 
 function App() {
   return (
@@ -23,6 +22,7 @@ function App() {
         element={
           <div class="mainBackground">
             <MyGarden />
+            {/* <CropperTester/> */}
           </div>
         }
       />
