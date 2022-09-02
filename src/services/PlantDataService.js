@@ -1,7 +1,6 @@
 import { db } from "../firebase-config";
 import { collection, getDoc, getDocs, addDoc, updateDoc, deleteDoc, doc, FieldPath, DocumentSnapshot } from "firebase/firestore";
-import { ref as storageRef, deleteObject } from "firebase/storage";
-
+import { ref, getMetadata } from "firebase/storage";
 import { storage } from "../firebase-config";
 
 //onChildChanged and onChildRemoved
@@ -19,29 +18,36 @@ class PlantDataService{
 
     deletePlant = (id) =>{
         const plantDoc = doc(db, "plants", id);
-        const {image} = DocumentSnapshot.get();
-        if(image !=null){
-            const storageReference = storage().refFromURL(image);
-            const imageRef = storage().ref(storageReference.fullPath);
-            imageRef.delete().then(()=>{
-                console.log("Image deleted");
-                deleteDoc(plantDoc);
-            }).catch((e) =>{
-                console.log(e);
-            });
-        }else{
+        // const image = doc(`/plants/${id}/image`);
+        // const image = plantDoc.data.image;
+        // console.log(image);
+;        // //const image = getMetadata(imageReference);
+        // var filename = image.substring(image.lastIndexOf('/')+1);
+        // console.log(filename);
+        // if(image !=null){
+        //     const storageReference = storage().refFromURL(image.name);
+        //     const imageRef =ref(storage, `files/${storageReference}`);
+        //     imageRef.delete().then(()=>{
+        //         console.log("Image deleted");
+        //         return deleteDoc(plantDoc);
+        //     }).catch((e) =>{
+        //         console.log(e);
+        //     });
+        // }else{
             return deleteDoc(plantDoc);
-        }
+        //}
         
     };
 
     getAllPlants = () =>{
+        
         return getDocs(plantCollectionRef);
     };
     
 
     getPlant = (id) => {
         const plantDoc = doc(db, "plants", id);
+
         return getDoc(plantDoc);
     };
     // deleteImage =(id)=>{

@@ -4,11 +4,12 @@ import { Button } from "react-bootstrap";
 import { BsFillPencilFill } from "react-icons/bs";
 import {IndividualPlant} from "../components/IndividualPlant";
 import { BsFillTrashFill } from "react-icons/bs";
+import { db } from "../firebase-config";
 import { storage } from "../firebase-config";
-import { ref, deleteObject } from "firebase/storage";
+import { ref, deleteObject, getMetadata } from "firebase/storage";
 const PlantList = ({getPlantId, showEdit}) =>{
     const [plants, setPlants] = useState([]);
-    
+    const [plantImage, setPlantImage] = useState("");
     useEffect(()=>{
         getPlants();
     },[]);
@@ -21,7 +22,8 @@ const PlantList = ({getPlantId, showEdit}) =>{
     };
 
     const deleteHandler = async (id) =>{
-        
+    //    
+
         await PlantDataService.deletePlant(id);
         getPlants();
     };
@@ -32,6 +34,13 @@ const PlantList = ({getPlantId, showEdit}) =>{
            
         }
     }
+    // const imageDelete = async(id)=>{
+    //     await PlantDataService.getPlant(id).then(()=>{
+
+    //     })     
+    // //     setPlantImage(plant.image);
+    // // return console.log(plantImage);
+    // }
     return(
         <div>
         <div className="mb-2">
@@ -52,10 +61,44 @@ const PlantList = ({getPlantId, showEdit}) =>{
                  />
                  <div class="buttons">
                          <div class="button-trash">
-                         <button className="btn btn-light" onClick = {(e)=> confirmDelete(doc.id)}><BsFillTrashFill></BsFillTrashFill></button>
+                         <button className="btn btn-light" onClick = {(e)=> {
+                                if(doc.image !== ""){
+                                const imageUrl = ref(storage, doc.image);
+                                getMetadata(imageUrl)
+                                .then((metadata) => {
+                                    const storageRef = ref(storage, `files/${imageUrl.name}`);
+                                    deleteObject(storageRef).then(()=>{
+                                        deleteHandler(doc.id);
+                                        console.log("IMAGE DELETED");
+                                    }).catch((error)=>{
+                                        console.log(error);
+                                    })
+                                })
+                                .catch((error) => {console.log(error)});
+                            }else{
+                                deleteHandler(doc.id);
+                            }
+                         }
+                        
+                        }><BsFillTrashFill></BsFillTrashFill></button>
                          </div>
                          <div class="button-edit">
                         <button className="btn btn-light" onClick ={(e) => {getPlantId(doc.id); showEdit();}}><BsFillPencilFill></BsFillPencilFill></button>
+                         <button onClick = {(e) => {
+                         
+                            const imageUrl = ref(storage, doc.image);
+                            getMetadata(imageUrl)
+                            .then((metadata) => {
+                                const storageRef = ref(storage, `files/${imageUrl.name}`);
+                                deleteObject(storageRef).then(()=>{
+                                    console.log("IMAGE DELETED");
+                                }).catch((error)=>{
+                                    console.log(error);
+                                })
+                            })
+                            .catch((error) => {console.log(error)});
+                           
+                        }}>TEST</button>
                          </div>
                          </div>
                  </div>
