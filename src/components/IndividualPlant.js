@@ -1,7 +1,6 @@
 import React from "react";
 import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
-import ImageUnavailable from "../assets/ImageUnavailable.png";
 import UploadImage from "./UploadImage";
 import Button from 'react-bootstrap/Button';
 import ".//individual-style.css";
@@ -9,6 +8,8 @@ import { Card } from "react-bootstrap";
 import ListGroupItem from "react-bootstrap/esm/ListGroupItem";
 import ListGroup from 'react-bootstrap/ListGroup';
 import {BsFillImageFill} from "react-icons/bs";
+import ImageUnavailable from "../assets/ImageUnavailable.png";
+
 export const IndividualPlant = ({plantData, openImageModal})=>{
 
     
@@ -17,8 +18,7 @@ export const IndividualPlant = ({plantData, openImageModal})=>{
                     <div className="IndividualPlant text-left col-sm">
                         <Card className="IndividualPlant" key={plantData.id} >
                             <div className="plantImageContainer">
-                            <Card.Img variant="top" className="plantImage" src= {plantData.image} ></Card.Img>
-
+                            <Card.Img variant="top" className="plantImage" src= {plantData.image !== "" || plantData.image !== null ? plantData.image : ImageUnavailable}></Card.Img>
                             </div>
                              <Card.Body >
                             <Card.Title  className="fw-bolder text-center" >

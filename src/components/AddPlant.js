@@ -8,7 +8,7 @@ import { storage } from "../firebase-config";
 import {getDownloadURL, ref, uploadBytesResumable} from 'firebase/storage';
 import ReactAvatarEditor from "react-avatar-editor";
 import Select from "react-select";
-
+import ImageUnavailable from "../assets/ImageUnavailable.png";
 
 const AddPlant = ({id, setPlantId, closeAddModal,})=>{
     
@@ -46,25 +46,25 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
         {value:' Friday ', label: 'Friday'},
         {value:' Saturday ', label: 'Saturday'},
     ]
-    const handleDisableWater = (e)=>{
-        if(water==="Daily"){
-            setDisableWater(7)
-        }else if(water==="3-5 times per week"){
-            setDisableWater(5)
-        }else if(water==="1-2 times per week"){
-            setDisableWater(2)
-        }else if(water==="2 times per month"){
-            setDisableWater(2)
-        }else if(water==="1 time per month"){
-            setDisableWater(1)
-        }else if(water==="Never"){
-            setDisableWater(0)
-        }else{
-            setDisableWater(7)
-            setDisableWater(7)
-        }
+    // const handleDisableWater = ()=>{
+    //     if(water==="Daily"){
+    //         setDisableWater(7)
+    //     }else if(water==="3-5 times per week"){
+    //         setDisableWater(5)
+    //     }else if(water==="1-2 times per week"){
+    //         setDisableWater(2)
+    //     }else if(water==="2 times per month"){
+    //         setDisableWater(2)
+    //     }else if(water==="1 time per month"){
+    //         setDisableWater(1)
+    //     }else if(water==="Never"){
+    //         setDisableWater(0)
+    //     }else{
+    //         setDisableWater(7)
+    //     }
         
-    }
+    // }
+    
     const handleWaterDay=(e)=>{
         setPlantWaterDay(Array.isArray(e) ? e.map(x => x.value) : []);
     }
@@ -87,7 +87,7 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
         e.preventDefault();
         setMessage("");
         
-        if(name==="" || title==="" || water===""){
+        if(name==="" || title==="" || water==="" || waterTime==="" || waterDay===""){
             setMessage({error:true, msg: "All fields are required!"});
             return;
         }
@@ -97,7 +97,9 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
             name, title, soil, size, sun, hardiness, water, waterTime, waterDay, family, image,
         };
         try{
-            if(id !== undefined && id !== ""){
+            
+            if(id !== undefined && id !== "" ){
+                
                 await PlantDataService.updatePlant(id, newPlant);
                 setPlantId("");
                  setMessage({error:false, msg: "Plant updated successfully"});
@@ -106,7 +108,9 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
                 setMessage({error:false, msg: "New plant added successfully"});
             }
         }catch (err){
-            setMessage({error:true, msg: err.message});
+            
+            setMessage({error:true, msg: "Error!"});
+            return;
         }
         setPlantName("");
         setPlantTitle("");
@@ -160,6 +164,8 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
             
             const name = new Date().getTime() + file.name;
             const imageRef = ref(storage, `files/${name}`);
+            //const defaultImageRef = ref(storage, "altImages/imageUnavailable.png");
+            //const defaultUploadTask = uploadBytesResumable(defaultImageRef, file);
             const uploadTask = uploadBytesResumable(imageRef, file);
             uploadTask.on(
                 "state_changed",
@@ -274,23 +280,23 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
               <ListGroup variant="flush" >
               <ListGroupItem><span style={{fontWeight:'bold'}}> Title:</span>
                   <div>
-                  <input class="editAdd" type="text" onChange={(event)=> setPlantTitle(event.target.value)} value={title}></input>
+                  <input class="editAdd" type="text" onChange={(event)=> setPlantTitle(event.target.value)} value={title} required></input>
                   </div>
                    </ListGroupItem>
                   <ListGroupItem><span style={{fontWeight:'bold'}} > Name:</span>
                   <div>
-                  <input class="editAdd" type="text" onChange={(event)=> setPlantName(event.target.value)} value={name}></input>
+                  <input class="editAdd" type="text" onChange={(event)=> setPlantName(event.target.value)} value={name} required></input>
                   </div>
                    </ListGroupItem>
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Family:</span> 
                   <div>
-                  <input class="editAdd" type="text" onChange={(event)=> setPlantFamily(event.target.value)} value={family}></input>
+                  <input class="editAdd" type="text" onChange={(event)=> setPlantFamily(event.target.value)} value={family} required></input>
                   </div>
                   </ListGroupItem>
 
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Size:</span> 
                   <div>
-                  <select class="form-select" aria-label="Default select example" onChange={(event)=> setPlantSize(event.target.value)} value={size}>
+                  <select class="form-select" aria-label="Default select example" onChange={(event)=> setPlantSize(event.target.value)} value={size} required>
                         <option value=""></option>
                       <option value="1-3 inches">1-5 inches</option>
                       <option value="4-7 inches">4-7 inches</option>
@@ -306,7 +312,7 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
 
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Soil:</span> 
                   <div>
-                  <select class="form-select" aria-label="Default select example" onChange={(event)=> setPlantSoil(event.target.value)} value={soil}>
+                  <select class="form-select" aria-label="Default select example" onChange={(event)=> setPlantSoil(event.target.value)} value={soil} required>
                     <option value=""></option>
                       <option value="Clay">Clay</option>
                       <option value="Sandy">Sandy</option>
@@ -320,7 +326,7 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
                   
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Sun:</span> 
                   <div >
-                  <select class="form-select" aria-label="Default select example" onChange={(event)=> setPlantSun(event.target.value)} value={sun}>
+                  <select class="form-select" aria-label="Default select example" onChange={(event)=> setPlantSun(event.target.value)} value={sun} required>
                         <option value=""></option>
                       <option value="Direct light">Direct light</option>
                       <option value="Bright indirect light">Bright indirect light</option>
@@ -332,7 +338,7 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
                 
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Hardiness:</span> 
                   <div>
-                  <select id="hardiness" class="form-select" aria-label="Default select example"  onChange={(event)=> setPlantHardiness(event.target.value)} value={hardiness}>
+                  <select id="hardiness" class="form-select" aria-label="Default select example"  onChange={(event)=> setPlantHardiness(event.target.value)} value={hardiness} required>
                     <option value=""></option>
                       <option value="1">1</option>
                       <option value="2">2</option>
@@ -351,7 +357,7 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Watering Frequency:</span> 
                   <div>
 
-                  <select class="form-select" aria-label="Default select example" onChange={(event)=> {setPlantWater(event.target.value); handleDisableWater(event)}} value={water}>
+                  <select class="form-select" aria-label="Default select example" onChange={(event)=> setPlantWater(event.target.value)} value={water} >
                       <option value=""></option>
                       <option value="Daily">Daily</option>
                       <option value="3-5 times per week">3-5 times per week</option>
@@ -365,19 +371,20 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
                   </ListGroupItem>
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Watering Time:</span>
                         <div>
-                        <input  type="time" onChange={(event)=> setPlantWaterTime(event.target.value)} placeholder={waterTime} value={waterTime}></input>
+                        <input  type="time" onChange={(event)=> setPlantWaterTime(event.target.value)} placeholder={waterTime} value={waterTime} required></input>
                         </div>
                   </ListGroupItem>
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Watering Days:</span>
                   <Select
                     className="dropdown"
                     placeholder="Select Days"
-                    value={dayOptions.filter(obj => waterDay.includes(obj.value))} 
+                    value={waterDay? dayOptions.filter(obj => waterDay.includes(obj.value)) : ""} 
                     options={dayOptions} 
                     onChange={handleWaterDay} 
                     isMulti
-                    isOptionDisabled={() => waterDay.length >= disableWater}
-      />
+                    required
+                    //isOptionDisabled={() => waterDay.length >= {disableWater}}
+      />            
                          
                  </ListGroupItem>
               </ListGroup>

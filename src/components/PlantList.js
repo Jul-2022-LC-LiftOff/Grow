@@ -13,7 +13,7 @@ const PlantList = ({getPlantId, showEdit}) =>{
         getPlants();
     },[]);
 
-   
+  
 
     const getPlants = async () => {
         const data = await PlantDataService.getAllPlants();
@@ -23,13 +23,13 @@ const PlantList = ({getPlantId, showEdit}) =>{
     const deleteHandler = async (id) =>{
         
         await PlantDataService.deletePlant(id);
-        
         getPlants();
     };
     const confirmDelete = (id) =>{
         const confirmed = window.confirm("Are you sure you want to delete this plant?");
         if(confirmed){
             deleteHandler(id);
+           
         }
     }
     return(
