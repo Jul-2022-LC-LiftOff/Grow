@@ -64,5 +64,8 @@
     align-items:center;
     overflow:hidden
  }
+ .bottomOfCard{
+   margin-bottom: 20px;
+ }
 
  

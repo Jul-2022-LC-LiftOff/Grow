@@ -34,13 +34,7 @@ const PlantList = ({getPlantId, showEdit}) =>{
            
         }
     }
-    // const imageDelete = async(id)=>{
-    //     await PlantDataService.getPlant(id).then(()=>{
-
-    //     })     
-    // //     setPlantImage(plant.image);
-    // // return console.log(plantImage);
-    // }
+    
     return(
         <div>
         <div className="mb-2">
@@ -84,21 +78,7 @@ const PlantList = ({getPlantId, showEdit}) =>{
                          </div>
                          <div class="button-edit">
                         <button className="btn btn-light" onClick ={(e) => {getPlantId(doc.id); showEdit();}}><BsFillPencilFill></BsFillPencilFill></button>
-                         <button onClick = {(e) => {
-                         
-                            const imageUrl = ref(storage, doc.image);
-                            getMetadata(imageUrl)
-                            .then((metadata) => {
-                                const storageRef = ref(storage, `files/${imageUrl.name}`);
-                                deleteObject(storageRef).then(()=>{
-                                    console.log("IMAGE DELETED");
-                                }).catch((error)=>{
-                                    console.log(error);
-                                })
-                            })
-                            .catch((error) => {console.log(error)});
-                           
-                        }}>TEST</button>
+                        
                          </div>
                          </div>
                  </div>

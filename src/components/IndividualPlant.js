@@ -40,9 +40,8 @@ export const IndividualPlant = ({plantData, openImageModal})=>{
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Water:</span> {plantData.water}</ListGroupItem>
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Watering Time:</span> {plantData.waterTime}</ListGroupItem>
 
-                                <ListGroupItem><span style={{fontWeight:'bold'}}>Watering Days:</span> {plantData.waterDay}</ListGroupItem>
-
- 
+                                <ListGroupItem className="bottomOfCard"><span style={{fontWeight:'bold'}}>Watering Days:</span> {plantData.waterDay}</ListGroupItem>
+    
  
                             </ListGroup>
                         

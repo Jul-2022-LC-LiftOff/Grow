@@ -5,9 +5,11 @@ import { Card } from "react-bootstrap";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { storage } from "../firebase-config";
-import {getDownloadURL, ref, uploadBytesResumable} from 'firebase/storage';
+import {deleteObject, getDownloadURL, getMetadata, ref, uploadBytesResumable} from 'firebase/storage';
 import ReactAvatarEditor from "react-avatar-editor";
 import Select from "react-select";
+import { doc } from "firebase/firestore";
+import { db } from "../firebase-config";
 import ImageUnavailable from "../assets/ImageUnavailable.png";
 
 const AddPlant = ({id, setPlantId, closeAddModal,})=>{
@@ -99,7 +101,24 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
         try{
             
             if(id !== undefined && id !== "" ){
-                
+                const plantDoc = doc(db, "plants", id);
+                const image = plantDoc.image;
+                image.onUpdate((change)=>{
+                    const before = change.before;
+                    const after = change.after;
+                    if(before !== after){
+                    const imageUrl = ref(storage, after);
+                    getMetadata(imageUrl)
+                    .then((metadata)=>{
+                        const storageRef = ref(storage,  `files/${imageUrl.name}`);
+                        deleteObject(storageRef).then(()=>{
+                            console.log("Old image deleted");
+                        })
+                    }).catch((error)=>{
+                        console.log(error);
+                    })
+                }
+                })
                 await PlantDataService.updatePlant(id, newPlant);
                 setPlantId("");
                  setMessage({error:false, msg: "Plant updated successfully"});
@@ -110,8 +129,25 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
         }catch (err){
             
             setMessage({error:true, msg: "Error!"});
+            console.log("error");
             return;
         }
+        // if(doc.image !== ""){
+        //     const imageUrl = ref(storage, doc.image);
+        //     getMetadata(imageUrl)
+        //     .then((metadata) => {
+        //         const storageRef = ref(storage, `files/${imageUrl.name}`);
+        //         deleteObject(storageRef).then(()=>{
+        //             deleteHandler(doc.id);
+        //             console.log("IMAGE DELETED");
+        //         }).catch((error)=>{
+        //             console.log(error);
+        //         })
+        //     })
+        //     .catch((error) => {console.log(error)});
+        // }else{
+        //     deleteHandler(doc.id);
+        // }
         setPlantName("");
         setPlantTitle("");
         setPlantSoil("");
@@ -236,7 +272,7 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
                             // position = {position}
                             onPositionChange={handlePositionChange}
                             rotate={parseFloat(rotate)}
-                            image = {id !== undefined && id !== "" ? image : imagePreview}
+                            image = {image !== undefined && image !== "" ? image : imagePreview}
                             alt={image}
                             className = "editor-canvas"
                         />
