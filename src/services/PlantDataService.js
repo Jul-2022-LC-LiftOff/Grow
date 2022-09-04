@@ -2,6 +2,7 @@ import { db } from "../firebase-config";
 import { collection, getDoc, getDocs, addDoc, updateDoc, deleteDoc, doc, FieldPath, DocumentSnapshot } from "firebase/firestore";
 import { ref, getMetadata } from "firebase/storage";
 import { storage } from "../firebase-config";
+import { useEffect, useRef } from "react";
 
 //onChildChanged and onChildRemoved
 const plantCollectionRef = collection(db,"plants");
@@ -35,6 +36,8 @@ class PlantDataService{
 
         return getDoc(plantDoc);
     };
+
+   
    
     // deleteImage =  (id) =>{
     //     const plant = doc(db, "plants", id);

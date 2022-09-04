@@ -11,7 +11,6 @@ import Select from "react-select";
 import { doc } from "firebase/firestore";
 import { db } from "../firebase-config";
 import ImageUnavailable from "../assets/ImageUnavailable.png";
-
 const AddPlant = ({id, setPlantId, closeAddModal,})=>{
     
     const [name, setPlantName] = useState("");
@@ -66,7 +65,13 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
     //     }
         
     // }
-    
+    function usePrevious(value){
+        const ref = useRef();
+        useEffect(()=>{
+            ref.current = value;//assigns value of ref to argument
+        },[value]); //runs when value of value changes
+        return ref.current; //will return the current ref value
+    }
     const handleWaterDay=(e)=>{
         setPlantWaterDay(Array.isArray(e) ? e.map(x => x.value) : []);
     }
@@ -86,6 +91,10 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
     
     const setEditorRef = useRef(null);
     const handleSubmit = async (e) =>{
+        const plantDoc = doc(db, "plants", id);
+        //const image = plantDoc.image;
+        const notUpdatedImage = usePrevious(plantDoc.image);
+
         e.preventDefault();
         setMessage("");
         
