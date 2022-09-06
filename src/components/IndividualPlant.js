@@ -8,9 +8,12 @@ import { Card } from "react-bootstrap";
 import ListGroupItem from "react-bootstrap/esm/ListGroupItem";
 import ListGroup from 'react-bootstrap/ListGroup';
 import {BsFillImageFill} from "react-icons/bs";
+import { BsFillTrashFill } from "react-icons/bs";
+import { BsFillPencilFill } from "react-icons/bs";
+
 import ImageUnavailable from "../assets/ImageUnavailable.png";
 
-export const IndividualPlant = ({plantData, openImageModal})=>{
+export const IndividualPlant = ({plantData, getIdAndEdit, deleteThePlant})=>{
 
     
     return(
@@ -46,6 +49,15 @@ export const IndividualPlant = ({plantData, openImageModal})=>{
                             </ListGroup>
                         
                             </Card.Body>
+                            <div class="buttons">
+                        <div class="button-trash">
+                        <button className="btn btn-light" onClick = {deleteThePlant}><BsFillTrashFill></BsFillTrashFill></button>
+                        </div>
+                        <div class="button-edit">
+                       <button className="btn btn-light" onClick ={getIdAndEdit}><BsFillPencilFill></BsFillPencilFill></button>
+                       
+                        </div>
+                        </div>
                         </Card>
                     </div>
                     );

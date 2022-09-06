@@ -65,13 +65,14 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
     //     }
         
     // }
-    function usePrevious(value){
-        const ref = useRef();
-        useEffect(()=>{
-            ref.current = value;//assigns value of ref to argument
-        },[value]); //runs when value of value changes
-        return ref.current; //will return the current ref value
-    }
+    // const getOldImage = (id)=>{
+    //     const plantRef = ref(db, "plants", id);
+    //             plantRef.onUpdate((change, context)=>{
+    //                 const after = change.after.val();
+    //                 const before = change.before.val();
+    //                 return before;
+    //             })
+    // }
     const handleWaterDay=(e)=>{
         setPlantWaterDay(Array.isArray(e) ? e.map(x => x.value) : []);
     }
@@ -91,18 +92,18 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
     
     const setEditorRef = useRef(null);
     const handleSubmit = async (e) =>{
-        const plantDoc = doc(db, "plants", id);
-        //const image = plantDoc.image;
-        const notUpdatedImage = usePrevious(plantDoc.image);
+        
+        
 
         e.preventDefault();
         setMessage("");
         
         if(name==="" || title==="" || water==="" || waterTime==="" || waterDay===""){
             setMessage({error:true, msg: "All fields are required!"});
+            e.preventDefault();
+
             return;
         }
-       
         
         const newPlant = {
             name, title, soil, size, sun, hardiness, water, waterTime, waterDay, family, image,
@@ -110,24 +111,20 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
         try{
             
             if(id !== undefined && id !== "" ){
-                const plantDoc = doc(db, "plants", id);
-                const image = plantDoc.image;
-                image.onUpdate((change)=>{
-                    const before = change.before;
-                    const after = change.after;
-                    if(before !== after){
-                    const imageUrl = ref(storage, after);
-                    getMetadata(imageUrl)
-                    .then((metadata)=>{
-                        const storageRef = ref(storage,  `files/${imageUrl.name}`);
-                        deleteObject(storageRef).then(()=>{
-                            console.log("Old image deleted");
-                        })
-                    }).catch((error)=>{
-                        console.log(error);
-                    })
-                }
-                })
+                // const plantImage = getOldImage(id).image;
+                // if(plantImage !== image){
+                    
+                //     getMetadata(plantImage)
+                //     .then((metadata)=>{
+                //         const storageRef = ref(storage,  `files/${plantImage.name}`);
+                //         deleteObject(storageRef).then(()=>{
+                //             console.log("Old image deleted");
+                //         })
+                //     }).catch((error)=>{
+                //         console.log(error);
+                //     })
+                // }
+               
                 await PlantDataService.updatePlant(id, newPlant);
                 setPlantId("");
                  setMessage({error:false, msg: "Plant updated successfully"});
@@ -138,25 +135,10 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
         }catch (err){
             
             setMessage({error:true, msg: "Error!"});
-            console.log("error");
+            console.log(err);
             return;
         }
-        // if(doc.image !== ""){
-        //     const imageUrl = ref(storage, doc.image);
-        //     getMetadata(imageUrl)
-        //     .then((metadata) => {
-        //         const storageRef = ref(storage, `files/${imageUrl.name}`);
-        //         deleteObject(storageRef).then(()=>{
-        //             deleteHandler(doc.id);
-        //             console.log("IMAGE DELETED");
-        //         }).catch((error)=>{
-        //             console.log(error);
-        //         })
-        //     })
-        //     .catch((error) => {console.log(error)});
-        // }else{
-        //     deleteHandler(doc.id);
-        // }
+       
         setPlantName("");
         setPlantTitle("");
         setPlantSoil("");
@@ -203,7 +185,7 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
             editHandler();
         }
     },[id]);
-
+   
     useEffect(()=>{
         const handleUpload = () =>{
             
@@ -281,7 +263,7 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
                             // position = {position}
                             onPositionChange={handlePositionChange}
                             rotate={parseFloat(rotate)}
-                            image = {image !== undefined && image !== "" ? image : imagePreview}
+                            image = {image != undefined && image != "" ? image : imagePreview}
                             alt={image}
                             className = "editor-canvas"
                         />

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import PlantDataService from "../services/PlantDataService";
 import { Button } from "react-bootstrap";
-import { BsFillPencilFill } from "react-icons/bs";
 import {IndividualPlant} from "../components/IndividualPlant";
 import { BsFillTrashFill } from "react-icons/bs";
+import { BsFillPencilFill } from "react-icons/bs";
+
 import { db } from "../firebase-config";
 import { storage } from "../firebase-config";
 import { ref, deleteObject, getMetadata } from "firebase/storage";
@@ -46,53 +47,48 @@ const PlantList = ({getPlantId, showEdit}) =>{
                
                  <div className="row">
                  {plants.map((doc)=>{
-         return(
-             <div id="container" className="col-md-4">
-             <IndividualPlant 
-                 plantData={doc} 
-                 key={doc.title} 
-                 id="card"
-                 />
-                 <div class="buttons">
-                         <div class="button-trash">
-                         <button className="btn btn-light" onClick = {(e)=> {
-                                if(doc.image !== ""){
-                                const imageUrl = ref(storage, doc.image);
-                                getMetadata(imageUrl)
-                                .then((metadata) => {
-                                    const storageRef = ref(storage, `files/${imageUrl.name}`);
-                                    deleteObject(storageRef).then(()=>{
-                                        deleteHandler(doc.id);
-                                        console.log("IMAGE DELETED");
-                                    }).catch((error)=>{
-                                        console.log(error);
-                                    })
-                                })
-                                .catch((error) => {console.log(error)});
-                            }else{
-                                deleteHandler(doc.id);
-                            }
-                         }
-                        
-                        }><BsFillTrashFill></BsFillTrashFill></button>
-                         </div>
-                         <div class="button-edit">
-                        <button className="btn btn-light" onClick ={(e) => {getPlantId(doc.id); showEdit();}}><BsFillPencilFill></BsFillPencilFill></button>
-                        
-                         </div>
-                         </div>
-                 </div>
+          return(
+            <div id="container" className="col-md-4">
+            <IndividualPlant 
+                plantData={doc} 
+                key={doc.title} 
+                id="card"
+                getIdAndEdit={(e) => {getPlantId(doc.id); showEdit();}}
+                deleteThePlant={
+                    (e)=> {
+                        const confirmed = window.confirm("Are you sure you want to delete this plant?");
+                        if(confirmed){
+                           if(doc.image !== ""){
+                           const imageUrl = ref(storage, doc.image);
+                           getMetadata(imageUrl)
+                           .then((metadata) => {
+                               const storageRef = ref(storage, `files/${imageUrl.name}`);
+                               deleteObject(storageRef).then(()=>{
+                                   deleteHandler(doc.id);
+                                   console.log("IMAGE DELETED");
+                               }).catch((error)=>{
+                                   console.log(error);
+                               })
+                           })
+                           .catch((error) => {console.log(error)});
+                       }else{
+                           deleteHandler(doc.id);
+                       }
+                    }
+                    }}
+                />
+                </div>
+        
+         )
          
-          )
-          
-     })}
-     </div>
+    })}
+    </div>
 
 
 
-     </div>
-     </div>
-    );
+    </div>
+    </div>
+   );
 };
 
 export default PlantList;
