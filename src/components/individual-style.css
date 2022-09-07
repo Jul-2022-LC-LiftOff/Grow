@@ -2,12 +2,21 @@
 
 .IndividualPlant{
    
-    margin-top: 10px;
+    margin-top: 1rem;
   width:100%;
+  
   
     
 }
-.IndividualPlant:hover{
+.IndividualPlantCard{
+   width: 100%;
+   height: 100%;
+}
+.IndividualPlantDiv{
+   
+  
+}
+.IndividualPlantCard:hover{
     box-shadow: 5px 10px 20px 1px rgba(0,0,0,0.253)!important;
     
 }
@@ -28,21 +37,20 @@
     width: 100%;
 }
  .buttons{
-    z-index: 9;
-    position: relative;
+   margin-top: auto;
     
     
  }
  .button-trash{
     position: absolute;
-    bottom:10px;
-    left: 10px;
+    bottom:1rem;
+    left: 1rem;
 
  }
  .button-edit{
     position: absolute;
-    bottom:10px;
-    right: 10px;
+    bottom:1rem;
+    right: 1rem;
  }
 
  #addModal{
@@ -53,8 +61,7 @@
  .plantImage{
     flex-shrink:0;
     -webkit-flex-shrink: 0;
-    max-width:90%;
-    max-height:100%;
+    
  }
  .plantImageContainer{
     width:360px;
@@ -65,7 +72,7 @@
     overflow:hidden
  }
  .bottomOfCard{
-   margin-bottom: 20px;
+   margin-bottom: 1rem;
  }
 
  

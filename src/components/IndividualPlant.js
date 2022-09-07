@@ -18,8 +18,8 @@ export const IndividualPlant = ({plantData, getIdAndEdit, deleteThePlant})=>{
     
     return(
   
-                    <div className="IndividualPlant text-left col-sm">
-                        <Card className="IndividualPlant" key={plantData.id} >
+                    <div className="IndividualPlantDiv">
+                        <Card className="IndividualPlantCard" key={plantData.id} >
                             <div className="plantImageContainer">
                             <Card.Img variant="top" className="plantImage" src= {plantData.image !== "" || plantData.image !== null ? plantData.image : ImageUnavailable}></Card.Img>
                             </div>

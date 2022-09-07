@@ -43,12 +43,12 @@ const PlantList = ({getPlantId, showEdit}) =>{
           Refresh Garden
         </Button>
       </div>
-     <div className="IndividualPlant container-fluid d-flex justify-content-center ">
+     <div className="IndividualPlant container-fluid ">
                
                  <div className="row">
                  {plants.map((doc)=>{
           return(
-            <div id="container" className="col-md-4">
+            <div id="container" className="col-md-4 d-flex align-items-stretch">
             <IndividualPlant 
                 plantData={doc} 
                 key={doc.title} 
