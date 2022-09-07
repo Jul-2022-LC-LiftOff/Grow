@@ -6,7 +6,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import { UserContext } from "./components/UserContext";
 import RegistrationPage from "./pages/registration/Registration.page";
+
+import ProfileNavbar from "./components/navbar/profile-navbar"
+
 import CropperTester from "./components/CropperTester";
+
 
 function App() {
   // const currentUser = auth.
@@ -22,6 +26,7 @@ function App() {
         path="/"
         element={
           <div class="mainBackground">
+            <ProfileNavbar />
             <MyGarden />
             {/* <CropperTester/> */}
           </div>
