@@ -65,14 +65,7 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
     //     }
         
     // }
-    // const getOldImage = (id)=>{
-    //     const plantRef = ref(db, "plants", id);
-    //             plantRef.onUpdate((change, context)=>{
-    //                 const after = change.after.val();
-    //                 const before = change.before.val();
-    //                 return before;
-    //             })
-    // }
+   
     const handleWaterDay=(e)=>{
         setPlantWaterDay(Array.isArray(e) ? e.map(x => x.value) : []);
     }

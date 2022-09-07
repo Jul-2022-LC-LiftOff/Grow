@@ -32,7 +32,7 @@ return(
          <Modal.Header >
         
              <Modal.Title>Add Plant </Modal.Title>
-             <CloseButton onClick={() => { handleAddClose()}}/>
+             <CloseButton onClick={() => { handleAddClose();}}/>
          </Modal.Header>
          <Modal.Body>
          <AddPlant id={plantId} setPlantId={setPlantId} closeAddModal={handleAddClose}/>
