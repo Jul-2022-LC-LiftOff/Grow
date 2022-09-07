@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 
 import RegistrationPage from "./pages/registration/Registration.page";
+import ProfileNavbar from "./components/navbar/profile-navbar"
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         path="/"
         element={
           <div class="mainBackground">
+            <ProfileNavbar />
             <MyGarden />
           </div>
         }
