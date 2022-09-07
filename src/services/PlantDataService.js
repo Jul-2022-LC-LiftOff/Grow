@@ -1,6 +1,5 @@
 import { db } from "../firebase-config";
 import { collection, getDoc, getDocs, addDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
-
 const plantCollectionRef = collection(db,"plants");
 class PlantDataService{
 
