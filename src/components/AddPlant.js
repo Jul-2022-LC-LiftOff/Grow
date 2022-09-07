@@ -114,6 +114,21 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
                
                 await PlantDataService.updatePlant(id, newPlant);
                 setPlantId("");
+                console.log(image);
+                        console.log(oldImage);
+                        if(oldImage!== image){
+                            const imageUrl = ref(storage, oldImage);
+                            getMetadata(imageUrl)
+                            .then((metadata) => {
+                                const storageRef = ref(storage, `files/${imageUrl.name}`);
+                                deleteObject(storageRef).then(()=>{
+                                    console.log("IMAGE DELETED");
+                                }).catch((error)=>{
+                                    console.log(error);
+                                })
+                            })
+                            .catch((error) => {console.log(error)});
+                        }
                  setMessage({error:false, msg: "Plant updated successfully"});
             }else{
                 await PlantDataService.addPlants(newPlant);
@@ -185,22 +200,22 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
     }
   
     const oldImage = usePrevious(image);
-    useEffect(()=>{
+    // useEffect(()=>{
         
-        if(oldImage!== image){
-                const imageUrl = ref(storage, oldImage);
-                getMetadata(imageUrl)
-                .then((metadata) => {
-                    const storageRef = ref(storage, `files/${imageUrl.name}`);
-                    deleteObject(storageRef).then(()=>{
-                        console.log("IMAGE DELETED");
-                    }).catch((error)=>{
-                        console.log(error);
-                    })
-                })
-                .catch((error) => {console.log(error)});
-            }
-            },[image]);
+        // if(oldImage!== image){
+        //         const imageUrl = ref(storage, oldImage);
+        //         getMetadata(imageUrl)
+        //         .then((metadata) => {
+        //             const storageRef = ref(storage, `files/${imageUrl.name}`);
+        //             deleteObject(storageRef).then(()=>{
+        //                 console.log("IMAGE DELETED");
+        //             }).catch((error)=>{
+        //                 console.log(error);
+        //             })
+        //         })
+        //         .catch((error) => {console.log(error)});
+        //     }
+        //     },[image]);
 
     useEffect(()=>{
         const handleUpload = () =>{
@@ -241,6 +256,7 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
                         setUploaded(false);
                         setShowProgBar(false);
                         setImage(url);
+                        
                     }) ;
                 }
                 
