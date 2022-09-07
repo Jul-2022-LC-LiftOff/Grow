@@ -186,6 +186,34 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
         }
     },[id]);
    
+    function usePrevious(value){
+        const ref = useRef();
+        useEffect(()=>{
+            ref.current = value;
+        }, [value]);
+        return ref.current;
+    }
+    const oldImage = usePrevious(image);
+    
+    useEffect(()=>{
+        if(oldImage !== image){
+            console.log("Image CHANGED");
+            if(image !== ""){
+                const imageUrl = ref(storage, image);
+                getMetadata(imageUrl)
+                .then((metadata) => {
+                    const storageRef = ref(storage, `files/${imageUrl.name}`);
+                    deleteObject(storageRef).then(()=>{
+                        console.log("IMAGE DELETED");
+                    }).catch((error)=>{
+                        console.log(error);
+                    })
+                })
+                .catch((error) => {console.log(error)});
+            }
+        }
+    })
+
     useEffect(()=>{
         const handleUpload = () =>{
             

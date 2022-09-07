@@ -4,7 +4,6 @@ import { Button } from "react-bootstrap";
 import {IndividualPlant} from "../components/IndividualPlant";
 import { BsFillTrashFill } from "react-icons/bs";
 import { BsFillPencilFill } from "react-icons/bs";
-
 import { db } from "../firebase-config";
 import { storage } from "../firebase-config";
 import { ref, deleteObject, getMetadata } from "firebase/storage";
@@ -14,7 +13,9 @@ const PlantList = ({getPlantId, showEdit}) =>{
     useEffect(()=>{
         getPlants();
     },[]);
-
+    // componentDidMount(()=>{
+    //     getPlants();
+    // })
   
 
     const getPlants = async () => {
