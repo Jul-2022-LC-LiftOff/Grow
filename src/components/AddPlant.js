@@ -111,19 +111,6 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
         try{
             
             if(id !== undefined && id !== "" ){
-                // const plantImage = getOldImage(id).image;
-                // if(plantImage !== image){
-                    
-                //     getMetadata(plantImage)
-                //     .then((metadata)=>{
-                //         const storageRef = ref(storage,  `files/${plantImage.name}`);
-                //         deleteObject(storageRef).then(()=>{
-                //             console.log("Old image deleted");
-                //         })
-                //     }).catch((error)=>{
-                //         console.log(error);
-                //     })
-                // }
                
                 await PlantDataService.updatePlant(id, newPlant);
                 setPlantId("");
@@ -167,7 +154,9 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
             setPlantWater(docSnap.data().water);
             setPlantWaterTime(docSnap.data().waterTime);
             setPlantWaterDay(docSnap.data().waterDay);
+            
             setImage(docSnap.data().image);
+            
         }catch (err){
             setMessage({error:true, msg:err.message});
         }
@@ -185,21 +174,21 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
             editHandler();
         }
     },[id]);
-   
+    
+
     function usePrevious(value){
         const ref = useRef();
         useEffect(()=>{
             ref.current = value;
-        }, [value]);
+        },[value]);
         return ref.current;
     }
+  
     const oldImage = usePrevious(image);
-    
     useEffect(()=>{
-        if(oldImage !== image){
-            console.log("Image CHANGED");
-            if(image !== ""){
-                const imageUrl = ref(storage, image);
+        
+        if(oldImage!== image){
+                const imageUrl = ref(storage, oldImage);
                 getMetadata(imageUrl)
                 .then((metadata) => {
                     const storageRef = ref(storage, `files/${imageUrl.name}`);
@@ -211,8 +200,7 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
                 })
                 .catch((error) => {console.log(error)});
             }
-        }
-    })
+            },[image]);
 
     useEffect(()=>{
         const handleUpload = () =>{
