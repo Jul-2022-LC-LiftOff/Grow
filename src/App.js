@@ -10,6 +10,9 @@ import RegistrationPage from "./pages/registration/Registration.page";
 import ProfileNavbar from "./components/navbar/profile-navbar"
 
 import CropperTester from "./components/CropperTester";
+import MainNavbar from "./components/navbar/main-navbar";
+import { HomePage } from "./pages/homepage/homepage";
+import MainBody from "./components/bodys/main_body/main_body";
 
 
 function App() {
@@ -25,8 +28,12 @@ function App() {
         path="/"
         element={
           <div class="mainBackground">
-            <ProfileNavbar />
-            <MyGarden />
+            {/* <ProfileNavbar /> */}
+            <MainNavbar />
+            {/* <HomePage /> */}
+            <MainBody />
+            {/* <RegistrationPage /> */}
+            {/* <MyGarden /> */}
             {/* <CropperTester/> */}
           </div>
         }
