@@ -11,6 +11,7 @@ import Select from "react-select";
 import { doc } from "firebase/firestore";
 import { db } from "../firebase-config";
 import ImageUnavailable from "../assets/ImageUnavailable.png";
+import axios from "axios";
 const AddPlant = ({id, setPlantId, closeAddModal,})=>{
     
     const [name, setPlantName] = useState("");
@@ -27,7 +28,7 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
     const [file, setFile] = useState("");
     const [image, setImage] = useState("");
     const [imagePreview, setImagePreview] = useState("");
-
+    const [apiPlants, setApiPlants] = useState([]);
     const [per, setPerc] = useState(0);
     const [showProgBar, setShowProgBar] = useState(false);
     const [uploaded, setUploaded] = useState(false);
@@ -39,13 +40,13 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
     const [rotate, setRotate] = useState(0);
     const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
     const dayOptions=[
-        {value:' Sunday ', label: 'Sunday'},
-        {value:' Monday ', label: 'Monday'},
-        {value:' Tuesday ', label: 'Tuesday'},
-        {value:' Wednesday ', label: 'Wednesday'},
-        {value:' Thursday ', label: 'Thursday'},
-        {value:' Friday ', label: 'Friday'},
-        {value:' Saturday ', label: 'Saturday'},
+        {value:'Sunday', label: ' Sunday '},
+        {value:'Monday', label: ' Monday '},
+        {value:'Tuesday', label: ' Tuesday '},
+        {value:'Wednesday', label: ' Wednesday '},
+        {value:'Thursday', label: ' Thursday '},
+        {value:'Friday', label: ' Friday '},
+        {value:'Saturday', label: ' Saturday '},
     ]
     // const handleDisableWater = ()=>{
     //     if(water==="Daily"){
@@ -65,6 +66,14 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
     //     }
         
     // }
+    useEffect(()=>{
+        const loadPlants = async ()=>{
+            const response = await axios.get('https://plants.usda.gov/api/plants/search/basic');
+            console.log(response.data.data);
+            setApiPlants(response.data.data);
+           }
+           loadPlants()
+    },[])
    
     const handleWaterDay=(e)=>{
         setPlantWaterDay(Array.isArray(e) ? e.map(x => x.value) : []);
@@ -430,6 +439,7 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
                   <Select
                     className="dropdown"
                     placeholder="Select Days"
+                    //label={waterDay? dayOptions.filter(obj => waterDay.includes(obj.label)) : ""}
                     value={waterDay? dayOptions.filter(obj => waterDay.includes(obj.value)) : ""} 
                     options={dayOptions} 
                     onChange={handleWaterDay} 
