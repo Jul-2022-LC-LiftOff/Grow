@@ -19,7 +19,7 @@ export const IndividualPlant = ({plantData, getIdAndEdit, deleteThePlant})=>{
         var string = "";
         for(let i=0; i<plantData.waterDay.length;i++){
             if(plantData.waterDay.length === 1){
-                string += plantData.waterDay[i]
+                string += plantData.waterDay[i];
             }
             else if(plantData.waterDay.length !== (i+1)){
             string += (plantData.waterDay[i] + ", ");
