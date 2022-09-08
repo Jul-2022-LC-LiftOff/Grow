@@ -40,13 +40,13 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
     const [rotate, setRotate] = useState(0);
     const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
     const dayOptions=[
-        {value:'Sunday', label: ' Sunday '},
-        {value:'Monday', label: ' Monday '},
-        {value:'Tuesday', label: ' Tuesday '},
-        {value:'Wednesday', label: ' Wednesday '},
-        {value:'Thursday', label: ' Thursday '},
-        {value:'Friday', label: ' Friday '},
-        {value:'Saturday', label: ' Saturday '},
+        {value:'Sunday', label: 'Sunday'},
+        {value:'Monday', label: 'Monday'},
+        {value:'Tuesday', label: 'Tuesday'},
+        {value:'Wednesday', label: 'Wednesday'},
+        {value:'Thursday', label: 'Thursday'},
+        {value:'Friday', label: 'Friday'},
+        {value:'Saturday', label: 'Saturday'},
     ]
     // const handleDisableWater = ()=>{
     //     if(water==="Daily"){
@@ -183,7 +183,9 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
         setFile(imagePreview);
        
     };
-
+    const formatOptionLabel = ({value, label})=>{
+        <div>{label}</div>
+    }
     
 
     useEffect(()=>{
@@ -297,7 +299,7 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
                             // position = {position}
                             onPositionChange={handlePositionChange}
                             rotate={parseFloat(rotate)}
-                            image = {image != undefined && image != "" ? image : imagePreview}
+                            image = {image !== undefined && image !== "" ? image : imagePreview}
                             alt={image}
                             className = "editor-canvas"
                         />

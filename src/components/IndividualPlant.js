@@ -14,7 +14,21 @@ import { BsFillPencilFill } from "react-icons/bs";
 import ImageUnavailable from "../assets/ImageUnavailable.png";
 
 export const IndividualPlant = ({plantData, getIdAndEdit, deleteThePlant})=>{
-
+    
+    const displayWaterDays = ()=>{
+        var string = "";
+        for(let i=0; i<plantData.waterDay.length;i++){
+            if(plantData.waterDay.length === 1){
+                string += plantData.waterDay[i]
+            }
+            else if(plantData.waterDay.length !== (i+1)){
+            string += (plantData.waterDay[i] + ", ");
+            }else{
+                string += ("and " + plantData.waterDay[i]);
+            }
+        }
+        return string;
+    }
     
     return(
   
@@ -43,7 +57,7 @@ export const IndividualPlant = ({plantData, getIdAndEdit, deleteThePlant})=>{
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Water:</span> {plantData.water}</ListGroupItem>
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Watering Time:</span> {plantData.waterTime}</ListGroupItem>
 
-                                <ListGroupItem className="bottomOfCard"><span style={{fontWeight:'bold'}}>Watering Days:</span> {plantData.waterDay}</ListGroupItem>
+                                <ListGroupItem className="bottomOfCard"><span style={{fontWeight:'bold'}}>Watering Days:</span> {displayWaterDays()}</ListGroupItem>
     
  
                             </ListGroup>
