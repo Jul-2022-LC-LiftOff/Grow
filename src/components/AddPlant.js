@@ -102,7 +102,7 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
         e.preventDefault();
         setMessage("");
         
-        if(name==="" || title==="" || water==="" || waterTime==="" || waterDay===""){
+        if(name==="" || title==="" || water==="" || waterTime==="" ){
             setMessage({error:true, msg: "All fields are required!"});
             e.preventDefault();
 
@@ -112,15 +112,15 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
         const newPlant = {
             name, title, soil, size, sun, hardiness, water, waterTime, waterDay, family, image,
         };
+       
         try{
             
             if(id !== undefined && id !== "" ){
-               
                 await PlantDataService.updatePlant(id, newPlant);
                 setPlantId("");
                 console.log(image);
                         console.log(oldImage);
-                        if(oldImage!== image){
+                        if(oldImage!== image && oldImage !== undefined && image !== undefined){
                             const imageUrl = ref(storage, oldImage);
                             getMetadata(imageUrl)
                             .then((metadata) => {
@@ -142,6 +142,11 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
             
             setMessage({error:true, msg: "Error!"});
             console.log(err);
+            if(id !== undefined && id !== "" ){
+                closeModal();
+            }else{
+            closeAddModal();
+            }
             return;
         }
        
@@ -208,7 +213,8 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
     }
   
     const oldImage = usePrevious(image);
- 
+    const plantRef = async() =>await PlantDataService.getPlant(id);
+    const oldPlant = usePrevious(plantRef);
 
     useEffect(()=>{
         const handleUpload = () =>{
