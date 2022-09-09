@@ -10,9 +10,8 @@ import ReactAvatarEditor from "react-avatar-editor";
 import Select from "react-select";
 import { doc } from "firebase/firestore";
 import { db } from "../firebase-config";
-import ImageUnavailable from "../assets/ImageUnavailable.png";
 import axios from "axios";
-const AddPlant = ({id, setPlantId, closeAddModal,})=>{
+const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
     
     const [name, setPlantName] = useState("");
     const [title, setPlantTitle] = useState("");
@@ -23,7 +22,6 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
     const [water, setPlantWater] = useState("");
     const [waterTime, setPlantWaterTime] = useState("");
     const [waterDay, setPlantWaterDay] = useState([]);
-    const [disableWater, setDisableWater] = useState(8);
     const [family, setPlantFamily] = useState("");
     const [file, setFile] = useState("");
     const [image, setImage] = useState("");
@@ -49,23 +47,27 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
         {value:'Saturday', label: 'Saturday'},
     ]
     // const handleDisableWater = ()=>{
+    //     var disableWater = 7;
     //     if(water==="Daily"){
-    //         setDisableWater(7)
+    //         disableWater = 7;
     //     }else if(water==="3-5 times per week"){
-    //         setDisableWater(5)
+    //         disableWater = 5;        
     //     }else if(water==="1-2 times per week"){
-    //         setDisableWater(2)
-    //     }else if(water==="2 times per month"){
-    //         setDisableWater(2)
+    //         disableWater = 2;
+    //             }else if(water==="2 times per month"){
+    //         disableWater = 2;
     //     }else if(water==="1 time per month"){
-    //         setDisableWater(1)
+    //         disableWater = 1;
     //     }else if(water==="Never"){
-    //         setDisableWater(0)
+    //         disableWater = 0;
     //     }else{
-    //         setDisableWater(7)
+    //         disableWater = 7;
     //     }
-        
+    //     if(waterDay.length >= disableWater){
+    //         setDisableSelection(true);
+    //     }
     // }
+    
     useEffect(()=>{
         const loadPlants = async ()=>{
             const response = await axios.get('https://plants.usda.gov/api/plants/search/basic');
@@ -131,10 +133,10 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
                             })
                             .catch((error) => {console.log(error)});
                         }
-                 setMessage({error:false, msg: "Plant updated successfully"});
+                 //setMessage({error:false, msg: "Plant updated successfully"});
             }else{
                 await PlantDataService.addPlants(newPlant);
-                setMessage({error:false, msg: "New plant added successfully"});
+                //setMessage({error:false, msg: "New plant added successfully"});
             }
         }catch (err){
             
@@ -155,7 +157,11 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
         setPlantWaterDay([]);
         setImage("");
         console.log(newPlant);
-        //closeAddModal();
+        if(id !== undefined && id !== "" ){
+            closeModal();
+        }else{
+        closeAddModal();
+        }
     };
     const editHandler = async () =>{
         setMessage("");
@@ -183,9 +189,7 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
         setFile(imagePreview);
        
     };
-    const formatOptionLabel = ({value, label})=>{
-        <div>{label}</div>
-    }
+
     
 
     useEffect(()=>{
@@ -204,30 +208,14 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
     }
   
     const oldImage = usePrevious(image);
-    // useEffect(()=>{
-        
-        // if(oldImage!== image){
-        //         const imageUrl = ref(storage, oldImage);
-        //         getMetadata(imageUrl)
-        //         .then((metadata) => {
-        //             const storageRef = ref(storage, `files/${imageUrl.name}`);
-        //             deleteObject(storageRef).then(()=>{
-        //                 console.log("IMAGE DELETED");
-        //             }).catch((error)=>{
-        //                 console.log(error);
-        //             })
-        //         })
-        //         .catch((error) => {console.log(error)});
-        //     }
-        //     },[image]);
+ 
 
     useEffect(()=>{
         const handleUpload = () =>{
             
             const name = new Date().getTime() + file.name;
             const imageRef = ref(storage, `files/${name}`);
-            //const defaultImageRef = ref(storage, "altImages/imageUnavailable.png");
-            //const defaultUploadTask = uploadBytesResumable(defaultImageRef, file);
+            
             const uploadTask = uploadBytesResumable(imageRef, file);
             uploadTask.on(
                 "state_changed",
@@ -441,13 +429,11 @@ const AddPlant = ({id, setPlantId, closeAddModal,})=>{
                   <Select
                     className="dropdown"
                     placeholder="Select Days"
-                    //label={waterDay? dayOptions.filter(obj => waterDay.includes(obj.label)) : ""}
                     value={waterDay? dayOptions.filter(obj => waterDay.includes(obj.value)) : ""} 
                     options={dayOptions} 
                     onChange={handleWaterDay} 
                     isMulti
                     required
-                    //isOptionDisabled={() => waterDay.length >= {disableWater}}
       />            
                          
                  </ListGroupItem>

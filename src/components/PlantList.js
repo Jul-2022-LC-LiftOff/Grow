@@ -39,11 +39,7 @@ const PlantList = ({getPlantId, showEdit}) =>{
     
     return(
         <div>
-        <div className="mb-2">
-        <Button variant="dark edit" onClick={getPlants}>
-          Refresh Garden
-        </Button>
-      </div>
+        
      <div className="IndividualPlant container-fluid ">
                
                  <div className="row">

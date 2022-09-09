@@ -4,7 +4,6 @@ import { ref, getMetadata } from "firebase/storage";
 import { storage } from "../firebase-config";
 import { useEffect, useRef } from "react";
 
-//onChildChanged and onChildRemoved
 const plantCollectionRef = collection(db,"plants");
 class PlantDataService{
 
@@ -37,23 +36,6 @@ class PlantDataService{
         return getDoc(plantDoc);
     };
 
-   
-   
-    // deleteImage =  (id) =>{
-    //     const plant = doc(db, "plants", id);
-    //     const doc = getDoc(plant);
-    //     const imageUrl = ref(storage, doc.image);
-    //                         getMetadata(imageUrl)
-    //                         .then((metadata) => {
-    //                             const storageRef = ref(storage, `files/${imageUrl.name}`);
-    //                             deleteObject(storageRef).then(()=>{
-    //                                 console.log("IMAGE DELETED");
-    //                             }).catch((error)=>{
-    //                                 console.log(error);
-    //                             })
-    //                         })
-    //                         .catch((error) => {console.log(error)});
-    // }
 
 }
 export default new PlantDataService();
