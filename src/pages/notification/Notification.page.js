@@ -1,36 +1,49 @@
-import React from "react";
 import "../../pages/notification/Notification.style.css";
 
-import Notification from "../../components/notification/Notification.comp";
+import Today from "../../components/notification/Today";
+import Tomorrow from "../../components/notification/Tomorrow";
 
 // import { Link } from "react-router-dom";
 
 export default function NotificationPage() {
-  const Header = () => (
-    <header>
-      <div className="header">
-        <div className="logo">Water Schedule</div>
-        {/* <nav>
-          <ul>
-            <li>
-              <Link to="/notify">Today</Link>
-            </li>
-            <li>
-              <Link to="/forgotton">Forgotton</Link>
-            </li>
-            <li>
-              <Link to="/upcoming">Upcoming</Link>
-            </li>
-          </ul>
-        </nav> */}
-      </div>
-    </header>
-  );
+  // const Header = () => (
+  //   <header>
+  //     <div className="header">
+  //       <div className="logo">Water Schedule</div>
+  //       <nav>
+  //         <ul>
+  //           <li>
+  //             <Link to="/notify">Today</Link>
+  //           </li>
+  //           <li>
+  //             <Link to="/forgotton">Forgotton</Link>
+  //           </li>
+  //           <li>
+  //             <Link to="/tomorrow">Tomorrow</Link>
+  //           </li>
+  //         </ul>
+  //       </nav>
+  //     </div>
+  //   </header>
+  // );
 
   return (
-    <div>
-      <Header />
-      <Notification />
+    <div className="box">
+      {" "}
+      <p className="header">Water Schedule</p>
+      <div className="notification-page">
+        {/* <Header /> */}
+        <div>
+          <div>
+            <h1>Today</h1>
+            <Today />
+          </div>
+          <div>
+            <h1>Tomorrow</h1>
+            <Tomorrow />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
