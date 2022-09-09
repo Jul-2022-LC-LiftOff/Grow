@@ -1,6 +1,5 @@
 * > * {
   box-sizing: border-box;
-  /* font-family: "Poppins", sans-serif; */
   margin: 0;
 }
 
@@ -16,21 +15,20 @@ body {
   background-repeat: no-repeat;
 }
 
-.card-notify {
-  /* background-color: white; */
+.cardnotify {
   border-radius: 25px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   padding: 1rem;
   width: fit-content;
 }
 
-.notification-page {
+.notificationpage {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-h1 {
+.h1 {
   margin: 30px;
   margin-top: 50px;
   margin-left: 200px;

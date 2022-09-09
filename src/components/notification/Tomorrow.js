@@ -3,6 +3,7 @@ import { useState } from "react";
 import { collection, query, where } from "firebase/firestore";
 import { db } from "../../firebase-config";
 import { getDocs } from "firebase/firestore";
+import classes from "../../pages/notification/Notification.module.css";
 
 export default function Tomorrow() {
   const [plants, setPlants] = useState([]);
@@ -47,7 +48,7 @@ export default function Tomorrow() {
         {plants.map((plant, index) => {
           return (
             <li key={index}>
-              <div className="flex">
+              <div className={classes.flex}>
                 <img src={plant.image} alt="img" />
                 <div>
                   <h3>Name: {plant.name}</h3>

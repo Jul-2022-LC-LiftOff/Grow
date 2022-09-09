@@ -1,4 +1,4 @@
-import "../../pages/notification/Notification.style.css";
+import classes from "../../pages/notification/Notification.module.css";
 
 import Today from "../../components/notification/Today";
 import Tomorrow from "../../components/notification/Tomorrow";
@@ -28,18 +28,18 @@ export default function NotificationPage() {
   // );
 
   return (
-    <div className="box">
+    <div className={classes.box}>
       {" "}
-      <p className="header">Water Schedule</p>
-      <div className="notification-page">
+      <p className={classes.header}>Water Schedule</p>
+      <div className={classes.notificationpage}>
         {/* <Header /> */}
         <div>
           <div>
-            <h1>Today</h1>
+            <h1 className={classes.h1}>Today</h1>
             <Today />
           </div>
           <div>
-            <h1>Tomorrow</h1>
+            <h1 className={classes.h1}>Tomorrow</h1>
             <Tomorrow />
           </div>
         </div>
