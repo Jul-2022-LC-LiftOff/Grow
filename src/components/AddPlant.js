@@ -11,6 +11,7 @@ import Select from "react-select";
 import { doc } from "firebase/firestore";
 import { db } from "../firebase-config";
 import axios from "axios";
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 export var successAdd = false;
 export var successEdit = false;
 const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
@@ -44,7 +45,7 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
     // const [scale, setScale] = useState(1);
     // const [rotate, setRotate] = useState(0);
     // const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
-    const dayOptions=[
+    let dayOptions=[
         {value:'Sunday', label: 'Sunday', disabled:false},
         {value:'Monday', label: 'Monday', disabled:false},
         {value:'Tuesday', label: 'Tuesday', disabled:false},
@@ -56,7 +57,9 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
     const handleDisableWater = ()=>{
         
         if(water==="3-5 times per week"){
-           setMaxDays(5);        
+           if(waterDay.length >= 4){
+           dayOptions[0].disabled = true;
+           }        
         }else if(water==="1-2 times per week"){
             setMaxDays(2); 
                 }else if(water==="2 times per month"){
@@ -68,11 +71,14 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
         }else{
             setMaxDays(7); 
         }
-    
+        //limitSelections();
     }
     const limitSelections =()=>{
-        if(waterDay.length === maxDays){
-            return true;
+        if(waterDay.length >= maxDays){
+                return true;
+        }else{
+            return false;
+            
         }
     }
     //possible plant API but API doesn't exist
@@ -450,7 +456,8 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
                     value={waterDay? dayOptions.filter(obj => waterDay.includes(obj.value)) : ""} 
                     options={dayOptions} 
                     onChange={handleWaterDay} 
-                    isDisabled = {limitSelections()}
+                    //isDisabled = {limitSelections()}
+                    isOptionDisabled = {(option)=>option.disabled}
                     isMulti
                     required
       />            
