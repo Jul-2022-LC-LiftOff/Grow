@@ -34,6 +34,7 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
     const [uploaded, setUploaded] = useState(false);
     const [message, setMessage] = useState({error: false, msg: ""});
     const [disableSelection, setDisableSelection] = useState(false);
+    const [maxDays, setMaxDays] = useState(7);
     // const [successAdd, setSuccessAdd] = useState(false);
     // const [successEdit, setSuccessEdit] = useState(false);
 
@@ -44,33 +45,34 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
     // const [rotate, setRotate] = useState(0);
     // const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
     const dayOptions=[
-        {value:'Sunday', label: 'Sunday'},
-        {value:'Monday', label: 'Monday'},
-        {value:'Tuesday', label: 'Tuesday'},
-        {value:'Wednesday', label: 'Wednesday'},
-        {value:'Thursday', label: 'Thursday'},
-        {value:'Friday', label: 'Friday'},
-        {value:'Saturday', label: 'Saturday'},
+        {value:'Sunday', label: 'Sunday', disabled:false},
+        {value:'Monday', label: 'Monday', disabled:false},
+        {value:'Tuesday', label: 'Tuesday', disabled:false},
+        {value:'Wednesday', label: 'Wednesday', disabled:false},
+        {value:'Thursday', label: 'Thursday', disabled:false},
+        {value:'Friday', label: 'Friday', disabled:false},
+        {value:'Saturday', label: 'Saturday', disabled:false},
     ]
     const handleDisableWater = ()=>{
-        var disableWater = 7;
-        if(water==="Daily"){
-            disableWater = 7;
-        }else if(water==="3-5 times per week"){
-            disableWater = 5;        
+        
+        if(water==="3-5 times per week"){
+           setMaxDays(5);        
         }else if(water==="1-2 times per week"){
-            disableWater = 2;
+            setMaxDays(2); 
                 }else if(water==="2 times per month"){
-            disableWater = 2;
+                    setMaxDays(2); 
         }else if(water==="1 time per month"){
-            disableWater = 1;
+            setMaxDays(1); 
         }else if(water==="Never"){
-            disableWater = 0;
+            setMaxDays(0); 
         }else{
-            disableWater = 7;
+            setMaxDays(7); 
         }
-        if(waterDay.length >= disableWater){
-            setDisableSelection(true);
+    
+    }
+    const limitSelections =()=>{
+        if(waterDay.length === maxDays){
+            return true;
         }
     }
     //possible plant API but API doesn't exist
@@ -448,7 +450,7 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
                     value={waterDay? dayOptions.filter(obj => waterDay.includes(obj.value)) : ""} 
                     options={dayOptions} 
                     onChange={handleWaterDay} 
-                    isDisabled = {disableSelection}
+                    isDisabled = {limitSelections()}
                     isMulti
                     required
       />            
