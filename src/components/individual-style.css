@@ -63,8 +63,8 @@
     
  }
  .plantImageContainer{
-    /* width:360px;
-    height:300px; */
+    width:360px;
+    height:300px;
     display:flex;
     justify-content:center;
     align-items:center;

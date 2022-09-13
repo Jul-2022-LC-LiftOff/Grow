@@ -10,7 +10,8 @@ import AddPlant from "../components/AddPlant";
 import PlantList from "../components/PlantList";
 import PlantDataService from "../services/PlantDataService";
 import { useEffect } from "react";
-//import { UserContext } from "../components/UserContext";
+import { successAdd } from "../components/AddPlant";
+import { successEdit } from "../components/AddPlant";
  const MyGarden=()=>{
    
     //const currentUser = useContext(UserContext)
@@ -24,15 +25,18 @@ import { useEffect } from "react";
      }  
     const handleAddClose = () => {
         setShowAdd(false);
-        setMessage({msg:"New plant added successfully"});
-        setAlert(true);
+        if(successAdd===true){
+            setMessage({msg:"New plant added successfully"});
+            setAlert(true);
+        };
+        // if({successAdd}){
+        // setAlert(true);
+        // }
     }
     const handleAddShow = () => {setShowAdd(true);}
     const handleEditClose = () => {
         setShowEdit(false);
-        setMessage({msg:"Plant updated successfully"});
-        setAlert(true);
-
+        
     }
     const handleEditShow = () => {setShowEdit(true);}
    const showAlert = ()=>{

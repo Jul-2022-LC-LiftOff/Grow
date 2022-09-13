@@ -11,6 +11,8 @@ import Select from "react-select";
 import { doc } from "firebase/firestore";
 import { db } from "../firebase-config";
 import axios from "axios";
+export var successAdd = false;
+export var successEdit = false;
 const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
     
     const [name, setPlantName] = useState("");
@@ -31,12 +33,16 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
     const [showProgBar, setShowProgBar] = useState(false);
     const [uploaded, setUploaded] = useState(false);
     const [message, setMessage] = useState({error: false, msg: ""});
-    const [width, setWidth] = useState(330);
-    const [height, setHeight] = useState(330);
-    const [zoomOut, setZoomOut] = useState(false);
-    const [scale, setScale] = useState(1);
-    const [rotate, setRotate] = useState(0);
-    const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
+    const [disableSelection, setDisableSelection] = useState(false);
+    // const [successAdd, setSuccessAdd] = useState(false);
+    // const [successEdit, setSuccessEdit] = useState(false);
+
+    // const [width, setWidth] = useState(330);
+    // const [height, setHeight] = useState(330);
+    // const [zoomOut, setZoomOut] = useState(false);
+    // const [scale, setScale] = useState(1);
+    // const [rotate, setRotate] = useState(0);
+    // const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
     const dayOptions=[
         {value:'Sunday', label: 'Sunday'},
         {value:'Monday', label: 'Monday'},
@@ -46,53 +52,54 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
         {value:'Friday', label: 'Friday'},
         {value:'Saturday', label: 'Saturday'},
     ]
-    // const handleDisableWater = ()=>{
-    //     var disableWater = 7;
-    //     if(water==="Daily"){
-    //         disableWater = 7;
-    //     }else if(water==="3-5 times per week"){
-    //         disableWater = 5;        
-    //     }else if(water==="1-2 times per week"){
-    //         disableWater = 2;
-    //             }else if(water==="2 times per month"){
-    //         disableWater = 2;
-    //     }else if(water==="1 time per month"){
-    //         disableWater = 1;
-    //     }else if(water==="Never"){
-    //         disableWater = 0;
-    //     }else{
-    //         disableWater = 7;
-    //     }
-    //     if(waterDay.length >= disableWater){
-    //         setDisableSelection(true);
-    //     }
-    // }
-    
-    useEffect(()=>{
-        const loadPlants = async ()=>{
-            const response = await axios.get('https://plants.usda.gov/api/plants/search/basic');
-            console.log(response.data.data);
-            setApiPlants(response.data.data);
-           }
-           loadPlants()
-    },[])
+    const handleDisableWater = ()=>{
+        var disableWater = 7;
+        if(water==="Daily"){
+            disableWater = 7;
+        }else if(water==="3-5 times per week"){
+            disableWater = 5;        
+        }else if(water==="1-2 times per week"){
+            disableWater = 2;
+                }else if(water==="2 times per month"){
+            disableWater = 2;
+        }else if(water==="1 time per month"){
+            disableWater = 1;
+        }else if(water==="Never"){
+            disableWater = 0;
+        }else{
+            disableWater = 7;
+        }
+        if(waterDay.length >= disableWater){
+            setDisableSelection(true);
+        }
+    }
+    //possible plant API but API doesn't exist
+    // useEffect(()=>{
+    //     const loadPlants = async ()=>{
+    //         const response = await axios.get('https://plants.usda.gov/api/plants/search/basic');
+    //         console.log(response.data.data);
+    //         setApiPlants(response.data.data);
+    //        }
+    //        loadPlants()
+    // },[])
    
     const handleWaterDay=(e)=>{
         setPlantWaterDay(Array.isArray(e) ? e.map(x => x.value) : []);
+        handleDisableWater();
     }
-    const handleScale = (e) => {
-        const scale = parseFloat(e.target.value);
-        setScale(scale);
-    };
+    // const handleScale = (e) => {
+    //     const scale = parseFloat(e.target.value);
+    //     setScale(scale);
+    // };
     
     const handleImagePreview = (e)=>{
         setImagePreview(e.target.files[0]);
     }
     
     
-    const handlePositionChange = (position) =>{
-        setPosition({position});
-    }
+    // const handlePositionChange = (position) =>{
+    //     setPosition({position});
+    // }
     
     const setEditorRef = useRef(null);
     const handleSubmit = async (e) =>{
@@ -163,9 +170,12 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
         setImage("");
         console.log(newPlant);
         if(id !== undefined && id !== "" ){
-            closeModal();
+            
+            successEdit= true;
+            
         }else{
-        closeAddModal();
+        //setSuccessAdd(true);
+        successAdd = true;
         }
     };
     const editHandler = async () =>{
@@ -287,12 +297,12 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
                     <div>
                         <ReactAvatarEditor
                             ref={setEditorRef}
-                            scale = {parseFloat(scale)}
-                            width = {height}
-                            height = {width}
-                            // position = {position}
-                            onPositionChange={handlePositionChange}
-                            rotate={parseFloat(rotate)}
+                            // scale = {parseFloat(scale)}
+                            // width = {height}
+                            // height = {width}
+                            // // position = {position}
+                            // onPositionChange={handlePositionChange}
+                            // rotate={parseFloat(rotate)}
                             image = {image !== undefined && image !== "" ? image : imagePreview}
                             alt={image}
                             className = "editor-canvas"
@@ -314,8 +324,8 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
              <input
                 name="scale"
                 type="range"
-                onChange={handleScale}
-                min={zoomOut ? "0.1" : "1"}
+                // onChange={handleScale}
+                // min={zoomOut ? "0.1" : "1"}
                 max="2"
                 step="0.01"
                 defaultValue="1"
@@ -438,6 +448,7 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
                     value={waterDay? dayOptions.filter(obj => waterDay.includes(obj.value)) : ""} 
                     options={dayOptions} 
                     onChange={handleWaterDay} 
+                    isDisabled = {disableSelection}
                     isMulti
                     required
       />            
