@@ -11,6 +11,9 @@ import Select from "react-select";
 import { doc } from "firebase/firestore";
 import { db } from "../firebase-config";
 import axios from "axios";
+import { isDisabled } from "@testing-library/user-event/dist/utils";
+export var successAdd = false;
+export var successEdit = false;
 const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
     
     const [name, setPlantName] = useState("");
@@ -31,78 +34,64 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
     const [showProgBar, setShowProgBar] = useState(false);
     const [uploaded, setUploaded] = useState(false);
     const [message, setMessage] = useState({error: false, msg: ""});
-    const [width, setWidth] = useState(330);
-    const [height, setHeight] = useState(330);
-    const [zoomOut, setZoomOut] = useState(false);
-    const [scale, setScale] = useState(1);
-    const [rotate, setRotate] = useState(0);
-    const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
-    const dayOptions=[
-        {value:'Sunday', label: 'Sunday'},
-        {value:'Monday', label: 'Monday'},
-        {value:'Tuesday', label: 'Tuesday'},
-        {value:'Wednesday', label: 'Wednesday'},
-        {value:'Thursday', label: 'Thursday'},
-        {value:'Friday', label: 'Friday'},
-        {value:'Saturday', label: 'Saturday'},
+    const [disableSelection, setDisableSelection] = useState(false);
+    const [maxDays, setMaxDays] = useState(7);
+  
+    const limitSelections =()=>{
+        if(water === "Never"){
+            return true;
+        }
+        else if(waterDay.length >= maxDays){
+            return true       
+        }else{
+            return false;
+            
+        }
+    }
+    const limitSelect = limitSelections();
+    let dayOptions=[
+        {value:'Sunday', label: 'Sunday', ...(limitSelect && {disabled:true})},
+        {value:'Monday', label: 'Monday', ...(limitSelect && {disabled:true})},
+        {value:'Tuesday', label: 'Tuesday', ...(limitSelect && {disabled:true})},
+        {value:'Wednesday', label: 'Wednesday', ...(limitSelect && {disabled:true})},
+        {value:'Thursday', label: 'Thursday', ...(limitSelect && {disabled:true})},
+        {value:'Friday', label: 'Friday', ...(limitSelect && {disabled:true})},
+        {value:'Saturday', label: 'Saturday', ...(limitSelect && {disabled:true})},
     ]
-    // const handleDisableWater = ()=>{
-    //     var disableWater = 7;
-    //     if(water==="Daily"){
-    //         disableWater = 7;
-    //     }else if(water==="3-5 times per week"){
-    //         disableWater = 5;        
-    //     }else if(water==="1-2 times per week"){
-    //         disableWater = 2;
-    //             }else if(water==="2 times per month"){
-    //         disableWater = 2;
-    //     }else if(water==="1 time per month"){
-    //         disableWater = 1;
-    //     }else if(water==="Never"){
-    //         disableWater = 0;
-    //     }else{
-    //         disableWater = 7;
-    //     }
-    //     if(waterDay.length >= disableWater){
-    //         setDisableSelection(true);
-    //     }
-    // }
-    
-    useEffect(()=>{
-        const loadPlants = async ()=>{
-            const response = await axios.get('https://plants.usda.gov/api/plants/search/basic');
-            console.log(response.data.data);
-            setApiPlants(response.data.data);
-           }
-           loadPlants()
-    },[])
+    const handleDisableWater = ()=>{
+        
+        if(water==="3-5 times per week"){
+           setMaxDays(5);  
+        }else if(water==="1-2 times per week"){
+            setMaxDays(2); 
+                }else if(water==="2 times per month"){
+                    setMaxDays(2); 
+        }else if(water==="1 time per month"){
+            setMaxDays(1); 
+        }else if(water==="Never"){
+            setMaxDays(0); 
+        }else{
+            setMaxDays(7); 
+        }
+        
+    }
+  
    
     const handleWaterDay=(e)=>{
         setPlantWaterDay(Array.isArray(e) ? e.map(x => x.value) : []);
+        handleDisableWater();
     }
-    const handleScale = (e) => {
-        const scale = parseFloat(e.target.value);
-        setScale(scale);
-    };
     
     const handleImagePreview = (e)=>{
         setImagePreview(e.target.files[0]);
     }
     
-    
-    const handlePositionChange = (position) =>{
-        setPosition({position});
-    }
-    
     const setEditorRef = useRef(null);
     const handleSubmit = async (e) =>{
-        
-        
-
         e.preventDefault();
         setMessage("");
         
-        if(name==="" || title==="" || water==="" || waterTime==="" || waterDay===""){
+        if(name==="" || title==="" || water==="" || waterTime==="" ){
             setMessage({error:true, msg: "All fields are required!"});
             e.preventDefault();
 
@@ -112,15 +101,15 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
         const newPlant = {
             name, title, soil, size, sun, hardiness, water, waterTime, waterDay, family, image,
         };
+       
         try{
             
             if(id !== undefined && id !== "" ){
-               
                 await PlantDataService.updatePlant(id, newPlant);
                 setPlantId("");
                 console.log(image);
                         console.log(oldImage);
-                        if(oldImage!== image){
+                        if(oldImage!== image && oldImage !== undefined && image !== undefined){
                             const imageUrl = ref(storage, oldImage);
                             getMetadata(imageUrl)
                             .then((metadata) => {
@@ -133,7 +122,6 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
                             })
                             .catch((error) => {console.log(error)});
                         }
-                 //setMessage({error:false, msg: "Plant updated successfully"});
             }else{
                 await PlantDataService.addPlants(newPlant);
                 //setMessage({error:false, msg: "New plant added successfully"});
@@ -142,6 +130,11 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
             
             setMessage({error:true, msg: "Error!"});
             console.log(err);
+            if(id !== undefined && id !== "" ){
+                closeModal();
+            }else{
+            closeAddModal();
+            }
             return;
         }
        
@@ -158,9 +151,12 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
         setImage("");
         console.log(newPlant);
         if(id !== undefined && id !== "" ){
-            closeModal();
+            
+            successEdit= true;
+            
         }else{
-        closeAddModal();
+        //setSuccessAdd(true);
+        successAdd = true;
         }
     };
     const editHandler = async () =>{
@@ -208,7 +204,8 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
     }
   
     const oldImage = usePrevious(image);
- 
+    const plantRef = async() =>await PlantDataService.getPlant(id);
+    const oldPlant = usePrevious(plantRef);
 
     useEffect(()=>{
         const handleUpload = () =>{
@@ -281,12 +278,12 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
                     <div>
                         <ReactAvatarEditor
                             ref={setEditorRef}
-                            scale = {parseFloat(scale)}
-                            width = {height}
-                            height = {width}
-                            // position = {position}
-                            onPositionChange={handlePositionChange}
-                            rotate={parseFloat(rotate)}
+                            // scale = {parseFloat(scale)}
+                            // width = {height}
+                            // height = {width}
+                            // // position = {position}
+                            // onPositionChange={handlePositionChange}
+                            // rotate={parseFloat(rotate)}
                             image = {image !== undefined && image !== "" ? image : imagePreview}
                             alt={image}
                             className = "editor-canvas"
@@ -308,8 +305,8 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
              <input
                 name="scale"
                 type="range"
-                onChange={handleScale}
-                min={zoomOut ? "0.1" : "1"}
+                // onChange={handleScale}
+                // min={zoomOut ? "0.1" : "1"}
                 max="2"
                 step="0.01"
                 defaultValue="1"
@@ -432,6 +429,7 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
                     value={waterDay? dayOptions.filter(obj => waterDay.includes(obj.value)) : ""} 
                     options={dayOptions} 
                     onChange={handleWaterDay} 
+                    isOptionDisabled = {(option)=>option.disabled}
                     isMulti
                     required
       />            
