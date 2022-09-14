@@ -36,30 +36,32 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
     const [message, setMessage] = useState({error: false, msg: ""});
     const [disableSelection, setDisableSelection] = useState(false);
     const [maxDays, setMaxDays] = useState(7);
-    // const [successAdd, setSuccessAdd] = useState(false);
-    // const [successEdit, setSuccessEdit] = useState(false);
-
-    // const [width, setWidth] = useState(330);
-    // const [height, setHeight] = useState(330);
-    // const [zoomOut, setZoomOut] = useState(false);
-    // const [scale, setScale] = useState(1);
-    // const [rotate, setRotate] = useState(0);
-    // const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
+  
+    const limitSelections =()=>{
+        if(water === "Never"){
+            return true;
+        }
+        else if(waterDay.length >= maxDays){
+            return true       
+        }else{
+            return false;
+            
+        }
+    }
+    const limitSelect = limitSelections();
     let dayOptions=[
-        {value:'Sunday', label: 'Sunday', disabled:false},
-        {value:'Monday', label: 'Monday', disabled:false},
-        {value:'Tuesday', label: 'Tuesday', disabled:false},
-        {value:'Wednesday', label: 'Wednesday', disabled:false},
-        {value:'Thursday', label: 'Thursday', disabled:false},
-        {value:'Friday', label: 'Friday', disabled:false},
-        {value:'Saturday', label: 'Saturday', disabled:false},
+        {value:'Sunday', label: 'Sunday', ...(limitSelect && {disabled:true})},
+        {value:'Monday', label: 'Monday', ...(limitSelect && {disabled:true})},
+        {value:'Tuesday', label: 'Tuesday', ...(limitSelect && {disabled:true})},
+        {value:'Wednesday', label: 'Wednesday', ...(limitSelect && {disabled:true})},
+        {value:'Thursday', label: 'Thursday', ...(limitSelect && {disabled:true})},
+        {value:'Friday', label: 'Friday', ...(limitSelect && {disabled:true})},
+        {value:'Saturday', label: 'Saturday', ...(limitSelect && {disabled:true})},
     ]
     const handleDisableWater = ()=>{
         
         if(water==="3-5 times per week"){
-           if(waterDay.length >= 4){
-           dayOptions[0].disabled = true;
-           }        
+           setMaxDays(5);  
         }else if(water==="1-2 times per week"){
             setMaxDays(2); 
                 }else if(water==="2 times per month"){
@@ -71,49 +73,21 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
         }else{
             setMaxDays(7); 
         }
-        //limitSelections();
+        
     }
-    const limitSelections =()=>{
-        if(waterDay.length >= maxDays){
-                return true;
-        }else{
-            return false;
-            
-        }
-    }
-    //possible plant API but API doesn't exist
-    // useEffect(()=>{
-    //     const loadPlants = async ()=>{
-    //         const response = await axios.get('https://plants.usda.gov/api/plants/search/basic');
-    //         console.log(response.data.data);
-    //         setApiPlants(response.data.data);
-    //        }
-    //        loadPlants()
-    // },[])
+  
    
     const handleWaterDay=(e)=>{
         setPlantWaterDay(Array.isArray(e) ? e.map(x => x.value) : []);
         handleDisableWater();
     }
-    // const handleScale = (e) => {
-    //     const scale = parseFloat(e.target.value);
-    //     setScale(scale);
-    // };
     
     const handleImagePreview = (e)=>{
         setImagePreview(e.target.files[0]);
     }
     
-    
-    // const handlePositionChange = (position) =>{
-    //     setPosition({position});
-    // }
-    
     const setEditorRef = useRef(null);
     const handleSubmit = async (e) =>{
-        
-        
-
         e.preventDefault();
         setMessage("");
         
@@ -148,7 +122,6 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
                             })
                             .catch((error) => {console.log(error)});
                         }
-                 //setMessage({error:false, msg: "Plant updated successfully"});
             }else{
                 await PlantDataService.addPlants(newPlant);
                 //setMessage({error:false, msg: "New plant added successfully"});
@@ -456,7 +429,6 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
                     value={waterDay? dayOptions.filter(obj => waterDay.includes(obj.value)) : ""} 
                     options={dayOptions} 
                     onChange={handleWaterDay} 
-                    //isDisabled = {limitSelections()}
                     isOptionDisabled = {(option)=>option.disabled}
                     isMulti
                     required
