@@ -1,7 +1,6 @@
 import "./main_body.css"
 
 
-
 function MainBody() {
 
     return (
