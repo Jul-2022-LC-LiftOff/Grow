@@ -52,7 +52,7 @@ export default function Tomorrow() {
                 <img src={plant.image} alt="img" />
                 <div>
                   <h3>Name: {plant.name}</h3>
-                  <h5>Watering Day: {plant.waterDay + ""}</h5>
+                  {/* <h5>Watering Day: {plant.waterDay + ""}</h5> */}
                   <h5>Watering Time: {plant.waterTime}</h5>
                 </div>
               </div>

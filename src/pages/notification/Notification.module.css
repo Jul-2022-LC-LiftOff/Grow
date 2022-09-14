@@ -61,7 +61,7 @@ ul > li .flex {
   padding: 0.8em 0;
   border-radius: 20px;
   box-shadow: 1px 10px 20px #858b9259;
-  width: 45%;
+  width: 25%;
 }
 
 ul {
@@ -69,8 +69,8 @@ ul {
 }
 
 ul > li img {
-  border-radius: 50%;
-  width: 20%;
+  border-radius: 100%;
+  width: 40%;
   padding: 20px;
 }
 

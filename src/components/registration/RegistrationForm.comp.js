@@ -14,6 +14,7 @@ import classes from "../../pages/registration/Registration.module.css";
 
 const RegistrationForm = () => {
   const initialValues = {
+    Garden: [],
     username: "",
     email: "",
     password: "",
