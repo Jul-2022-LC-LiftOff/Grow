@@ -11,27 +11,39 @@ import ProfileNavbar from "./components/navbar/profile-navbar"
 
 import CropperTester from "./components/CropperTester";
 
+import ProfilePage from "./pages/profilePage/ProfilePage";
+import RegistrationForm from "./components/RegistrationForm.comp";
+
 
 function App() {
   return (
 
-    <Routes>
-      <Route path="/signup" element={<RegistrationPage />} />
-      <Route
-        path="/login"
-        element={<div className="style">Welcome To Login Page</div>}
-      />
-      <Route
-        path="/"
-        element={
-          <div class="mainBackground">
-            <ProfileNavbar />
-            <MyGarden />
-            {/* <CropperTester/> */}
-          </div>
-        }
-      />
-    </Routes>
+    // <Routes>
+    //   <Route path="/signup" element={<RegistrationPage />} />
+    //   <Route
+    //     path="/login"
+    //     element={<div className="style">Welcome To Login Page</div>}
+    //   />
+    //   <Route
+    //     path="/"
+    //     element={
+    //       <div class="mainBackground">
+    //         {/* <ProfileNavbar />
+    //         <MyGarden /> */}
+    //         {/* <CropperTester/> */}
+            
+            
+    //       </div>
+          
+    //     }
+    //   />
+
+    
+    // </Routes>
+
+    <div className="mainBackground">
+      <ProfilePage />
+    </div>
 
     // <div class="mainBackground">
     //   <MyGarden/>
