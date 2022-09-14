@@ -38,7 +38,7 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
     const [maxDays, setMaxDays] = useState(7);
   
     const limitSelections =()=>{
-        if(water === "Never"){
+        if(water === "Never" || water==="Daily"){
             return true;
         }
         else if(waterDay.length >= maxDays){
@@ -70,7 +70,8 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
             setMaxDays(1); 
         }else if(water==="Never"){
             setMaxDays(0); 
-        }else{
+        }
+        else{
             setMaxDays(7); 
         }
         

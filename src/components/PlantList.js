@@ -7,6 +7,8 @@ import { BsFillPencilFill } from "react-icons/bs";
 import { db } from "../firebase-config";
 import { storage } from "../firebase-config";
 import { ref, deleteObject, getMetadata } from "firebase/storage";
+import plantsUnavailable from "../assets/plantsUnavailable.png";
+
 const PlantList = ({getPlantId, showEdit}) =>{
     const [plants, setPlants] = useState([]);
     const [plantImage, setPlantImage] = useState("");
@@ -45,7 +47,7 @@ const PlantList = ({getPlantId, showEdit}) =>{
                  <div className="row">
                  {plants.map((doc)=>{
           return(
-            <div id="container" className="col-md-4 d-flex align-items-stretch">
+            <div id="container" className="col-md-4 d-flex align-items-stretch" style={{backgroundImage: plantsUnavailable }}>
             <IndividualPlant 
                 plantData={doc} 
                 key={doc.title} 

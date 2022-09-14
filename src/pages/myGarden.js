@@ -52,7 +52,7 @@ import { successEdit } from "../components/AddPlant";
     return ()=> clearTimeout(timeout);
    },[alert]);
 return(
-    <>
+    <div className="myGarden" >
      
     <Button  onClick = {handleAddShow}className="btn-lg"><span>Add Plant   </span><BsFillPlusCircleFill></BsFillPlusCircleFill></Button>
    <div className="editAddAlert">
@@ -92,7 +92,7 @@ return(
       
     <PlantList getPlantId={getPlantIdHandler} showEdit={handleEditShow}/>
     
-    </>
+    </div>
 
    
 )
