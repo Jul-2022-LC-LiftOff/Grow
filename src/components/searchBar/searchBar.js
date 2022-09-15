@@ -114,6 +114,8 @@ function SearchBar( props ) {
         setQuery('');
     }
 
+
+    // uncomment below after login part and addPlants is updated
     // if ( props.userGarden ) {
     //     console.log(props.userGarden);
     //     passDataOut(searchAllWithArrQuery(props.userGarden, []))
