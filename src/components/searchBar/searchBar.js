@@ -27,6 +27,7 @@ function CustomToggle({ children, eventKey }) {
 
 function SearchBar( props ) {
 
+    const passDataOut = props.setFilteredGarden;
 
     const columns = ["Name", "Family", "Hardiness", "Water", "Size", "Soil", "Sun", "Title"];
     const keys = columns.map((item) => item.toLowerCase());
@@ -37,12 +38,10 @@ function SearchBar( props ) {
         columns.map(item => item = false)
     );
 
+    
+    
 
-    // if ( props.userGarden ) {
-    //     console.log(props.userGarden);
-    // }
-
-    //queryKeys is an array of column names that are put together based on the checkbox input
+ 
     const [queryKeys, setQueryKeys] = useState("empty");
 
     const handleQueryChange = (event) => {
@@ -58,7 +57,7 @@ function SearchBar( props ) {
         tempStateArr[index] = value;
         setCheckedState(tempStateArr);
 
-        // on checking a checkbox, recreate a new array with updated querykeys
+   
         let tempKeyArr = [];
         checkedState.forEach((bool, index) => {
             if (bool) {
@@ -96,13 +95,7 @@ function SearchBar( props ) {
             )
         ))
     }
-
-
-
-    const passDataOut = props.setFilteredGarden;
-
-
-     // >>>> note to self, your search only work on string values <<<<
+ 
     const handleSubmit = (event) => {
         let val = rawQueryChecker();
         let isFiltered = checkedState.some((item) => item === true);
@@ -121,6 +114,10 @@ function SearchBar( props ) {
         setQuery('');
     }
 
+    // if ( props.userGarden ) {
+    //     console.log(props.userGarden);
+    //     passDataOut(searchAllWithArrQuery(props.userGarden, []))
+    // }
 
     return (
         <div className="search-bar d-flex flex-row p-3 mb-4 px-md-4 bg shadow-sm">
