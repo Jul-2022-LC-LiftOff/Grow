@@ -28,9 +28,8 @@ function CustomToggle({ children, eventKey }) {
 function SearchBar( props ) {
 
 
-    const columns = ["Name", "Family", "Hardiness", "Water", "Mature Size", "Soil Type", "Sun Exposure"];
+    const columns = ["Name", "Family", "Hardiness", "Water", "Size", "Soil", "Sun", "Title"];
     const keys = columns.map((item) => item.toLowerCase());
-    // let columnNames = columns.map((column) => <th className="px-3" key={column}>{column}</th>);
 
 
     const [query, setQuery] = useState("");
@@ -98,10 +97,10 @@ function SearchBar( props ) {
         ))
     }
 
-    // let setFilteredGarden = props.setFilteredGarden;
+
 
     const passDataOut = props.setFilteredGarden;
-    // const passDataOut = passDataToNav.bind(this);
+
 
      // >>>> note to self, your search only work on string values <<<<
     const handleSubmit = (event) => {
@@ -118,7 +117,7 @@ function SearchBar( props ) {
     }
 
     const clearSearchResult = () => { 
-        // passDataOut('');
+        passDataOut('');
         setQuery('');
     }
 

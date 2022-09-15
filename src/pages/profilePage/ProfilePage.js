@@ -9,8 +9,8 @@ import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
 
 function ProfilePage() {
 
-    let [garden, setGarden] = useState(null);
-    let [filteredGarden, setFilteredGarden] = useState(null);
+    let [garden, setGarden] = useState("");
+    let [filteredGarden, setFilteredGarden] = useState("");
     
 
     const getGarden = async () => {
@@ -29,8 +29,13 @@ function ProfilePage() {
             .then((result) => {
                 setGarden(result);
             });
-        console.log(filteredGarden);
-
+        
+        if (filteredGarden !== "") {
+            console.log(filteredGarden);
+        } else {
+            console.log("nothing found");
+        }
+        
     }, [filteredGarden])
 
     
