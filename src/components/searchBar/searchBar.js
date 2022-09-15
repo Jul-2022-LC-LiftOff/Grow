@@ -2,11 +2,9 @@ import Form from "react-bootstrap/Form";
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Accordion from 'react-bootstrap/Accordion';
+
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
-
 import { useState,  } from "react";
-
-
 
 
 
@@ -30,21 +28,20 @@ function CustomToggle({ children, eventKey }) {
 function SearchBar( props ) {
 
 
-    const columns = ["Name", "Family", "Hardiness", "Water", "Mature_size", "Soil_type", "Sun_exposure"];
-
-
+    const columns = ["Name", "Family", "Hardiness", "Water", "Mature Size", "Soil Type", "Sun Exposure"];
     const keys = columns.map((item) => item.toLowerCase());
-    let columnNames = columns.map((column) => <th className="px-3" key={column}>{column}</th>);
+    // let columnNames = columns.map((column) => <th className="px-3" key={column}>{column}</th>);
 
 
     const [query, setQuery] = useState("");
-
     const [checkedState, setCheckedState] = useState(
         columns.map(item => item = false)
     );
 
-    let allKeys
-    let Plants
+
+    // if ( props.userGarden ) {
+    //     console.log(props.userGarden);
+    // }
 
     //queryKeys is an array of column names that are put together based on the checkbox input
     const [queryKeys, setQueryKeys] = useState("empty");
@@ -62,15 +59,14 @@ function SearchBar( props ) {
         tempStateArr[index] = value;
         setCheckedState(tempStateArr);
 
-        // on checking a checkbox, recreate a new keys array and update querykeys
+        // on checking a checkbox, recreate a new array with updated querykeys
         let tempKeyArr = [];
         checkedState.forEach((bool, index) => {
             if (bool) {
-                tempKeyArr.push(allKeys[index])
+                tempKeyArr.push(keys[index])
             }
         })
         setQueryKeys(tempKeyArr);
-
     }
 
     
@@ -86,20 +82,7 @@ function SearchBar( props ) {
         }
     }
 
-    // these search work with query as a whole string
-    const search = (dataObj) => {
-        return dataObj.filter((itemObj) => 
-            queryKeys.some((key) => itemObj[key].toLowerCase().includes(query)
-        ))
-    }
-    const searchAll = (dataObj) => {
-        return dataObj.filter((itemObj) => (
-            allKeys.some((key) => itemObj[key].toLowerCase().includes(query)
-            )
-        ))
-    }
 
-    // these search support query seperated with ", "
     const searchWithArrQuery = (dataObj, queryList) => {
         return dataObj.filter((item) => 
             queryKeys.some((key) => 
@@ -109,13 +92,15 @@ function SearchBar( props ) {
     }
     const searchAllWithArrQuery = (dataObj, queryList) => {
         return dataObj.filter((itemObj) => (
-            allKeys.some((key) => 
+            keys.some((key) => 
                 queryList.some((quertItem) => itemObj[key].toLowerCase().includes(quertItem))
             )
         ))
     }
 
-    const passDataOut = "temp";
+    // let setFilteredGarden = props.setFilteredGarden;
+
+    const passDataOut = props.setFilteredGarden;
     // const passDataOut = passDataToNav.bind(this);
 
      // >>>> note to self, your search only work on string values <<<<
@@ -124,16 +109,16 @@ function SearchBar( props ) {
         let isFiltered = checkedState.some((item) => item === true);
 
         if (isFiltered) {
-            passDataOut(searchWithArrQuery(Plants, val));
+            passDataOut(searchWithArrQuery(props.userGarden, val));
         } else {
-            passDataOut(searchAllWithArrQuery(Plants, val));
+            passDataOut(searchAllWithArrQuery(props.userGarden, val));
         }
 
         event.preventDefault();
     }
 
     const clearSearchResult = () => { 
-        passDataOut('');
+        // passDataOut('');
         setQuery('');
     }
 
