@@ -38,10 +38,6 @@ function SearchBar( props ) {
         columns.map(item => item = false)
     );
 
-    
-    
-
- 
     const [queryKeys, setQueryKeys] = useState("empty");
 
     const handleQueryChange = (event) => {
@@ -57,7 +53,7 @@ function SearchBar( props ) {
         tempStateArr[index] = value;
         setCheckedState(tempStateArr);
 
-   
+
         let tempKeyArr = [];
         checkedState.forEach((bool, index) => {
             if (bool) {
@@ -118,7 +114,7 @@ function SearchBar( props ) {
     // uncomment below after login part and addPlants is updated
     // if ( props.userGarden ) {
     //     console.log(props.userGarden);
-    //     passDataOut(searchAllWithArrQuery(props.userGarden, []))
+    //     passDataOut(searchAllWithArrQuery(props.userGarden, ""))
     // }
 
     return (

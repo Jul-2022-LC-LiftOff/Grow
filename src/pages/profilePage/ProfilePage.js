@@ -7,6 +7,12 @@ import MyGarden from "../myGarden";
 import { db } from "../../firebase-config";
 import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
 
+
+
+
+
+
+
 function ProfilePage() {
 
     let [garden, setGarden] = useState("");
