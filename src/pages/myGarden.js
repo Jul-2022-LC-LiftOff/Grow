@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Button from 'react-bootstrap/Button';
 import { CloseButton } from "react-bootstrap";
 import "../components/individual-style.css";
@@ -8,7 +8,7 @@ import { Modal } from "react-bootstrap";
 import AddPlant from "../components/AddPlant";
 import PlantList from "../components/PlantList";
 //import { UserContext } from "../components/UserContext";
- const MyGarden=()=>{
+ const MyGarden=( props )=>{
 
     //const currentUser = useContext(UserContext)
      const [showAdd, setShowAdd] = useState(false);
@@ -23,9 +23,18 @@ import PlantList from "../components/PlantList";
     const handleEditClose = () => setShowEdit(false);
     const handleEditShow = () => setShowEdit(true);
     
-   
+    
+    //this is for debuging
+    // useEffect(() => {
+
+    //     console.log(props.filteredGarden);
+
+    // }, [props.filteredGarden])
+
+
 return(
     <>
+
     <Button  onClick = {handleAddShow}className="btn-lg"><span>Add Plant   </span><BsFillPlusCircleFill></BsFillPlusCircleFill></Button>
 
     <Modal show={showAdd} onHide={handleAddClose}  class="modal">
@@ -49,7 +58,7 @@ return(
          <AddPlant id={plantId} setPlantId={setPlantId} closeModal={handleEditClose}/>
         </Modal.Body>
        </Modal>
-    <PlantList getPlantId={getPlantIdHandler} showEdit={handleEditShow}/>
+    <PlantList getPlantId={getPlantIdHandler} showEdit={handleEditShow} filteredGarden={props.filteredGarden} /> 
     </>
 
    

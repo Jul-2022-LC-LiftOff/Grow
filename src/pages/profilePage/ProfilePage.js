@@ -34,15 +34,18 @@ function ProfilePage() {
         getGarden()
             .then((result) => {
                 setGarden(result);
+                setFilteredGarden(result);
             });
         
-        if (filteredGarden !== "") {
-            console.log(filteredGarden);
-        } else {
-            console.log("nothing found");
-        }
+        // this is for debugging
+        // if (filteredGarden !== "") {
+        //     console.log(filteredGarden);
+        // } else {
+        //     console.log("nothing found");
+        // }
         
-    }, [filteredGarden])
+    // }, [filteredGarden]);
+    }, []);
 
     
     
@@ -55,8 +58,7 @@ function ProfilePage() {
             
             <SearchBar userGarden={garden} setFilteredGarden={ setFilteredGarden }/> 
 
-            {/* <MyGarden /> */}
-
+            <MyGarden filteredGarden={ filteredGarden }/>
 
         </div>
     );

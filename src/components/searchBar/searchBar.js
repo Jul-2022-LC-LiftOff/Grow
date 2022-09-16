@@ -4,7 +4,7 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Accordion from 'react-bootstrap/Accordion';
 
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
-import { useState,  } from "react";
+import { useEffect, useState,  } from "react";
 
 
 
@@ -39,6 +39,11 @@ function SearchBar( props ) {
     );
 
     const [queryKeys, setQueryKeys] = useState("empty");
+    
+
+    
+
+    
 
     const handleQueryChange = (event) => {
         setQuery(event.target.value.toLowerCase());
@@ -109,6 +114,20 @@ function SearchBar( props ) {
         passDataOut('');
         setQuery('');
     }
+
+
+    // useEffect(() => {
+
+    //     let val = rawQueryChecker();
+    //     passDataOut(searchAllWithArrQuery(props.userGarden, val));
+
+    // }, [props.userGarden])
+
+
+    // if (props.userGarden) {
+    //     let val = rawQueryChecker();
+    //     passDataOut(searchAllWithArrQuery(props.userGarden, val));
+    // }
 
 
     // uncomment below after login part and addPlants is updated
