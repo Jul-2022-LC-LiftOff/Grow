@@ -25,15 +25,21 @@ import PlantList from "../components/PlantList";
     
     
     //this is for debuging
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     console.log(props.filteredGarden);
+        console.log(props.filteredGarden);
 
-    // }, [props.filteredGarden])
+    }, [props.filteredGarden])
 
+    let table = null;
+    if (props.filteredGarden != "") {
+        table = props.filteredGarden.map((plant) => <h1>{plant.name}</h1>);
+    }
 
 return(
     <>
+
+    {table};
 
     <Button  onClick = {handleAddShow}className="btn-lg"><span>Add Plant   </span><BsFillPlusCircleFill></BsFillPlusCircleFill></Button>
 
