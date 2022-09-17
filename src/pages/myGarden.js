@@ -31,15 +31,17 @@ import PlantList from "../components/PlantList";
 
     }, [props.filteredGarden])
 
+
+    // this code is to show that the data thats comming in
     let table = null;
     if (props.filteredGarden != "") {
-        table = props.filteredGarden.map((plant) => <h1>{plant.name}</h1>);
+        table = props.filteredGarden.map((plant) => <h3>{plant.name}</h3>);
     }
 
 return(
     <>
 
-    {table};
+    {table}
 
     <Button  onClick = {handleAddShow}className="btn-lg"><span>Add Plant   </span><BsFillPlusCircleFill></BsFillPlusCircleFill></Button>
 
