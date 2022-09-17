@@ -1,5 +1,5 @@
 import "./main_body.css"
-
+import GardenCarousel from "./GardenCarousel";
 
 function MainBody() {
 
@@ -16,7 +16,7 @@ function MainBody() {
             </p>
         </div>
 
-        <div className="container col-md-8 mt-5 py-5 text-center">
+        {/* <div className="container col-md-8 mt-5 py-5 text-center">
             
             <h2 className="display-4">Gardens</h2>
 
@@ -53,7 +53,9 @@ function MainBody() {
                 </div>
 
             </div>
-        </div>
+        </div> */}
+
+        <GardenCarousel />
 
     </div>
     )
