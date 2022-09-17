@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-.registration-page {
+.registrationpage {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,7 +38,7 @@
   height: 100vh;
 }
 
-.login-here {
+.loginhere {
   font-weight: bold;
   color: green;
   font-size: large;
@@ -48,7 +48,7 @@
   color: green;
 }
 
-.custom-btn {
+.custombtn {
   background: green;
   color: white;
   border: 2px solid green;
@@ -58,7 +58,7 @@
 }
 
 @media screen and (max-width: 500px) {
-  .registration-page {
+  .registrationpage {
     flex-direction: column;
     top: 0;
     left: 0;
