@@ -12,9 +12,9 @@ export default function ProfileNavbar() {
 
             <>
 
-            <Navbar class="navbar-custom">
+            <Navbar className="navbar-custom">
                 <Container>
-                    <Navbar.Brand className="me-auto" href='#home' class="brand">
+                    <Navbar.Brand className="me-auto" href='#home'>
                         Grow
                     </Navbar.Brand>
 

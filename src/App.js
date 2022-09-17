@@ -27,7 +27,7 @@ function App() {
       <Route
         path="/"
         element={
-          <div class="mainBackground">
+          <div className="mainBackground">
             {/* <ProfileNavbar /> */}
             <MainNavbar />
             {/* <HomePage /> */}

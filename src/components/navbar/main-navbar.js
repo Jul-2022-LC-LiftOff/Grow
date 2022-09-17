@@ -9,7 +9,7 @@ export default function MainNavbar() {
         <>
             <Navbar>
                 <Container>
-                    <Navbar.Brand className="me-auto" href='#home' class="brand">
+                    <Navbar.Brand className="brand me-auto" href='#home'>
                         Grow
                     </Navbar.Brand>
                     <Nav>
