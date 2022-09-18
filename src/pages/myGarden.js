@@ -9,7 +9,6 @@ import { Modal } from "react-bootstrap";
 import AddPlant from "../components/AddPlant";
 import PlantList from "../components/PlantList";
 import PlantDataService from "../services/PlantDataService";
-import { useEffect } from "react";
 import { successAdd } from "../components/AddPlant";
 import { successEdit } from "../components/AddPlant";
  const MyGarden=( props )=>{

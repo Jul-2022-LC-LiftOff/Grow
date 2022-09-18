@@ -9,6 +9,7 @@ import RegistrationPage from "./pages/registration/Registration.page";
 import NotificationPage from "./pages/notification/Notification.page";
 
 import ProfileNavbar from "./components/navbar/profile-navbar";
+import ProfilePage from "./pages/profilePage/ProfilePage"
 
 import CropperTester from "./components/CropperTester";
 
