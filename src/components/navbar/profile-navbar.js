@@ -9,8 +9,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function ProfileNavbar() {
     return (
-        <>
-            
+
+            <>
+
             <Navbar className="navbar-custom custom-color">
                 <Container>
                     <Navbar.Brand href='#home' className="brand me-auto">
@@ -25,14 +26,14 @@ export default function ProfileNavbar() {
             </Navbar>
 
 
-            <div>
+            {/* <div>
                 <Routes>
                     <Route path='/myGarden' element={<MyGarden />}></Route>
                 </Routes>
-            </div>
+            </div> */}
 
+            </>
 
-        </>
 
     )
 }
