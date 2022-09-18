@@ -13,7 +13,8 @@ import ProfileNavbar from "./components/navbar/profile-navbar";
 import CropperTester from "./components/CropperTester";
 import MainNavbar from "./components/navbar/main-navbar";
 import { HomePage } from "./pages/homepage/homepage";
-import MainBody from "./components/bodys/main_body/main_body";
+import MainBody from "./components/main_body/main_body";
+import MainPage from "./pages/homepage/mainPage";
 
 function App() {
   // const currentUser = auth.
@@ -29,12 +30,13 @@ function App() {
         element={
           <div className="mainBackground">
             {/* <ProfileNavbar /> */}
-            <MainNavbar />
+            {/* <MainNavbar /> */}
             {/* <HomePage /> */}
-            <MainBody />
+            {/* <MainBody /> */}
             {/* <RegistrationPage /> */}
             {/* <MyGarden /> */}
             {/* <CropperTester/> */}
+            <MainPage />
           </div>
         }
       />
