@@ -4,15 +4,17 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "../firebase-config";
-import { db } from "../firebase-config";
+import { auth } from "../../firebase-config";
+import { db } from "../../firebase-config";
 
 import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 
-import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import { Container, Row, Col, Button, Form, Alert } from "react-bootstrap";
+import classes from "../../pages/registration/Registration.module.css";
 
 const RegistrationForm = () => {
   const initialValues = {
+    Garden: [],
     username: "",
     email: "",
     password: "",
@@ -21,6 +23,8 @@ const RegistrationForm = () => {
 
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
+  const [error, setError] = useState("");
+
   // useEffect(() => {}, [formValues]);
 
   const { username, email, password } = formValues;
@@ -34,6 +38,8 @@ const RegistrationForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+
     // setFormErrors(validate(formValues));
 
     if (Object.keys(validate(formValues)).length === 0) {
@@ -49,13 +55,15 @@ const RegistrationForm = () => {
 
         const formValuesCopy = { ...formValues };
         delete formValuesCopy.password;
+        delete formValuesCopy.confirmpassword;
+
         formValuesCopy.timestamp = serverTimestamp();
 
         await setDoc(doc(db, "users", user.uid), formValuesCopy);
 
         navigate("/login");
       } catch (error) {
-        console.log(error);
+        setError("This user already have an account");
       }
     } else {
       setFormErrors(validate(formValues));
@@ -90,12 +98,13 @@ const RegistrationForm = () => {
     <Container>
       <Row>
         <Col>
-          <h1 className="signup mb-4">Sign Up</h1>
+          <h1 className={classes.signup}>Sign Up</h1>
         </Col>
       </Row>
 
       <Row>
         <Col>
+          {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Username</Form.Label>
@@ -146,7 +155,7 @@ const RegistrationForm = () => {
             <p className="text-danger">{formErrors.confirmpassword}</p>
 
             <Button
-              className="custom-btn "
+              className={classes.custombtn}
               // variant="primary"
               type="submit"
             >
@@ -159,7 +168,7 @@ const RegistrationForm = () => {
       <Row className="py-4">
         <Col>
           Already have an account?{" "}
-          <Link to="/login" className="login-here">
+          <Link to="/login" className={classes.loginhere}>
             Login Here
           </Link>
         </Col>

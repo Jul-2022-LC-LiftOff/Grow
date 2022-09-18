@@ -1,24 +1,43 @@
 import React from "react";
-import Modal from 'react-bootstrap/Modal';
-import { useState } from 'react';
-import ImageUnavailable from "../assets/ImageUnavailable.png";
-import UploadImage from "./UploadImage";
-import Button from 'react-bootstrap/Button';
 import ".//individual-style.css";
 import { Card } from "react-bootstrap";
 import ListGroupItem from "react-bootstrap/esm/ListGroupItem";
 import ListGroup from 'react-bootstrap/ListGroup';
-import {BsFillImageFill} from "react-icons/bs";
-export const IndividualPlant = ({plantData, openImageModal})=>{
+import { BsFillTrashFill } from "react-icons/bs";
+import { BsFillPencilFill } from "react-icons/bs";
 
+import ImageUnavailable from "../assets/ImageUnavailable.png";
+
+export const IndividualPlant = ({plantData, getIdAndEdit, deleteThePlant})=>{
+    
+    const displayWaterDays = ()=>{
+        var string = "";
+        for(let i=0; i<plantData.waterDay.length;i++){
+            if(plantData.waterDay.length === 1){
+                string += plantData.waterDay[i];
+            }
+            else if(plantData.waterDay.length !== (i+1)){
+            string += (plantData.waterDay[i] + ", ");
+            }else{
+                string += ("and " + plantData.waterDay[i]);
+            }
+        }
+        return string;
+    }
+    const imageHandler = ()=>{
+        if(plantData.image === "" || plantData.image === undefined){
+                return ImageUnavailable;
+            }else{
+            return plantData.image;
+        }
+    }
     
     return(
   
-                    <div className="IndividualPlant text-left col-sm">
-                        <Card className="IndividualPlant" key={plantData.id} >
+                    <div className="IndividualPlantDiv">
+                        <Card className="IndividualPlantCard" key={plantData.id} >
                             <div className="plantImageContainer">
-                            <Card.Img variant="top" className="plantImage" src= {plantData.image} ></Card.Img>
-
+                            <Card.Img variant="top" className="plantImage" src= {imageHandler()}></Card.Img>
                             </div>
                              <Card.Body >
                             <Card.Title  className="fw-bolder text-center" >
@@ -40,13 +59,21 @@ export const IndividualPlant = ({plantData, openImageModal})=>{
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Water:</span> {plantData.water}</ListGroupItem>
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Watering Time:</span> {plantData.waterTime}</ListGroupItem>
 
-                                <ListGroupItem><span style={{fontWeight:'bold'}}>Watering Days:</span> {plantData.waterDay}</ListGroupItem>
-
- 
+                                <ListGroupItem className="bottomOfCard"><span style={{fontWeight:'bold'}}>Watering Days:</span> {displayWaterDays()}</ListGroupItem>
+    
  
                             </ListGroup>
                         
                             </Card.Body>
+                            <div class="buttons">
+                        <div class="button-trash">
+                        <button className="btn btn-light" onClick = {deleteThePlant}><BsFillTrashFill></BsFillTrashFill></button>
+                        </div>
+                        <div class="button-edit">
+                       <button className="btn btn-light" onClick ={getIdAndEdit}><BsFillPencilFill></BsFillPencilFill></button>
+                       
+                        </div>
+                        </div>
                         </Card>
                     </div>
                     );
