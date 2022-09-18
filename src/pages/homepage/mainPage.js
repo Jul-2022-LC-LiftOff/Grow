@@ -1,5 +1,5 @@
 import MainNavbar from "../../components/navbar/main-navbar"
-
+import MainBody from "../../components/main_body/main_body";
 
 function MainPage() {
 
@@ -8,7 +8,7 @@ function MainPage() {
             <MainNavbar />
 
                 
-            <MainPage />
+            <MainBody />
 
         </div>
     )

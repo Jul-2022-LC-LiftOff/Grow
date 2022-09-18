@@ -32,7 +32,6 @@ function App() {
             {/* <ProfileNavbar /> */}
             {/* <MainNavbar /> */}
             {/* <HomePage /> */}
-            {/* <MainBody /> */}
             {/* <RegistrationPage /> */}
             {/* <MyGarden /> */}
             {/* <CropperTester/> */}
