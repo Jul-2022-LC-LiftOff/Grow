@@ -36,15 +36,7 @@ function ProfilePage() {
                 setGarden(result);
                 setFilteredGarden(result);
             });
-        
-        // this is for debugging
-        // if (filteredGarden !== "") {
-        //     console.log(filteredGarden);
-        // } else {
-        //     console.log("nothing found");
-        // }
-        
-    // }, [filteredGarden]);
+    
     }, []);
 
     
