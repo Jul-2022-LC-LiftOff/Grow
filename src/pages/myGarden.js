@@ -50,9 +50,7 @@ import { successEdit } from "../components/AddPlant";
     }, 3000);
     return ()=> clearTimeout(timeout);
 
-    console.log(props.filteredGarden);
-
-   },[alert, props.filteredGarden]);
+   },[alert]);
 
 
    // this code is to show that the data thats comming in
@@ -104,7 +102,7 @@ return(
         </Modal.Body>
        </Modal>
       
-    <PlantList getPlantId={getPlantIdHandler} showEdit={handleEditShow}/>
+    <PlantList getPlantId={getPlantIdHandler} showEdit={handleEditShow} filteredGarden={props.filteredGarden}/>
     
     </>
 

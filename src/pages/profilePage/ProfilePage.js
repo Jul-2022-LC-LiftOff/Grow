@@ -36,11 +36,7 @@ function ProfilePage() {
                 setGarden(result);
                 setFilteredGarden(result);
             });
-    
     }, []);
-
-    
-    
     
     return (
         <div>
