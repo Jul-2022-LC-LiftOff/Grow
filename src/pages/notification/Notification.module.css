@@ -9,10 +9,15 @@ body {
 }
 
 .box {
-  background-image: url("../../assets/notify2.jpg");
-  height: 100%;
-  background-size: cover;
+  background: url("../../assets/notify2.jpg") no-repeat center center fixed;
+  height: 100vh;
+  /* background-size: cover; */
   background-repeat: no-repeat;
+  /* background: url(images/bg.jpg) no-repeat center center fixed;  */
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .cardnotify {
@@ -26,12 +31,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  /* width: fit-content; */
 }
 
 .h1 {
   margin: 30px;
   margin-top: 50px;
-  margin-left: 200px;
+  margin-left: 100px;
   text-align: left;
   font-weight: bold;
   color: darkgreen;
@@ -44,10 +50,11 @@ body {
   align-items: center;
   justify-content: center;
   background-color: #265d2b;
-  padding: 0 10%;
+  /* padding: 0 10%; */
   color: white;
   font-size: 40px;
-  margin: 10px;
+  margin: 0px;
+  /* position: fixed; */
 }
 
 ul > li .flex {
@@ -58,10 +65,10 @@ ul > li .flex {
   gap: 2em;
   margin-top: 1em;
   text-align: left;
-  padding: 0.8em 0;
+  /* padding: 0.8em 0; */
   border-radius: 20px;
   box-shadow: 1px 10px 20px #858b9259;
-  width: 25%;
+  width: 35%;
 }
 
 ul {
@@ -71,7 +78,20 @@ ul {
 ul > li img {
   border-radius: 100%;
   width: 40%;
-  padding: 20px;
+  padding: 40px;
+}
+
+.button {
+  background-color: darkgreen;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 50%;
 }
 
 @media screen and (max-width: 500px) {

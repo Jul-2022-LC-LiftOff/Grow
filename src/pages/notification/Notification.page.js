@@ -28,19 +28,20 @@ export default function NotificationPage() {
   // );
 
   return (
-    <div className={classes.box}>
-      {" "}
+    <div>
       <p className={classes.header}>Water Schedule</p>
-      <div className={classes.notificationpage}>
-        {/* <Header /> */}
-        <div>
+      <div className={classes.box}>
+        <div className={classes.notificationpage}>
+          {/* <Header /> */}
           <div>
-            <h1 className={classes.h1}>Today</h1>
-            <Today />
-          </div>
-          <div>
-            <h1 className={classes.h1}>Tomorrow</h1>
-            <Tomorrow />
+            <div>
+              <h1 className={classes.h1}>Today</h1>
+              <Today />
+            </div>
+            <div>
+              <h1 className={classes.h1}>Tomorrow</h1>
+              <Tomorrow />
+            </div>
           </div>
         </div>
       </div>
