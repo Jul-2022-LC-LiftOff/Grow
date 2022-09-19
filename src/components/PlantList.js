@@ -23,7 +23,6 @@ const PlantList = ({getPlantId, showEdit, filteredGarden}) =>{
     //     getPlants();
     // })
     
-    console.log(filteredGarden)
 
     const getPlants = async () => {
         const data = await PlantDataService.getAllPlants();
