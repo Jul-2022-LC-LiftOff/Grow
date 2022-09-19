@@ -5,6 +5,7 @@ import { Card } from "react-bootstrap";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { storage } from "../firebase-config";
+import ".//individual-style.css";
 import {deleteObject, getDownloadURL, getMetadata, ref, uploadBytesResumable} from 'firebase/storage';
 import ReactAvatarEditor from "react-avatar-editor";
 import Select from "react-select";

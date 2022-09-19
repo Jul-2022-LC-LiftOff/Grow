@@ -7,6 +7,8 @@ import { BsFillPencilFill } from "react-icons/bs";
 import { db } from "../firebase-config";
 import { storage } from "../firebase-config";
 import { ref, deleteObject, getMetadata } from "firebase/storage";
+import ".//individual-style.css";
+
 const PlantList = ({getPlantId, showEdit}) =>{
     const [plants, setPlants] = useState([]);
     const [plantImage, setPlantImage] = useState("");
