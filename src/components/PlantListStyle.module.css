@@ -1,0 +1,17 @@
+.IndividualPlantList{
+   
+    margin-top: 1rem;
+   width:100%;
+ 
+  
+    
+}
+.container-fluid{
+    padding-top:3rem;
+    padding-bottom:3rem;
+   
+}
+
+.PlantCard{
+    padding-top: 1rem;
+}

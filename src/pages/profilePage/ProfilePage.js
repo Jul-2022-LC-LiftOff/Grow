@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { collection, doc, getDocs } from "firebase/firestore";
-import "../../components/individual-style.css";
 
 import ProfileNavbar from "../../components/navbar/profile-navbar";
 import SearchBar from "../../components/searchBar/searchBar";

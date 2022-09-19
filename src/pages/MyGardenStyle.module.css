@@ -1,0 +1,14 @@
+.myGarden{
+    background-color:#495D63;
+   
+  }
+  .editAddAlert{
+    width: 400px;
+    position:absolute;
+    text-align: center; 
+    z-index: 10;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+  }

@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import {Button} from "react-bootstrap";
 import { Alert } from "react-bootstrap";
 import { CloseButton } from "react-bootstrap";
-import "../components/individual-style.css";
+// import "../components/individual-style.css";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
@@ -11,7 +11,7 @@ import PlantList from "../components/PlantList";
 import PlantDataService from "../services/PlantDataService";
 import { successAdd } from "../components/AddPlant";
 import { successEdit } from "../components/AddPlant";
-
+import classes from ".//MyGardenStyle.module.css";
  const MyGarden=( props )=>{
    
     //const currentUser = useContext(UserContext)
@@ -63,7 +63,7 @@ import { successEdit } from "../components/AddPlant";
 
 
 return(
-    <div className = "myGarden">
+    <div className = {classes.MyGarden}>
     
     {/* //{table} */}
 

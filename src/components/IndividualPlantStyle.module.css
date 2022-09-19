@@ -1,0 +1,59 @@
+
+.IndividualPlant{
+   
+    margin-top: 1rem;
+   width:100%;
+ 
+  
+    
+}
+
+.IndividualPlantCard{
+   width: 100%;
+   height: 100%;
+}
+
+.IndividualPlantCard:hover{
+    box-shadow: 5px 10px 20px 1px rgba(0,0,0,0.253)!important;
+    
+}
+.IndividualPlant-text{
+    width:100%;
+}
+.buttons{
+    margin-top: auto;
+     
+     
+  }
+  .buttonTrash{
+     position: absolute;
+     bottom:1rem;
+     left: 1rem;
+ 
+  }
+  .buttonEdit{
+     position: absolute;
+     bottom:1rem;
+     right: 1rem;
+  }
+  .plantImage{
+    flex-shrink:0;
+    -webkit-flex-shrink: 0;
+    
+ }
+ .plantImageContainer{
+    width:360px;
+    height:300px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+   
+ }
+ .bottomOfCard{
+   margin-bottom: 1rem;
+ }
+ .IndividualPlantDiv{
+    max-width: 500px;
+   
+  }

@@ -8,8 +8,8 @@ import { db } from "../firebase-config";
 import { storage } from "../firebase-config";
 import { ref, deleteObject, getMetadata } from "firebase/storage";
 import plantsUnavailable from "../assets/plantsUnavailable.png";
-
-import "./individual-style.css";
+import classes from ".//PlantListStyle.module.css";
+// import "./individual-style.css";
 
 
 const PlantList = ({getPlantId, showEdit}) =>{
@@ -44,13 +44,12 @@ const PlantList = ({getPlantId, showEdit}) =>{
     
     return(
         <div>
-        
-     <div className="IndividualPlant container-fluid ">
+     <div className={`${classes.IndividualPlantList} container-fluid`}>
                
                  <div className="row">
                  {plants.map((doc)=>{
           return(
-            <div id="container" className="col-md-4 d-flex align-items-stretch" style={{backgroundImage: plantsUnavailable }}>
+            <div id="container" className={`col-md-4 d-flex align-items-stretch ${classes.PlantCard}`} style={{backgroundImage: plantsUnavailable }}>
             <IndividualPlant 
                 plantData={doc} 
                 key={doc.title} 
