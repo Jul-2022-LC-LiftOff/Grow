@@ -9,25 +9,31 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function ProfileNavbar() {
     return (
-        <>
-            
-            <Navbar class="navbar-custom">
-                    <Navbar.Brand href='#home' class="brand">Grow</Navbar.Brand>
-                        <Nav activeKey="/home">
-                            <Nav.Link as={Link} to='/myGarden' className="text-success">My Garden</Nav.Link>
-                            <Nav.Link as={Link} to='#' className="text-success">Log out</Nav.Link>
-                        </Nav>
+
+            <>
+
+            <Navbar className="navbar-custom custom-color">
+                <Container>
+                    <Navbar.Brand href='#home' className="brand me-auto">
+                        Grow
+                    </Navbar.Brand>
+
+                    <Nav activeKey="/home">
+                        <Nav.Link as={Link} to='/myGarden' className="text-success">My Garden</Nav.Link>
+                        <Nav.Link as={Link} to='#' className="text-success">Log out</Nav.Link>
+                    </Nav>
+                </Container>
             </Navbar>
 
 
-            <div>
+            {/* <div>
                 <Routes>
                     <Route path='/myGarden' element={<MyGarden />}></Route>
                 </Routes>
-            </div>
+            </div> */}
 
+            </>
 
-        </>
 
     )
 }

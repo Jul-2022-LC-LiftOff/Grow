@@ -9,6 +9,9 @@ import { storage } from "../firebase-config";
 import { ref, deleteObject, getMetadata } from "firebase/storage";
 import plantsUnavailable from "../assets/plantsUnavailable.png";
 
+import ".//individual-style.css";
+
+
 const PlantList = ({getPlantId, showEdit}) =>{
     const [plants, setPlants] = useState([]);
     const [plantImage, setPlantImage] = useState("");

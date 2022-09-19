@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {Button} from "react-bootstrap";
 import { Alert } from "react-bootstrap";
 import { CloseButton } from "react-bootstrap";
@@ -9,10 +9,10 @@ import { Modal } from "react-bootstrap";
 import AddPlant from "../components/AddPlant";
 import PlantList from "../components/PlantList";
 import PlantDataService from "../services/PlantDataService";
-import { useEffect } from "react";
 import { successAdd } from "../components/AddPlant";
 import { successEdit } from "../components/AddPlant";
- const MyGarden=()=>{
+
+ const MyGarden=( props )=>{
    
     //const currentUser = useContext(UserContext)
      const [showAdd, setShowAdd] = useState(false);
@@ -50,10 +50,23 @@ import { successEdit } from "../components/AddPlant";
         setAlert(false);
     }, 3000);
     return ()=> clearTimeout(timeout);
+
    },[alert]);
+
+
+   // this code is to show that the data thats comming in
+    let table = null;
+    if (props.filteredGarden != "") {
+        table = props.filteredGarden.map((plant) => <h3>{plant.name}</h3>);
+    }
+
+
+
 return(
-    <div className="myGarden" >
-     
+    <div className = "myGarden">
+    
+    {table}
+
     <Button  onClick = {handleAddShow}className="btn-lg"><span>Add Plant   </span><BsFillPlusCircleFill></BsFillPlusCircleFill></Button>
    <div className="editAddAlert">
     
@@ -90,7 +103,7 @@ return(
         </Modal.Body>
        </Modal>
       
-    <PlantList getPlantId={getPlantIdHandler} showEdit={handleEditShow}/>
+    <PlantList getPlantId={getPlantIdHandler} showEdit={handleEditShow} filteredGarden={props.filteredGarden}/>
     
     </div>
 
