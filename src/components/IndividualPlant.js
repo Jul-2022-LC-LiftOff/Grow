@@ -39,6 +39,7 @@ export const IndividualPlant = ({plantData, getIdAndEdit, deleteThePlant})=>{
                             <Card.Img variant="top" className={classes.plantImage} src= {imageHandler()}></Card.Img>
                             </div>
                              <Card.Body >
+
                             <Card.Title  className="fw-bolder text-center" >
                              {plantData.title}
                             </Card.Title>

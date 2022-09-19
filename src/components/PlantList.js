@@ -79,17 +79,15 @@ const PlantList = ({getPlantId, showEdit, filteredGarden}) =>{
                     }}
                 />
                 </div>
-        
-         )
+          )
          
-    })}
-    </div>
-
-
-
-    </div>
-    </div>
-   );
-};
-
+        })}
+        </div>
+    
+    
+    
+        </div>
+        </div>
+       );
+    };
 export default PlantList;

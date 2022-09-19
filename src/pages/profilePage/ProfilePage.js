@@ -48,6 +48,7 @@ function ProfilePage() {
             <MyGarden filteredGarden={ filteredGarden }/>
 
         </div>
+        
     );
 }
 

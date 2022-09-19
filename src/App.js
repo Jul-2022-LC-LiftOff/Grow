@@ -36,6 +36,7 @@ function App() {
             {/* <RegistrationPage /> */}
             {/* <MyGarden /> */}
             {/* <CropperTester/> */}
+            
             {/* <MainPage /> */}
             {/* <MyGarden/> */}
             <ProfilePage />
