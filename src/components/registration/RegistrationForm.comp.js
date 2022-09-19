@@ -10,7 +10,7 @@ import { db } from "../../firebase-config";
 import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 
 import { Container, Row, Col, Button, Form, Alert } from "react-bootstrap";
-import classes from "../../pages/registration/Registration.module.css";
+import classes from "../../pages/registration/Registration.style.css";
 
 const RegistrationForm = () => {
   const initialValues = {

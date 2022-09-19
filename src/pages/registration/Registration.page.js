@@ -1,12 +1,12 @@
 import React from "react";
-import classes from "../../pages/registration/Registration.module.css";
+import classes from "../../pages/registration/Registration.style.css";
 
 import RegistrationForm from "../../components/registration/RegistrationForm.comp";
 
 function RegistrationPage() {
   return (
-    <div className={classes.registrationpage}>
-      <div className={classes.card}>
+    <div className="registrationPage">
+      <div className="card">
         <RegistrationForm />
       </div>
     </div>
