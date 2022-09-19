@@ -6,7 +6,6 @@ import { db } from "../../firebase-config";
 
 function GardenCarousel() {
 
-    let randomList = [];
     let [garden, setGarden] = useState(null);
 
     // currently just showing plants
@@ -31,11 +30,31 @@ function GardenCarousel() {
         })
     }
 
+    function pickRandom(arr, numOfItem) {
+        let itemPool = arr;
+        let itemCount = arr.length;
+        let resultArr = [];
+        let counter = 0;
+    
+        while (counter < numOfItem) {
+            let index = Math.floor(Math.random() * itemCount);
+            let item = itemPool[index];
+    
+            if (!resultArr.some((element) => element == item)) {
+                resultArr.push(item);
+                counter += 1;
+            }
+        }
+    
+        return resultArr;
+    }
+
     useEffect(() => {
 
         getGarden()
         .then((res) => {
-            setGarden(res);
+            let pickedItem = pickRandom(res, 3);
+            setGarden(pickedItem);
         })
         
     }, [])
@@ -61,8 +80,6 @@ function GardenCarousel() {
 
         )
     }
-
-
 
 
     return (
