@@ -15,13 +15,15 @@ import classes from ".//PlantListStyle.module.css";
 const PlantList = ({getPlantId, showEdit, filteredGarden}) =>{
     const [plants, setPlants] = useState([]);
     const [plantImage, setPlantImage] = useState("");
+    let garden = null;
     useEffect(()=>{
         getPlants();
     },[]);
     // componentDidMount(()=>{
     //     getPlants();
     // })
-  
+    
+    console.log(filteredGarden)
 
     const getPlants = async () => {
         const data = await PlantDataService.getAllPlants();
