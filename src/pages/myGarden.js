@@ -55,17 +55,17 @@ import { successEdit } from "../components/AddPlant";
 
 
    // this code is to show that the data thats comming in
-    let table = null;
-    if (props.filteredGarden != "") {
-        table = props.filteredGarden.map((plant) => <h3>{plant.name}</h3>);
-    }
+    // let table = null;
+    // if (props.filteredGarden != "") {
+    //     table = props.filteredGarden.map((plant) => <h3>{plant.name}</h3>);
+    // }
 
 
 
 return(
     <div className = "myGarden">
     
-    {table}
+    {/* //{table} */}
 
     <Button  onClick = {handleAddShow}className="btn-lg"><span>Add Plant   </span><BsFillPlusCircleFill></BsFillPlusCircleFill></Button>
    <div className="editAddAlert">
@@ -103,7 +103,8 @@ return(
         </Modal.Body>
        </Modal>
       
-    <PlantList getPlantId={getPlantIdHandler} showEdit={handleEditShow} filteredGarden={props.filteredGarden}/>
+    <PlantList getPlantId={getPlantIdHandler} showEdit={handleEditShow}/>
+    {/* filteredGarden={props.filteredGarden} */}
     
     </div>
 

@@ -12,7 +12,7 @@ import plantsUnavailable from "../assets/plantsUnavailable.png";
 import "./individual-style.css";
 
 
-const PlantList = ({getPlantId, showEdit, filteredGarden}) =>{
+const PlantList = ({getPlantId, showEdit}) =>{
     const [plants, setPlants] = useState([]);
     const [plantImage, setPlantImage] = useState("");
     useEffect(()=>{
@@ -48,7 +48,7 @@ const PlantList = ({getPlantId, showEdit, filteredGarden}) =>{
      <div className="IndividualPlant container-fluid ">
                
                  <div className="row">
-                 {filteredGarden.map((doc)=>{
+                 {plants.map((doc)=>{
           return(
             <div id="container" className="col-md-4 d-flex align-items-stretch" style={{backgroundImage: plantsUnavailable }}>
             <IndividualPlant 
