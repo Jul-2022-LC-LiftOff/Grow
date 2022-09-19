@@ -14,15 +14,11 @@ export default function ProfileNavbar() {
             <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" className="">
 
                 <Nav>
-                    <Navbar.Brand className="home" href="#home" >Grow</Navbar.Brand>
+                    <Navbar.Brand className="home" href="#home" alt="Go to profile page">Grow</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
-                    <Nav.Link className="signout position-absolute end-0" href="#SignOut">Sign Out</Nav.Link>
-
+                    <Nav.Link className="signout position-absolute end-0" href="#SignOut" alt="sign out">Sign Out</Nav.Link>
                 </Nav>
-
-
-
             </Navbar>
 
 
