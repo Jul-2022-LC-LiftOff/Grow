@@ -9,6 +9,7 @@ import RegistrationPage from "./pages/registration/Registration.page";
 import NotificationPage from "./pages/notification/Notification.page";
 
 import ProfileNavbar from "./components/navbar/profile-navbar";
+import ProfilePage from "./pages/profilePage/ProfilePage"
 
 import CropperTester from "./components/CropperTester";
 import MainNavbar from "./components/navbar/main-navbar";
@@ -35,12 +36,14 @@ function App() {
             {/* <RegistrationPage /> */}
             {/* <MyGarden /> */}
             {/* <CropperTester/> */}
-            <MainPage />
+            {/* <MainPage /> */}
+            <ProfilePage />
           </div>
         }
       />
       <Route path="/notify" element={<NotificationPage />} />
     </Routes>
+
 
     // <div class="mainBackground">
     //   <MyGarden/>

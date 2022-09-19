@@ -12,9 +12,9 @@ export default function ProfileNavbar() {
 
             <>
 
-            <Navbar className="navbar-custom">
+            <Navbar className="navbar-custom custom-color">
                 <Container>
-                    <Navbar.Brand className="me-auto" href='#home'>
+                    <Navbar.Brand href='#home' className="brand me-auto">
                         Grow
                     </Navbar.Brand>
 
@@ -22,7 +22,6 @@ export default function ProfileNavbar() {
                         <Nav.Link as={Link} to='/myGarden' className="text-success">My Garden</Nav.Link>
                         <Nav.Link as={Link} to='#' className="text-success">Log out</Nav.Link>
                     </Nav>
-
                 </Container>
             </Navbar>
 
