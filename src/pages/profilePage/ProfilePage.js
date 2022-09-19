@@ -41,13 +41,12 @@ function ProfilePage() {
     return (
         <div>
             
-            {/* <ProfileNavbar />
+            {/* <ProfileNavbar /> */}
             
             <SearchBar userGarden={garden} setFilteredGarden={ setFilteredGarden }/> 
 
-            <MyGarden filteredGarden={ filteredGarden }/> */}
+            <MyGarden filteredGarden={ filteredGarden }/>
 
-            {/* <MyGarden /> */}
         </div>
         
     );

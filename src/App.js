@@ -37,8 +37,8 @@ function App() {
             {/* <MyGarden /> */}
             {/* <CropperTester/> */}
             
-            <MainPage />
-            {/* <ProfilePage /> */}
+            {/* <MainPage /> */}
+            <ProfilePage />
           </div>
         }
       />

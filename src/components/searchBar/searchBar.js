@@ -111,30 +111,12 @@ function SearchBar( props ) {
     }
 
     const clearSearchResult = () => { 
-        passDataOut('');
+        let val = rawQueryChecker();
+        passDataOut(searchAllWithArrQuery(props.userGarden, val));
         setQuery('');
     }
 
 
-    // useEffect(() => {
-
-    //     let val = rawQueryChecker();
-    //     passDataOut(searchAllWithArrQuery(props.userGarden, val));
-
-    // }, [props.userGarden])
-
-
-    // if (props.userGarden) {
-    //     let val = rawQueryChecker();
-    //     passDataOut(searchAllWithArrQuery(props.userGarden, val));
-    // }
-
-
-    // uncomment below after login part and addPlants is updated
-    // if ( props.userGarden ) {
-    //     console.log(props.userGarden);
-    //     passDataOut(searchAllWithArrQuery(props.userGarden, ""))
-    // }
 
     return (
         <div className="search-bar d-flex flex-row p-3 mb-4 px-md-4 bg shadow-sm">
