@@ -15,7 +15,7 @@ import classes from ".//PlantListStyle.module.css";
 const PlantList = ({getPlantId, showEdit, filteredGarden}) =>{
     const [plants, setPlants] = useState([]);
     const [plantImage, setPlantImage] = useState("");
-    let garden = null;
+
     useEffect(()=>{
         getPlants();
     },[]);
