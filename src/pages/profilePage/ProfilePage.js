@@ -16,7 +16,7 @@ import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
 function ProfilePage() {
 
     let [garden, setGarden] = useState("");
-    let [filteredGarden, setFilteredGarden] = useState("");
+    let [filteredGarden, setFilteredGarden] = useState([]);
     
 
     const getGarden = async () => {
