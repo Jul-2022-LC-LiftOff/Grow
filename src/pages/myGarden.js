@@ -103,7 +103,7 @@ return(
         </Modal.Body>
        </Modal>
       
-    <PlantList getPlantId={getPlantIdHandler} showEdit={handleEditShow}/>
+    <PlantList getPlantId={getPlantIdHandler} showEdit={handleEditShow} filteredGarden={props.filteredGarden}/>
     {/* filteredGarden={props.filteredGarden} */}
     
     </div>

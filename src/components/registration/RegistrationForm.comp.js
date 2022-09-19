@@ -10,7 +10,7 @@ import { db } from "../../firebase-config";
 import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 
 import { Container, Row, Col, Button, Form, Alert } from "react-bootstrap";
-import classes from "../../pages/registration/Registration.style.css";
+import classes from "../../pages/registration/Registration.module.css";
 
 const RegistrationForm = () => {
   const initialValues = {
@@ -98,7 +98,7 @@ const RegistrationForm = () => {
     <Container>
       <Row>
         <Col>
-          <h1 className={classes.signup}>Sign Up</h1>
+          <h1 className={classes.custombtn}>Sign Up</h1>
         </Col>
       </Row>
 

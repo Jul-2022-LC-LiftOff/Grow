@@ -12,7 +12,7 @@ import classes from ".//PlantListStyle.module.css";
 // import "./individual-style.css";
 
 
-const PlantList = ({getPlantId, showEdit}) =>{
+const PlantList = ({getPlantId, showEdit, filteredGarden}) =>{
     const [plants, setPlants] = useState([]);
     const [plantImage, setPlantImage] = useState("");
     useEffect(()=>{
@@ -47,7 +47,7 @@ const PlantList = ({getPlantId, showEdit}) =>{
      <div className={`${classes.IndividualPlantList} container-fluid`}>
                
                  <div className="row">
-                 {plants.map((doc)=>{
+                 {filteredGarden.map((doc)=>{
           return(
             <div id="container" className={`col-md-4 d-flex align-items-stretch ${classes.PlantCard}`} style={{backgroundImage: plantsUnavailable }}>
             <IndividualPlant 
