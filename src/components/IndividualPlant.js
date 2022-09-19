@@ -34,12 +34,13 @@ export const IndividualPlant = ({plantData, getIdAndEdit, deleteThePlant})=>{
     
     return(
   
-                    <div className="IndividualPlantDiv">
+                    <div className="IndividualPlantDiv" key={plantData.id}>
                         <Card className="IndividualPlantCard" key={plantData.id} >
                             <div className="plantImageContainer">
                             <Card.Img variant="top" className="plantImage" src= {imageHandler()}></Card.Img>
                             </div>
                              <Card.Body >
+
                             <Card.Title  className="fw-bolder text-center" >
                              {plantData.title}
                             </Card.Title>

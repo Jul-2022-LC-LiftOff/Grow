@@ -47,7 +47,7 @@ function ProfilePage() {
 
             <MyGarden filteredGarden={ filteredGarden }/> */}
 
-            <MyGarden />
+            {/* <MyGarden /> */}
         </div>
         
     );
