@@ -19,8 +19,8 @@ export default function ProfileNavbar() {
                     </Navbar.Brand>
 
                     <Nav activeKey="/home">
-                        <Nav.Link as={Link} to='/myGarden' className="text-success">My Garden</Nav.Link>
-                        <Nav.Link as={Link} to='#' className="text-success">Log out</Nav.Link>
+                        <Nav.Link as={Link} to='/myGarden' className="">My Garden</Nav.Link>
+                        <Nav.Link as={Link} to='#' className="">Log out</Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>
