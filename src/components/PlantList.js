@@ -9,10 +9,10 @@ import { storage } from "../firebase-config";
 import { ref, deleteObject, getMetadata } from "firebase/storage";
 import plantsUnavailable from "../assets/plantsUnavailable.png";
 
-import ".//individual-style.css";
+import "./individual-style.css";
 
 
-const PlantList = ({getPlantId, showEdit}) =>{
+const PlantList = ({getPlantId, showEdit, filteredGarden}) =>{
     const [plants, setPlants] = useState([]);
     const [plantImage, setPlantImage] = useState("");
     useEffect(()=>{
@@ -48,7 +48,7 @@ const PlantList = ({getPlantId, showEdit}) =>{
      <div className="IndividualPlant container-fluid ">
                
                  <div className="row">
-                 {plants.map((doc)=>{
+                 {filteredGarden.map((doc)=>{
           return(
             <div id="container" className="col-md-4 d-flex align-items-stretch" style={{backgroundImage: plantsUnavailable }}>
             <IndividualPlant 

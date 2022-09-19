@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { collection, doc, getDocs } from "firebase/firestore";
+import "../../components/individual-style.css";
 
 import ProfileNavbar from "../../components/navbar/profile-navbar";
 import SearchBar from "../../components/searchBar/searchBar";
@@ -16,7 +17,7 @@ import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
 function ProfilePage() {
 
     let [garden, setGarden] = useState("");
-    let [filteredGarden, setFilteredGarden] = useState("");
+    let [filteredGarden, setFilteredGarden] = useState([]);
     
 
     const getGarden = async () => {

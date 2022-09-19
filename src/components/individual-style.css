@@ -67,7 +67,8 @@
     display:flex;
     justify-content:center;
     align-items:center;
-    overflow:hidden
+    overflow:hidden;
+   
  }
  .bottomOfCard{
    margin-bottom: 1rem;
