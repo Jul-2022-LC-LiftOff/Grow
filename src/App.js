@@ -34,10 +34,11 @@ function App() {
             {/* <MainNavbar /> */}
             {/* <HomePage /> */}
             {/* <RegistrationPage /> */}
-            {/* <MyGarden /> */}
+            <MyGarden />
             {/* <CropperTester/> */}
+            
             {/* <MainPage /> */}
-            <ProfilePage />
+            {/* <ProfilePage /> */}
           </div>
         }
       />
