@@ -37,12 +37,11 @@ const LogInInput = ( props ) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setFormErrors(validate(formValues));
+    setFormErrors(validate(formValues));
     signInWithEmailAndPassword(auth, formValues.username, formValues.password)
       .then((userInfo) => {
         getUserId(userInfo.user.uid);
         navigate("/profilePage");
-        // console.log(userInfo.user.uid);
       })
       .catch((error) => {
         const errorCode = error.code;
