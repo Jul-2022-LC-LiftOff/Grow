@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container, Row, Col, ListGroup, Image } from 'react-bootstrap';
-
 export const HomePage= () =>{
     // before login
     return (
+
         <Container>
             <Row>
                 <Col>
