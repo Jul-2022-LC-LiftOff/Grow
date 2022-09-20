@@ -31,7 +31,7 @@ const PlantList = ({getPlantId, showEdit, filteredGarden}) =>{
     };
 
     const deleteHandler = async (id) =>{
-    //    
+       
 
         await PlantDataService.deletePlant(id);
         getPlants();
@@ -44,8 +44,10 @@ const PlantList = ({getPlantId, showEdit, filteredGarden}) =>{
         }
     }
     const backgroundImageHandler =()=>{
-        if(filteredGarden.length===0 || plants.length===0){
+        if(filteredGarden.length===0 ){
             return plantNotFound;
+        }else if(plants.length===0){
+            return plantsUnavailable;
         }
     }
     
