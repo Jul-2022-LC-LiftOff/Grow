@@ -18,7 +18,7 @@ function ProfilePage() {
     let [garden, setGarden] = useState("");
     let [filteredGarden, setFilteredGarden] = useState([]);
     
-
+   
     const getGarden = async () => {
         let resultArr = [];
         const plantsRef = collection(db, "plants");
@@ -44,9 +44,7 @@ function ProfilePage() {
             <ProfileNavbar />
             
             <SearchBar userGarden={garden} setFilteredGarden={ setFilteredGarden }/> 
-
             <MyGarden filteredGarden={ filteredGarden }/>
-
         </div>
         
     );
