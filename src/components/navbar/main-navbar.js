@@ -3,7 +3,7 @@ import { Container , Nav , Navbar } from 'react-bootstrap';
 import { Link, Route, Routes } from 'react-router-dom';
 import { HomePage } from '../../pages/homepage/homepage';
 import RegistrationPage from '../../pages/registration/Registration.page';
-import "./main-navbar.style.css";
+import "./main-navbar-style.css";
 
 export default function MainNavbar() {
     return (
@@ -18,11 +18,11 @@ export default function MainNavbar() {
                 </Nav>
             </Navbar>
 
-            {/* <div>
+            <div>
                 <Routes>
                     <Route path='/Registration' element={<RegistrationPage />}></Route>
                 </Routes>
-            </div> /*}
+            </div> 
         </>
 
     )
