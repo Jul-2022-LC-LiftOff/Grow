@@ -44,6 +44,7 @@ import classes from ".//MyGardenStyle.module.css";
     const timeout = setTimeout(3000);
     return () => clearTimeout(timeout);
    }
+  
    
    useEffect(()=>{
     const timeout = setTimeout(()=>{
