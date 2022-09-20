@@ -3,7 +3,7 @@ import React from "react";
 //import LogInInput from "./components/LogInInput.comp.js";
 import LogInInput from "../components/LogInInput";
 //import LogIn from "./components/LogInPage.comp.js";
-import classes from "../login/Login.module.css";
+import classes from "../LogIn/Login.module.css";
 
 
 function LogInPage() {
