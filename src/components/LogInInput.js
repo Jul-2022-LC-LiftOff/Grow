@@ -34,6 +34,7 @@ const LogInInput = () => {
    const handleSubmit = async (e) => {
    e.preventDefault();
    setFormErrors(validate(formValues));
+   console.log("val");
    }
   //   try {
   //     const userCredential = await createUserWithEmailAndPassword(

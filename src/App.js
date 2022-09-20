@@ -36,13 +36,13 @@ function App() {
             {/* <ProfileNavbar /> */}
             {/* <MainNavbar /> */}
             {/* <HomePage /> */}
-            {/* <RegistrationPage /> */}
+            <RegistrationPage />
             {/* <MyGarden /> */}
             {/* <CropperTester/> */}
             <LogInPage />
             {/* <MainPage /> */}
             {/* <MyGarden/> */}
-            <ProfilePage />
+            {/* <ProfilePage /> */}
           </div>
         }
       />
