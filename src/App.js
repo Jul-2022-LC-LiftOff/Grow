@@ -14,7 +14,6 @@ import ProfilePage from "./pages/profilePage/ProfilePage"
 import LogInPage from "./LogIn/LogInPage";
 import CropperTester from "./components/CropperTester";
 import MainNavbar from "./components/navbar/main-navbar";
-import { HomePage } from "./pages/homepage/homepage";
 import MainBody from "./components/main_body/main_body";
 import MainPage from "./pages/homepage/mainPage";
 
@@ -24,28 +23,22 @@ function App() {
   return (
 
     <Routes>
-      <Route path="/signup" element={<RegistrationPage />} />
-      <Route
+      {/* <Route path="/signup" element={<RegistrationPage />} /> */}
+      {/* <Route
         path="/login"
         element={<div className="style">Welcome To Login Page</div>}
-      />
+      /> */}
       <Route
         path="/"
         element={
           <div className="mainBackground">
-            {/* <ProfileNavbar /> */}
-            {/* <MainNavbar /> */}
-            {/* <HomePage /> */}
-            {/* <RegistrationPage /> */}
-            {/* <MyGarden /> */}
-            {/* <CropperTester/> */}
-            <LogInPage />
-            {/* <MainPage /> */}
-            {/* <MyGarden/> */}
-            <ProfilePage />
+            <MainPage />
           </div>
         }
       />
+      <Route path='/profilePage' element={<ProfilePage />}></Route>
+      <Route path='/LogIn' element={<LogInPage />}></Route>
+      <Route path='/Registration' element={<RegistrationPage />}></Route>
       <Route path="/notify" element={<NotificationPage />} />
     </Routes>
 
