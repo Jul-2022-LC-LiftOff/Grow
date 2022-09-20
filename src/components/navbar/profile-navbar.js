@@ -23,12 +23,12 @@ export default function ProfileNavbar() {
             </Navbar>
 
 
-            {/* <div>
+            <div>
                 <Routes>
                     <Route path='/myGarden' element={<MyGarden />}></Route>
                     <Route path='/mainpage' element={<MainPage />}></Route>
                 </Routes>
-            </div> */}
+            </div>
 
         </>
 
