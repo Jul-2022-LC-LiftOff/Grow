@@ -1,12 +1,22 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { collection, orderBy, query, where } from "firebase/firestore";
+import {
+  collection,
+  orderBy,
+  query,
+  Query,
+  where,
+  limit,
+} from "firebase/firestore";
 import { db } from "../../firebase-config";
 import { getDocs } from "firebase/firestore";
+
 import classes from "../../pages/notification/Notification.module.css";
 
 export default function Today() {
   const [plants, setPlants] = useState([]);
+  const [checked, setChecked] = React.useState(false);
+
   const plantsCollectionRef = collection(db, "plants");
 
   const weekday = [
@@ -21,11 +31,15 @@ export default function Today() {
 
   let showDate = new Date();
   let currentDay = weekday[showDate.getDay()];
+  // let waterDayInt = parseInt(plants.waterDay);
+
+  // const waterDayConvert = [showDate.getTime()];
+  // console.log(showDate.getHours() + ":" + showDate.getMinutes());
 
   const q = query(
     plantsCollectionRef,
     where("waterDay", "array-contains", currentDay)
-    // orderBy("waterTime", "asc")
+    // orderBy("name", "array-contains", "desc")
   );
 
   const getPlants = async () => {
@@ -45,17 +59,27 @@ export default function Today() {
 
   return (
     <div>
-      <ul className="item">
+      <ul>
         {plants.map((plant, index) => {
           return (
             <li key={index}>
               <div className={classes.flex}>
                 <img src={plant.image} alt="img" />
                 <div>
-                  <h3>Name: {plant.name}</h3>
+                  <h3>{plant.name}</h3>
                   {/* <h5>Watering Day: {plant.waterDay + ""} </h5> */}
-                  <h5>Watering Time: {plant.waterTime}</h5>
+                  <h5>Water: {plant.waterTime}</h5>
                 </div>
+                {/* <input type="checkbox" checked={checked} /> */}
+                <button
+                  onClick={() => {
+                    setChecked((old) => !old);
+                  }}
+                  className={classes.button}
+                >
+                  {" "}
+                  {checked ? "Undo" : "Water"}{" "}
+                </button>
               </div>
             </li>
           );

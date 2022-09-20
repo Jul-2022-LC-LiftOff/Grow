@@ -111,12 +111,12 @@ function SearchBar( props ) {
     }
 
     const clearSearchResult = () => { 
-        let val = rawQueryChecker();
+        let val = [""];
         passDataOut(searchAllWithArrQuery(props.userGarden, val));
         setQuery('');
     }
 
-
+    //testing
 
     return (
         <div className="search-bar d-flex flex-row p-3 mb-4 px-md-4 bg shadow-sm">
