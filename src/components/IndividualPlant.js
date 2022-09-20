@@ -1,11 +1,10 @@
 import React from "react";
-import ".//individual-style.css";
 import { Card } from "react-bootstrap";
 import ListGroupItem from "react-bootstrap/esm/ListGroupItem";
 import ListGroup from 'react-bootstrap/ListGroup';
 import { BsFillTrashFill } from "react-icons/bs";
 import { BsFillPencilFill } from "react-icons/bs";
-
+import classes from ".//IndividualPlantStyle.module.css";
 import ImageUnavailable from "../assets/ImageUnavailable.png";
 
 export const IndividualPlant = ({plantData, getIdAndEdit, deleteThePlant})=>{
@@ -34,12 +33,13 @@ export const IndividualPlant = ({plantData, getIdAndEdit, deleteThePlant})=>{
     
     return(
   
-                    <div className="IndividualPlantDiv">
-                        <Card className="IndividualPlantCard" key={plantData.id} >
-                            <div className="plantImageContainer">
-                            <Card.Img variant="top" className="plantImage" src= {imageHandler()}></Card.Img>
+                    <div className={classes.IndividualPlantDiv}>
+                        <Card className={classes.IndividualPlantCard} key={plantData.id} >
+                            <div className={classes.plantImageContainer}>
+                            <Card.Img variant="top" className={classes.plantImage} src= {imageHandler()}></Card.Img>
                             </div>
                              <Card.Body >
+
                             <Card.Title  className="fw-bolder text-center" >
                              {plantData.title}
                             </Card.Title>
@@ -59,17 +59,17 @@ export const IndividualPlant = ({plantData, getIdAndEdit, deleteThePlant})=>{
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Water:</span> {plantData.water}</ListGroupItem>
                                 <ListGroupItem><span style={{fontWeight:'bold'}}>Watering Time:</span> {plantData.waterTime}</ListGroupItem>
 
-                                <ListGroupItem className="bottomOfCard"><span style={{fontWeight:'bold'}}>Watering Days:</span> {displayWaterDays()}</ListGroupItem>
+                                <ListGroupItem className={classes.bottomOfCard}><span style={{fontWeight:'bold'}}>Watering Days:</span> {displayWaterDays()}</ListGroupItem>
     
  
                             </ListGroup>
                         
                             </Card.Body>
-                            <div class="buttons">
-                        <div class="button-trash">
+                            <div class={classes.buttons}>
+                        <div class={classes.buttonTrash}>
                         <button className="btn btn-light" onClick = {deleteThePlant}><BsFillTrashFill></BsFillTrashFill></button>
                         </div>
-                        <div class="button-edit">
+                        <div class={classes.buttonEdit}>
                        <button className="btn btn-light" onClick ={getIdAndEdit}><BsFillPencilFill></BsFillPencilFill></button>
                        
                         </div>

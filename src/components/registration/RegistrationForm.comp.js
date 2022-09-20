@@ -98,7 +98,7 @@ const RegistrationForm = () => {
     <Container>
       <Row>
         <Col>
-          <h1 className={classes.signup}>Sign Up</h1>
+          <h1 className={classes.custombtn}>Sign Up</h1>
         </Col>
       </Row>
 

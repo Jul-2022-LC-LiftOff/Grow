@@ -9,8 +9,13 @@ import RegistrationPage from "./pages/registration/Registration.page";
 import NotificationPage from "./pages/notification/Notification.page";
 
 import ProfileNavbar from "./components/navbar/profile-navbar";
+import ProfilePage from "./pages/profilePage/ProfilePage"
 
 import CropperTester from "./components/CropperTester";
+import MainNavbar from "./components/navbar/main-navbar";
+import { HomePage } from "./pages/homepage/homepage";
+import MainBody from "./components/main_body/main_body";
+import MainPage from "./pages/homepage/mainPage";
 
 function App() {
   // const currentUser = auth.
@@ -24,15 +29,23 @@ function App() {
       <Route
         path="/"
         element={
-          <div class="mainBackground">
-            <ProfileNavbar />
-            <MyGarden />
+          <div className="mainBackground">
+            {/* <ProfileNavbar /> */}
+            {/* <MainNavbar /> */}
+            {/* <HomePage /> */}
+            {/* <RegistrationPage /> */}
+            {/* <MyGarden /> */}
             {/* <CropperTester/> */}
+            
+            {/* <MainPage /> */}
+            {/* <MyGarden/> */}
+            <ProfilePage />
           </div>
         }
       />
       <Route path="/notify" element={<NotificationPage />} />
     </Routes>
+
 
     // <div class="mainBackground">
     //   <MyGarden/>
