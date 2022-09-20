@@ -8,10 +8,8 @@ import { storage } from "../firebase-config";
 import {deleteObject, getDownloadURL, getMetadata, ref, uploadBytesResumable} from 'firebase/storage';
 import ReactAvatarEditor from "react-avatar-editor";
 import Select from "react-select";
-import { doc } from "firebase/firestore";
-import { db } from "../firebase-config";
-import axios from "axios";
-import { isDisabled } from "@testing-library/user-event/dist/utils";
+
+import classes from "./AddPlantStyle.module.css"
 export var successAdd = false;
 export var successEdit = false;
 const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
@@ -38,7 +36,7 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
     const [maxDays, setMaxDays] = useState(7);
   
     const limitSelections =()=>{
-        if(water === "Never"){
+        if(water === "Never" || water==="Daily"){
             return true;
         }
         else if(waterDay.length >= maxDays){
@@ -70,7 +68,8 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
             setMaxDays(1); 
         }else if(water==="Never"){
             setMaxDays(0); 
-        }else{
+        }
+        else{
             setMaxDays(7); 
         }
         
@@ -328,17 +327,17 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
               <ListGroup variant="flush" >
               <ListGroupItem><span style={{fontWeight:'bold'}}> Title:</span>
                   <div>
-                  <input class="editAdd" type="text" onChange={(event)=> setPlantTitle(event.target.value)} value={title} required></input>
+                  <input className={classes.editAdd} type="text" onChange={(event)=> setPlantTitle(event.target.value)} value={title} required></input>
                   </div>
                    </ListGroupItem>
                   <ListGroupItem><span style={{fontWeight:'bold'}} > Name:</span>
                   <div>
-                  <input class="editAdd" type="text" onChange={(event)=> setPlantName(event.target.value)} value={name} required></input>
+                  <input className={classes.editAdd} type="text" onChange={(event)=> setPlantName(event.target.value)} value={name} required></input>
                   </div>
                    </ListGroupItem>
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Family:</span> 
                   <div>
-                  <input class="editAdd" type="text" onChange={(event)=> setPlantFamily(event.target.value)} value={family} required></input>
+                  <input className={classes.editAdd} type="text" onChange={(event)=> setPlantFamily(event.target.value)} value={family} required></input>
                   </div>
                   </ListGroupItem>
 

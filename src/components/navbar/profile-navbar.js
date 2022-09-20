@@ -11,23 +11,25 @@ export default function ProfileNavbar() {
     return (
         <>
             
-            <Navbar class="navbar-custom">
-                    <Navbar.Brand href='#home' class="brand">Grow</Navbar.Brand>
-                        <Nav activeKey="/home">
-                            <Nav.Link as={Link} to='/myGarden' className="text-success">My Garden</Nav.Link>
-                            <Nav.Link as={Link} to='#' className="text-success">Log out</Nav.Link>
-                        </Nav>
+            <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" className="">
+
+                <Nav>
+                    <Navbar.Brand className="home" href="#home" alt="Go to profile page">Grow</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+
+                    <Nav.Link className="signout position-absolute end-0" href="#SignOut" alt="sign out">Sign Out</Nav.Link>
+                </Nav>
             </Navbar>
 
 
-            <div>
+            {/* <div>
                 <Routes>
                     <Route path='/myGarden' element={<MyGarden />}></Route>
                 </Routes>
-            </div>
-
+            </div> */}
 
         </>
+
 
     )
 }

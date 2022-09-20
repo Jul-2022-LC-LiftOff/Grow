@@ -1,4 +1,5 @@
 
+
 import reportWebVitals from './reportWebVitals';
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
@@ -9,6 +10,7 @@ import App from "./App";
 import { UserProvider } from './components/UserContext';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 
 root.render(
   <BrowserRouter>

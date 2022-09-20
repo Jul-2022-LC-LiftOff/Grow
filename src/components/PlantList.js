@@ -7,16 +7,22 @@ import { BsFillPencilFill } from "react-icons/bs";
 import { db } from "../firebase-config";
 import { storage } from "../firebase-config";
 import { ref, deleteObject, getMetadata } from "firebase/storage";
-const PlantList = ({getPlantId, showEdit}) =>{
+import plantsUnavailable from "../assets/plantsUnavailable.png";
+import classes from ".//PlantListStyle.module.css";
+// import "./individual-style.css";
+
+
+const PlantList = ({getPlantId, showEdit, filteredGarden}) =>{
     const [plants, setPlants] = useState([]);
     const [plantImage, setPlantImage] = useState("");
+
     useEffect(()=>{
         getPlants();
     },[]);
     // componentDidMount(()=>{
     //     getPlants();
     // })
-  
+    
 
     const getPlants = async () => {
         const data = await PlantDataService.getAllPlants();
@@ -39,13 +45,12 @@ const PlantList = ({getPlantId, showEdit}) =>{
     
     return(
         <div>
-        
-     <div className="IndividualPlant container-fluid ">
+     <div className={`${classes.IndividualPlantList} container-fluid`}>
                
                  <div className="row">
-                 {plants.map((doc)=>{
+                 {filteredGarden.map((doc)=>{
           return(
-            <div id="container" className="col-md-4 d-flex align-items-stretch">
+            <div id="container" className={`col-md-4 d-flex align-items-stretch ${classes.PlantCard}`} style={{backgroundImage: plantsUnavailable }}>
             <IndividualPlant 
                 plantData={doc} 
                 key={doc.title} 
@@ -75,17 +80,15 @@ const PlantList = ({getPlantId, showEdit}) =>{
                     }}
                 />
                 </div>
-        
-         )
+          )
          
-    })}
-    </div>
-
-
-
-    </div>
-    </div>
-   );
-};
-
+        })}
+        </div>
+    
+    
+    
+        </div>
+        </div>
+       );
+    };
 export default PlantList;
