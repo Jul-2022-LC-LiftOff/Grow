@@ -8,6 +8,7 @@ import { db } from "../firebase-config";
 import { storage } from "../firebase-config";
 import { ref, deleteObject, getMetadata } from "firebase/storage";
 import plantsUnavailable from "../assets/plantsUnavailable.png";
+import plantNotFound from "../assets/plantNotFound.png";
 import classes from ".//PlantListStyle.module.css";
 // import "./individual-style.css";
 
@@ -15,6 +16,7 @@ import classes from ".//PlantListStyle.module.css";
 const PlantList = ({getPlantId, showEdit, filteredGarden}) =>{
     const [plants, setPlants] = useState([]);
     const [plantImage, setPlantImage] = useState("");
+    const blankPage =[];
     useEffect(()=>{
         getPlants();
     },[]);
@@ -41,15 +43,21 @@ const PlantList = ({getPlantId, showEdit, filteredGarden}) =>{
            
         }
     }
+    const backgroundImageHandler =()=>{
+        if(filteredGarden.length===0 || plants.length===0){
+            return plantNotFound;
+        }
+    }
     
     return(
-        <div>
+        <div className={classes.backgroundPlants}>
+
      <div className={`${classes.IndividualPlantList} container-fluid`}>
-               
+        <img className={classes.plantNotFoundImage} src={backgroundImageHandler()}/>
                  <div className="row">
                  {filteredGarden.map((doc)=>{
           return(
-            <div id="container" className={`col-md-4 d-flex align-items-stretch ${classes.PlantCard}`} style={{backgroundImage: plantsUnavailable }}>
+            <div id="container" className={`col-md-4 d-flex align-items-stretch ${classes.PlantCard}`} >
             <IndividualPlant 
                 plantData={doc} 
                 key={doc.title} 
