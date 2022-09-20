@@ -9,20 +9,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function ProfileNavbar() {
     return (
+        <>
+            
+            <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" className="">
 
-            <>
+                <Nav>
+                    <Navbar.Brand className="home" href="#home" alt="Go to profile page">Grow</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
-            <Navbar className="navbar-custom custom-color">
-                <Container>
-                    <Navbar.Brand href='#home' className="brand me-auto">
-                        Grow
-                    </Navbar.Brand>
-
-                    <Nav activeKey="/home">
-                        <Nav.Link as={Link} to='/myGarden' className="">My Garden</Nav.Link>
-                        <Nav.Link as={Link} to='#' className="">Log out</Nav.Link>
-                    </Nav>
-                </Container>
+                    <Nav.Link className="signout position-absolute end-0" href="#SignOut" alt="sign out">Sign Out</Nav.Link>
+                </Nav>
             </Navbar>
 
 
@@ -32,7 +28,7 @@ export default function ProfileNavbar() {
                 </Routes>
             </div> */}
 
-            </>
+        </>
 
 
     )
