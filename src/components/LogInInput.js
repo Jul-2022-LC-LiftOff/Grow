@@ -10,7 +10,7 @@ import { db } from "../firebase-config";
 import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
-import LogInPage from "../LogIn/LogInPage.js";
+import LogInPage from "../login/LogInPage.js";
 
 const LogInInput = () => {
    const initialValues = {

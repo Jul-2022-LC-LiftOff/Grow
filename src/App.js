@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 
-import LogInPage from "./LogIn/LogInPage";
+import LogInPage from "./login/LogInPage";
 
 function App() {
   return (

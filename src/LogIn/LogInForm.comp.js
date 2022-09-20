@@ -45,7 +45,7 @@ const LogInForm = () => {
     <Container>
       <Row>
         <Col>
-          <h1 className="signup mb-4">Sign In</h1>
+          <h1 className={classes.LogInPage}>Sign In</h1>
         </Col>
       </Row>
       <Row>
