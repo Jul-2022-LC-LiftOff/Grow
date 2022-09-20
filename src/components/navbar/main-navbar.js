@@ -3,27 +3,26 @@ import { Container , Nav , Navbar } from 'react-bootstrap';
 import { Link, Route, Routes } from 'react-router-dom';
 import { HomePage } from '../../pages/homepage/homepage';
 import RegistrationPage from '../../pages/registration/Registration.page';
+import "./main-navbar-style.css";
 
 export default function MainNavbar() {
     return (
-        <>
-            <Navbar>
-                <Container>
-                    <Navbar.Brand className="brand me-auto" href='#home'>
-                        Grow
-                    </Navbar.Brand>
-                    <Nav>
-                        <Nav.Link as={Link} to='/'>Home</Nav.Link>
-                        <Nav.Link as={Link} to='/Registration'>Log In/Register</Nav.Link>
-                    </Nav>
-                </Container>
+        <>  
+            <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" className="">
+
+                <Nav>
+                    <Navbar.Brand className="home" href="#home" alt="Go to home page">Grow</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+
+                    <Nav.Link className="signout position-absolute end-0" href="#Registration" alt="Sign in/Register">Sign in/Register</Nav.Link>
+                </Nav>
             </Navbar>
 
-            {/* <div>
+            <div>
                 <Routes>
                     <Route path='/Registration' element={<RegistrationPage />}></Route>
                 </Routes>
-            </div> */}
+            </div> 
         </>
 
     )
