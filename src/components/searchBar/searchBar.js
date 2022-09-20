@@ -116,7 +116,7 @@ function SearchBar( props ) {
         setQuery('');
     }
 
-
+    //testing
 
     return (
         <div className="search-bar d-flex flex-row p-3 mb-4 px-md-4 bg shadow-sm">
