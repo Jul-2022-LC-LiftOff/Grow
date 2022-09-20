@@ -11,8 +11,8 @@ import NotificationPage from "./pages/notification/Notification.page";
 
 import ProfileNavbar from "./components/navbar/profile-navbar";
 import ProfilePage from "./pages/profilePage/ProfilePage"
-import LogInPage from "./login/LogInPage";
-import CropperTester from "./components/CropperTester";
+import LogInPage from "./LogIn/LogInPage"
+// import CropperTester from "./components/CropperTester";
 import MainNavbar from "./components/navbar/main-navbar";
 import { HomePage } from "./pages/homepage/homepage";
 import MainBody from "./components/main_body/main_body";
