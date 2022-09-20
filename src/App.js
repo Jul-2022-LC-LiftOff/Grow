@@ -1,5 +1,5 @@
 
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./App.css";
 import MyGarden from "./pages/myGarden";
 import { Route, Routes } from "react-router-dom";
@@ -20,6 +20,11 @@ import MainPage from "./pages/homepage/mainPage";
 
 function App() {
   // const currentUser = auth.
+
+  const [userId, setUserId] = useState(null);
+
+  console.log(userId);
+
   return (
 
     <Routes>
@@ -37,7 +42,7 @@ function App() {
         }
       />
       <Route path='/profilePage' element={<ProfilePage />}></Route>
-      <Route path='/LogIn' element={<LogInPage />}></Route>
+      <Route path='/LogIn' element={<LogInPage setUserId={setUserId}/>}></Route>
       <Route path='/Registration' element={<RegistrationPage />}></Route>
       <Route path="/notify" element={<NotificationPage />} />
     </Routes>

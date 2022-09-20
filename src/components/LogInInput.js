@@ -1,41 +1,54 @@
 import React from "react";
-
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "../firebase-config";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+// import { auth } from "../firebase-config";
 import { db } from "../firebase-config";
-
 import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import LogInPage from "../LogIn/LogInPage";
 
-const LogInInput = () => {
-   const initialValues = {
-     username: "",
-     password: "",
-   };
 
-   const [formValues, setFormValues] = useState(initialValues);
-   const [formErrors, setFormErrors] = useState({});
-   useEffect(() => {}, [formValues]);
+const auth = getAuth();
 
-   const { username, password } = formValues;
+const LogInInput = ( props ) => {
 
-  // const navigate = useNavigate();
+    const initialValues = {
+      username: "",
+      password: "",
+    };
 
-   const handleChange = (e) => {
-     const { name, value } = e.target;
-     setFormValues({ ...formValues, [name]: value });
-   };
+    const [formValues, setFormValues] = useState(initialValues);
+    const [formErrors, setFormErrors] = useState({});
+    useEffect(() => {}, [formValues]);
 
-   const handleSubmit = async (e) => {
-   e.preventDefault();
-   setFormErrors(validate(formValues));
-   console.log("val");
-   }
+    const { username, password } = formValues;
+    const navigate = useNavigate();
+
+
+    const getUserId = props.setUserId;
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // setFormErrors(validate(formValues));
+    signInWithEmailAndPassword(auth, formValues.username, formValues.password)
+      .then((userInfo) => {
+        getUserId(userInfo.user.uid);
+        navigate("/profilePage");
+        // console.log(userInfo.user.uid);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      })
+  }
   //   try {
   //     const userCredential = await createUserWithEmailAndPassword(
   //       auth,
@@ -85,7 +98,7 @@ const LogInInput = () => {
         <Col>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Username</Form.Label>
+              <Form.Label>Email</Form.Label>
               <Form.Control
                 type="text"
                 name="username"

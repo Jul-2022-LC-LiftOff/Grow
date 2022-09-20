@@ -20,13 +20,13 @@ export default function MainNavbar() {
                 </Nav>
             </Navbar>
 
-            <div>
+            {/* <div>
                 <Routes>
                     <Route path='/mainPage' element={<MainPage />}></Route>
                     <Route path='/LogIn' element={<LogInPage />}></Route>
                     <Route path='/Registration' element={<RegistrationPage />}></Route>
                 </Routes>
-            </div> 
+            </div>  */}
         </>
 
     )
