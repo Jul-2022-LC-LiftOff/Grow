@@ -17,7 +17,7 @@ import MainBody from "./components/main_body/main_body";
 import MainPage from "./pages/homepage/mainPage";
 
 function App() {
-  // const currentUser = auth.
+  
 
   const [userId, setUserId] = useState(null);
 
