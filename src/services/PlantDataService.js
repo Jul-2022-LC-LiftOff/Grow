@@ -5,10 +5,12 @@ import { storage } from "../firebase-config";
 import { useEffect, useRef } from "react";
 import { getAuth } from "firebase/auth";
 
-const auth = getAuth();
-const user = auth.currentUser;
-//const plantCollectionRef = collection(db,"users", user.uid, "Garden");
-const plantCollectionRef = collection(db,"plants");
+// const auth = getAuth();
+// const user = auth.currentUser;
+const plantCollectionRef = collection(db,"users", 
+"8O5ciqNR20Q2veqyKulUHxO3Vhv2"
+, "Garden");
+//const plantCollectionRef = collection(db,"plants");
 
 class PlantDataService{
 

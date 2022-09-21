@@ -12,8 +12,8 @@ import Select from "react-select";
 import classes from "./AddPlantStyle.module.css"
 export var successAdd = false;
 export var successEdit = false;
-const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
-    
+const AddPlant = ({id, setPlantId, closeAddModal, closeModal, userId})=>{
+    let user = userId;
     const [name, setPlantName] = useState("");
     const [title, setPlantTitle] = useState("");
     const [soil, setPlantSoil] = useState("");

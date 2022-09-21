@@ -13,10 +13,10 @@ import classes from ".//PlantListStyle.module.css";
 // import "./individual-style.css";
 
 
-const PlantList = ({getPlantId, showEdit, filteredGarden}) =>{
+const PlantList = ({getPlantId, showEdit, filteredGarden, userId}) =>{
     const [plants, setPlants] = useState([]);
     const [plantImage, setPlantImage] = useState("");
-
+    var user = userId;
     useEffect(()=>{
         getPlants();
     },[]);

@@ -100,11 +100,11 @@ return(
              <CloseButton onClick={() => { handleEditClose()}}/>
          </Modal.Header>
          <Modal.Body>
-         <AddPlant id={plantId} setPlantId={setPlantId} closeModal={handleEditClose}/>
+         <AddPlant id={plantId} setPlantId={setPlantId} closeModal={handleEditClose} userId={props.userId}/>
         </Modal.Body>
        </Modal>
       
-    <PlantList getPlantId={getPlantIdHandler} showEdit={handleEditShow} filteredGarden={props.filteredGarden}/>
+    <PlantList getPlantId={getPlantIdHandler} showEdit={handleEditShow} filteredGarden={props.filteredGarden} userId={props.userId}/>
     {/* filteredGarden={props.filteredGarden} */}
     
     </div>
