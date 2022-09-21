@@ -18,7 +18,7 @@ export default function ProfileNavbar() {
                     <Navbar.Brand className="home" href="myGarden" alt="Go to your garden">Grow</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
-                    <Nav.Link className="signout position-absolute end-0" href="mainpage" alt="sign out">Sign Out</Nav.Link>
+                    <Nav.Link className="signout position-absolute end-0" href="/" alt="sign out">Sign Out</Nav.Link>
                 </Nav>
             </Navbar>
 

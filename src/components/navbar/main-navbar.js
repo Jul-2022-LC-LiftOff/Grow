@@ -12,7 +12,7 @@ export default function MainNavbar() {
             <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" className="">
 
                 <Nav>
-                    <Navbar.Brand className="home" href="mainPage" alt="Go to home page">Grow</Navbar.Brand>
+                    <Navbar.Brand className="home" href="/" alt="Go to home page">Grow</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
                     <Nav.Link className="signin position-absolute end-0" href="LogIn" alt="Sign in">Sign in</Nav.Link>
