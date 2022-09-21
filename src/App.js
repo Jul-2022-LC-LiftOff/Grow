@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./App.css";
 import MyGarden from "./pages/myGarden";
 import { Route, Routes } from "react-router-dom";
@@ -11,35 +11,39 @@ import NotificationPage from "./pages/notification/Notification.page";
 import ProfileNavbar from "./components/navbar/profile-navbar";
 import ProfilePage from "./pages/profilePage/ProfilePage";
 import LogInPage from "./LogIn/LogInPage";
-import CropperTester from "./components/CropperTester";
+// import CropperTester from "./components/CropperTester";
 import MainNavbar from "./components/navbar/main-navbar";
-import { HomePage } from "./pages/homepage/homepage";
 import MainBody from "./components/main_body/main_body";
 import MainPage from "./pages/homepage/mainPage";
 
 function App() {
   // const currentUser = auth.
+
+  const [userId, setUserId] = useState(null);
+
+  console.log(userId);
+
   return (
     <Routes>
-      <Route path="/signup" element={<RegistrationPage />} />
-      <Route path="/login" element={<LogInPage />} />
+      {/* <Route path="/signup" element={<RegistrationPage />} /> */}
+      {/* <Route
+        path="/login"
+        element={<div className="style">Welcome To Login Page</div>}
+      /> */}
       <Route
         path="/"
         element={
           <div className="mainBackground">
-            {/* <ProfileNavbar /> */}
-            {/* <MainNavbar /> */}
-            {/* <HomePage /> */}
-            {/* <RegistrationPage /> */}
-            {/* <MyGarden /> */}
-            {/* <CropperTester/> */}
-            {/* <LogInPage /> */}
-            {/* <MainPage /> */}
-            {/* <MyGarden/> */}
-            <ProfilePage />
+            <MainPage />
           </div>
         }
       />
+      <Route path="/profilePage" element={<ProfilePage />}></Route>
+      <Route
+        path="/LogIn"
+        element={<LogInPage setUserId={setUserId} />}
+      ></Route>
+      <Route path="/Registration" element={<RegistrationPage />}></Route>
       <Route path="/notify" element={<NotificationPage />} />
     </Routes>
 

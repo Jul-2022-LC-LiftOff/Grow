@@ -1,8 +1,9 @@
 import React from 'react';
-import { Container , Nav , Navbar } from 'react-bootstrap';
-import { Link, Route, Routes } from 'react-router-dom';
-import { HomePage } from '../../pages/homepage/homepage';
+import { Nav , Navbar } from 'react-bootstrap';
+import { Route, Routes } from 'react-router-dom';
+import MainPage from '../../pages/homepage/mainPage';
 import RegistrationPage from '../../pages/registration/Registration.page';
+import LogInPage from '../../LogIn/LogInPage';
 import "./main-navbar-style.css";
 
 export default function MainNavbar() {
@@ -11,15 +12,18 @@ export default function MainNavbar() {
             <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" className="">
 
                 <Nav>
-                    <Navbar.Brand className="home" href="#home" alt="Go to home page">Grow</Navbar.Brand>
+                    <Navbar.Brand className="home" href="/" alt="Go to home page">Grow</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
-                    <Nav.Link className="signout position-absolute end-0" href="#Registration" alt="Sign in/Register">Sign in/Register</Nav.Link>
+                    <Nav.Link className="signin position-absolute end-0" href="LogIn" alt="Sign in">Sign in</Nav.Link>
+                    <Nav.Link className="register position-absolute end-0" href="Registration" alt="Register">Register</Nav.Link>
                 </Nav>
             </Navbar>
 
             <div>
                 <Routes>
+                    <Route path='/mainPage' element={<MainPage />}></Route>
+                    <Route path='/LogIn' element={<LogInPage />}></Route>
                     <Route path='/Registration' element={<RegistrationPage />}></Route>
                 </Routes>
             </div> 
