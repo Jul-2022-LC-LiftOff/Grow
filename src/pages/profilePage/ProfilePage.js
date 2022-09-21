@@ -13,7 +13,7 @@ import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
 
 
 
-function ProfilePage() {
+function ProfilePage( props ) {
 
     let [garden, setGarden] = useState("");
     let [filteredGarden, setFilteredGarden] = useState([]);
@@ -44,7 +44,7 @@ function ProfilePage() {
             <ProfileNavbar />
             
             <SearchBar userGarden={garden} setFilteredGarden={ setFilteredGarden }/> 
-            <MyGarden filteredGarden={ filteredGarden }/>
+            <MyGarden filteredGarden={ filteredGarden } />
         </div>
         
     );
