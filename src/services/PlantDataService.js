@@ -13,38 +13,40 @@ const plantCollectionRef = collection(db,"users",
 //const plantCollectionRef = collection(db,"plants");
 
 class PlantDataService{
-
-    addPlants = (newPlant)=>{
-        return addDoc(plantCollectionRef, newPlant);
+    getCollectionRef = (user)=>{
+        return collection(db,"users", user, "Garden");
+    }
+    addPlants = (newPlant, user)=>{
+        return addDoc(this.getCollectionRef(user), newPlant);
     };
 
-    updatePlant = (id, updatedPlant)=>{
+    updatePlant = (id, updatedPlant, user)=>{
         //const plantDoc = doc(db,"users", user.uid, "Garden", id);
-        const plantDoc = doc(db,"plants", id);
+        //const plantDoc = doc(db,"plants", id);
 
-        return updateDoc(plantDoc, updatedPlant);
+        return updateDoc(this.getCollectionRef(user), updatedPlant);
     };
 
-    deletePlant = (id) =>{
+    deletePlant = (id, user) =>{
         //const plantDoc = doc(db,"users", user.uid, "Garden", id);
-        const plantDoc = doc(db,"plants", id);
+        //const plantDoc = doc(db,"plants", id);
 
-            return deleteDoc(plantDoc);
+            return deleteDoc(this.getCollectionRef(user));
         
         
     };
 
-    getAllPlants = () =>{
+    getAllPlants = (user) =>{
         
-        return getDocs(plantCollectionRef);
+        return getDocs(this.getCollectionRef(user));
     };
     
 
-    getPlant = (id) => {
+    getPlant = (id, user) => {
         //const plantDoc = doc(db,"users", user.uid, "Garden", id);
-        const plantDoc = doc(db, "plants", id);
+        //const plantDoc = doc(db, "plants", id);
 
-        return getDoc(plantDoc);
+        return getDoc(this.getCollectionRef(user));
     };
 
 

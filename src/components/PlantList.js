@@ -16,7 +16,7 @@ import classes from ".//PlantListStyle.module.css";
 const PlantList = ({getPlantId, showEdit, filteredGarden, userId}) =>{
     const [plants, setPlants] = useState([]);
     const [plantImage, setPlantImage] = useState("");
-    var user = userId;
+    // var user = userId;
     useEffect(()=>{
         getPlants();
     },[]);
@@ -26,14 +26,14 @@ const PlantList = ({getPlantId, showEdit, filteredGarden, userId}) =>{
     
 
     const getPlants = async () => {
-        const data = await PlantDataService.getAllPlants();
+        const data = await PlantDataService.getAllPlants(userId);
         setPlants(data.docs.map((doc)=>({...doc.data(), id:doc.id})));
     };
 
     const deleteHandler = async (id) =>{
        
 
-        await PlantDataService.deletePlant(id);
+        await PlantDataService.deletePlant(id, userId);
         getPlants();
     };
     const confirmDelete = (id) =>{

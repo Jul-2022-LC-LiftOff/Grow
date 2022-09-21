@@ -104,7 +104,7 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal, userId})=>{
         try{
             
             if(id !== undefined && id !== "" ){
-                await PlantDataService.updatePlant(id, newPlant);
+                await PlantDataService.updatePlant(id, newPlant, userId);
                 setPlantId("");
                 console.log(image);
                         console.log(oldImage);
@@ -122,7 +122,7 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal, userId})=>{
                             .catch((error) => {console.log(error)});
                         }
             }else{
-                await PlantDataService.addPlants(newPlant);
+                await PlantDataService.addPlants(newPlant, userId);
                 //setMessage({error:false, msg: "New plant added successfully"});
             }
         }catch (err){
@@ -161,7 +161,7 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal, userId})=>{
     const editHandler = async () =>{
         setMessage("");
         try{
-            const docSnap = await PlantDataService.getPlant(id);
+            const docSnap = await PlantDataService.getPlant(id, userId);
             setPlantName(docSnap.data().name);
             setPlantTitle(docSnap.data().title);
             setPlantSoil(docSnap.data().soil);
@@ -203,7 +203,7 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal, userId})=>{
     }
   
     const oldImage = usePrevious(image);
-    const plantRef = async() =>await PlantDataService.getPlant(id);
+    const plantRef = async() =>await PlantDataService.getPlant(id, userId);
     const oldPlant = usePrevious(plantRef);
 
     useEffect(()=>{
