@@ -92,7 +92,7 @@ const LogInForm = () => {
       <Row className="py-4">
         <Col>
           Don't have an account{" "}
-          <Link to="/signup" className={classes.loginhere}>
+          <Link to="/Registration" className={classes.loginhere}>
             Sign up Here
           </Link>
         </Col>

@@ -10,7 +10,7 @@ function LogInPage(props) {
   return (
     <div className={classes.LogInPage}>
       <div className={classes.card}>
-        <LogInInput setUserId={props.setUserId} />
+        <LogInForm setUserId={props.setUserId} />
         {/* <h1>Test</h1> */}
       </div>
     </div>
