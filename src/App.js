@@ -38,7 +38,7 @@ function App() {
           </div>
         }
       />
-      <Route path="/profilePage" element={<ProfilePage />}></Route>
+      <Route path="/profilePage" element={<ProfilePage userId={userId}/>}></Route>
       <Route
         path="/LogIn"
         element={<LogInPage setUserId={setUserId} />}

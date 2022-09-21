@@ -8,11 +8,13 @@ import { serverTimestamp } from "firebase/firestore";
 import { Container, Row, Col, Button, Form, Alert } from "react-bootstrap";
 import classes from "./Login.module.css";
 
-const LogInForm = ( ) => {
+const LogInForm = ( props ) => {
   const initialValues = {
     email: "",
     password: "",
   };
+  const getUserId = props.setUserId;
+
   const [formValues, setFormValues] = useState(initialValues);
   // const [formErrors, setFormErrors] = useState({});
   const [error, setError] = useState("");
@@ -33,11 +35,15 @@ const LogInForm = ( ) => {
     e.preventDefault();
     setError("");
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password)
+        .then((userInfo) => {
+          getUserId(userInfo.user.uid);
+          navigate("/profilePage");
+        })
       const formValuesCopy = { ...formValues };
       delete formValuesCopy.password;
       formValuesCopy.timestamp = serverTimestamp();
-      navigate("/");
+      // navigate("/profilePage");
     } catch (err) {
       setError("Incorrect email or password");
     }
