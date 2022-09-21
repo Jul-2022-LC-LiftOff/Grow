@@ -1,4 +1,3 @@
-
 import React, { useContext } from "react";
 import "./App.css";
 import MyGarden from "./pages/myGarden";
@@ -10,7 +9,7 @@ import RegistrationPage from "./pages/registration/Registration.page";
 import NotificationPage from "./pages/notification/Notification.page";
 
 import ProfileNavbar from "./components/navbar/profile-navbar";
-import ProfilePage from "./pages/profilePage/ProfilePage"
+import ProfilePage from "./pages/profilePage/ProfilePage";
 import LogInPage from "./LogIn/LogInPage";
 import CropperTester from "./components/CropperTester";
 import MainNavbar from "./components/navbar/main-navbar";
@@ -18,17 +17,12 @@ import { HomePage } from "./pages/homepage/homepage";
 import MainBody from "./components/main_body/main_body";
 import MainPage from "./pages/homepage/mainPage";
 
-
 function App() {
   // const currentUser = auth.
   return (
-
     <Routes>
       <Route path="/signup" element={<RegistrationPage />} />
-      <Route
-        path="/login"
-        element={<div className="style">Welcome To Login Page</div>}
-      />
+      <Route path="/login" element={<LogInPage />} />
       <Route
         path="/"
         element={
@@ -39,7 +33,7 @@ function App() {
             {/* <RegistrationPage /> */}
             {/* <MyGarden /> */}
             {/* <CropperTester/> */}
-            <LogInPage />
+            {/* <LogInPage /> */}
             {/* <MainPage /> */}
             {/* <MyGarden/> */}
             <ProfilePage />
@@ -49,11 +43,9 @@ function App() {
       <Route path="/notify" element={<NotificationPage />} />
     </Routes>
 
-
     // <div class="mainBackground">
     //   <MyGarden/>
     // </div>
   );
 }
 export default App;
-

@@ -6,7 +6,8 @@ import { auth } from "../firebase-config";
 // import { db } from "../firebase-config";
 import { serverTimestamp } from "firebase/firestore";
 import { Container, Row, Col, Button, Form, Alert } from "react-bootstrap";
-import classes from "../pages/login/Login.module.css";
+import classes from "./Login.module.css";
+
 const LogInForm = () => {
   const initialValues = {
     email: "",
@@ -36,7 +37,7 @@ const LogInForm = () => {
       const formValuesCopy = { ...formValues };
       delete formValuesCopy.password;
       formValuesCopy.timestamp = serverTimestamp();
-      navigate("/mygarden");
+      navigate("/");
     } catch (err) {
       setError("Incorrect email or password");
     }
@@ -45,7 +46,7 @@ const LogInForm = () => {
     <Container>
       <Row>
         <Col>
-          <h1 className={classes.LogInPage}>Sign In</h1>
+          <h1 className={classes.signin}>Sign In</h1>
         </Col>
       </Row>
       <Row>
@@ -91,7 +92,7 @@ const LogInForm = () => {
       <Row className="py-4">
         <Col>
           Don't have an account{" "}
-          <Link to="/" className={classes.loginhere}>
+          <Link to="/signup" className={classes.loginhere}>
             Sign up Here
           </Link>
         </Col>
