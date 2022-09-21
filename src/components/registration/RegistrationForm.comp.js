@@ -25,8 +25,6 @@ const RegistrationForm = () => {
   const [formErrors, setFormErrors] = useState({});
   const [error, setError] = useState("");
 
-  // useEffect(() => {}, [formValues]);
-
   const { username, email, password } = formValues;
 
   const navigate = useNavigate();
@@ -39,8 +37,6 @@ const RegistrationForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-
-    // setFormErrors(validate(formValues));
 
     if (Object.keys(validate(formValues)).length === 0) {
       try {
@@ -61,7 +57,7 @@ const RegistrationForm = () => {
 
         await setDoc(doc(db, "users", user.uid), formValuesCopy);
 
-        navigate("/login");
+        navigate("/");
       } catch (error) {
         setError("This user already have an account");
       }
@@ -98,7 +94,7 @@ const RegistrationForm = () => {
     <Container>
       <Row>
         <Col>
-          <h1 className={classes.custombtn}>Sign Up</h1>
+          <h1 className={classes.signup}>Sign Up</h1>
         </Col>
       </Row>
 
