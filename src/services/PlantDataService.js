@@ -5,46 +5,94 @@ import { storage } from "../firebase-config";
 import { useEffect, useRef } from "react";
 import { getAuth } from "firebase/auth";
 
-const auth = getAuth();
-const user = auth.currentUser;
-//const plantCollectionRef = collection(db,"users", user.uid, "Garden");
-const plantCollectionRef = collection(db,"plants");
 
-class PlantDataService{
+// const plantCollectionRef = collection(db,"plants");
 
-    addPlants = (newPlant)=>{
-        return addDoc(plantCollectionRef, newPlant);
-    };
 
-    updatePlant = (id, updatedPlant)=>{
-        //const plantDoc = doc(db,"users", user.uid, "Garden", id);
-        const plantDoc = doc(db,"plants", id);
+function PlantDataService ( props ) {
+    console.log(props.userId);
 
-        return updateDoc(plantDoc, updatedPlant);
-    };
+    if (props.userId != null) {
+        const auth = getAuth();
+        // const user = auth.currentUser;
+        const plantCollectionRef = collection(db,"users", props.userId, "Garden");
+    
+        const addPlants = (newPlant)=>{
+            return addDoc(plantCollectionRef, newPlant);
+        };
+            
+        const updatePlant = (id, updatedPlant)=>{
+            const plantDoc = doc(db,"users", props.userId, "Garden", id);
+            // const plantDoc = doc(db,"plants", id);
 
-    deletePlant = (id) =>{
-        //const plantDoc = doc(db,"users", user.uid, "Garden", id);
-        const plantDoc = doc(db,"plants", id);
+            return updateDoc(plantDoc, updatedPlant);
+        };
 
-            return deleteDoc(plantDoc);
+        const deletePlant = (id) =>{
+            const plantDoc = doc(db,"users", props.userId, "Garden", id);
+            // const plantDoc = doc(db,"plants", id);
+
+                return deleteDoc(plantDoc);
+            
+            
+        };
+
+        const getAllPlants = () =>{
+            
+            return getDocs(plantCollectionRef);
+        };
         
-        
-    };
 
-    getAllPlants = () =>{
+        const getPlant = (id) => {
+            const plantDoc = doc(db,"users", props.userId, "Garden", id);
+            // const plantDoc = doc(db, "plants", id);
+
+            return getDoc(plantDoc);
+        };
         
-        return getDocs(plantCollectionRef);
-    };
+
+    }
+}
+export default PlantDataService;
+
+
+// class PlantDataService {
+
     
 
-    getPlant = (id) => {
-        //const plantDoc = doc(db,"users", user.uid, "Garden", id);
-        const plantDoc = doc(db, "plants", id);
+//     addPlants = (newPlant)=>{
+//         return addDoc(plantCollectionRef, newPlant);
+//     };
 
-        return getDoc(plantDoc);
-    };
+//     updatePlant = (id, updatedPlant)=>{
+//         const plantDoc = doc(db,"users", user.uid, "Garden", id);
+//         // const plantDoc = doc(db,"plants", id);
+
+//         return updateDoc(plantDoc, updatedPlant);
+//     };
+
+//     deletePlant = (id) =>{
+//         const plantDoc = doc(db,"users", user.uid, "Garden", id);
+//         // const plantDoc = doc(db,"plants", id);
+
+//             return deleteDoc(plantDoc);
+        
+        
+//     };
+
+//     getAllPlants = () =>{
+        
+//         return getDocs(plantCollectionRef);
+//     };
+    
+
+//     getPlant = (id) => {
+//         const plantDoc = doc(db,"users", user.uid, "Garden", id);
+//         // const plantDoc = doc(db, "plants", id);
+
+//         return getDoc(plantDoc);
+//     };
 
 
-}
-export default new PlantDataService();
+// }
+// export default new PlantDataService();

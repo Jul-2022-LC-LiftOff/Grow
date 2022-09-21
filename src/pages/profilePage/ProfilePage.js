@@ -43,8 +43,8 @@ function ProfilePage( props ) {
             
             <ProfileNavbar />
             
-            <SearchBar userGarden={garden} setFilteredGarden={ setFilteredGarden }/> 
-            <MyGarden filteredGarden={ filteredGarden } />
+            <SearchBar userGarden={ garden } setFilteredGarden={ setFilteredGarden }/> 
+            <MyGarden filteredGarden={ filteredGarden } userId={ props.userId }/>
         </div>
         
     );

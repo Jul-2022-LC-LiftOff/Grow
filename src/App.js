@@ -15,6 +15,7 @@ import LogInPage from "./LogIn/LogInPage";
 import MainNavbar from "./components/navbar/main-navbar";
 import MainBody from "./components/main_body/main_body";
 import MainPage from "./pages/homepage/mainPage";
+import PlantDataService from "./services/PlantDataService";
 
 function App() {
   // const currentUser = auth.
@@ -24,6 +25,8 @@ function App() {
   console.log(userId);
 
   return (
+    <>
+    <PlantDataService userId={userId}/>
     <Routes>
       {/* <Route path="/signup" element={<RegistrationPage />} /> */}
       {/* <Route
@@ -50,6 +53,8 @@ function App() {
     // <div class="mainBackground">
     //   <MyGarden/>
     // </div>
+
+    </>
   );
 }
 export default App;

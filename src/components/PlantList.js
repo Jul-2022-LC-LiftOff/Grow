@@ -56,8 +56,8 @@ const PlantList = ({getPlantId, showEdit, filteredGarden}) =>{
 
      <div className={`${classes.IndividualPlantList} container-fluid`}>
         <img className={classes.plantNotFoundImage} src={backgroundImageHandler()}/>
-                 <div className="row">
-                 {filteredGarden.map((doc)=>{
+                <div className="row">
+                {filteredGarden.map((doc)=>{
           return(
             <div id="container" className={`col-md-4 d-flex align-items-stretch ${classes.PlantCard}`} >
             <IndividualPlant 
