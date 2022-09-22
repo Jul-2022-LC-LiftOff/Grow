@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./App.css";
 import MyGarden from "./pages/myGarden";
 import { Route, Routes } from "react-router-dom";
@@ -7,22 +7,24 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import { UserContext } from "./components/UserContext";
 import RegistrationPage from "./pages/registration/Registration.page";
 import NotificationPage from "./pages/notification/Notification.page";
-
+//import {createBrowserHistory} from "history";
 import ProfileNavbar from "./components/navbar/profile-navbar";
 import ProfilePage from "./pages/profilePage/ProfilePage";
 import LogInPage from "./LogIn/LogInPage";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+///import qs from "qs";
 // import CropperTester from "./components/CropperTester";
 import MainNavbar from "./components/navbar/main-navbar";
 import MainBody from "./components/main_body/main_body";
 import MainPage from "./pages/homepage/mainPage";
+import { FirebaseError } from "firebase/app";
 
 function App() {
-  // const currentUser = auth.
 
-  const [userId, setUserId] = useState(null);
-
+  const [userId, setUserId] = useState();
+ 
   console.log(userId);
-
+  
   return (
     <Routes>
       {/* <Route path="/signup" element={<RegistrationPage />} /> */}
@@ -35,13 +37,14 @@ function App() {
         element={
           <div className="mainBackground">
             <MainPage />
+            
           </div>
         }
       />
       <Route path="/profilePage" element={<ProfilePage userId={userId}/>}></Route>
       <Route
         path="/LogIn"
-        element={<LogInPage setUserId={setUserId} />}
+        element={<LogInPage  setUserId={setUserId}/>} //setUserId={setUserId}
       ></Route>
       <Route path="/Registration" element={<RegistrationPage />}></Route>
       <Route path="/notify" element={<NotificationPage />} />

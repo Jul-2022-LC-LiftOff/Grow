@@ -6,6 +6,7 @@ import SearchBar from "../../components/searchBar/searchBar";
 import MyGarden from "../myGarden";
 import { db } from "../../firebase-config";
 import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
+import { getAuth } from "firebase/auth";
 
 
 
@@ -18,10 +19,13 @@ function ProfilePage( props ) {
     let [garden, setGarden] = useState("");
     let [filteredGarden, setFilteredGarden] = useState([]);
     
+
+    var userId = props.userId;
    
     const getGarden = async () => {
         let resultArr = [];
-        const plantsRef = collection(db, "plants");
+        const plantsRef = collection(db,"users",userId , "Garden");
+        //const plantsRef = collection(db, "plants");
         const plantsSnap = await getDocs(plantsRef);
         plantsSnap.forEach((doc) => {
             resultArr.push(doc.data());
@@ -44,7 +48,8 @@ function ProfilePage( props ) {
             <ProfileNavbar />
             
             <SearchBar userGarden={garden} setFilteredGarden={ setFilteredGarden }/> 
-            <MyGarden filteredGarden={ filteredGarden } />
+            
+            <MyGarden filteredGarden={ filteredGarden } userId={props.userId}/>
         </div>
         
     );

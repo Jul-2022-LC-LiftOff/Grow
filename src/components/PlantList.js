@@ -5,6 +5,7 @@ import {IndividualPlant} from "../components/IndividualPlant";
 import { BsFillTrashFill } from "react-icons/bs";
 import { BsFillPencilFill } from "react-icons/bs";
 import { db } from "../firebase-config";
+import { getAuth } from "firebase/auth";
 import { storage } from "../firebase-config";
 import { ref, deleteObject, getMetadata } from "firebase/storage";
 import plantsUnavailable from "../assets/plantsUnavailable.png";
@@ -13,10 +14,13 @@ import classes from ".//PlantListStyle.module.css";
 // import "./individual-style.css";
 
 
-const PlantList = ({getPlantId, showEdit, filteredGarden}) =>{
+const PlantList = ({getPlantId, showEdit, filteredGarden,userId }) =>{ //userId
     const [plants, setPlants] = useState([]);
     const [plantImage, setPlantImage] = useState("");
-
+    // const auth =getAuth();
+    // const user = auth.currentUser;
+    //const userId = user.uid;
+    // var user = userId;
     useEffect(()=>{
         getPlants();
     },[]);
@@ -26,14 +30,14 @@ const PlantList = ({getPlantId, showEdit, filteredGarden}) =>{
     
 
     const getPlants = async () => {
-        const data = await PlantDataService.getAllPlants();
+        const data = await PlantDataService.getAllPlants(userId);
         setPlants(data.docs.map((doc)=>({...doc.data(), id:doc.id})));
     };
 
     const deleteHandler = async (id) =>{
        
 
-        await PlantDataService.deletePlant(id);
+        await PlantDataService.deletePlant(id, userId);
         getPlants();
     };
     const confirmDelete = (id) =>{

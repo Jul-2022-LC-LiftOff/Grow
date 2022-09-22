@@ -5,44 +5,38 @@ import { storage } from "../firebase-config";
 import { useEffect, useRef } from "react";
 import { getAuth } from "firebase/auth";
 
-const auth = getAuth();
-const user = auth.currentUser;
-//const plantCollectionRef = collection(db,"users", user.uid, "Garden");
-const plantCollectionRef = collection(db,"plants");
+
 
 class PlantDataService{
-
-    addPlants = (newPlant)=>{
-        return addDoc(plantCollectionRef, newPlant);
+    getCollectionRef = (user)=>{
+        return collection(db,"users", user, "Garden");
+    }
+    addPlants = (newPlant, user)=>{
+        return addDoc(this.getCollectionRef(user), newPlant);
     };
 
-    updatePlant = (id, updatedPlant)=>{
-        //const plantDoc = doc(db,"users", user.uid, "Garden", id);
-        const plantDoc = doc(db,"plants", id);
-
-        return updateDoc(plantDoc, updatedPlant);
+    updatePlant = (id, updatedPlant, user)=>{
+       
+        return updateDoc(this.getCollectionRef(user), updatedPlant);
     };
 
-    deletePlant = (id) =>{
-        //const plantDoc = doc(db,"users", user.uid, "Garden", id);
-        const plantDoc = doc(db,"plants", id);
+    deletePlant = (id, user) =>{
+      
 
-            return deleteDoc(plantDoc);
+            return deleteDoc(this.getCollectionRef(user));
         
         
     };
 
-    getAllPlants = () =>{
+    getAllPlants = (user) =>{
         
-        return getDocs(plantCollectionRef);
+        return getDocs(this.getCollectionRef(user));
     };
     
 
-    getPlant = (id) => {
-        //const plantDoc = doc(db,"users", user.uid, "Garden", id);
-        const plantDoc = doc(db, "plants", id);
-
-        return getDoc(plantDoc);
+    getPlant = (id, user) => {
+       
+        return getDoc(this.getCollectionRef(user));
     };
 
 
