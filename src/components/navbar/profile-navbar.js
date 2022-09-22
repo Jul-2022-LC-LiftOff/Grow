@@ -5,10 +5,17 @@ import MyGarden from "../../pages/myGarden";
 import MainPage from "../../pages/homepage/mainPage";
 import "./profile-navbar.style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { signOut } from 'firebase/auth';
 //import "bootstrap/dist/js/bootstrap.min.js";
 
 
 export default function ProfileNavbar() {
+
+
+    const signOuthandler = () => {
+        localStorage.removeItem("id");
+    }
+
     return (
         <>
             
@@ -18,7 +25,7 @@ export default function ProfileNavbar() {
                     <Navbar.Brand className="home" href="myGarden" alt="Go to your garden">Grow</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
-                    <Nav.Link className="signout position-absolute end-0" href="/" alt="sign out">Sign Out</Nav.Link>
+                    <Nav.Link className="signout position-absolute end-0" href="/" alt="sign out" onClick={signOuthandler}>Sign Out</Nav.Link>
                 </Nav>
             </Navbar>
 
