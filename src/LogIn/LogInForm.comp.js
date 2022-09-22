@@ -37,7 +37,7 @@ const LogInForm = () => {
       const formValuesCopy = { ...formValues };
       delete formValuesCopy.password;
       formValuesCopy.timestamp = serverTimestamp();
-      navigate("/");
+      navigate("/profilePage");
     } catch (err) {
       setError("Incorrect email or password");
     }

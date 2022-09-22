@@ -1,6 +1,7 @@
 * > * {
   box-sizing: border-box;
   margin: 0;
+  /* background: url("../../assets/notify2.jpg") no-repeat fixed; */
 }
 
 body {
@@ -31,6 +32,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+
   /* width: fit-content; */
 }
 
@@ -54,6 +57,7 @@ body {
   color: white;
   font-size: 40px;
   margin: 0px;
+  margin-bottom: 60px;
   /* position: fixed; */
 }
 
