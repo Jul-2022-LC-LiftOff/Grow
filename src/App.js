@@ -22,6 +22,14 @@ import { FirebaseError } from "firebase/app";
 function App() {
 
   const [userId, setUserId] = useState();
+
+  useEffect(() => {
+
+    let id = localStorage.getItem("id");
+
+    setUserId(id);
+
+  }, [userId])
  
   console.log(userId);
   
