@@ -1,13 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import {
-  collection,
-  orderBy,
-  query,
-  Query,
-  where,
-  limit,
-} from "firebase/firestore";
+import { collection, query, where } from "firebase/firestore";
 import { db } from "../../firebase-config";
 import { getDocs } from "firebase/firestore";
 
@@ -15,7 +8,7 @@ import classes from "../../pages/notification/Notification.module.css";
 
 export default function Today() {
   const [plants, setPlants] = useState([]);
-  const [checked, setChecked] = React.useState(false);
+  // const [checked, setChecked] = React.useState(false);
 
   const plantsCollectionRef = collection(db, "plants");
 
@@ -39,7 +32,6 @@ export default function Today() {
   const q = query(
     plantsCollectionRef,
     where("waterDay", "array-contains", currentDay)
-    // orderBy("name", "array-contains", "desc")
   );
 
   const getPlants = async () => {
@@ -71,7 +63,7 @@ export default function Today() {
                   <h5>Water: {plant.waterTime}</h5>
                 </div>
                 {/* <input type="checkbox" checked={checked} /> */}
-                <button
+                {/* <button
                   onClick={() => {
                     setChecked((old) => !old);
                   }}
@@ -79,7 +71,7 @@ export default function Today() {
                 >
                   {" "}
                   {checked ? "Undo" : "Water"}{" "}
-                </button>
+                </button> */}
               </div>
             </li>
           );

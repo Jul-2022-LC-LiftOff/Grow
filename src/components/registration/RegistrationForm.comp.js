@@ -57,9 +57,10 @@ const RegistrationForm = () => {
 
         await setDoc(doc(db, "users", user.uid), formValuesCopy);
 
-        navigate("/");
+        navigate("/profilePage");
       } catch (error) {
         setError("This user already have an account");
+        // setError(error);
       }
     } else {
       setFormErrors(validate(formValues));
@@ -68,19 +69,21 @@ const RegistrationForm = () => {
 
   const validate = (values) => {
     const errors = {};
-    const regEx = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    // const regEx = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+
     if (!values.username) {
       errors.username = "Username is required";
     }
     if (!values.email) {
       errors.email = "Email is required";
-    } else if (!regEx.test(values.email)) {
-      errors.email = "Invalid email!";
     }
+    // else if (!regEx.test(values.email)) {
+    //   errors.email = "Invalid email!";
+    // }
     if (!values.password) {
       errors.password = "Password is required";
-    } else if (values.password.length < 4) {
-      errors.password = "Password must be more than 4 characters";
+    } else if (values.password.length < 6) {
+      errors.password = "Password must be more than 6 characters";
     }
     if (!values.confirmpassword) {
       errors.confirmpassword = "Confirm Password is required";

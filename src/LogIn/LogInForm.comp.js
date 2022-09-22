@@ -8,7 +8,7 @@ import { serverTimestamp } from "firebase/firestore";
 import { Container, Row, Col, Button, Form, Alert } from "react-bootstrap";
 import classes from "./Login.module.css";
 
-const LogInForm = ( props ) => {
+const LogInForm = (props) => {
   const initialValues = {
     email: "",
     password: "",
@@ -35,11 +35,12 @@ const LogInForm = ( props ) => {
     e.preventDefault();
     setError("");
     try {
-      await signInWithEmailAndPassword(auth, email, password)
-        .then((userInfo) => {
+      await signInWithEmailAndPassword(auth, email, password).then(
+        (userInfo) => {
           getUserId(userInfo.user.uid);
           navigate("/profilePage");
-        })
+        }
+      );
       const formValuesCopy = { ...formValues };
       delete formValuesCopy.password;
       formValuesCopy.timestamp = serverTimestamp();
