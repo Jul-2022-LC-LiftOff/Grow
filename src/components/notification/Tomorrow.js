@@ -8,7 +8,7 @@ import classes from "../../pages/notification/Notification.module.css";
 
 export default function Tomorrow() {
   const [plants, setPlants] = useState([]);
-  const [checked, setChecked] = React.useState(false);
+  // const [checked, setChecked] = React.useState(false);
 
   const plantsCollectionRef = collection(db, "plants");
 
@@ -59,7 +59,7 @@ export default function Tomorrow() {
                   <h5>Water: {plant.waterTime}</h5>
                 </div>
                 {/* <input type="checkbox" checked={checked} /> */}
-                <button
+                {/* <button
                   onClick={() => {
                     setChecked((old) => !old);
                   }}
@@ -67,7 +67,7 @@ export default function Tomorrow() {
                 >
                   {" "}
                   {checked ? "Undo" : "Water"}
-                </button>{" "}
+                </button>{" "} */}
               </div>
             </li>
           );
