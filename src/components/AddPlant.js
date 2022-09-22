@@ -8,12 +8,15 @@ import { storage } from "../firebase-config";
 import {deleteObject, getDownloadURL, getMetadata, ref, uploadBytesResumable} from 'firebase/storage';
 import ReactAvatarEditor from "react-avatar-editor";
 import Select from "react-select";
-
+import { getAuth } from "firebase/auth";
 import classes from "./AddPlantStyle.module.css"
 export var successAdd = false;
 export var successEdit = false;
-const AddPlant = ({id, setPlantId, closeAddModal, closeModal, userId})=>{
-    let user = userId;
+const AddPlant = ({id, setPlantId, closeAddModal, closeModal,userId })=>{//userId
+    //let user = userId;
+    // const auth =getAuth();
+    // const user = auth.currentUser;
+    // const userId = user.uid;
     const [name, setPlantName] = useState("");
     const [title, setPlantTitle] = useState("");
     const [soil, setPlantSoil] = useState("");

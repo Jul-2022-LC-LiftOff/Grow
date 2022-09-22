@@ -11,34 +11,20 @@ import NotificationPage from "./pages/notification/Notification.page";
 import ProfileNavbar from "./components/navbar/profile-navbar";
 import ProfilePage from "./pages/profilePage/ProfilePage";
 import LogInPage from "./LogIn/LogInPage";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 ///import qs from "qs";
 // import CropperTester from "./components/CropperTester";
 import MainNavbar from "./components/navbar/main-navbar";
 import MainBody from "./components/main_body/main_body";
 import MainPage from "./pages/homepage/mainPage";
+import { FirebaseError } from "firebase/app";
 
 function App() {
-  const auth = getAuth();
-  const user = auth.currentUser;
-  var userId;
-const [userIds, setUserId] = useState();
-if(user){
-  setUserId(user.uid);
-  userId = user.uid;
-}
-  //const history = createBrowserHistory(); 
+
+  const [userId, setUserId] = useState();
+ 
   console.log(userId);
-  // useEffect(()=>{
-  //   const filterParams = history.location.search.substr(1);
-  //   const filtersFromParams = qs.parse(filterParams);
-  //   if(filtersFromParams.userId){
-  //     setUserId(Number(filtersFromParams.userId));
-  //   }
-  // },[]);
-  // useEffect(()=>{
-  //   history.push(`?userId = ${userId}`);
-  // },[userId]);
+  
   return (
     <Routes>
       {/* <Route path="/signup" element={<RegistrationPage />} /> */}
@@ -51,6 +37,7 @@ if(user){
         element={
           <div className="mainBackground">
             <MainPage />
+            
           </div>
         }
       />
