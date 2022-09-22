@@ -22,7 +22,7 @@ function App() {
 
   const [userId, setUserId] = useState(null);
 
-  console.log(userId);
+  // console.log(userId);
 
   return (
     <>
@@ -49,10 +49,6 @@ function App() {
       <Route path="/Registration" element={<RegistrationPage />}></Route>
       <Route path="/notify" element={<NotificationPage />} />
     </Routes>
-
-    // <div class="mainBackground">
-    //   <MyGarden/>
-    // </div>
 
     </>
   );

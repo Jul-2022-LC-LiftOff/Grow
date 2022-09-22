@@ -9,8 +9,17 @@ import ImageUnavailable from "../assets/ImageUnavailable.png";
 
 export const IndividualPlant = ({plantData, getIdAndEdit, deleteThePlant})=>{
     
+
     const displayWaterDays = ()=>{
         var string = "";
+
+
+        // this is when plantData doesn't exist, the component would not error out
+        if (plantData == "") {
+            return string;
+        }
+
+
         for(let i=0; i<plantData.waterDay.length;i++){
             if(plantData.waterDay.length === 1){
                 string += plantData.waterDay[i];
@@ -65,11 +74,11 @@ export const IndividualPlant = ({plantData, getIdAndEdit, deleteThePlant})=>{
                             </ListGroup>
                         
                             </Card.Body>
-                            <div class={classes.buttons}>
-                        <div class={classes.buttonTrash}>
+                            <div className={classes.buttons}>
+                        <div className={classes.buttonTrash}>
                         <button className="btn btn-light" onClick = {deleteThePlant}><BsFillTrashFill></BsFillTrashFill></button>
                         </div>
-                        <div class={classes.buttonEdit}>
+                        <div className={classes.buttonEdit}>
                        <button className="btn btn-light" onClick ={getIdAndEdit}><BsFillPencilFill></BsFillPencilFill></button>
                        
                         </div>

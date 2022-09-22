@@ -18,7 +18,7 @@ const PlantList = ({getPlantId, showEdit, filteredGarden}) =>{
     const [plantImage, setPlantImage] = useState("");
 
     useEffect(()=>{
-        getPlants();
+        // getPlants();
     },[]);
     // componentDidMount(()=>{
     //     getPlants();
@@ -43,13 +43,23 @@ const PlantList = ({getPlantId, showEdit, filteredGarden}) =>{
            
         }
     }
+
+    // I comment the code block out to disable the function so it doesnt do anything for debuging
     const backgroundImageHandler =()=>{
-        if(filteredGarden.length===0 ){
-            return plantNotFound;
-        }else if(plants.length===0){
-            return plantsUnavailable;
-        }
+        // if(filteredGarden.length===0 ){
+        //     return plantNotFound;
+        // }else if(plants.length===0){
+        //     return plantsUnavailable;
+        // }
     }
+
+
+    // this is for preventing component getting undefined pass down to jsx causing errors
+    if (filteredGarden == undefined) {
+        console.log("null check fired");
+        filteredGarden = [""];
+    }
+
     
     return(
         <div className={classes.backgroundPlants}>

@@ -13,6 +13,11 @@ import classes from "./AddPlantStyle.module.css"
 export var successAdd = false;
 export var successEdit = false;
 const AddPlant = ({id, setPlantId, closeAddModal, closeModal})=>{
+
+    useEffect(() => {
+        console.log(PlantDataService)
+    }, [])
+    
     
     const [name, setPlantName] = useState("");
     const [title, setPlantTitle] = useState("");
