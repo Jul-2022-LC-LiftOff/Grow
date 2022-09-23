@@ -7,7 +7,7 @@ import "./profile-navbar.style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 //import "bootstrap/dist/js/bootstrap.min.js";
 
-export default function ProfileNavbar() {
+export default function WaterNavbar() {
   return (
     <>
       <Navbar
@@ -20,20 +20,12 @@ export default function ProfileNavbar() {
         <Nav>
           <Navbar.Brand
             className="home"
-            href="myGarden"
+            href="/profilePage"
             alt="Go to your garden"
           >
             Grow
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-
-          <Nav.Link
-            className="water position-absolute end-0"
-            href="/notify"
-            alt="Water Schedule"
-          >
-            Water
-          </Nav.Link>
 
           <Nav.Link
             className="signout position-absolute end-0"
