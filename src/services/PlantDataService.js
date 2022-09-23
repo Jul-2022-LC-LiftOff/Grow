@@ -15,7 +15,6 @@ class PlantDataService{
     }
 
     addPlants = (newPlant, user)=>{
-        this.counter+= 1;
         return addDoc(this.getCollectionRef(user), newPlant);
     };
 
