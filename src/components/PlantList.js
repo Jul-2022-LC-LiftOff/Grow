@@ -42,7 +42,7 @@ const PlantList = ({getPlantId, showEdit, filteredGarden, userId }) =>{ //userId
     //     setPlants( data.docs.map((doc)=>({...doc.data(), id:doc.id})) );
     };
 
-    const deleteHandler = async (id, userId) =>{
+    const deleteHandler = async (id) =>{
        
 
         await PlantDataService.deletePlant(id, userId);

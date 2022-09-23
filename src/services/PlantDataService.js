@@ -25,7 +25,7 @@ class PlantDataService{
 
     deletePlant = (id, user) =>{
         // return deleteDoc(this.getCollectionRef(user));
-        return deleteDoc(doc(db, "user", user, "Garden", id))
+        return deleteDoc(doc(db, "users", user, "Garden", id))
     };
 
     getAllPlants = (user) =>{
