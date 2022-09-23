@@ -28,8 +28,8 @@ function App() {
     let id = localStorage.getItem("id");
 
     setUserId(id);
-
-  }, [userId])
+    
+  }, [])
  
   console.log(userId);
   

@@ -24,8 +24,13 @@ function ProfilePage( props ) {
    
     const getGarden = async () => {
         let resultArr = [];
+
+
         const plantsRef = collection(db,"users",userId , "Garden");
-        //const plantsRef = collection(db, "plants");
+        // const plantsRef = collection(db, "plants");
+        
+        
+        console.log(plantsRef);
         const plantsSnap = await getDocs(plantsRef);
         plantsSnap.forEach((doc) => {
             resultArr.push(doc.data());
