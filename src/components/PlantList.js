@@ -74,8 +74,6 @@ const PlantList = ({getPlantId, showEdit, filteredGarden, userId }) =>{ //userId
 
                     <div className="row">
                         {filteredGarden.map((doc)=>{
-                
-                        <h1>{doc.name}</h1>
 
                         return(
                             <div id="container" className={`col-md-4 d-flex align-items-stretch ${classes.PlantCard}`} >
