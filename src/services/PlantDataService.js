@@ -20,7 +20,7 @@ class PlantDataService{
     };
 
     updatePlant = (id, updatedPlant, user)=>{
-        return updateDoc(this.getCollectionRef(user), updatedPlant);
+        return updateDoc(doc(db, "users", user, "Garden", id), updatedPlant);
     };
 
     deletePlant = (id, user) =>{
@@ -35,9 +35,9 @@ class PlantDataService{
 
 
 
-    // getPlant = (id, user) => {
-    //     return getDoc(this.getCollectionRef(user));
-    // };
+    getPlant = (id, user) => {
+        return getDoc(doc(db, "users", user, "Garden", id));
+    };
 
 
 }

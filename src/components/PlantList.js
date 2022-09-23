@@ -64,7 +64,7 @@ const PlantList = ({getPlantId, showEdit, filteredGarden, userId }) =>{ //userId
         // }
     }
     
-    console.log(filteredGarden[0])
+    console.log(filteredGarden)
 
     return(
         <div className={classes.backgroundPlants}>
