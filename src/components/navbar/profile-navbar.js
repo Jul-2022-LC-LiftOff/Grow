@@ -6,8 +6,22 @@ import MainPage from "../../pages/homepage/mainPage";
 import "./profile-navbar.style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 //import "bootstrap/dist/js/bootstrap.min.js";
+import { getAuth, signOut } from "firebase/auth";
 
 export default function ProfileNavbar() {
+  const signOuthandler = () => {
+    localStorage.removeItem("id");
+
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
+
   return (
     <>
       <Navbar
@@ -28,17 +42,10 @@ export default function ProfileNavbar() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
           <Nav.Link
-            className="water position-absolute end-0"
-            href="/notify"
-            alt="Water Schedule"
-          >
-            Water
-          </Nav.Link>
-
-          <Nav.Link
             className="signout position-absolute end-0"
             href="/"
             alt="sign out"
+            onClick={signOuthandler}
           >
             Sign Out
           </Nav.Link>

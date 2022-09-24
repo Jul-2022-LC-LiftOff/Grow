@@ -38,6 +38,9 @@ const LogInForm = (props) => {
       await signInWithEmailAndPassword(auth, email, password).then(
         (userInfo) => {
           getUserId(userInfo.user.uid);
+
+          localStorage.setItem("id", userInfo.user.uid);
+
           navigate("/profilePage");
         }
       );

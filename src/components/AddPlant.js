@@ -14,12 +14,17 @@ import {
 } from "firebase/storage";
 import ReactAvatarEditor from "react-avatar-editor";
 import Select from "react-select";
-
+import { getAuth } from "firebase/auth";
 import classes from "./AddPlantStyle.module.css";
-
 export var successAdd = false;
 export var successEdit = false;
-const AddPlant = ({ id, setPlantId, closeAddModal, closeModal }) => {
+
+const AddPlant = ({ id, setPlantId, closeAddModal, closeModal, userId }) => {
+  //userId
+  //let user = userId;
+  // const auth =getAuth();
+  // const user = auth.currentUser;
+  // const userId = user.uid;
   const [name, setPlantName] = useState("");
   const [title, setPlantTitle] = useState("");
   const [soil, setPlantSoil] = useState("");
@@ -40,6 +45,10 @@ const AddPlant = ({ id, setPlantId, closeAddModal, closeModal }) => {
   const [message, setMessage] = useState({ error: false, msg: "" });
   const [disableSelection, setDisableSelection] = useState(false);
   const [maxDays, setMaxDays] = useState(7);
+
+  // useEffect(() => {
+  //     console.log(userId);
+  // }, [userId])
 
   const limitSelections = () => {
     if (water === "Never" || water === "Daily") {
@@ -141,7 +150,7 @@ const AddPlant = ({ id, setPlantId, closeAddModal, closeModal }) => {
 
     try {
       if (id !== undefined && id !== "") {
-        await PlantDataService.updatePlant(id, newPlant);
+        await PlantDataService.updatePlant(id, newPlant, userId);
         setPlantId("");
         console.log(image);
         console.log(oldImage);
@@ -167,7 +176,7 @@ const AddPlant = ({ id, setPlantId, closeAddModal, closeModal }) => {
             });
         }
       } else {
-        await PlantDataService.addPlants(newPlant);
+        await PlantDataService.addPlants(newPlant, userId);
         //setMessage({error:false, msg: "New plant added successfully"});
       }
     } catch (err) {
@@ -203,7 +212,7 @@ const AddPlant = ({ id, setPlantId, closeAddModal, closeModal }) => {
   const editHandler = async () => {
     setMessage("");
     try {
-      const docSnap = await PlantDataService.getPlant(id);
+      const docSnap = await PlantDataService.getPlant(id, userId);
       setPlantName(docSnap.data().name);
       setPlantTitle(docSnap.data().title);
       setPlantSoil(docSnap.data().soil);
@@ -240,7 +249,7 @@ const AddPlant = ({ id, setPlantId, closeAddModal, closeModal }) => {
   }
 
   const oldImage = usePrevious(image);
-  const plantRef = async () => await PlantDataService.getPlant(id);
+  const plantRef = async () => await PlantDataService.getPlant(id, userId);
   const oldPlant = usePrevious(plantRef);
 
   useEffect(() => {
@@ -302,7 +311,7 @@ const AddPlant = ({ id, setPlantId, closeAddModal, closeModal }) => {
       <section>
         <div>
           <Card className="IndividualPlantModal" id="addModal">
-            <div class="uploadImage ">
+            <div className="uploadImage ">
               <div>
                 <div>
                   <ReactAvatarEditor
@@ -396,7 +405,7 @@ const AddPlant = ({ id, setPlantId, closeAddModal, closeModal }) => {
                   <span style={{ fontWeight: "bold" }}>Size:</span>
                   <div>
                     <select
-                      class="form-select"
+                      className="form-select"
                       aria-label="Default select example"
                       onChange={(event) => setPlantSize(event.target.value)}
                       value={size}
@@ -419,7 +428,7 @@ const AddPlant = ({ id, setPlantId, closeAddModal, closeModal }) => {
                   <span style={{ fontWeight: "bold" }}>Soil:</span>
                   <div>
                     <select
-                      class="form-select"
+                      className="form-select"
                       aria-label="Default select example"
                       onChange={(event) => setPlantSoil(event.target.value)}
                       value={soil}
@@ -440,7 +449,7 @@ const AddPlant = ({ id, setPlantId, closeAddModal, closeModal }) => {
                   <span style={{ fontWeight: "bold" }}>Sun:</span>
                   <div>
                     <select
-                      class="form-select"
+                      className="form-select"
                       aria-label="Default select example"
                       onChange={(event) => setPlantSun(event.target.value)}
                       value={sun}
@@ -464,7 +473,7 @@ const AddPlant = ({ id, setPlantId, closeAddModal, closeModal }) => {
                   <div>
                     <select
                       id="hardiness"
-                      class="form-select"
+                      className="form-select"
                       aria-label="Default select example"
                       onChange={(event) =>
                         setPlantHardiness(event.target.value)
@@ -492,7 +501,7 @@ const AddPlant = ({ id, setPlantId, closeAddModal, closeModal }) => {
                   </span>
                   <div>
                     <select
-                      class="form-select"
+                      className="form-select"
                       aria-label="Default select example"
                       onChange={(event) => setPlantWater(event.target.value)}
                       value={water}

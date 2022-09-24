@@ -12,7 +12,7 @@ import PlantDataService from "../services/PlantDataService";
 import { successAdd } from "../components/AddPlant";
 import { successEdit } from "../components/AddPlant";
 import classes from ".//MyGardenStyle.module.css";
-const MyGarden = (props) => {
+const MyGarden = ( props ) => {
   //const currentUser = useContext(UserContext)
   const [showAdd, setShowAdd] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
@@ -92,6 +92,7 @@ const MyGarden = (props) => {
             id={plantId}
             setPlantId={setPlantId}
             closeAddModal={handleAddClose}
+            userId={props.userId}
           />
         </Modal.Body>
       </Modal>
@@ -118,6 +119,7 @@ const MyGarden = (props) => {
         getPlantId={getPlantIdHandler}
         showEdit={handleEditShow}
         filteredGarden={props.filteredGarden}
+        userId={props.userId}
       />
       {/* filteredGarden={props.filteredGarden} */}
     </div>

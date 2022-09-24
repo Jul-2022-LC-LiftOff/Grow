@@ -1,48 +1,41 @@
 import { db } from "../firebase-config";
-import { collection, getDoc, getDocs, addDoc, updateDoc, deleteDoc, doc, FieldPath, DocumentSnapshot } from "firebase/firestore";
+import { collection, getDoc, getDocs, addDoc, updateDoc, deleteDoc, doc, FieldPath, DocumentSnapshot, setDoc } from "firebase/firestore";
 import { ref, getMetadata } from "firebase/storage";
 import { storage } from "../firebase-config";
 import { useEffect, useRef } from "react";
 import { getAuth } from "firebase/auth";
 
-const auth = getAuth();
-const user = auth.currentUser;
-//const plantCollectionRef = collection(db,"users", user.uid, "Garden");
-const plantCollectionRef = collection(db,"plants");
+
 
 class PlantDataService{
+    
 
-    addPlants = (newPlant)=>{
-        return addDoc(plantCollectionRef, newPlant);
+    getCollectionRef = (user)=>{
+        return collection(db,"users", user, "Garden");
+    }
+
+    addPlants = (newPlant, user)=>{
+        return addDoc(this.getCollectionRef(user), newPlant);
     };
 
-    updatePlant = (id, updatedPlant)=>{
-        //const plantDoc = doc(db,"users", user.uid, "Garden", id);
-        const plantDoc = doc(db,"plants", id);
-
-        return updateDoc(plantDoc, updatedPlant);
+    updatePlant = (id, updatedPlant, user)=>{
+        return updateDoc(doc(db, "users", user, "Garden", id), updatedPlant);
     };
 
-    deletePlant = (id) =>{
-        //const plantDoc = doc(db,"users", user.uid, "Garden", id);
-        const plantDoc = doc(db,"plants", id);
-
-            return deleteDoc(plantDoc);
-        
-        
+    deletePlant = (id, user) =>{
+        // return deleteDoc(this.getCollectionRef(user));
+        return deleteDoc(doc(db, "users", user, "Garden", id))
     };
 
-    getAllPlants = () =>{
-        
-        return getDocs(plantCollectionRef);
+    getAllPlants = (user) =>{
+        return getDocs(this.getCollectionRef(user));
     };
     
 
-    getPlant = (id) => {
-        //const plantDoc = doc(db,"users", user.uid, "Garden", id);
-        const plantDoc = doc(db, "plants", id);
 
-        return getDoc(plantDoc);
+
+    getPlant = (id, user) => {
+        return getDoc(doc(db, "users", user, "Garden", id));
     };
 
 
