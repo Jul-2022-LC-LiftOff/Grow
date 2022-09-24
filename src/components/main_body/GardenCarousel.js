@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Carousel } from "react-bootstrap";
 
-import {collection, getDocs} from "firebase/firestore"
+import {collection, getDoc, getDocs, query, where, doc} from "firebase/firestore"
 import { db } from "../../firebase-config";
 
 function GardenCarousel() {
@@ -22,14 +22,26 @@ function GardenCarousel() {
     }
 
 
-    // this is for later when user and user garden are linked 
+    // getUsers will pick 3 random user who have plants in their garden, you can change the number of 
+    // users to pick on line 34 the pickRandom function 2nd parameter
     const getUsers = async () => {
-        let userArr = [];
+
         const usersRef = collection(db, "users");
-        const usersSnap = await getDocs(usersRef);
-        usersSnap.forEach((doc) => {
-            userArr.push(doc.data())
-        })
+        const usersWithPlantsQ = query(usersRef, where("hasPlants", "==", true))
+        const usersWithPlantsSnap = await getDocs(usersWithPlantsQ);
+
+        const docs = usersWithPlantsSnap.docs;
+        const randomPickedDocs = pickRandom(docs, 3);
+
+        // console.log(randomPickedDocs);
+        return randomPickedDocs;
+    }
+
+    const getUserPlant = async (userDoc) => {
+        const userGardenRef = collection(db, "users", userDoc.id, "Garden");
+        const userGardenSnap = await getDocs(userGardenRef);
+ 
+        return userGardenSnap.docs[0];
     }
 
     function pickRandom(arr, numOfItem) {
@@ -50,6 +62,8 @@ function GardenCarousel() {
     
         return resultArr;
     }
+    
+    let plantsArr = [];
 
     useEffect(() => {
 
@@ -60,7 +74,34 @@ function GardenCarousel() {
         })
 
         
+        getUsers()
+        .then((res) => {
+
+            
+            res.forEach((user) => {
+                getUserPlant(user)
+                .then((res) => {
+                    console.log(res)
+                    plantsArr.push(res);
+                })
+            })
+            
+
+            // let user = res[0];
+            // console.log(user)
+
+            // getUserPlant(user)
+            // .then((res) => {
+            //     console.log(res);
+            // })
+        })
+        
     }, [])
+
+    if (plantsArr.length != 0) {
+        console.log(plantsArr);
+    }
+    
 
     let carouselItems = null;
     if (randomList) {
