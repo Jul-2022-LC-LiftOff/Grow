@@ -92,6 +92,7 @@ const MyGarden = (props) => {
             id={plantId}
             setPlantId={setPlantId}
             closeAddModal={handleAddClose}
+            userId = {props.userId}
           />
         </Modal.Body>
       </Modal>
@@ -110,6 +111,8 @@ const MyGarden = (props) => {
             id={plantId}
             setPlantId={setPlantId}
             closeModal={handleEditClose}
+            userId = {props.userId}
+
           />
         </Modal.Body>
       </Modal>
@@ -118,6 +121,7 @@ const MyGarden = (props) => {
         getPlantId={getPlantIdHandler}
         showEdit={handleEditShow}
         filteredGarden={props.filteredGarden}
+        userId = {props.userId}
       />
       {/* filteredGarden={props.filteredGarden} */}
     </div>

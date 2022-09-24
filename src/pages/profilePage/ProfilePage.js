@@ -18,13 +18,18 @@ function ProfilePage( props ) {
 
     let [garden, setGarden] = useState("");
     let [filteredGarden, setFilteredGarden] = useState([]);
-    
+    const [user, setUser] = useState();
 
     var userId = props.userId;
    
     const getGarden = async () => {
         let resultArr = [];
-        const plantsRef = collection(db,"users",userId , "Garden");
+        const plantsRef = collection(db,"users", 
+        
+        
+        
+        
+        userId, "Garden");
         //const plantsRef = collection(db, "plants");
         const plantsSnap = await getDocs(plantsRef);
         plantsSnap.forEach((doc) => {
@@ -32,15 +37,25 @@ function ProfilePage( props ) {
         })
         return resultArr;
     }
-
+    // useEffect(()=>{
+    //     const auth = getAuth();
+    //     const user = auth.currentUser;
+    //     if(user !== null){
+    //         setUser(user);
+    //         console.log(user);
+    //     }
+    // });
     useEffect(() => {
-
+        
         getGarden()
             .then((result) => {
                 setGarden(result);
                 setFilteredGarden(result);
+                console.log(filteredGarden);
+                console.log(garden);
             });
     }, []);
+   
     
     return (
         <div>

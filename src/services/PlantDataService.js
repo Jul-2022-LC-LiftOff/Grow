@@ -16,14 +16,15 @@ class PlantDataService{
     };
 
     updatePlant = (id, updatedPlant, user)=>{
-       
-        return updateDoc(this.getCollectionRef(user), updatedPlant);
+        const plantDoc = doc(db, "users", user, "Garden", id);
+
+        return updateDoc(plantDoc, updatedPlant);
     };
 
     deletePlant = (id, user) =>{
       
-
-            return deleteDoc(this.getCollectionRef(user));
+        const plantDoc = doc(db, "users", user, "Garden", id);
+            return deleteDoc(plantDoc);
         
         
     };
@@ -35,8 +36,9 @@ class PlantDataService{
     
 
     getPlant = (id, user) => {
-       
-        return getDoc(this.getCollectionRef(user));
+        const plantDoc = doc(db, "users", user, "Garden", id);
+
+        return getDoc(plantDoc);
     };
 
 
