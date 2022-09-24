@@ -12,7 +12,9 @@ import { getAuth } from "firebase/auth";
 import classes from "./AddPlantStyle.module.css"
 export var successAdd = false;
 export var successEdit = false;
-const AddPlant = ({id, setPlantId, closeAddModal, closeModal,userId })=>{//userId
+
+
+const AddPlant = ({id, setPlantId, closeAddModal, closeModal, userId })=>{//userId
     //let user = userId;
     // const auth =getAuth();
     // const user = auth.currentUser;
@@ -37,7 +39,12 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal,userId })=>{//userI
     const [message, setMessage] = useState({error: false, msg: ""});
     const [disableSelection, setDisableSelection] = useState(false);
     const [maxDays, setMaxDays] = useState(7);
-  
+
+    
+    // useEffect(() => {
+    //     console.log(userId);
+    // }, [userId])
+
     const limitSelections =()=>{
         if(water === "Never" || water==="Daily"){
             return true;
@@ -275,7 +282,7 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal,userId })=>{//userI
       <div >
       <Card className="IndividualPlantModal" id="addModal"  >
 
-              <div class="uploadImage ">
+              <div className="uploadImage ">
                     <div>
                     <div>
                         <ReactAvatarEditor
@@ -346,7 +353,7 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal,userId })=>{//userI
 
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Size:</span> 
                   <div>
-                  <select class="form-select" aria-label="Default select example" onChange={(event)=> setPlantSize(event.target.value)} value={size} required>
+                  <select className="form-select" aria-label="Default select example" onChange={(event)=> setPlantSize(event.target.value)} value={size} required>
                         <option value=""></option>
                       <option value="1-3 inches">1-5 inches</option>
                       <option value="4-7 inches">4-7 inches</option>
@@ -362,7 +369,7 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal,userId })=>{//userI
 
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Soil:</span> 
                   <div>
-                  <select class="form-select" aria-label="Default select example" onChange={(event)=> setPlantSoil(event.target.value)} value={soil} required>
+                  <select className="form-select" aria-label="Default select example" onChange={(event)=> setPlantSoil(event.target.value)} value={soil} required>
                     <option value=""></option>
                       <option value="Clay">Clay</option>
                       <option value="Sandy">Sandy</option>
@@ -376,7 +383,7 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal,userId })=>{//userI
                   
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Sun:</span> 
                   <div >
-                  <select class="form-select" aria-label="Default select example" onChange={(event)=> setPlantSun(event.target.value)} value={sun} required>
+                  <select className="form-select" aria-label="Default select example" onChange={(event)=> setPlantSun(event.target.value)} value={sun} required>
                         <option value=""></option>
                       <option value="Direct light">Direct light</option>
                       <option value="Bright indirect light">Bright indirect light</option>
@@ -388,7 +395,7 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal,userId })=>{//userI
                 
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Hardiness:</span> 
                   <div>
-                  <select id="hardiness" class="form-select" aria-label="Default select example"  onChange={(event)=> setPlantHardiness(event.target.value)} value={hardiness} required>
+                  <select id="hardiness" className="form-select" aria-label="Default select example"  onChange={(event)=> setPlantHardiness(event.target.value)} value={hardiness} required>
                     <option value=""></option>
                       <option value="1">1</option>
                       <option value="2">2</option>
@@ -407,7 +414,7 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal,userId })=>{//userI
                   <ListGroupItem><span style={{fontWeight:'bold'}}>Watering Frequency:</span> 
                   <div>
 
-                  <select class="form-select" aria-label="Default select example" onChange={(event)=> setPlantWater(event.target.value)} value={water} >
+                  <select className="form-select" aria-label="Default select example" onChange={(event)=> setPlantWater(event.target.value)} value={water} >
                       <option value=""></option>
                       <option value="Daily">Daily</option>
                       <option value="3-5 times per week">3-5 times per week</option>
