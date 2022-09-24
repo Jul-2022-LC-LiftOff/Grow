@@ -23,6 +23,9 @@ export default function NotificationPage() {
             <h1 className={classes.h1}>Tomorrow</h1>
             <Tomorrow />
           </div>
+          <div>
+            <CurrentUser />
+          </div>
         </div>
       </p>
     </div>

@@ -16,6 +16,7 @@ import ReactAvatarEditor from "react-avatar-editor";
 import Select from "react-select";
 
 import classes from "./AddPlantStyle.module.css";
+
 export var successAdd = false;
 export var successEdit = false;
 const AddPlant = ({ id, setPlantId, closeAddModal, closeModal }) => {
