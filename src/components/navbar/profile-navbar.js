@@ -3,6 +3,7 @@ import { Nav, Navbar } from "react-bootstrap";
 import { Route, Routes } from "react-router-dom";
 import MyGarden from "../../pages/myGarden";
 import MainPage from "../../pages/homepage/mainPage";
+import NotificationPage from "../../pages/notification/Notification.page";
 import "./profile-navbar.style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 //import "bootstrap/dist/js/bootstrap.min.js";
@@ -48,6 +49,10 @@ export default function ProfileNavbar() {
             onClick={signOuthandler}
           >
             Sign Out
+          </Nav.Link>
+
+          <Nav.Link className="water" href="/notify" alt="water schedule">
+            Water Schedule
           </Nav.Link>
         </Nav>
       </Navbar>

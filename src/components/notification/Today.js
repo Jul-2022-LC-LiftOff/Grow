@@ -1,58 +1,57 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { collection, query, where } from "firebase/firestore";
-import { db } from "../../firebase-config";
-import { getDocs } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  doc,
+  query,
+  where,
+  getDoc,
+} from "firebase/firestore";
+import { db, auth } from "../../firebase-config";
+import PlantDataService from "../../services/PlantDataService";
 
 import classes from "../../pages/notification/Notification.module.css";
 
 export default function Today() {
-  const [plants, setPlants] = useState([]);
-  // const [checked, setChecked] = React.useState(false);
+  const [gardenData, setGardenData] = useState([]);
 
-  const plantsCollectionRef = collection(db, "plants");
-
-  const weekday = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-
-  let showDate = new Date();
-  let currentDay = weekday[showDate.getDay()];
-  // let waterDayInt = parseInt(plants.waterDay);
-
-  // const waterDayConvert = [showDate.getTime()];
-  // console.log(showDate.getHours() + ":" + showDate.getMinutes());
-
-  const q = query(
-    plantsCollectionRef,
-    where("waterDay", "array-contains", currentDay)
-  );
-
-  const getPlants = async () => {
-    const data = await getDocs(q);
-
-    // data.forEach((doc) => {
-    //   // doc.data() is never undefined for query doc snapshots
-    //   console.log(doc.id, " => ", doc.data());
-    // });
-    setPlants(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  };
+  const user = auth.currentUser;
+  const userId = user.uid;
+  const userEmail = user.email;
 
   useEffect(() => {
-    getPlants();
-    // eslint-disable-next-line
-  }, []);
+    if (!user) {
+      console.log("No user defined");
+    } else {
+      const getData = async () => {
+        const q = query(collection(db, "users"));
+        const snapshot = await getDocs(q);
+        const data = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        data.map(async (elem) => {
+          const gardenQ = query(collection(db, `users/${elem.id}/Garden`));
+          const gardenDetails = await getDocs(gardenQ);
+          const GardenInfo = gardenDetails.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+          }));
+          setGardenData(GardenInfo);
+        });
+      };
+      getData();
+    }
+  }, [user]);
 
   return (
     <div>
+      Logged in as
+      <div>Email: {userEmail}</div>
+      <div>ID: {userId}</div>
       <ul>
-        {plants.map((plant, index) => {
+        {gardenData.map((plant, index) => {
           return (
             <li key={index}>
               <div className={classes.flex}>
