@@ -14,11 +14,12 @@ export var successAdd = false;
 export var successEdit = false;
 
 
-const AddPlant = ({id, setPlantId, closeAddModal, closeModal, userId })=>{//userId
+const AddPlant = ({id, setPlantId, closeAddModal, closeModal, userId, updateTrigger, updateVal })=>{//userId
     //let user = userId;
     // const auth =getAuth();
     // const user = auth.currentUser;
     // const userId = user.uid;
+    
     const [name, setPlantName] = useState("");
     const [title, setPlantTitle] = useState("");
     const [soil, setPlantSoil] = useState("");
@@ -41,9 +42,10 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal, userId })=>{//user
     const [maxDays, setMaxDays] = useState(7);
 
     
-    // useEffect(() => {
-    //     console.log(userId);
-    // }, [userId])
+    useEffect(() => {
+        // console.log(userId);
+        // console.log(updateTrigger)
+    }, [userId])
 
     const limitSelections =()=>{
         if(water === "Never" || water==="Daily"){
@@ -100,6 +102,9 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal, userId })=>{//user
         e.preventDefault();
         setMessage("");
         
+        
+        updateTrigger(updateVal + 1);
+
         if(name==="" || title==="" || water==="" || waterTime==="" ){
             setMessage({error:true, msg: "All fields are required!"});
             e.preventDefault();
@@ -158,7 +163,7 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal, userId })=>{//user
         setPlantWaterTime("");
         setPlantWaterDay([]);
         setImage("");
-        console.log(newPlant);
+        // console.log(newPlant);
         if(id !== undefined && id !== "" ){
             
             successEdit= true;
