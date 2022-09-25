@@ -111,6 +111,8 @@ const MyGarden = ( props ) => {
             id={plantId}
             setPlantId={setPlantId}
             closeModal={handleEditClose}
+            userId = {props.userId}
+
           />
         </Modal.Body>
       </Modal>

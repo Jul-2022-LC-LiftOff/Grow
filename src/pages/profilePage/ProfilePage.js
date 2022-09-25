@@ -18,7 +18,7 @@ function ProfilePage( props ) {
 
     let [garden, setGarden] = useState("");
     let [filteredGarden, setFilteredGarden] = useState([]);
-    
+    const [user, setUser] = useState();
 
     var userId = props.userId;
     const getGarden = async () => {
@@ -59,7 +59,14 @@ function ProfilePage( props ) {
         // console.log(resultArr);
         return resultArr;
     }
-
+    // useEffect(()=>{
+    //     const auth = getAuth();
+    //     const user = auth.currentUser;
+    //     if(user !== null){
+    //         setUser(user);
+    //         console.log(user);
+    //     }
+    // });
     useEffect(() => {
 
         if (userId) {
