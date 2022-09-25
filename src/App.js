@@ -54,7 +54,7 @@ function App() {
         path="/LogIn"
         element={<LogInPage  setUserId={setUserId}/>} //setUserId={setUserId}
       ></Route>
-      <Route path="/Registration" element={<RegistrationPage />}></Route>
+      <Route path="/Registration" element={<RegistrationPage setUserId={setUserId}/>}></Route>
       <Route path="/notify" element={<NotificationPage />} />
     </Routes>
 

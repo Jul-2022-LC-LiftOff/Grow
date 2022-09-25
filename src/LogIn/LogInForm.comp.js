@@ -13,7 +13,7 @@ const LogInForm = (props) => {
     email: "",
     password: "",
   };
-  const getUserId = props.setUserId;
+  const setUserId = props.setUserId;
 
   const [formValues, setFormValues] = useState(initialValues);
   // const [formErrors, setFormErrors] = useState({});
@@ -35,9 +35,10 @@ const LogInForm = (props) => {
     e.preventDefault();
     setError("");
     try {
-      await signInWithEmailAndPassword(auth, email, password).then(
+      await signInWithEmailAndPassword(auth, email, password)
+      .then(
         (userInfo) => {
-          getUserId(userInfo.user.uid);
+          setUserId(userInfo.user.uid);
 
           localStorage.setItem("id", userInfo.user.uid);
 

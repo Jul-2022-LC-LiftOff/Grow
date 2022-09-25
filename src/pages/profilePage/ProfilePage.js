@@ -60,14 +60,7 @@ function ProfilePage( props ) {
         // console.log(resultArr);
         return resultArr;
     }
-    // useEffect(()=>{
-    //     const auth = getAuth();
-    //     const user = auth.currentUser;
-    //     if(user !== null){
-    //         setUser(user);
-    //         console.log(user);
-    //     }
-    // });
+    
     useEffect(() => {
         
         if (userId) {

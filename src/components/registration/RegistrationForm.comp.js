@@ -12,7 +12,7 @@ import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { Container, Row, Col, Button, Form, Alert } from "react-bootstrap";
 import classes from "../../pages/registration/Registration.module.css";
 
-const RegistrationForm = () => {
+const RegistrationForm = ( props ) => {
   const initialValues = {
     username: "",
     email: "",
@@ -29,6 +29,8 @@ const RegistrationForm = () => {
 
   const navigate = useNavigate();
 
+  const setUserId = props.setUserId;
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
@@ -44,7 +46,16 @@ const RegistrationForm = () => {
           auth,
           email,
           password
-        );
+        )
+        .then(
+          (userInfo) => {
+            setUserId(userInfo.user.uid);
+  
+            localStorage.setItem("id", userInfo.user.uid);
+  
+            navigate("/profilePage");
+          }
+        )
 
         const user = userCredential.user;
         updateProfile(auth.currentUser, { username: username });
