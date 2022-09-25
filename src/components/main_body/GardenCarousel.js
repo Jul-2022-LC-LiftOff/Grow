@@ -61,7 +61,7 @@ function GardenCarousel() {
                 counter += 1;
             }
         }
-    
+        console.log(resultArr);
         return resultArr;
     }
     
