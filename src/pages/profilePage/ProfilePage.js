@@ -29,19 +29,12 @@ function ProfilePage( props ) {
 
         // get the current user doc ref
         const userRef = doc(db,"users", userId);
-        // console.log(userRef);
+        console.log(userRef);
 
         // this is how you read data from the user doc ref
         const userSnap = await getDoc(userRef);
-        // console.log(userSnap.data())
-
-        // userSnap.forEach((doc) => {
-        //     resultArr.push(doc.data());
-        // })
-
-
-        // this can add objects to the Garden collection, using addDoc, because we like to have auto gened Id for the plant
-        // await addDoc(collection(db,"users", userId, "Garden"), {test: "test Obj"})
+        const userObj = {...userSnap.data(), uid: userId};
+        // console.log(userObj)
 
         
         // get the Garden collection ref from firestore
