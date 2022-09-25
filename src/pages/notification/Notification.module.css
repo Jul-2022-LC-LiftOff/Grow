@@ -20,6 +20,12 @@
   padding-top: 30px;
 }
 
+.user {
+  color: black;
+  font-size: 20px;
+  text-align: right;
+}
+
 ul > li .flex {
   color: darkgreen;
   display: flex;

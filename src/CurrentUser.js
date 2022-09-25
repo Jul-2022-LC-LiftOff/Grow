@@ -10,13 +10,9 @@ function CurrentUser() {
 
   return (
     <div>
-      <div>
-        Logged in as
-        {/* <div>{user?.uid}</div> */}
-        {/* <div>{user?.email}</div> */}
-        <div>{userId}</div>
-        <div>{userEmail}</div>
-      </div>
+      Logged in as
+      <div>Email: {userEmail}</div>
+      <div>ID: {userId}</div>
     </div>
   );
 }

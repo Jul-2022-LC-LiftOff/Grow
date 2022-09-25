@@ -11,19 +11,21 @@ export default function NotificationPage() {
   return (
     <div className={classes.box}>
       <WaterNavbar />
+
       <p className={classes.header}>
         Water Schedule
         <div className={classes.notificationpage}>
-          {/* <Header /> */}
+          <div className={classes.user}>
+            <CurrentUser />
+          </div>{" "}
           <div>
             <h1 className={classes.h1}>Today</h1>
             <Today />
           </div>
           <div>
             <h1 className={classes.h1}>Tomorrow</h1>
-            {/* <Tomorrow /> */}
+            <Tomorrow />
           </div>
-          <div>{/* <CurrentUser /> */}</div>
         </div>
       </p>
     </div>

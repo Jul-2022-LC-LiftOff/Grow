@@ -51,8 +51,12 @@ export default function ProfileNavbar() {
             Sign Out
           </Nav.Link>
 
-          <Nav.Link className="water" href="/notify" alt="water schedule">
-            Water Schedule
+          <Nav.Link
+            className="water position-absolute end-0"
+            href="/notify"
+            alt="water schedule"
+          >
+            Water
           </Nav.Link>
         </Nav>
       </Navbar>
@@ -61,6 +65,7 @@ export default function ProfileNavbar() {
         <Routes>
           <Route path="/myGarden" element={<MyGarden />}></Route>
           <Route path="/mainpage" element={<MainPage />}></Route>
+          <Route path="/notify" element={<NotificationPage />}></Route>
         </Routes>
       </div>
     </>
