@@ -18,7 +18,8 @@ function ProfilePage( props ) {
 
     let [garden, setGarden] = useState("");
     let [filteredGarden, setFilteredGarden] = useState([]);
-    
+    let [updateTrigger, setUpdateTrigger] = useState(1);
+    // const [user, setUser] = useState();
 
     var userId = props.userId;
     const getGarden = async () => {
@@ -59,9 +60,16 @@ function ProfilePage( props ) {
         // console.log(resultArr);
         return resultArr;
     }
-
+    // useEffect(()=>{
+    //     const auth = getAuth();
+    //     const user = auth.currentUser;
+    //     if(user !== null){
+    //         setUser(user);
+    //         console.log(user);
+    //     }
+    // });
     useEffect(() => {
-
+        
         if (userId) {
             getGarden()
                 .then((result) => {
@@ -71,7 +79,7 @@ function ProfilePage( props ) {
                 });
         }
 
-    }, [userId]);
+    }, [userId, updateTrigger]);
     
 
     return (
@@ -81,7 +89,7 @@ function ProfilePage( props ) {
             
             <SearchBar userGarden={garden} setFilteredGarden={ setFilteredGarden }/> 
             
-            <MyGarden filteredGarden={ filteredGarden } userId={props.userId}/>
+            <MyGarden filteredGarden={ filteredGarden } userId={props.userId} updateTrigger={setUpdateTrigger} updateVal={updateTrigger}/>
         </div>
         
     );
