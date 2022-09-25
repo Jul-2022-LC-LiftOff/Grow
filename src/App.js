@@ -20,19 +20,16 @@ import MainPage from "./pages/homepage/mainPage";
 import { FirebaseError } from "firebase/app";
 
 function App() {
-
   const [userId, setUserId] = useState();
 
   useEffect(() => {
-
     let id = localStorage.getItem("id");
 
     setUserId(id);
+  }, [userId]);
 
-  }, [userId])
- 
   // console.log(userId);
-  
+
   return (
     <Routes>
       {/* <Route path="/signup" element={<RegistrationPage />} /> */}
@@ -45,14 +42,16 @@ function App() {
         element={
           <div className="mainBackground">
             <MainPage />
-            
           </div>
         }
       />
-      <Route path="/profilePage" element={<ProfilePage userId={userId}/>}></Route>
+      <Route
+        path="/profilePage"
+        element={<ProfilePage userId={userId} />}
+      ></Route>
       <Route
         path="/LogIn"
-        element={<LogInPage  setUserId={setUserId}/>} //setUserId={setUserId}
+        element={<LogInPage setUserId={setUserId} />} //setUserId={setUserId}
       ></Route>
       <Route path="/Registration" element={<RegistrationPage setUserId={setUserId}/>}></Route>
       <Route path="/notify" element={<NotificationPage />} />
