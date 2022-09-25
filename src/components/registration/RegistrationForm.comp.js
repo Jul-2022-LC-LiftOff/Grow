@@ -18,7 +18,7 @@ const RegistrationForm = () => {
     email: "",
     password: "",
     confirmpassword: "",
-    hasPlant: false
+    hasPlant: false,
   };
 
   const [formValues, setFormValues] = useState(initialValues);
@@ -57,7 +57,7 @@ const RegistrationForm = () => {
 
         await setDoc(doc(db, "users", user.uid), formValuesCopy);
 
-        navigate("/profilePage");
+        navigate("/LogIn");
       } catch (error) {
         setError("This user already have an account");
         // setError(error);
