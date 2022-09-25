@@ -51,15 +51,15 @@ export default function Today() {
       <div>Email: {userEmail}</div>
       <div>ID: {userId}</div>
       <ul>
-        {gardenData.map((plant, index) => {
+        {gardenData.map((elem) => {
           return (
-            <li key={index}>
+            <li key={elem.uid}>
               <div className={classes.flex}>
-                <img src={plant.image} alt="img" />
+                <img src={elem.image} alt="img" />
                 <div>
-                  <h3>{plant.name}</h3>
-                  {/* <h5>Watering Day: {plant.waterDay + ""} </h5> */}
-                  <h5>Water: {plant.waterTime}</h5>
+                  <h3>{elem.name}</h3>
+                  {/* <h5>Watering Day: {elem.waterDay + ""} </h5> */}
+                  <h5>Water: {elem.waterTime}</h5>
                 </div>
                 {/* <input type="checkbox" checked={checked} /> */}
                 {/* <button
