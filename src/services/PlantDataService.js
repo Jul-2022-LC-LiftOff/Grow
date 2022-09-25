@@ -9,12 +9,18 @@ import { getAuth } from "firebase/auth";
 
 class PlantDataService{
     
+    getDocRef = (user) => {
+        return doc(db, "users", user);
+    }
 
     getCollectionRef = (user)=>{
         return collection(db,"users", user, "Garden");
     }
 
     addPlants = (newPlant, user)=>{
+        let userRef = this.getDocRef(user);
+        setDoc(userRef, {hasPlants: true}, {merge: true});
+        
         return addDoc(this.getCollectionRef(user), newPlant);
     };
 
