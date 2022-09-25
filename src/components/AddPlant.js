@@ -317,7 +317,7 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal, userId })=>{//user
                 
             </label>
             <br/>
-            
+           
              {/* <input
                 name="scale"
                 type="range"
@@ -327,7 +327,7 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal, userId })=>{//user
                 step="0.01"
                 defaultValue="1"
             /> */}
-            <button onClick={handleImage}> Upload Image</button> 
+            <button className={classes.uploadImage}onClick={handleImage}> Upload Image</button> 
 
         </div>
 
