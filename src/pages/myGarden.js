@@ -18,6 +18,11 @@ const MyGarden = ( props ) => {
   const [showEdit, setShowEdit] = useState(false);
   const [message, setMessage] = useState({ msg: "" });
   const [alert, setAlert] = useState(false);
+
+
+
+
+
   const [plantId, setPlantId] = useState("");
   const getPlantIdHandler = (id) => {
     setPlantId(id);
@@ -32,11 +37,19 @@ const MyGarden = ( props ) => {
     // setAlert(true);
     // }
   };
+  const handleDelete = ()=>{
+    setMessage({msg: "Plant deleted successfully"});
+    setAlert(true);
+  }
   const handleAddShow = () => {
     setShowAdd(true);
   };
   const handleEditClose = () => {
     setShowEdit(false);
+    if(successEdit===true){
+        setMessage({msg: "Plant updated successfully"});
+        setAlert(true);
+    }
   };
   const handleEditShow = () => {
     setShowEdit(true);
@@ -63,12 +76,12 @@ const MyGarden = ( props ) => {
   return (
     <div className={classes.MyGarden}>
       {/* //{table} */}
-
+        <div className={classes.buttonAlertPlane}>
       <Button onClick={handleAddShow} className="btn-lg">
         <span>Add Plant </span>
         <BsFillPlusCircleFill></BsFillPlusCircleFill>
       </Button>
-      <div className="editAddAlert">
+      <div className={classes.editAddAlert}>
         <Alert
           variant={"success"}
           dismissible
@@ -77,6 +90,7 @@ const MyGarden = ( props ) => {
         >
           {message?.msg}
         </Alert>
+      </div>
       </div>
       <Modal show={showAdd} onHide={handleAddClose} class="modal">
         <Modal.Header>

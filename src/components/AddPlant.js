@@ -116,6 +116,8 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal, userId })=>{//user
             if(id !== undefined && id !== "" ){
                 await PlantDataService.updatePlant(id, newPlant, userId);
                 setPlantId("");
+                successEdit=true;
+                closeModal();
                 console.log(image);
                         console.log(oldImage);
                         if(oldImage!== image && oldImage !== undefined && image !== undefined){
@@ -131,19 +133,23 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal, userId })=>{//user
                             })
                             .catch((error) => {console.log(error)});
                         }
+                        
             }else{
                 await PlantDataService.addPlants(newPlant, userId);
+                successAdd = true;
+                closeAddModal();
                 //setMessage({error:false, msg: "New plant added successfully"});
+                
             }
         }catch (err){
             
             setMessage({error:true, msg: "Error!"});
             console.log(err);
-            if(id !== undefined && id !== "" ){
-                closeModal();
-            }else{
-            closeAddModal();
-            }
+            // if(id !== undefined && id !== "" ){
+            //     closeModal();
+            // }else{
+            // closeAddModal();
+            // }
             return;
         }
        
@@ -159,14 +165,15 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal, userId })=>{//user
         setPlantWaterDay([]);
         setImage("");
         console.log(newPlant);
-        if(id !== undefined && id !== "" ){
+        // if(id !== undefined && id !== "" ){
             
-            successEdit= true;
-            
-        }else{
-        //setSuccessAdd(true);
-        successAdd = true;
-        }
+        //     successEdit= true;
+        //     //closeModal();
+        // }else{
+        // //setSuccessAdd(true);
+        // successAdd = true;
+        // //closeAddModal();
+        // }
     };
     const editHandler = async () =>{
         setMessage("");
@@ -311,7 +318,7 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal, userId })=>{//user
             </label>
             <br/>
             
-             <input
+             {/* <input
                 name="scale"
                 type="range"
                 // onChange={handleScale}
@@ -319,7 +326,7 @@ const AddPlant = ({id, setPlantId, closeAddModal, closeModal, userId })=>{//user
                 max="2"
                 step="0.01"
                 defaultValue="1"
-            />
+            /> */}
             <button onClick={handleImage}> Upload Image</button> 
 
         </div>

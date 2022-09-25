@@ -14,7 +14,7 @@ import classes from ".//PlantListStyle.module.css";
 // import "./individual-style.css";
 
 
-const PlantList = ({getPlantId, showEdit, filteredGarden, userId }) =>{ //userId
+const PlantList = ({getPlantId, showEdit, filteredGarden, userId, deleteAlert }) =>{ //userId
     const [plants, setPlants] = useState([]);
     const [plantImage, setPlantImage] = useState("");
     // const auth =getAuth();
@@ -86,6 +86,7 @@ const PlantList = ({getPlantId, showEdit, filteredGarden, userId }) =>{ //userId
                                     (e)=> {
                                         const confirmed = window.confirm("Are you sure you want to delete this plant?");
                                         if(confirmed){
+                                            // deleteAlert();
                                         if(doc.image !== ""){
                                         const imageUrl = ref(storage, doc.image);
                                         getMetadata(imageUrl)
