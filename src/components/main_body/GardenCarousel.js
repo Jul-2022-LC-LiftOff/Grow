@@ -7,7 +7,7 @@ import { db } from "../../firebase-config";
 function GardenCarousel() {
 
     // let [garden, setGarden] = useState(null);
-    let [randomList, setRandomList] = useState(null);
+    let [randomList, setRandomList] = useState([]);
 
 
     // currently just showing plants
@@ -37,11 +37,12 @@ function GardenCarousel() {
         return randomPickedDocs;
     }
 
+    // getUserPlant will use a given userId and retreive the first plant object in user's garden collection
     const getUserPlant = async (userDoc) => {
         const userGardenRef = collection(db, "users", userDoc.id, "Garden");
         const userGardenSnap = await getDocs(userGardenRef);
  
-        return userGardenSnap.docs[0];
+        return userGardenSnap.docs[0].data();
     }
 
     function pickRandom(arr, numOfItem) {
@@ -63,44 +64,29 @@ function GardenCarousel() {
         return resultArr;
     }
     
-    let plantsArr = [];
+    let resultArr = []
 
     useEffect(() => {
-
-        getGarden()
-        .then((res) => {
-            let pickedItems = pickRandom(res, 4)
-            setRandomList(pickedItems);
-        })
-
         
         getUsers()
-        .then((res) => {
+        .then((returnedUsers) => {
+            returnedUsers.forEach((user) => {
 
-            
-            res.forEach((user) => {
                 getUserPlant(user)
                 .then((res) => {
-                    console.log(res)
-                    plantsArr.push(res);
+                    let userData = user.data();
+                    // console.log(userData.username);
+                    let newObj = {...res, userName: userData.username};
+                    resultArr.push(newObj);
+                    setRandomList(resultArr)
                 })
             })
             
-
-            // let user = res[0];
-            // console.log(user)
-
-            // getUserPlant(user)
-            // .then((res) => {
-            //     console.log(res);
-            // })
         })
-        
+
+
     }, [])
 
-    if (plantsArr.length != 0) {
-        console.log(plantsArr);
-    }
     
 
     let carouselItems = null;
@@ -117,8 +103,8 @@ function GardenCarousel() {
                     height="500"
                 />
                 <Carousel.Caption>
-                    <h1>{plant.name}</h1>
-                    <p>Sample Text</p>
+                    <h1 className="text-secondary">{plant.name}</h1>
+                    <h2 className="text-secondary">{`From user ${plant.userName}`}</h2>
                 </Carousel.Caption>
             </Carousel.Item>
 
