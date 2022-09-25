@@ -1,16 +1,17 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { collection, query, where } from "firebase/firestore";
-import { db } from "../../firebase-config";
-import { getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db, auth } from "../../firebase-config";
+// import PlantDataService from "../../services/PlantDataService";
 
 import classes from "../../pages/notification/Notification.module.css";
 
 export default function Today() {
-  const [plants, setPlants] = useState([]);
-  // const [checked, setChecked] = React.useState(false);
+  const [gardenData, setGardenData] = useState([]);
 
-  const plantsCollectionRef = collection(db, "plants");
+  const user = auth.currentUser;
+  // const userId = user.uid;
+  const userEmail = user.email;
 
   const weekday = [
     "Sunday",
@@ -24,43 +25,54 @@ export default function Today() {
 
   let showDate = new Date();
   let currentDay = weekday[showDate.getDay()];
-  // let waterDayInt = parseInt(plants.waterDay);
 
-  // const waterDayConvert = [showDate.getTime()];
-  // console.log(showDate.getHours() + ":" + showDate.getMinutes());
-
-  const q = query(
-    plantsCollectionRef,
-    where("waterDay", "array-contains", currentDay)
-  );
-
-  const getPlants = async () => {
-    const data = await getDocs(q);
-
-    // data.forEach((doc) => {
-    //   // doc.data() is never undefined for query doc snapshots
-    //   console.log(doc.id, " => ", doc.data());
-    // });
-    setPlants(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  };
+  const usersCollectionRef = collection(db, "users");
 
   useEffect(() => {
-    getPlants();
-    // eslint-disable-next-line
-  }, []);
+    if (user) {
+      const getData = async () => {
+        const q = query(usersCollectionRef);
+        const snapshot = await getDocs(q);
+        const data = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        data.map(async (elem) => {
+          const gardenQ = query(
+            collection(db, `users/${elem.id}/Garden`),
+            where("waterDay", "array-contains", currentDay)
+          );
+          const gardenDetails = await getDocs(gardenQ);
+          const GardenInfo = gardenDetails.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+          }));
+          // gardenDetails.forEach((doc) => {
+          //   console.log(doc.id, " => ", doc.data());
+          // });
+          setGardenData(GardenInfo);
+          // console.log(GardenInfo);
+        });
+      };
+      getData();
+    } else {
+      console.log("No user defined");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   return (
     <div>
       <ul>
-        {plants.map((plant, index) => {
+        {gardenData.map((elem) => {
           return (
-            <li key={index}>
+            <li key={elem.id}>
               <div className={classes.flex}>
-                <img src={plant.image} alt="img" />
+                <img src={elem.image} alt="img" />
                 <div>
-                  <h3>{plant.name}</h3>
-                  {/* <h5>Watering Day: {plant.waterDay + ""} </h5> */}
-                  <h5>Water: {plant.waterTime}</h5>
+                  <h3>{elem.name}</h3>
+                  {/* <h5>Watering Day: {elem.waterDay + ""} </h5> */}
+                  <h5>Water: {elem.waterTime}</h5>
                 </div>
                 {/* <input type="checkbox" checked={checked} /> */}
                 {/* <button

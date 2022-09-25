@@ -14,7 +14,7 @@ import classes from ".//PlantListStyle.module.css";
 // import "./individual-style.css";
 
 
-const PlantList = ({getPlantId, showEdit, filteredGarden, userId, deleteAlert }) =>{ //userId
+const PlantList = ({getPlantId, showEdit, filteredGarden, userId, updateTrigger, updateVal }) =>{ //userId
     const [plants, setPlants] = useState([]);
     const [plantImage, setPlantImage] = useState("");
     // const auth =getAuth();
@@ -46,6 +46,7 @@ const PlantList = ({getPlantId, showEdit, filteredGarden, userId, deleteAlert })
        
 
         await PlantDataService.deletePlant(id, userId);
+        updateTrigger(updateVal + 1);
         // getPlants();
     };
     const confirmDelete = (id) =>{
@@ -64,7 +65,7 @@ const PlantList = ({getPlantId, showEdit, filteredGarden, userId, deleteAlert })
         // }
     }
     
-    console.log(filteredGarden)
+    // console.log(filteredGarden)
 
     return(
         <div className={classes.backgroundPlants}>

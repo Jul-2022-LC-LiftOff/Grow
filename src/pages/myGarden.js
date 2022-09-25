@@ -67,6 +67,7 @@ const MyGarden = ( props ) => {
     return () => clearTimeout(timeout);
   }, [alert]);
 
+
   // this code is to show that the data thats comming in
   // let table = null;
   // if (props.filteredGarden != "") {
@@ -107,6 +108,8 @@ const MyGarden = ( props ) => {
             setPlantId={setPlantId}
             closeAddModal={handleAddClose}
             userId={props.userId}
+            updateVal={props.updateVal}
+            updateTrigger={props.updateTrigger}
           />
         </Modal.Body>
       </Modal>
@@ -136,6 +139,8 @@ const MyGarden = ( props ) => {
         showEdit={handleEditShow}
         filteredGarden={props.filteredGarden}
         userId={props.userId}
+        updateVal={props.updateVal}
+        updateTrigger={props.updateTrigger}
       />
       {/* filteredGarden={props.filteredGarden} */}
     </div>
