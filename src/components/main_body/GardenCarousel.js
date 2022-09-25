@@ -31,13 +31,14 @@ function GardenCarousel() {
         const usersWithPlantsSnap = await getDocs(usersWithPlantsQ);
 
         const docs = usersWithPlantsSnap.docs;
+        // console.log(docs);
         const randomPickedDocs = pickRandom(docs, 3);
 
         // console.log(randomPickedDocs);
         return randomPickedDocs;
     }
 
-    // getUserPlant will use a given userId and retreive the first plant object in user's garden collection
+    // getUserPlant will use a given userId and retreive the first plant object in the user's garden collection
     const getUserPlant = async (userDoc) => {
         const userGardenRef = collection(db, "users", userDoc.id, "Garden");
         const userGardenSnap = await getDocs(userGardenRef);
