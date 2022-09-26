@@ -140,7 +140,7 @@ function SearchBar( props ) {
 
                         <Accordion.Collapse eventKey="1">
                             <div className="d-flex flex-row justify-content-center mx-auto mt-3 text-white">
-                                {columns.slice(0, 4).map((item, index) => (
+                                {columns.map((item, index) => (
                                     <div key={`${item} checkbox`}>
                                         <Form.Check
                                             inline
@@ -154,7 +154,26 @@ function SearchBar( props ) {
                                     ))}
                             </div>
                         </Accordion.Collapse>
-                        <Accordion.Collapse eventKey="1">
+
+
+                        {/* <Accordion.Collapse eventKey="1">
+                            <div className="d-flex flex-row justify-content-center mx-auto mt-3 text-white">
+                                {columns.slice(0, 4).map((item, index) => (
+                                    <div key={`${item} checkbox`}>
+                                        <Form.Check
+                                            inline
+                                            label={item}
+                                            type="checkbox"
+                                            name={item}
+                                            value = {index}
+                                            onChange = {handleCheckBoxChange}
+                                        />
+                                    </div>
+                                    ))}
+                            </div>
+                        </Accordion.Collapse> */}
+
+                        {/* <Accordion.Collapse eventKey="1">
                             <div className="d-flex flex-row justify-content-center mx-auto mt-3 text-white">
                                 {columns.slice(4).map( (item, index) => (
                                     <div key={`${item} checkbox`}>
@@ -169,7 +188,7 @@ function SearchBar( props ) {
                                     </div>
                                 ))}
                             </div>
-                        </Accordion.Collapse>
+                        </Accordion.Collapse> */}
                         
                     </Form>
                 </Accordion>
