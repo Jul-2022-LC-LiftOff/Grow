@@ -5,7 +5,7 @@ import MainPage from "../../pages/homepage/mainPage";
 import RegistrationPage from "../../pages/registration/Registration.page";
 import LogInPage from "../../LogIn/LogInPage";
 import "./main-navbar-style.css";
-
+import growLogo from "../../assets/growLogo.png";
 export default function MainNavbar() {
   return (
     <>
@@ -18,7 +18,12 @@ export default function MainNavbar() {
       >
         <Nav>
           <Navbar.Brand className="home" href="/" alt="Go to home page">
-            Grow
+            {/* //Grow */}
+            <img
+            alt="Grow"
+            src={growLogo}
+            height="40px"
+            />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
@@ -26,6 +31,8 @@ export default function MainNavbar() {
             className="signin position-absolute end-0"
             href="LogIn"
             alt="Sign in"
+            
+            
           >
             Sign in
           </Nav.Link>
