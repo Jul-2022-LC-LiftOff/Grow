@@ -104,8 +104,8 @@ function GardenCarousel() {
                     height="500"
                 />
                 <Carousel.Caption>
-                    <h1 className="text-secondary">{plant.name}</h1>
-                    <h2 className="text-secondary">{`From user ${plant.userName}`}</h2>
+                    <h1 className="text-white">{plant.name}</h1>
+                    <h2 className="text-white">{`From user ${plant.userName}`}</h2>
                 </Carousel.Caption>
             </Carousel.Item>
 
