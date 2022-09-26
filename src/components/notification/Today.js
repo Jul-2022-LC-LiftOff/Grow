@@ -6,7 +6,7 @@ import { db, auth } from "../../firebase-config";
 
 import classes from "../../pages/notification/Notification.module.css";
 
-export default function Today( props ) {
+export default function Today(props) {
   const [gardenData, setGardenData] = useState([]);
 
   // const user = auth.currentUser;
@@ -16,17 +16,18 @@ export default function Today( props ) {
   let [userEmail, setUserEmail] = useState("");
   let [userId, setUserId] = useState("");
   let [user, setUser] = useState("");
-  
+
   useEffect(() => {
-  
     if (props.user) {
       setUserEmail(props.user.email);
       setUserId(props.user.uid);
       setUser(props.user);
     }
-    
-  }, [props.user])
+  }, [props.user]);
 
+  const plantsCollectionRef = collection(db, "users", userId, "Garden");
+  // const plantsCollectionRef1 = collection(db, "Garden");
+  console.log(plantsCollectionRef);
 
   const weekday = [
     "Sunday",
@@ -41,40 +42,25 @@ export default function Today( props ) {
   let showDate = new Date();
   let currentDay = weekday[showDate.getDay()];
 
-  const usersCollectionRef = collection(db, "users");
+  const q = query(
+    plantsCollectionRef,
+    where("waterDay", "array-contains", currentDay)
+  );
+
+  const getPlants = async () => {
+    const data = await getDocs(q);
+
+    // data.forEach((doc) => {
+    //   // doc.data() is never undefined for query doc snapshots
+    //   console.log(doc.id, " => ", doc.data());
+    // });
+    setGardenData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
 
   useEffect(() => {
-    if (user) {
-      const getData = async () => {
-        const q = query(usersCollectionRef);
-        const snapshot = await getDocs(q);
-        const data = snapshot.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        data.map(async (elem) => {
-          const gardenQ = query(
-            collection(db, `users/${elem.id}/Garden`),
-            where("waterDay", "array-contains", currentDay)
-          );
-          const gardenDetails = await getDocs(gardenQ);
-          const GardenInfo = gardenDetails.docs.map((doc) => ({
-            ...doc.data(),
-            id: doc.id,
-          }));
-          // gardenDetails.forEach((doc) => {
-          //   console.log(doc.id, " => ", doc.data());
-          // });
-          setGardenData(GardenInfo);
-          // console.log(GardenInfo);
-        });
-      };
-      getData();
-    } else {
-      console.log("No user defined");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+    getPlants();
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div>
