@@ -5,6 +5,8 @@ import MyGarden from "../../pages/myGarden";
 import MainPage from "../../pages/homepage/mainPage";
 import "./profile-navbar.style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import growLogo from "../../assets/growLogo.png";
+
 //import "bootstrap/dist/js/bootstrap.min.js";
 
 export default function WaterNavbar() {
@@ -23,7 +25,11 @@ export default function WaterNavbar() {
             href="/profilePage"
             alt="Go to your garden"
           >
-            Grow
+             <img
+            alt="Grow"
+            src={growLogo}
+            height="40px"
+            />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 

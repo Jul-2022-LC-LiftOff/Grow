@@ -6,6 +6,7 @@ import MainPage from "../../pages/homepage/mainPage";
 import NotificationPage from "../../pages/notification/Notification.page";
 import "./profile-navbar.style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import growLogo from "../../assets/growLogo.png";
 //import "bootstrap/dist/js/bootstrap.min.js";
 import { getAuth, signOut } from "firebase/auth";
 
@@ -37,7 +38,11 @@ export default function ProfileNavbar() {
             className="home"
             href="myGarden"
           >
-            Grow
+            <img
+            alt="Grow"
+            src={growLogo}
+            height="40px"
+            />
           </Navbar.Brand>
 
 
