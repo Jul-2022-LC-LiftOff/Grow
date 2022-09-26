@@ -18,7 +18,7 @@ const RegistrationForm = () => {
     email: "",
     password: "",
     confirmpassword: "",
-    hasPlant: false,
+    hasPlants: false,
   };
 
   const [formValues, setFormValues] = useState(initialValues);
@@ -28,6 +28,7 @@ const RegistrationForm = () => {
   const { username, email, password } = formValues;
 
   const navigate = useNavigate();
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,7 +45,7 @@ const RegistrationForm = () => {
           auth,
           email,
           password
-        );
+        )
 
         const user = userCredential.user;
         updateProfile(auth.currentUser, { username: username });
