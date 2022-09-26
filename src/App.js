@@ -18,17 +18,40 @@ import MainNavbar from "./components/navbar/main-navbar";
 import MainBody from "./components/main_body/main_body";
 import MainPage from "./pages/homepage/mainPage";
 import { FirebaseError } from "firebase/app";
+import { doc, getDoc} from "firebase/firestore";
+import { db } from "./firebase-config";
 
 function App() {
   const [userId, setUserId] = useState();
+  const [user, setUser] = useState();
 
   useEffect(() => {
     let id = localStorage.getItem("id");
 
     setUserId(id);
+
+    if (id) {
+      getUser(id)
+        .then((res) => {
+          setUser(res);
+        })
+    }
+    
   }, [userId]);
 
-  // console.log(userId);
+ 
+  const getUser = async () => {
+
+    const userRef = doc(db,"users", userId);
+    // console.log(userRef);
+
+
+    const userSnap = await getDoc(userRef);
+    const userObj = {...userSnap.data(), uid: userId};
+    // console.log(userObj)
+
+    return userObj;
+}
 
   return (
     <Routes>
@@ -54,7 +77,7 @@ function App() {
         element={<LogInPage setUserId={setUserId} />} //setUserId={setUserId}
       ></Route>
       <Route path="/Registration" element={<RegistrationPage />}></Route>
-      <Route path="/notify" element={<NotificationPage />} />
+      <Route path="/notify" element={ <NotificationPage user={user}/> }></Route>
     </Routes>
 
     // <div class="mainBackground">

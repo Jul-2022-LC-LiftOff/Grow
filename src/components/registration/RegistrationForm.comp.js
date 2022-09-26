@@ -29,6 +29,7 @@ const RegistrationForm = () => {
 
   const navigate = useNavigate();
 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
@@ -44,7 +45,7 @@ const RegistrationForm = () => {
           auth,
           email,
           password
-        );
+        )
 
         const user = userCredential.user;
         updateProfile(auth.currentUser, { username: username });

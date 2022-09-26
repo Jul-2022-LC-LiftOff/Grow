@@ -87,6 +87,7 @@ const PlantList = ({getPlantId, showEdit, filteredGarden, userId, updateTrigger,
                                     (e)=> {
                                         const confirmed = window.confirm("Are you sure you want to delete this plant?");
                                         if(confirmed){
+                                            // deleteAlert();
                                         if(doc.image !== ""){
                                         const imageUrl = ref(storage, doc.image);
                                         getMetadata(imageUrl)
