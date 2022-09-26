@@ -6,27 +6,25 @@ import { db, auth } from "../../firebase-config";
 
 import classes from "../../pages/notification/Notification.module.css";
 
-export default function Today( props ) {
+export default function Today(props) {
   const [gardenData, setGardenData] = useState([]);
 
   // const user = auth.currentUser;
-  // const userId = user.uid;
+  // const userId1 = user.uid;
   // const userEmail = user.email;
 
   let [userEmail, setUserEmail] = useState("");
   let [userId, setUserId] = useState("");
   let [user, setUser] = useState("");
-  
+
   useEffect(() => {
-  
     if (props.user) {
       setUserEmail(props.user.email);
       setUserId(props.user.uid);
       setUser(props.user);
+      console.log("userid: ", userId);
     }
-    
-  }, [props.user])
-
+  }, [props.user]);
 
   const weekday = [
     "Sunday",
@@ -41,12 +39,12 @@ export default function Today( props ) {
   let showDate = new Date();
   let currentDay = weekday[showDate.getDay()];
 
-  const usersCollectionRef = collection(db, "users");
-
   useEffect(() => {
-    if (user) {
+    if (!user) {
+      console.log("No user defined");
+    } else {
       const getData = async () => {
-        const q = query(usersCollectionRef);
+        const q = query(collection(db, "users"));
         const snapshot = await getDocs(q);
         const data = snapshot.docs.map((doc) => ({
           ...doc.data(),
@@ -54,7 +52,7 @@ export default function Today( props ) {
         }));
         data.map(async (elem) => {
           const gardenQ = query(
-            collection(db, `users/${elem.id}/Garden`),
+            collection(db, `users/${userId}/Garden`),
             where("waterDay", "array-contains", currentDay)
           );
           const gardenDetails = await getDocs(gardenQ);
@@ -62,18 +60,11 @@ export default function Today( props ) {
             ...doc.data(),
             id: doc.id,
           }));
-          // gardenDetails.forEach((doc) => {
-          //   console.log(doc.id, " => ", doc.data());
-          // });
           setGardenData(GardenInfo);
-          // console.log(GardenInfo);
         });
       };
       getData();
-    } else {
-      console.log("No user defined");
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   return (
@@ -81,7 +72,7 @@ export default function Today( props ) {
       <ul>
         {gardenData.map((elem) => {
           return (
-            <li key={elem.id}>
+            <li key={elem.userId}>
               <div className={classes.flex}>
                 <img src={elem.image} alt="img" />
                 <div>
@@ -91,14 +82,14 @@ export default function Today( props ) {
                 </div>
                 {/* <input type="checkbox" checked={checked} /> */}
                 {/* <button
-                  onClick={() => {
-                    setChecked((old) => !old);
-                  }}
-                  className={classes.button}
-                >
-                  {" "}
-                  {checked ? "Undo" : "Water"}{" "}
-                </button> */}
+                    onClick={() => {
+                      setChecked((old) => !old);
+                    }}
+                    className={classes.button}
+                  >
+                    {" "}
+                    {checked ? "Undo" : "Water"}{" "}
+                  </button> */}
               </div>
             </li>
           );
