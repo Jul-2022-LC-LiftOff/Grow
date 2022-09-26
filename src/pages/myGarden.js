@@ -22,7 +22,7 @@ const MyGarden = ( props ) => {
 
 
 
-
+  
   const [plantId, setPlantId] = useState("");
   const getPlantIdHandler = (id) => {
     setPlantId(id);
@@ -93,6 +93,7 @@ const MyGarden = ( props ) => {
         </Alert>
       </div>
       </div>
+      <div className={showAdd ? classes.modalCont : classes.noDiv}>
       <Modal show={showAdd} onHide={handleAddClose} class="modal">
         <Modal.Header>
           <Modal.Title>Add Plant </Modal.Title>
@@ -114,7 +115,8 @@ const MyGarden = ( props ) => {
           />
         </Modal.Body>
       </Modal>
-
+      </div>
+      <div className={showEdit ? classes.modalCont : classes.noDiv}>
       <Modal show={showEdit} onHide={handleEditClose} class="modal">
         <Modal.Header>
           <Modal.Title>Edit Plant </Modal.Title>
@@ -136,7 +138,7 @@ const MyGarden = ( props ) => {
           />
         </Modal.Body>
       </Modal>
-
+      </div>
       <PlantList
         getPlantId={getPlantIdHandler}
         showEdit={handleEditShow}
