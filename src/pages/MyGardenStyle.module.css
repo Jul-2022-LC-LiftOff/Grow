@@ -4,10 +4,15 @@
 .editAddAlert {
   width: 400px;
   position: absolute;
+  top: 175px;
   text-align: center;
   z-index: 10;
   margin-left: auto;
   margin-right: auto;
   left: 0;
   right: 0;
+ padding-bottom: 30px;
+}
+.buttonAlertPlane{
+  display: inline-block;
 }
