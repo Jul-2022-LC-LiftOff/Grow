@@ -10,7 +10,7 @@ export default function Today(props) {
   const [gardenData, setGardenData] = useState([]);
 
   // const user = auth.currentUser;
-  // const userId = user.uid;
+  // const userId1 = user.uid;
   // const userEmail = user.email;
 
   let [userEmail, setUserEmail] = useState("");
@@ -22,12 +22,9 @@ export default function Today(props) {
       setUserEmail(props.user.email);
       setUserId(props.user.uid);
       setUser(props.user);
+      console.log("userid: ", userId);
     }
   }, [props.user]);
-
-  const plantsCollectionRef = collection(db, "users", userId, "Garden");
-  // const plantsCollectionRef1 = collection(db, "Garden");
-  console.log(plantsCollectionRef);
 
   const weekday = [
     "Sunday",
@@ -42,32 +39,40 @@ export default function Today(props) {
   let showDate = new Date();
   let currentDay = weekday[showDate.getDay()];
 
-  const q = query(
-    plantsCollectionRef,
-    where("waterDay", "array-contains", currentDay)
-  );
-
-  const getPlants = async () => {
-    const data = await getDocs(q);
-
-    // data.forEach((doc) => {
-    //   // doc.data() is never undefined for query doc snapshots
-    //   console.log(doc.id, " => ", doc.data());
-    // });
-    setGardenData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  };
-
   useEffect(() => {
-    getPlants();
-    // eslint-disable-next-line
-  }, []);
+    if (!user) {
+      console.log("No user defined");
+    } else {
+      const getData = async () => {
+        const q = query(collection(db, "users"));
+        const snapshot = await getDocs(q);
+        const data = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        data.map(async (elem) => {
+          const gardenQ = query(
+            collection(db, `users/${userId}/Garden`),
+            where("waterDay", "array-contains", currentDay)
+          );
+          const gardenDetails = await getDocs(gardenQ);
+          const GardenInfo = gardenDetails.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+          }));
+          setGardenData(GardenInfo);
+        });
+      };
+      getData();
+    }
+  }, [user]);
 
   return (
     <div>
       <ul>
         {gardenData.map((elem) => {
           return (
-            <li key={elem.id}>
+            <li key={elem.userId}>
               <div className={classes.flex}>
                 <img src={elem.image} alt="img" />
                 <div>
@@ -77,14 +82,14 @@ export default function Today(props) {
                 </div>
                 {/* <input type="checkbox" checked={checked} /> */}
                 {/* <button
-                  onClick={() => {
-                    setChecked((old) => !old);
-                  }}
-                  className={classes.button}
-                >
-                  {" "}
-                  {checked ? "Undo" : "Water"}{" "}
-                </button> */}
+                    onClick={() => {
+                      setChecked((old) => !old);
+                    }}
+                    className={classes.button}
+                  >
+                    {" "}
+                    {checked ? "Undo" : "Water"}{" "}
+                  </button> */}
               </div>
             </li>
           );

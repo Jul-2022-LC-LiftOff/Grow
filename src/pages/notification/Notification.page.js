@@ -13,7 +13,7 @@ export default function NotificationPage(props) {
         Water Schedule
         <div className={classes.notificationpage}>
           <div className={classes.user}>
-            <CurrentUser user={props.user} />
+            {/* <CurrentUser user={props.user} /> */}
           </div>{" "}
           <div>
             <h1 className={classes.h1}>Today</h1>
@@ -21,7 +21,7 @@ export default function NotificationPage(props) {
           </div>
           <div>
             <h1 className={classes.h1}>Tomorrow</h1>
-            {/* <Tomorrow user={props.user}/> */}
+            <Tomorrow user={props.user} />
           </div>
         </div>
       </p>
