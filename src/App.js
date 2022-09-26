@@ -12,14 +12,13 @@ import ProfileNavbar from "./components/navbar/profile-navbar";
 import ProfilePage from "./pages/profilePage/ProfilePage";
 import LogInPage from "./LogIn/LogInPage";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-///import qs from "qs";
-// import CropperTester from "./components/CropperTester";
 import MainNavbar from "./components/navbar/main-navbar";
 import MainBody from "./components/main_body/main_body";
 import MainPage from "./pages/homepage/mainPage";
 import { FirebaseError } from "firebase/app";
 import { doc, getDoc} from "firebase/firestore";
 import { db } from "./firebase-config";
+
 
 function App() {
   const [userId, setUserId] = useState();
@@ -79,6 +78,8 @@ function App() {
       ></Route>
       <Route path="/Registration" element={<RegistrationPage />}></Route>
       <Route path="/notify" element={ <NotificationPage user={user}/> }></Route>
+      
+      
     </Routes>
 
     // <div class="mainBackground">
