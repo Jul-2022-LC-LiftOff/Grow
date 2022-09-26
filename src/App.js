@@ -30,27 +30,28 @@ function App() {
 
     setUserId(id);
 
-    if (id) {
+    if (id != undefined) {
       getUser(id)
         .then((res) => {
           setUser(res);
         })
     }
     
+    
   }, [userId]);
 
  
   const getUser = async () => {
+    let userRef 
+    if (userId != undefined) {
+      userRef = doc(db,"users", userId);
 
-    const userRef = doc(db,"users", userId);
-    // console.log(userRef);
+      const userSnap = await getDoc(userRef);
+      const userObj = {...userSnap.data(), uid: userId};
 
-
-    const userSnap = await getDoc(userRef);
-    const userObj = {...userSnap.data(), uid: userId};
-    // console.log(userObj)
-
-    return userObj;
+      return userObj;
+    }
+    
 }
 
   return (

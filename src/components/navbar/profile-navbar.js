@@ -9,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 //import "bootstrap/dist/js/bootstrap.min.js";
 import { getAuth, signOut } from "firebase/auth";
 
+
 export default function ProfileNavbar() {
   const signOuthandler = () => {
     localStorage.removeItem("id");
@@ -26,21 +27,19 @@ export default function ProfileNavbar() {
   return (
     <>
       <Navbar
-        collapseOnSelect
+
         expand="md"
         bg="dark"
         variant="dark"
-        className=""
       >
         <Nav>
           <Navbar.Brand
             className="home"
             href="myGarden"
-            alt="Go to your garden"
           >
             Grow
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+
 
           <Nav.Link
             className="signout position-absolute end-0"
@@ -58,6 +57,7 @@ export default function ProfileNavbar() {
           >
             Water
           </Nav.Link>
+
         </Nav>
       </Navbar>
 
