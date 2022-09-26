@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { Route, Routes } from "react-router-dom";
 import MyGarden from "../../pages/myGarden";
@@ -61,13 +61,6 @@ export default function ProfileNavbar() {
         </Nav>
       </Navbar>
 
-      <div>
-        <Routes>
-          <Route path="/myGarden" element={<MyGarden />}></Route>
-          <Route path="/mainpage" element={<MainPage />}></Route>
-          <Route path="/notify" element={<NotificationPage />}></Route>
-        </Routes>
-      </div>
     </>
   );
 }

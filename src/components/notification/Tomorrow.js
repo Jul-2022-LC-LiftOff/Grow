@@ -13,12 +13,27 @@ import PlantDataService from "../../services/PlantDataService";
 
 import classes from "../../pages/notification/Notification.module.css";
 
-export default function Tomorrow() {
+export default function Tomorrow( props ) {
   const [gardenData, setGardenData] = useState([]);
 
-  const user = auth.currentUser;
-  const userId = user.uid;
-  const userEmail = user.email;
+  // const user = auth.currentUser;
+  // const userId = user.uid;
+  // const userEmail = user.email;
+
+  let [userEmail, setUserEmail] = useState("");
+  let [userId, setUserId] = useState("");
+  let [user, setUser] = useState("");
+  
+  useEffect(() => {
+  
+    if (props.user) {
+      setUserEmail(props.user.email);
+      setUserId(props.user.uid);
+      setUser(props.user);
+    }
+    
+  }, [props.user])
+
 
   const weekday = [
     "Sunday",
