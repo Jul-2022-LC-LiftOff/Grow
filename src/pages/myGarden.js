@@ -110,7 +110,7 @@ const MyGarden = ( props ) => {
             userId={props.userId}
             updateVal={props.updateVal}
             updateTrigger={props.updateTrigger}
-            
+
           />
         </Modal.Body>
       </Modal>
@@ -144,6 +144,7 @@ const MyGarden = ( props ) => {
         userId={props.userId}
         updateVal={props.updateVal}
         updateTrigger={props.updateTrigger}
+        deleteAlert={handleDelete}
       />
       {/* filteredGarden={props.filteredGarden} */}
     </div>
