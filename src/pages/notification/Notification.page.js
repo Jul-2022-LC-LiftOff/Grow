@@ -20,7 +20,7 @@ export default function NotificationPage() {
           </div>{" "}
           <div>
             <h1 className={classes.h1}>Today</h1>
-            <Today />
+            {/* <Today /> */}
           </div>
           <div>
             <h1 className={classes.h1}>Tomorrow</h1>
