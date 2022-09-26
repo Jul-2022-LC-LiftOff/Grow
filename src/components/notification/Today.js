@@ -6,12 +6,27 @@ import { db, auth } from "../../firebase-config";
 
 import classes from "../../pages/notification/Notification.module.css";
 
-export default function Today() {
+export default function Today( props ) {
   const [gardenData, setGardenData] = useState([]);
 
-  const user = auth.currentUser;
+  // const user = auth.currentUser;
   // const userId = user.uid;
-  const userEmail = user.email;
+  // const userEmail = user.email;
+
+  let [userEmail, setUserEmail] = useState("");
+  let [userId, setUserId] = useState("");
+  let [user, setUser] = useState("");
+  
+  useEffect(() => {
+  
+    if (props.user) {
+      setUserEmail(props.user.email);
+      setUserId(props.user.uid);
+      setUser(props.user);
+    }
+    
+  }, [props.user])
+
 
   const weekday = [
     "Sunday",
