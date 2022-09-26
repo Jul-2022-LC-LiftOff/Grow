@@ -19,28 +19,12 @@ function ProfilePage( props ) {
     let [garden, setGarden] = useState("");
     let [filteredGarden, setFilteredGarden] = useState([]);
     let [updateTrigger, setUpdateTrigger] = useState(1);
-    let [user, setUser] = useState(null);
-    // const [user, setUser] = useState();
 
     var userId = props.userId;
 
 
-    // const getUser = async () => {
-    //     // get the current user doc ref
-    //     const userRef = doc(db,"users", userId);
-    //     // console.log(userRef);
-
-    //     // this is how you read data from the user doc ref
-    //     const userSnap = await getDoc(userRef);
-    //     const userObj = {...userSnap.data(), uid: userId};
-    //     // console.log(userObj)
-
-    //     return userObj;
-    // }
-
     const getGarden = async () => {
         let resultArr = [];
-  
         // get the Garden collection ref from firestore
         const userGardenRef = collection(db, "users", userId, "Garden");
         // console.log(userGardenRef);
@@ -76,7 +60,7 @@ function ProfilePage( props ) {
     return (
         <div>
             
-            <ProfileNavbar user={user}/>
+            <ProfileNavbar />
             
             <SearchBar userGarden={garden} setFilteredGarden={ setFilteredGarden }/> 
             
