@@ -110,6 +110,7 @@ const MyGarden = ( props ) => {
             userId={props.userId}
             updateVal={props.updateVal}
             updateTrigger={props.updateTrigger}
+            
           />
         </Modal.Body>
       </Modal>
@@ -129,6 +130,8 @@ const MyGarden = ( props ) => {
             setPlantId={setPlantId}
             closeModal={handleEditClose}
             userId = {props.userId}
+            updateVal={props.updateVal}
+        updateTrigger={props.updateTrigger}
 
           />
         </Modal.Body>

@@ -123,6 +123,8 @@ const AddPlant = ({
     }
   };
 
+  
+
   const handleWaterDay = (e) => {
     setPlantWaterDay(Array.isArray(e) ? e.map((x) => x.value) : []);
     handleDisableWater();
