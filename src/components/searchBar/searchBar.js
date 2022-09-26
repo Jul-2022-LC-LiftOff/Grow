@@ -155,7 +155,7 @@ function SearchBar( props ) {
                             </div>
                         </Accordion.Collapse>
 
-
+                        
                         {/* <Accordion.Collapse eventKey="1">
                             <div className="d-flex flex-row justify-content-center mx-auto mt-3 text-white">
                                 {columns.slice(0, 4).map((item, index) => (
@@ -189,6 +189,7 @@ function SearchBar( props ) {
                                 ))}
                             </div>
                         </Accordion.Collapse> */}
+                        
                         
                     </Form>
                 </Accordion>
