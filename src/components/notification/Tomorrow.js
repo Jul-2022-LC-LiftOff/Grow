@@ -1,39 +1,30 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import {
-  collection,
-  getDocs,
-  doc,
-  query,
-  where,
-  getDoc,
-} from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db, auth } from "../../firebase-config";
-import PlantDataService from "../../services/PlantDataService";
+// import PlantDataService from "../../services/PlantDataService";
 
 import classes from "../../pages/notification/Notification.module.css";
 
-export default function Tomorrow( props ) {
+export default function Today(props) {
   const [gardenData, setGardenData] = useState([]);
 
   // const user = auth.currentUser;
-  // const userId = user.uid;
+  // const userId1 = user.uid;
   // const userEmail = user.email;
 
   let [userEmail, setUserEmail] = useState("");
   let [userId, setUserId] = useState("");
   let [user, setUser] = useState("");
-  
+
   useEffect(() => {
-  
     if (props.user) {
       setUserEmail(props.user.email);
       setUserId(props.user.uid);
       setUser(props.user);
+      console.log("userid: ", userId);
     }
-    
-  }, [props.user])
-
+  }, [props.user]);
 
   const weekday = [
     "Sunday",
@@ -61,7 +52,7 @@ export default function Tomorrow( props ) {
         }));
         data.map(async (elem) => {
           const gardenQ = query(
-            collection(db, `users/${elem.id}/Garden`),
+            collection(db, `users/${userId}/Garden`),
             where("waterDay", "array-contains", nextDay)
           );
           const gardenDetails = await getDocs(gardenQ);
@@ -81,7 +72,7 @@ export default function Tomorrow( props ) {
       <ul>
         {gardenData.map((elem) => {
           return (
-            <li key={elem.uid}>
+            <li key={elem.userId}>
               <div className={classes.flex}>
                 <img src={elem.image} alt="img" />
                 <div>
@@ -91,14 +82,14 @@ export default function Tomorrow( props ) {
                 </div>
                 {/* <input type="checkbox" checked={checked} /> */}
                 {/* <button
-                  onClick={() => {
-                    setChecked((old) => !old);
-                  }}
-                  className={classes.button}
-                >
-                  {" "}
-                  {checked ? "Undo" : "Water"}{" "}
-                </button> */}
+                    onClick={() => {
+                      setChecked((old) => !old);
+                    }}
+                    className={classes.button}
+                  >
+                    {" "}
+                    {checked ? "Undo" : "Water"}{" "}
+                  </button> */}
               </div>
             </li>
           );
