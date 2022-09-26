@@ -123,6 +123,8 @@ const AddPlant = ({
     }
   };
 
+  
+
   const handleWaterDay = (e) => {
     setPlantWaterDay(Array.isArray(e) ? e.map((x) => x.value) : []);
     handleDisableWater();
@@ -165,7 +167,8 @@ const AddPlant = ({
         await PlantDataService.updatePlant(id, newPlant, userId);
         setPlantId("");
         console.log(image);
-        console.log(oldImage);
+        successEdit=true;
+        closeModal();
         if (
           oldImage !== image &&
           oldImage !== undefined &&
@@ -189,7 +192,8 @@ const AddPlant = ({
         }
       } else {
         await PlantDataService.addPlants(newPlant, userId);
-        //setMessage({error:false, msg: "New plant added successfully"});
+        successAdd = true;
+        closeAddModal();
       }
     } catch (err) {
       setMessage({ error: true, msg: "Error!" });

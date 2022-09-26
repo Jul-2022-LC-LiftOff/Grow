@@ -14,7 +14,7 @@ import classes from ".//PlantListStyle.module.css";
 // import "./individual-style.css";
 
 
-const PlantList = ({getPlantId, showEdit, filteredGarden, userId, updateTrigger, updateVal }) =>{ //userId
+const PlantList = ({getPlantId, showEdit, filteredGarden, userId, updateTrigger, updateVal,deleteAlert }) =>{ //userId
     const [plants, setPlants] = useState([]);
     const [plantImage, setPlantImage] = useState("");
     // const auth =getAuth();
@@ -47,6 +47,7 @@ const PlantList = ({getPlantId, showEdit, filteredGarden, userId, updateTrigger,
 
         await PlantDataService.deletePlant(id, userId);
         updateTrigger(updateVal + 1);
+        deleteAlert();
         // getPlants();
     };
     const confirmDelete = (id) =>{
