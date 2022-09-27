@@ -18,9 +18,6 @@ class PlantDataService{
     }
 
     addPlants = (newPlant, user)=>{
-        let userRef = this.getDocRef(user);
-        setDoc(userRef, {hasPlants: true}, {merge: true});
-        
         return addDoc(this.getCollectionRef(user), newPlant);
     };
 
@@ -30,6 +27,7 @@ class PlantDataService{
 
     deletePlant = (id, user) =>{
         // return deleteDoc(this.getCollectionRef(user));
+
         return deleteDoc(doc(db, "users", user, "Garden", id))
     };
 

@@ -27,13 +27,12 @@ function GardenCarousel() {
     const getUsers = async () => {
 
         const usersRef = collection(db, "users");
-        // const usersWithPlantsQ = query(usersRef, where("hasPlants", "==", true))
-        const usersWithPlantsQ = query(usersRef, where("Garden", "==", undefined))
+        const usersWithPlantsQ = query(usersRef, where("plantCount", "<", 0))
         const usersWithPlantsSnap = await getDocs(usersWithPlantsQ);
         // console.log(usersWithPlantsSnap);
 
         const docs = usersWithPlantsSnap.docs;
-        console.log(docs);
+        // console.log(docs);
         const randomPickedDocs = pickRandom(docs, 3);
 
         // console.log(randomPickedDocs);
@@ -94,7 +93,7 @@ function GardenCarousel() {
                 })
 
             })
-            console.log(resultArr);
+            // console.log(resultArr);
         })
 
     }, [])

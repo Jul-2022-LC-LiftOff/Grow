@@ -5,6 +5,11 @@ import { Card } from "react-bootstrap";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { storage } from "../firebase-config";
+
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "../firebase-config";
+
+
 import {
   deleteObject,
   getDownloadURL,
@@ -18,6 +23,9 @@ import { getAuth } from "firebase/auth";
 import classes from "./AddPlantStyle.module.css";
 export var successAdd = false;
 export var successEdit = false;
+
+
+
 
 const AddPlant = ({
   id,
@@ -135,6 +143,28 @@ const AddPlant = ({
   };
 
   const setEditorRef = useRef(null);
+
+
+
+
+
+
+  // this is for adding plantCount;
+  const addCount = async () => {
+    const userRef = doc(db, "users", userId);
+    const userSnap = await getDoc(userRef);
+
+    if (userSnap) {
+        let plantNum = userSnap.data().plantCount;
+        setDoc(userRef, {plantCount: plantNum + 1}, {merge: true});
+    }
+    
+  }
+
+
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
@@ -166,7 +196,7 @@ const AddPlant = ({
       if (id !== undefined && id !== "") {
         await PlantDataService.updatePlant(id, newPlant, userId);
         setPlantId("");
-        console.log(image);
+        // console.log(image);
         successEdit=true;
         closeModal();
         if (
@@ -178,6 +208,7 @@ const AddPlant = ({
           getMetadata(imageUrl)
             .then((metadata) => {
               const storageRef = ref(storage, `files/${imageUrl.name}`);
+
               deleteObject(storageRef)
                 .then(() => {
                   console.log("IMAGE DELETED");
@@ -192,6 +223,12 @@ const AddPlant = ({
         }
       } else {
         await PlantDataService.addPlants(newPlant, userId);
+
+      
+        // update plantCount field on user
+        addCount(userId);
+
+
         successAdd = true;
         closeAddModal();
       }

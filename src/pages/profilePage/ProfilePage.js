@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { collection, doc, getDoc , getDocs, setDoc, addDoc, deleteDoc} from "firebase/firestore";
+import { collection, doc, getDoc , getDocs, setDoc} from "firebase/firestore";
 
 import ProfileNavbar from "../../components/navbar/profile-navbar";
 import SearchBar from "../../components/searchBar/searchBar";
@@ -22,6 +22,9 @@ function ProfilePage( props ) {
 
     var userId = props.userId;
 
+    
+    // setDoc(userRef, {plantCount: plantNum + 1}, {merge: true});
+        
 
     const getGarden = async () => {
         let resultArr = [];
@@ -46,6 +49,7 @@ function ProfilePage( props ) {
         
         if (userId) {
 
+
             getGarden()
                 .then((result) => {
                     setGarden(result);
@@ -56,6 +60,21 @@ function ProfilePage( props ) {
         // console.log(user);
     }, [userId, updateTrigger]);
     
+
+    const updateCount = async (userId) => {
+            const userRef = doc(db, "users", userId);
+            const userSnap = await getDoc(userRef);
+
+            if (userSnap) {
+                console.log(userSnap.data());
+                let plantNum = userSnap.data().plantCount;
+                console.log(plantNum + 1);
+
+                setDoc(userRef, {plantCount: plantNum + 1}, {merge: true});
+            }
+            
+    }
+
 
     return (
         <div>

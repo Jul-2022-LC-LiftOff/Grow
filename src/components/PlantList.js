@@ -11,18 +11,14 @@ import { ref, deleteObject, getMetadata } from "firebase/storage";
 import plantsUnavailable from "../assets/plantsUnavailable.png";
 import plantNotFound from "../assets/plantNotFound.png";
 import classes from ".//PlantListStyle.module.css";
-// import "./individual-style.css";
+import {doc, getDoc, setDoc} from "firebase/firestore";
 
 
-const PlantList = ({getPlantId, showEdit, filteredGarden, userId, updateTrigger, updateVal,deleteAlert }) =>{ //userId
+const PlantList = ({getPlantId, showEdit, filteredGarden, userId, updateTrigger, updateVal,deleteAlert }) => {
     const [plants, setPlants] = useState([]);
     const [plantImage, setPlantImage] = useState("");
-    // const auth =getAuth();
-    // const user = auth.currentUser;
-    //const userId = user.uid;
-    // var user = userId;
+
     useEffect(()=>{
-        // getPlants();
 
         // console.log(userId);
         // console.log(filteredGarden);
@@ -31,31 +27,37 @@ const PlantList = ({getPlantId, showEdit, filteredGarden, userId, updateTrigger,
 
 
 
-    // componentDidMount(()=>{
-    //     getPlants();
-    // })
-    
+    // this is for decreasing plantCount
+    const decreasCount = async (userId) => {
+        const userRef = doc(db, "users", userId);
+        const userSnap = await getDoc(userRef);
 
-    // we can remove this
-    const getPlants = async () => {
-    //     const data = await PlantDataService.getAllPlants(userId);
-    //     setPlants( data.docs.map((doc)=>({...doc.data(), id:doc.id})) );
-    };
+        if (userSnap) {
+
+            let plantNum = userSnap.data().plantCount;       
+            setDoc(userRef, {plantCount: plantNum - 1}, {merge: true});
+
+        }
+        
+    }
 
     const deleteHandler = async (id) =>{
-       
-
+        console.log(userId);
         await PlantDataService.deletePlant(id, userId);
+
+        decreasCount(userId);
         updateTrigger(updateVal + 1);
+
         deleteAlert();
-        // getPlants();
     };
-    const confirmDelete = (id) =>{
-        const confirmed = window.confirm("Are you sure you want to delete this plant?");
-        if(confirmed){
-            deleteHandler(id);
-        }
-    }
+
+    // const confirmDelete = (id) =>{
+    //     const confirmed = window.confirm("Are you sure you want to delete this plant?");
+    //     if(confirmed){
+    //         deleteHandler(id);
+    //     }
+    // }
+
     const backgroundImageHandler =()=>{
         if(filteredGarden.length===0 ){
             return plantNotFound;

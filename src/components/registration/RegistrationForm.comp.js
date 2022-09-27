@@ -18,7 +18,7 @@ const RegistrationForm = () => {
     email: "",
     password: "",
     confirmpassword: "",
-    hasPlants: false,
+    plantCount: 0,
   };
 
   const [formValues, setFormValues] = useState(initialValues);
