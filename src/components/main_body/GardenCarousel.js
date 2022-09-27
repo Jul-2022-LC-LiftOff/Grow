@@ -6,20 +6,9 @@ import { db } from "../../firebase-config";
 
 function GardenCarousel() {
 
-    // let [garden, setGarden] = useState(null);
+
     let [randomList, setRandomList] = useState([]);
 
-
-    // currently just showing plants
-    const getGarden = async () => {
-        let resultArr = [];
-        const plantsRef = collection(db, "plants");
-        const plantsSnap = await getDocs(plantsRef);
-        plantsSnap.forEach((doc) => {
-            resultArr.push(doc.data());
-        })
-        return resultArr;
-    }
 
 
     // getUsers will pick 3 random user who have plants in their garden, you can change the number of 
@@ -27,15 +16,16 @@ function GardenCarousel() {
     const getUsers = async () => {
 
         const usersRef = collection(db, "users");
-        const usersWithPlantsQ = query(usersRef, where("plantCount", "<", 0))
+        const usersWithPlantsQ = query(usersRef, where("plantCount", ">", 0))
         const usersWithPlantsSnap = await getDocs(usersWithPlantsQ);
         // console.log(usersWithPlantsSnap);
 
         const docs = usersWithPlantsSnap.docs;
         // console.log(docs);
-        const randomPickedDocs = pickRandom(docs, 3);
 
+        const randomPickedDocs = pickRandom(docs, 3);
         // console.log(randomPickedDocs);
+
         return randomPickedDocs;
     }
 
@@ -71,40 +61,37 @@ function GardenCarousel() {
     let resultArr = [];
     
     useEffect(() => {
-        // let resultArr = [];
 
         getUsers()
-        .then((returnedUsers) => {
-            // let resultArr = [];
+            .then((returnedUsers) => {
 
-            returnedUsers.forEach((user) => {
+                // forEach will be buggy inside a promise
+                for (let i = 0; i < returnedUsers.length; i++) {
+                    let user = returnedUsers[i];
+                    getUserPlant(user)
+                    .then((res) => {
 
-                getUserPlant(user)
-                .then((res) => {
-                    // console.log("user retured")
-                    let userData = user.data();
-                    // console.log(userData.username);
-                    // console.log(res);
-                    let newObj = {...res, userName: userData.username};
-                    // console.log(newObj);
-                    resultArr.push(newObj);
-                    // console.log(resultArr);
-                    setRandomList(resultArr);
-                })
+                        let userData = user.data();
+                        let newObj = {...res, userName: userData.username};
+                        resultArr.push(newObj);
+                        setRandomList(resultArr);
 
+                    })
+                    
+                } 
+                
             })
-            // console.log(resultArr);
-        })
 
-    }, [])
+    }, []);
 
-    
-
+    // console.log(randomList);
     let carouselItems = null;
     if (randomList) {
-
+        console.log("list not ready");
+        
+        if (randomList.length == 3) {
+        console.log(randomList.length);
         carouselItems = randomList.map((plant) =>
-        // carouselItems = resultArr.map((plant) =>
 
             <Carousel.Item key={plant.name}>
                 <img 
@@ -121,7 +108,9 @@ function GardenCarousel() {
             </Carousel.Item>
 
         )
+        }
     }
+    
 
     return (
         <div>
