@@ -27,11 +27,13 @@ function GardenCarousel() {
     const getUsers = async () => {
 
         const usersRef = collection(db, "users");
-        const usersWithPlantsQ = query(usersRef, where("hasPlants", "==", true))
+        // const usersWithPlantsQ = query(usersRef, where("hasPlants", "==", true))
+        const usersWithPlantsQ = query(usersRef, where("Garden", "==", undefined))
         const usersWithPlantsSnap = await getDocs(usersWithPlantsQ);
+        // console.log(usersWithPlantsSnap);
 
         const docs = usersWithPlantsSnap.docs;
-        // console.log(docs);
+        console.log(docs);
         const randomPickedDocs = pickRandom(docs, 3);
 
         // console.log(randomPickedDocs);
@@ -42,8 +44,10 @@ function GardenCarousel() {
     const getUserPlant = async (userDoc) => {
         const userGardenRef = collection(db, "users", userDoc.id, "Garden");
         const userGardenSnap = await getDocs(userGardenRef);
- 
-        return userGardenSnap.docs[0].data();
+        const plantObj = userGardenSnap.docs[0].data();
+        // console.log(plantObj);
+
+        return plantObj;
     }
 
     function pickRandom(arr, numOfItem) {
@@ -65,26 +69,33 @@ function GardenCarousel() {
         return resultArr;
     }
     
-    let resultArr = []
-
+    let resultArr = [];
+    
     useEffect(() => {
-        
+        // let resultArr = [];
+
         getUsers()
         .then((returnedUsers) => {
+            // let resultArr = [];
+
             returnedUsers.forEach((user) => {
 
                 getUserPlant(user)
                 .then((res) => {
+                    // console.log("user retured")
                     let userData = user.data();
                     // console.log(userData.username);
+                    // console.log(res);
                     let newObj = {...res, userName: userData.username};
+                    // console.log(newObj);
                     resultArr.push(newObj);
-                    setRandomList(resultArr)
+                    // console.log(resultArr);
+                    setRandomList(resultArr);
                 })
-            })
-            
-        })
 
+            })
+            console.log(resultArr);
+        })
 
     }, [])
 
@@ -94,6 +105,7 @@ function GardenCarousel() {
     if (randomList) {
 
         carouselItems = randomList.map((plant) =>
+        // carouselItems = resultArr.map((plant) =>
 
             <Carousel.Item key={plant.name}>
                 <img 
@@ -111,9 +123,6 @@ function GardenCarousel() {
 
         )
     }
-
-
-
 
     return (
         <div>
