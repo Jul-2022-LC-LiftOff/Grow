@@ -1,11 +1,11 @@
 import classes from "../../pages/notification/Notification.module.css";
 import { useEffect } from "react";
-import Today from "../../components/notification/Today";
-import Tomorrow from "../../components/notification/Tomorrow";
+import { Today } from "../../components/notification/Today";
+import { Tomorrow } from "../../components/notification/Tomorrow";
 import WaterNavbar from "../../components/navbar/water-navbar";
 import CurrentUser from "../../CurrentUser";
 
-export default function NotificationPage(props) {
+export const NotificationPage = (props) => {
   return (
     <div className={classes.box}>
       <WaterNavbar />
@@ -27,4 +27,4 @@ export default function NotificationPage(props) {
       </p>
     </div>
   );
-}
+};
