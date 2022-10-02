@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import { UserContext } from "./components/UserContext";
 import RegistrationPage from "./pages/registration/Registration.page";
-import NotificationPage from "./pages/notification/Notification.page";
+import { NotificationPage } from "./pages/notification/Notification.page";
 //import {createBrowserHistory} from "history";
 import ProfileNavbar from "./components/navbar/profile-navbar";
 import ProfilePage from "./pages/profilePage/ProfilePage";
@@ -18,7 +18,7 @@ import MainNavbar from "./components/navbar/main-navbar";
 import MainBody from "./components/main_body/main_body";
 import MainPage from "./pages/homepage/mainPage";
 import { FirebaseError } from "firebase/app";
-import { doc, getDoc} from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "./firebase-config";
 
 function App() {
@@ -31,28 +31,23 @@ function App() {
     setUserId(id);
 
     if (id != undefined) {
-      getUser(id)
-        .then((res) => {
-          setUser(res);
-        })
+      getUser(id).then((res) => {
+        setUser(res);
+      });
     }
-    
-    
   }, [userId]);
 
- 
   const getUser = async () => {
-    let userRef 
+    let userRef;
     if (userId != undefined) {
-      userRef = doc(db,"users", userId);
+      userRef = doc(db, "users", userId);
 
       const userSnap = await getDoc(userRef);
-      const userObj = {...userSnap.data(), uid: userId};
+      const userObj = { ...userSnap.data(), uid: userId };
 
       return userObj;
     }
-    
-}
+  };
 
   return (
     <Routes>
@@ -78,7 +73,7 @@ function App() {
         element={<LogInPage setUserId={setUserId} />} //setUserId={setUserId}
       ></Route>
       <Route path="/Registration" element={<RegistrationPage />}></Route>
-      <Route path="/notify" element={ <NotificationPage user={user}/> }></Route>
+      <Route path="/notify" element={<NotificationPage user={user} />}></Route>
     </Routes>
 
     // <div class="mainBackground">

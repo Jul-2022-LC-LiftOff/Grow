@@ -2,11 +2,13 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db, auth } from "../../firebase-config";
+import { UsingProps } from "./DisplayCard";
+
 // import PlantDataService from "../../services/PlantDataService";
 
 import classes from "../../pages/notification/Notification.module.css";
 
-export default function Today(props) {
+export const Today = (props) => {
   const [gardenData, setGardenData] = useState([]);
 
   // const user = auth.currentUser;
@@ -22,9 +24,10 @@ export default function Today(props) {
       setUserEmail(props.user.email);
       setUserId(props.user.uid);
       setUser(props.user);
-      console.log("userid: ", userId);
     }
   }, [props.user]);
+
+  console.log("userid: ", userId);
 
   const weekday = [
     "Sunday",
@@ -69,32 +72,8 @@ export default function Today(props) {
 
   return (
     <div>
-      <ul>
-        {gardenData.map((elem) => {
-          return (
-            <li key={elem.userId}>
-              <div className={classes.flex}>
-                <img src={elem.image} alt="img" />
-                <div>
-                  <h3>{elem.name}</h3>
-                  {/* <h5>Watering Day: {elem.waterDay + ""} </h5> */}
-                  <h5>Water: {elem.waterTime}</h5>
-                </div>
-                {/* <input type="checkbox" checked={checked} /> */}
-                {/* <button
-                    onClick={() => {
-                      setChecked((old) => !old);
-                    }}
-                    className={classes.button}
-                  >
-                    {" "}
-                    {checked ? "Undo" : "Water"}{" "}
-                  </button> */}
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+      {" "}
+      <UsingProps gardenData={gardenData} />
     </div>
   );
-}
+};
